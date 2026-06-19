@@ -132,17 +132,61 @@
 
   footer.ft{color:var(--faint);font-size:12px;padding:18px 0 34px;border-top:1px solid var(--line);margin-top:8px;line-height:1.6}
   footer.ft b{color:var(--muted)}
+
+  /* ---------------- language overlay ---------------- */
+  #langOverlay{position:fixed;inset:0;z-index:99999;background:var(--paper);display:flex;align-items:center;justify-content:center;padding:20px}
+  .lo-card{max-width:620px;width:100%;background:var(--card);border:1px solid var(--line);border-radius:22px;
+    padding:34px 32px 26px;box-shadow:0 24px 64px rgba(60,40,20,.14),0 2px 12px rgba(60,40,20,.07);
+    animation:loIn .55s cubic-bezier(.22,1,.36,1) both}
+  @keyframes loIn{from{opacity:0;transform:translateY(26px) scale(.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+  .lo-top{display:flex;align-items:center;gap:14px;padding-bottom:20px;border-bottom:1px solid var(--line2);margin-bottom:20px}
+  .lo-dna{font-size:36px}
+  .lo-sitename{font-family:var(--serif);font-size:19px;font-weight:500;line-height:1.25;letter-spacing:-.2px;color:var(--ink)}
+  .lo-who{color:var(--muted);font-size:12px;margin-top:3px}
+  .lo-heading{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);margin-bottom:13px}
+  .lo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  @media(max-width:520px){.lo-grid{grid-template-columns:repeat(2,1fr)}}
+  .lo-btn{display:flex;align-items:center;gap:9px;padding:12px 13px;border:1.5px solid var(--line);background:var(--paper);
+    border-radius:12px;cursor:pointer;font-family:inherit;transition:border-color .15s,background .15s,transform .15s,box-shadow .15s;text-align:left}
+  .lo-btn:hover{background:var(--accent-soft);border-color:var(--accent);transform:translateY(-2px);box-shadow:0 6px 18px rgba(194,107,71,.15)}
+  .lo-btn:active{transform:translateY(0)}
+  .lo-flag{font-size:21px;flex:none;line-height:1}
+  .lo-names{display:flex;flex-direction:column;min-width:0}
+  .lo-native{font-size:14px;font-weight:700;color:var(--ink);white-space:nowrap}
+  .lo-en{font-size:10.5px;color:var(--muted);white-space:nowrap}
+  .lo-note{font-size:11.5px;color:var(--faint);text-align:center;margin-top:17px;line-height:1.5}
+  #appContent{opacity:0;transform:translateY(10px);transition:opacity .5s ease,transform .5s ease}
+  #appContent.visible{opacity:1;transform:translateY(0)}
+  .lo-langbtn{position:absolute;top:18px;right:0;border:1px solid var(--line);background:var(--card);border-radius:999px;
+    padding:6px 13px;font-size:12.5px;font-weight:600;color:var(--ink);display:inline-flex;align-items:center;gap:6px}
+  .header-row{position:relative}
 </style>
 </head>
 <body>
+<div id="langOverlay">
+  <div class="lo-card">
+    <div class="lo-top">
+      <span class="lo-dna">🧬</span>
+      <div>
+        <div class="lo-sitename">What's linked to cancer?</div>
+        <div class="lo-who">IARC Monographs Evidence Explorer · WHO</div>
+      </div>
+    </div>
+    <div class="lo-heading">Choose your language</div>
+    <div class="lo-grid" id="loGrid"></div>
+    <div class="lo-note">Cancer and exposure names stay in English — they're international scientific terms.</div>
+  </div>
+</div>
+<div id="appContent">
 <div class="wrap">
-  <header class="top">
+  <header class="top header-row">
+    <button class="lo-langbtn" id="langSwitchBtn"><span>🌐</span><span id="langSwitchLabel">EN</span></button>
     <h1>What's linked to cancer?</h1>
     <p class="lede">An interactive map of the exposures scientists have linked to different cancers, from the
       <b>World Health Organization's IARC Monographs</b>. Start with a cancer, start with an exposure, or explore the whole network.</p>
     <div class="disclaimer" id="disc">
       <span class="ico">💛</span>
-      <div><b>Please read.</b> This shows whether something <b>can cause cancer in general</b> (a population-level
+      <div id="disc-body"><b>Please read.</b> This shows whether something <b>can cause cancer in general</b> (a population-level
         “hazard”) — not what caused any individual's cancer, and not your personal risk, which also depends on dose,
         duration, genetics and chance. Most people with these exposures never get cancer. For your own health, talk to a doctor.</div>
       <button title="Hide" onclick="document.getElementById('disc').style.display='none'">×</button>
@@ -151,9 +195,9 @@
 
   <div class="controls">
     <div class="tabs" role="tablist">
-      <button class="tab" role="tab" data-mode="cancer" aria-selected="true">Start with a cancer</button>
-      <button class="tab" role="tab" data-mode="exposure" aria-selected="false">Start with an exposure</button>
-      <button class="tab" role="tab" data-mode="map" aria-selected="false">Explore the network</button>
+      <button class="tab" role="tab" data-mode="cancer" aria-selected="true" id="tabCancer">Start with a cancer</button>
+      <button class="tab" role="tab" data-mode="exposure" aria-selected="false" id="tabExposure">Start with an exposure</button>
+      <button class="tab" role="tab" data-mode="map" aria-selected="false" id="tabMap">Explore the network</button>
     </div>
     <div class="searchrow" id="searchrow">
       <span class="si">🔍</span>
@@ -176,13 +220,13 @@
   <div class="panel" id="mapWrap">
     <div class="mapbar">
       <div class="msearch"><span class="si">🔍</span><input id="mq" type="text" placeholder="Find an exposure or cancer…" autocomplete="off"></div>
-      <span class="mlabel">Links</span>
-      <span class="chip line" id="chipEst"><span class="sw" style="border-top:3px solid var(--established)"></span>Established</span>
-      <span class="chip line" id="chipSus"><span class="sw" style="border-top:3px dashed var(--suspected)"></span>Suspected</span>
-      <span class="mlabel" style="margin-left:4px">Cause</span>
-      <span class="chip" data-grp="1"><span class="sw" style="background:var(--g1)"></span>Known</span>
-      <span class="chip" data-grp="2A"><span class="sw" style="background:var(--g2a)"></span>Probable</span>
-      <span class="chip" data-grp="2B"><span class="sw" style="background:var(--g2b)"></span>Possible</span>
+      <span class="mlabel" id="mlabelLinks">Links</span>
+      <span class="chip line" id="chipEst"><span class="sw" style="border-top:3px solid var(--established)"></span><span class="txt">Established</span></span>
+      <span class="chip line" id="chipSus"><span class="sw" style="border-top:3px dashed var(--suspected)"></span><span class="txt">Suspected</span></span>
+      <span class="mlabel" style="margin-left:4px" id="mlabelCause">Cause</span>
+      <span class="chip" data-grp="1"><span class="sw" style="background:var(--g1)"></span><span class="txt">Known</span></span>
+      <span class="chip" data-grp="2A"><span class="sw" style="background:var(--g2a)"></span><span class="txt">Probable</span></span>
+      <span class="chip" data-grp="2B"><span class="sw" style="background:var(--g2b)"></span><span class="txt">Possible</span></span>
       <span style="margin-left:auto"></span>
       <button class="btn" id="btnReset">Reset</button>
       <button class="btn primary" id="btnFs">⤢ Full screen</button>
@@ -192,23 +236,24 @@
       <div class="zoombtns"><button id="zin" title="Zoom in">＋</button><button id="zout" title="Zoom out">－</button></div>
       <div class="mapcard" id="mapcard"></div>
       <div class="maplegend">
-        <span><span class="sq" style="background:var(--cancer)"></span>Cancer</span>
-        <span><span class="dot" style="background:var(--g1)"></span>Known cause</span>
-        <span><span class="dot" style="background:var(--g2a)"></span>Probable</span>
-        <span><span class="dot" style="background:var(--g2b)"></span>Possible</span>
-        <span><span class="sw" style="display:inline-block;width:18px;border-top:3px solid var(--established)"></span>Established (closer, bolder)</span>
-        <span><span class="sw" style="display:inline-block;width:18px;border-top:3px dashed var(--suspected)"></span>Suspected (farther, lighter)</span>
+        <span><span class="sq" style="background:var(--cancer)"></span><span class="txt">Cancer</span></span>
+        <span><span class="dot" style="background:var(--g1)"></span><span class="txt">Known cause</span></span>
+        <span><span class="dot" style="background:var(--g2a)"></span><span class="txt">Probable</span></span>
+        <span><span class="dot" style="background:var(--g2b)"></span><span class="txt">Possible</span></span>
+        <span><span class="sw" style="display:inline-block;width:18px;border-top:3px solid var(--established)"></span><span class="txt">Established (closer, bolder)</span></span>
+        <span><span class="sw" style="display:inline-block;width:18px;border-top:3px dashed var(--suspected)"></span><span class="txt">Suspected (farther, lighter)</span></span>
       </div>
     </div>
-    <div class="maphint">Tap a circle to see details and highlight its links · drag to move · scroll or ＋/－ to zoom · bigger circle = more links.</div>
+    <div class="maphint" id="maphint">Tap a circle to see details and highlight its links · drag to move · scroll or ＋/－ to zoom · bigger circle = more links.</div>
   </div>
 
   <footer class="ft">
     Source: <a href="https://monographs.iarc.who.int/list-of-classifications" target="_blank" rel="noopener">IARC Monographs</a>,
     “Classifications by cancer site” (Vols 1–140) &amp; Cogliano et al., <i>JNCI</i> 2011.
-    Shows <b>hazard</b> (can it cause cancer?), not <b>risk</b> (how much). For public understanding — not medical advice.
+    <span id="footer-hazard">Shows <b>hazard</b> (can it cause cancer?), not <b>risk</b> (how much). For public understanding — not medical advice.</span>
     <span id="meta-counts"></span>
   </footer>
+</div>
 </div>
 <div id="tip"></div>
 
@@ -227,15 +272,358 @@ const GRP_HEX={'1':'#A8462E','2A':'#C07A38','2B':'#C7A24E','3':'#A89E8C'};
 const GRP_VAR={'1':'var(--g1)','2A':'var(--g2a)','2B':'var(--g2b)','3':'var(--g3)'};
 const HEX={cancer:'#496B61',ink:'#262219',accent:'#C26B47',est:'#B05236',sus:'#C49A45',g3:'#B3A894',paper:'#F5F1E8'};
 
-document.getElementById('meta-counts').textContent =
-  `${exposures.length} exposures · ${cancers.length} cancer types · ${links.length} links.`;
+/* ====================================================================
+   TRANSLATIONS
+   ==================================================================== */
+const LANGS={
+en:{name:'English',native:'English',flag:'🇬🇧',dir:'ltr',
+  title:"What's linked to cancer?",
+  lede:"An interactive map of the exposures scientists have linked to different cancers, from the <b>World Health Organization's IARC Monographs</b>. Start with a cancer, start with an exposure, or explore the whole network.",
+  disclaimerTitle:"Please read.",
+  disclaimerText:"This shows whether something <b>can cause cancer in general</b> (a population-level “hazard”) — not what caused any individual's cancer, and not your personal risk, which also depends on dose, duration, genetics and chance. Most people with these exposures never get cancer. For your own health, talk to a doctor.",
+  tabCancer:"Start with a cancer",tabExposure:"Start with an exposure",tabMap:"Explore the network",
+  searchCancer:"Search cancers… e.g. lung, breast",searchExposure:"Search exposures… e.g. tobacco, radon, HPV",searchMap:"Find an exposure or cancer…",
+  pickerCancer:"Cancer types",pickerExposure:"Exposures",
+  noMatches:"No matches. Try another word.",
+  emptyArrow:"←",emptyText:"Pick an item on the left to explore the evidence.",
+  established:"Established link",suspected:"Suspected link",tooLimited:"Too limited to classify",
+  tooLimitedNote:"These came up in studies, but IARC judged the overall evidence too limited to say whether there's really a link.",
+  whatThisShows:"What this shows",whereEncounter:"Where people encounter this",
+  inPeople:"In people",inAnimals:"In animals",howItWorks:"How it works",
+  strongEvidence:"✅ Strong evidence",someEvidence:"➕ Some evidence (limited)",
+  links:n=>`${n} link${n!=1?'s':''}`,
+  exposuresLinked:n=>`${n} exposure${n!=1?'s':''} linked`,
+  exposuresLinkedDesc:name=>`Exposures IARC has linked to <b>${name}</b>. <b>Established</b> = strong evidence in people; <b>Suspected</b> = some evidence, not certain. Tap any exposure to learn more.`,
+  evidence:"evidence",labEvidence:"lab evidence",
+  noExposures:"No exposures recorded for this cancer.",noCancers:"No specific cancer links recorded.",noCancerLinks:"No cancer links recorded.",noExposuresShort:"No exposures recorded.",
+  mlabelLinks:"Links",mlabelCause:"Cause",chipEst:"Established",chipSus:"Suspected",
+  grpKnown:"Known",grpProbable:"Probable",grpPossible:"Possible",
+  badgeLabels:{'1':'Known cause','2A':'Probable cause','2B':'Possible cause','3':'Not classifiable'},
+  btnReset:"Reset",btnFs:"⤢ Full screen",btnFsExit:"⤡ Exit full screen",
+  legendCancer:"Cancer",legendKnown:"Known cause",legendProbable:"Probable",legendPossible:"Possible",
+  legendEst:"Established (closer, bolder)",legendSus:"Suspected (farther, lighter)",
+  maphint:"Tap a circle to see details and highlight its links · drag to move · scroll or ＋/－ to zoom · bigger circle = more links.",
+  footerHazard:"Shows <b>hazard</b> (can it cause cancer?), not <b>risk</b> (how much). For public understanding — not medical advice.",
+  metaCounts:(ne,nc,nl)=>`${ne} exposures · ${nc} cancer types · ${nl} links.`,
+  back:"‹ Back to list",
+  langChoose:"Choose your language",langNote:"Cancer and exposure names stay in English — they're international scientific terms."},
+zh:{name:'Chinese',native:'中文',flag:'🇨🇳',dir:'ltr',
+  title:"什么与癌症有关？",
+  lede:"基于<b>世界卫生组织 IARC 专论</b>的互动地图，展示科学家已将哪些因素与不同癌症相关联。从癌症出发，从暴露因素出发，或自由探索整个网络。",
+  disclaimerTitle:"请先阅读。",
+  disclaimerText:"此图显示某种因素是否<b>总体上可能致癌</b>（人群层面的“危害”），而非导致某个人患癌的具体原因，也不是您的个人风险——个人风险还取决于剂量、时长、遗传和偶然因素。大多数有这些暴露的人并不会患癌。如需了解自身健康状况，请咨询医生。",
+  tabCancer:"从癌症出发",tabExposure:"从暴露因素出发",tabMap:"探索全网络",
+  searchCancer:"搜索癌症… 如：肺癌、乳腺癌",searchExposure:"搜索暴露因素… 如：烟草、氡、HPV",searchMap:"查找暴露因素或癌症…",
+  pickerCancer:"癌症类型",pickerExposure:"暴露因素",
+  noMatches:"无匹配结果，请换一个词试试。",
+  emptyArrow:"←",emptyText:"在左侧选择一项来查看证据。",
+  established:"已确立关联",suspected:"疑似关联",tooLimited:"证据不足，无法分类",
+  tooLimitedNote:"这些因素在研究中有所提及，但 IARC 认为总体证据不足，无法确认是否存在真实关联。",
+  whatThisShows:"本图显示内容",whereEncounter:"人们如何接触到这种因素",
+  inPeople:"人类研究",inAnimals:"动物研究",howItWorks:"作用机制",
+  strongEvidence:"✅ 强有力证据",someEvidence:"➕ 有限证据",
+  links:n=>`${n} 项关联`,
+  exposuresLinked:n=>`已关联 ${n} 项暴露因素`,
+  exposuresLinkedDesc:name=>`IARC 已将以下暴露因素与<b>${name}</b>相关联。<b>已确立</b> = 人类研究中有强有力证据；<b>疑似</b> = 有一定证据，但尚不确定。点击任意暴露因素了解详情。`,
+  evidence:"证据",labEvidence:"实验室证据",
+  noExposures:"该癌症尚无已记录的暴露因素。",noCancers:"尚无具体癌症关联记录。",noCancerLinks:"尚无癌症关联记录。",noExposuresShort:"尚无暴露因素记录。",
+  mlabelLinks:"关联",mlabelCause:"致癌因素",chipEst:"已确立",chipSus:"疑似",
+  grpKnown:"已知",grpProbable:"可能",grpPossible:"或许",
+  badgeLabels:{'1':'已知致癌','2A':'可能致癌','2B':'或许致癌','3':'无法分类'},
+  btnReset:"重置",btnFs:"⤢ 全屏",btnFsExit:"⤡ 退出全屏",
+  legendCancer:"癌症",legendKnown:"已知致癌物",legendProbable:"可能致癌",legendPossible:"或许致癌",
+  legendEst:"已确立（更近、更粗）",legendSus:"疑似（更远、更细）",
+  maphint:"点击圆圈查看详情并高亮关联 · 拖动移动 · 滚动或＋/－缩放 · 圆圈越大关联越多。",
+  footerHazard:"显示<b>危害</b>（是否可致癌？），而非<b>风险</b>（程度如何）。仅供公众了解，非医疗建议。",
+  metaCounts:(ne,nc,nl)=>`${ne} 项暴露因素 · ${nc} 种癌症类型 · ${nl} 项关联。`,
+  back:"‹ 返回列表",
+  langChoose:"请选择语言",langNote:"癌症和暴露因素名称保留英文，因为它们是国际通用科学术语。"},
+fr:{name:'French',native:'Français',flag:'🇫🇷',dir:'ltr',
+  title:"Qu'est-ce qui est lié au cancer ?",
+  lede:"Une carte interactive des expositions que les scientifiques ont liées à différents cancers, d'après les <b>Monographies du CIRC de l'OMS</b>. Partez d'un cancer, d'une exposition, ou explorez le réseau entier.",
+  disclaimerTitle:"À lire.",
+  disclaimerText:"Ceci indique si quelque chose <b>peut causer le cancer en général</b> (un « danger » à l'échelle de la population) — pas ce qui a causé le cancer d'une personne en particulier, ni votre risque personnel, qui dépend aussi de la dose, de la durée, de la génétique et du hasard. La plupart des personnes exposées ne développent jamais de cancer. Pour votre santé, consultez un médecin.",
+  tabCancer:"Partir d'un cancer",tabExposure:"Partir d'une exposition",tabMap:"Explorer le réseau",
+  searchCancer:"Rechercher un cancer… ex. poumon, sein",searchExposure:"Rechercher une exposition… ex. tabac, radon, HPV",searchMap:"Trouver une exposition ou un cancer…",
+  pickerCancer:"Types de cancers",pickerExposure:"Expositions",
+  noMatches:"Aucun résultat. Essayez un autre terme.",
+  emptyArrow:"←",emptyText:"Sélectionnez un élément à gauche pour explorer les preuves.",
+  established:"Lien établi",suspected:"Lien suspecté",tooLimited:"Preuves insuffisantes",
+  tooLimitedNote:"Ces éléments sont apparus dans des études, mais le CIRC a jugé les preuves globales insuffisantes pour conclure à l'existence d'un lien réel.",
+  whatThisShows:"Ce que cela montre",whereEncounter:"Comment les personnes y sont exposées",
+  inPeople:"Chez l'humain",inAnimals:"Chez l'animal",howItWorks:"Mécanisme d'action",
+  strongEvidence:"✅ Preuves solides",someEvidence:"➕ Preuves limitées",
+  links:n=>`${n} lien${n!=1?'s':''}`,
+  exposuresLinked:n=>`${n} exposition${n!=1?'s':''} liée${n!=1?'s':''}`,
+  exposuresLinkedDesc:name=>`Expositions que le CIRC a liées au <b>${name}</b>. <b>Établi</b> = preuves solides chez l'humain ; <b>Suspecté</b> = preuves partielles, incertaines. Cliquez sur une exposition pour en savoir plus.`,
+  evidence:"preuves",labEvidence:"preuves en laboratoire",
+  noExposures:"Aucune exposition enregistrée pour ce cancer.",noCancers:"Aucun lien spécifique enregistré.",noCancerLinks:"Aucun lien cancer enregistré.",noExposuresShort:"Aucune exposition enregistrée.",
+  mlabelLinks:"Liens",mlabelCause:"Cause",chipEst:"Établi",chipSus:"Suspecté",
+  grpKnown:"Connu",grpProbable:"Probable",grpPossible:"Possible",
+  badgeLabels:{'1':'Cause connue','2A':'Cause probable','2B':'Cause possible','3':'Non classable'},
+  btnReset:"Réinitialiser",btnFs:"⤢ Plein écran",btnFsExit:"⤡ Quitter le plein écran",
+  legendCancer:"Cancer",legendKnown:"Cause connue",legendProbable:"Probable",legendPossible:"Possible",
+  legendEst:"Établi (plus proche, plus épais)",legendSus:"Suspecté (plus loin, plus fin)",
+  maphint:"Cliquez sur un cercle pour voir les détails et mettre en évidence ses liens · faites glisser pour déplacer · faites défiler ou ＋/－ pour zoomer · plus le cercle est grand, plus il y a de liens.",
+  footerHazard:"Indique le <b>danger</b> (peut-il causer le cancer ?), pas le <b>risque</b> (à quel point). Pour le grand public — pas un avis médical.",
+  metaCounts:(ne,nc,nl)=>`${ne} expositions · ${nc} types de cancers · ${nl} liens.`,
+  back:"‹ Retour à la liste",
+  langChoose:"Choisissez votre langue",langNote:"Les noms de cancers et d'expositions restent en anglais, en tant que termes scientifiques internationaux."},
+es:{name:'Spanish',native:'Español',flag:'🇪🇸',dir:'ltr',
+  title:"¿Qué está relacionado con el cáncer?",
+  lede:"Un mapa interactivo de las exposiciones que los científicos han vinculado a distintos tipos de cáncer, según las <b>Monografías del CIIC de la OMS</b>. Empieza por un cáncer, por una exposición, o explora toda la red.",
+  disclaimerTitle:"Por favor, lea esto.",
+  disclaimerText:"Esto muestra si algo <b>puede causar cáncer en general</b> (un «peligro» a nivel poblacional), no qué causó el cáncer de una persona en particular, ni su riesgo personal, que también depende de la dosis, la duración, la genética y el azar. La mayoría de las personas con estas exposiciones nunca desarrollan cáncer. Para su salud personal, consulte a un médico.",
+  tabCancer:"Empezar por un cáncer",tabExposure:"Empezar por una exposición",tabMap:"Explorar la red",
+  searchCancer:"Buscar un cáncer… ej. pulmón, mama",searchExposure:"Buscar una exposición… ej. tabaco, radón, VPH",searchMap:"Buscar una exposición o un cáncer…",
+  pickerCancer:"Tipos de cáncer",pickerExposure:"Exposiciones",
+  noMatches:"Sin resultados. Prueba con otra palabra.",
+  emptyArrow:"←",emptyText:"Selecciona un elemento a la izquierda para explorar la evidencia.",
+  established:"Vínculo establecido",suspected:"Vínculo sospechado",tooLimited:"Evidencia insuficiente",
+  tooLimitedNote:"Aparecieron en estudios, pero el CIIC consideró que la evidencia global era demasiado limitada para concluir si existe un vínculo real.",
+  whatThisShows:"Qué muestra esto",whereEncounter:"Cómo las personas se exponen a esto",
+  inPeople:"En personas",inAnimals:"En animales",howItWorks:"Mecanismo de acción",
+  strongEvidence:"✅ Evidencia sólida",someEvidence:"➕ Evidencia limitada",
+  links:n=>`${n} vínculo${n!=1?'s':''}`,
+  exposuresLinked:n=>`${n} exposición${n!=1?'es':''} vinculada${n!=1?'s':''}`,
+  exposuresLinkedDesc:name=>`Exposiciones que el CIIC ha vinculado al <b>${name}</b>. <b>Establecido</b> = evidencia sólida en personas; <b>Sospechado</b> = alguna evidencia, no concluyente. Toca una exposición para saber más.`,
+  evidence:"evidencia",labEvidence:"evidencia de laboratorio",
+  noExposures:"No hay exposiciones registradas para este cáncer.",noCancers:"No hay vínculos específicos registrados.",noCancerLinks:"No hay vínculos de cáncer registrados.",noExposuresShort:"No hay exposiciones registradas.",
+  mlabelLinks:"Vínculos",mlabelCause:"Causa",chipEst:"Establecido",chipSus:"Sospechado",
+  grpKnown:"Conocido",grpProbable:"Probable",grpPossible:"Posible",
+  badgeLabels:{'1':'Causa conocida','2A':'Causa probable','2B':'Causa posible','3':'No clasificable'},
+  btnReset:"Restablecer",btnFs:"⤢ Pantalla completa",btnFsExit:"⤡ Salir de pantalla completa",
+  legendCancer:"Cáncer",legendKnown:"Causa conocida",legendProbable:"Probable",legendPossible:"Posible",
+  legendEst:"Establecido (más cerca, más grueso)",legendSus:"Sospechado (más lejos, más fino)",
+  maphint:"Toca un círculo para ver detalles y resaltar sus vínculos · arrastra para mover · desplázate o usa ＋/－ para hacer zoom · círculo más grande = más vínculos.",
+  footerHazard:"Muestra el <b>peligro</b> (¿puede causar cáncer?), no el <b>riesgo</b> (¿cuánto?). Para el público en general — no es consejo médico.",
+  metaCounts:(ne,nc,nl)=>`${ne} exposiciones · ${nc} tipos de cáncer · ${nl} vínculos.`,
+  back:"‹ Volver a la lista",
+  langChoose:"Elige tu idioma",langNote:"Los nombres de cánceres y exposiciones se mantienen en inglés, como términos científicos internacionales."},
+ru:{name:'Russian',native:'Русский',flag:'🇷🇺',dir:'ltr',
+  title:"Что связано с раком?",
+  lede:"Интерактивная карта факторов воздействия, которые учёные связали с различными видами рака, на основе <b>Монографий МАИР ВОЗ</b>. Начните с вида рака, с фактора воздействия или исследуйте всю сеть.",
+  disclaimerTitle:"Важно прочитать.",
+  disclaimerText:"Здесь показано, может ли что-то <b>в принципе вызывать рак</b> (опасность на уровне популяции) — не что именно вызвало рак у конкретного человека и не ваш личный риск, который зависит также от дозы, продолжительности воздействия, генетики и случайности. Большинство людей с такими воздействиями никогда не заболевают раком. Для оценки личного здоровья обратитесь к врачу.",
+  tabCancer:"Начать с вида рака",tabExposure:"Начать с фактора",tabMap:"Изучить всю сеть",
+  searchCancer:"Поиск рака… напр. лёгкое, молочная железа",searchExposure:"Поиск фактора… напр. табак, радон, ВПЧ",searchMap:"Найти фактор или вид рака…",
+  pickerCancer:"Виды рака",pickerExposure:"Факторы воздействия",
+  noMatches:"Ничего не найдено. Попробуйте другое слово.",
+  emptyArrow:"←",emptyText:"Выберите элемент слева, чтобы изучить доказательства.",
+  established:"Установленная связь",suspected:"Предполагаемая связь",tooLimited:"Недостаточно данных",
+  tooLimitedNote:"Эти факторы упоминались в исследованиях, однако МАИР признал совокупность доказательств недостаточной для вывода о наличии реальной связи.",
+  whatThisShows:"Что здесь показано",whereEncounter:"Где люди сталкиваются с этим",
+  inPeople:"У людей",inAnimals:"У животных",howItWorks:"Механизм действия",
+  strongEvidence:"✅ Убедительные доказательства",someEvidence:"➕ Ограниченные доказательства",
+  links:n=>`${n} связь`,
+  exposuresLinked:n=>`${n} связанных фактора`,
+  exposuresLinkedDesc:name=>`Факторы, которые МАИР связал с <b>${name}</b>. <b>Установлено</b> = убедительные доказательства у людей; <b>Предполагается</b> = некоторые данные, неопределённость сохраняется. Нажмите на любой фактор, чтобы узнать больше.`,
+  evidence:"доказательства",labEvidence:"лабораторные данные",
+  noExposures:"Для этого вида рака не зафиксировано факторов воздействия.",noCancers:"Конкретных связей с видами рака не зафиксировано.",noCancerLinks:"Связей с раком не зафиксировано.",noExposuresShort:"Факторов воздействия не зафиксировано.",
+  mlabelLinks:"Связи",mlabelCause:"Причина",chipEst:"Установлено",chipSus:"Предполагается",
+  grpKnown:"Известные",grpProbable:"Вероятные",grpPossible:"Возможные",
+  badgeLabels:{'1':'Известная причина','2A':'Вероятная причина','2B':'Возможная причина','3':'Не классифицируется'},
+  btnReset:"Сбросить",btnFs:"⤢ На весь экран",btnFsExit:"⤡ Выйти из полноэкранного режима",
+  legendCancer:"Рак",legendKnown:"Известная причина",legendProbable:"Вероятная",legendPossible:"Возможная",
+  legendEst:"Установлено (ближе, толще)",legendSus:"Предполагается (дальше, тоньше)",
+  maphint:"Нажмите на круг, чтобы увидеть детали и выделить связи · перетащите для перемещения · прокрутите или нажмите ＋/－ для масштабирования · больший круг = больше связей.",
+  footerHazard:"Показывает <b>опасность</b> (может ли вызвать рак?), а не <b>риск</b> (насколько?). Для общего понимания — не медицинская консультация.",
+  metaCounts:(ne,nc,nl)=>`${ne} факторов · ${nc} видов рака · ${nl} связей.`,
+  back:"‹ К списку",
+  langChoose:"Выберите язык",langNote:"Названия видов рака и факторов воздействия остаются на английском языке как международные научные термины."},
+pt:{name:'Portuguese',native:'Português',flag:'🇧🇷',dir:'ltr',
+  title:"O que está ligado ao câncer?",
+  lede:"Um mapa interativo das exposições que cientistas associaram a diferentes cânceres, com base nas <b>Monografias do IARC da OMS</b>. Comece por um câncer, por uma exposição ou explore toda a rede.",
+  disclaimerTitle:"Por favor, leia.",
+  disclaimerText:"Isso mostra se algo <b>pode causar câncer em geral</b> (um \"perigo\" em nível populacional) — não o que causou o câncer de uma pessoa específica, nem o seu risco pessoal, que também depende de dose, duração, genética e acaso. A maioria das pessoas com essas exposições nunca desenvolve câncer. Para sua saúde pessoal, consulte um médico.",
+  tabCancer:"Começar por um câncer",tabExposure:"Começar por uma exposição",tabMap:"Explorar a rede",
+  searchCancer:"Buscar câncer… ex.: pulmão, mama",searchExposure:"Buscar exposição… ex.: tabaco, radônio, HPV",searchMap:"Encontrar exposição ou câncer…",
+  pickerCancer:"Tipos de câncer",pickerExposure:"Exposições",
+  noMatches:"Sem resultados. Tente outra palavra.",
+  emptyArrow:"←",emptyText:"Selecione um item à esquerda para explorar as evidências.",
+  established:"Associação estabelecida",suspected:"Associação suspeita",tooLimited:"Evidência insuficiente",
+  tooLimitedNote:"Estes fatores apareceram em estudos, mas o IARC considerou as evidências gerais insuficientes para concluir se existe uma associação real.",
+  whatThisShows:"O que isso mostra",whereEncounter:"Como as pessoas se expõem a isso",
+  inPeople:"Em pessoas",inAnimals:"Em animais",howItWorks:"Mecanismo de ação",
+  strongEvidence:"✅ Evidência forte",someEvidence:"➕ Evidência limitada",
+  links:n=>`${n} associação${n!=1?'ões':''}`,
+  exposuresLinked:n=>`${n} exposição${n!=1?'ões':''} associada${n!=1?'s':''}`,
+  exposuresLinkedDesc:name=>`Exposições que o IARC associou ao <b>${name}</b>. <b>Estabelecido</b> = evidência forte em pessoas; <b>Suspeito</b> = alguma evidência, não conclusiva. Toque em uma exposição para saber mais.`,
+  evidence:"evidência",labEvidence:"evidência laboratorial",
+  noExposures:"Nenhuma exposição registrada para este câncer.",noCancers:"Nenhuma associação específica registrada.",noCancerLinks:"Nenhuma associação de câncer registrada.",noExposuresShort:"Nenhuma exposição registrada.",
+  mlabelLinks:"Associações",mlabelCause:"Causa",chipEst:"Estabelecida",chipSus:"Suspeita",
+  grpKnown:"Conhecida",grpProbable:"Provável",grpPossible:"Possível",
+  badgeLabels:{'1':'Causa conhecida','2A':'Causa provável','2B':'Causa possível','3':'Não classificável'},
+  btnReset:"Redefinir",btnFs:"⤢ Tela cheia",btnFsExit:"⤡ Sair da tela cheia",
+  legendCancer:"Câncer",legendKnown:"Causa conhecida",legendProbable:"Provável",legendPossible:"Possível",
+  legendEst:"Estabelecida (mais próximo, mais espessa)",legendSus:"Suspeita (mais distante, mais fina)",
+  maphint:"Toque em um círculo para ver detalhes e destacar suas associações · arraste para mover · role ou use ＋/－ para zoom · círculo maior = mais associações.",
+  footerHazard:"Mostra <b>perigo</b> (pode causar câncer?), não <b>risco</b> (quanto?). Para compreensão pública — não é aconselhamento médico.",
+  metaCounts:(ne,nc,nl)=>`${ne} exposições · ${nc} tipos de câncer · ${nl} associações.`,
+  back:"‹ Voltar à lista",
+  langChoose:"Escolha seu idioma",langNote:"Os nomes de cânceres e exposições permanecem em inglês, como termos científicos internacionais."},
+ar:{name:'Arabic',native:'العربية',flag:'🇸🇦',dir:'rtl',
+  title:"ما الذي يرتبط بالسرطان؟",
+  lede:"خريطة تفاعلية للتعرضات التي ربطها العلماء بأنواع مختلفة من السرطان، استناداً إلى <b>مونوغرافيات الوكالة الدولية لأبحاث السرطان (IARC) التابعة لمنظمة الصحة العالمية</b>. ابدأ بسرطان، أو بعامل تعرض، أو استكشف الشبكة بأكملها.",
+  disclaimerTitle:"يُرجى القراءة.",
+  disclaimerText:"يوضح هذا ما إذا كان شيء ما <b>يمكن أن يسبب السرطان بوجه عام</b> (خطر على مستوى السكان)، وليس ما سبب سرطان شخص بعينه، ولا خطرك الشخصي الذي يعتمد أيضاً على الجرعة والمدة والجينات والصدفة. معظم الأشخاص المعرضين لهذه العوامل لا يصابون بالسرطان. لمعرفة وضعك الصحي، استشر طبيبك.",
+  tabCancer:"ابدأ بسرطان",tabExposure:"ابدأ بعامل تعرض",tabMap:"استكشف الشبكة",
+  searchCancer:"ابحث عن سرطان… مثل: رئة، ثدي",searchExposure:"ابحث عن عامل تعرض… مثل: تبغ، رادون، HPV",searchMap:"ابحث عن عامل أو سرطان…",
+  pickerCancer:"أنواع السرطانات",pickerExposure:"عوامل التعرض",
+  noMatches:"لا نتائج. جرب كلمة أخرى.",
+  emptyArrow:"→",emptyText:"اختر عنصراً من اليمين لاستعراض الأدلة.",
+  established:"ارتباط ثابت",suspected:"ارتباط مشتبه به",tooLimited:"أدلة غير كافية",
+  tooLimitedNote:"ظهرت هذه العوامل في دراسات، لكن IARC رأت أن الأدلة الإجمالية غير كافية لتحديد ما إذا كان هناك ارتباط حقيقي.",
+  whatThisShows:"ماذا يُظهر هذا",whereEncounter:"كيف يتعرض الناس لهذا",
+  inPeople:"في البشر",inAnimals:"في الحيوانات",howItWorks:"آلية العمل",
+  strongEvidence:"✅ أدلة قوية",someEvidence:"➕ أدلة محدودة",
+  links:n=>`${n} ارتباط`,
+  exposuresLinked:n=>`${n} تعرض مرتبط`,
+  exposuresLinkedDesc:name=>`التعرضات التي ربطها IARC بـ<b>${name}</b>. <b>ثابت</b> = أدلة قوية لدى البشر؛ <b>مشتبه به</b> = بعض الأدلة، غير مؤكدة. انقر على أي تعرض لمعرفة المزيد.`,
+  evidence:"أدلة",labEvidence:"أدلة مخبرية",
+  noExposures:"لا توجد تعرضات مسجلة لهذا السرطان.",noCancers:"لا توجد ارتباطات محددة مسجلة.",noCancerLinks:"لا توجد ارتباطات سرطان مسجلة.",noExposuresShort:"لا توجد تعرضات مسجلة.",
+  mlabelLinks:"الارتباطات",mlabelCause:"السبب",chipEst:"ثابت",chipSus:"مشتبه به",
+  grpKnown:"معروف",grpProbable:"محتمل",grpPossible:"ممكن",
+  badgeLabels:{'1':'سبب معروف','2A':'سبب محتمل','2B':'سبب ممكن','3':'غير قابل للتصنيف'},
+  btnReset:"إعادة ضبط",btnFs:"⤢ ملء الشاشة",btnFsExit:"⤡ الخروج من ملء الشاشة",
+  legendCancer:"سرطان",legendKnown:"سبب معروف",legendProbable:"محتمل",legendPossible:"ممكن",
+  legendEst:"ثابت (أقرب، أكثر سمكاً)",legendSus:"مشتبه به (أبعد، أرفع)",
+  maphint:"انقر على دائرة لرؤية التفاصيل وتمييز ارتباطاتها · اسحب للتحرك · مرر أو استخدم ＋/－ للتكبير · الدائرة الأكبر = ارتباطات أكثر.",
+  footerHazard:"يُظهر <b>الخطر</b> (هل يمكن أن يسبب السرطان؟)، لا <b>المخاطرة</b> (بأي قدر؟). للفهم العام — وليس نصيحة طبية.",
+  metaCounts:(ne,nc,nl)=>`${ne} تعرضاً · ${nc} نوع سرطان · ${nl} ارتباطاً.`,
+  back:"‹ العودة للقائمة",
+  langChoose:"اختر لغتك",langNote:"تبقى أسماء السرطانات وعوامل التعرض باللغة الإنجليزية كمصطلحات علمية دولية."},
+de:{name:'German',native:'Deutsch',flag:'🇩🇪',dir:'ltr',
+  title:"Was ist mit Krebs verbunden?",
+  lede:"Eine interaktive Karte der Expositionen, die Wissenschaftler mit verschiedenen Krebsarten in Verbindung gebracht haben, basierend auf den <b>IARC-Monographien der WHO</b>. Beginnen Sie mit einer Krebsart, einer Exposition oder erkunden Sie das gesamte Netzwerk.",
+  disclaimerTitle:"Bitte lesen.",
+  disclaimerText:"Dies zeigt, ob etwas <b>generell Krebs verursachen kann</b> (ein „Gefahrenpotenzial“ auf Bevölkerungsebene) – nicht, was den Krebs einer bestimmten Person verursacht hat, und nicht Ihr persönliches Risiko, das auch von Dosis, Dauer, Genetik und Zufall abhängt. Die meisten Menschen mit diesen Expositionen erkranken nie an Krebs. Wenden Sie sich für Ihre persönliche Gesundheit an einen Arzt.",
+  tabCancer:"Mit Krebsart beginnen",tabExposure:"Mit Exposition beginnen",tabMap:"Netzwerk erkunden",
+  searchCancer:"Krebsart suchen… z. B. Lunge, Brust",searchExposure:"Exposition suchen… z. B. Tabak, Radon, HPV",searchMap:"Exposition oder Krebsart suchen…",
+  pickerCancer:"Krebsarten",pickerExposure:"Expositionen",
+  noMatches:"Keine Ergebnisse. Versuchen Sie ein anderes Wort.",
+  emptyArrow:"←",emptyText:"Wählen Sie links ein Element aus, um die Belege zu erkunden.",
+  established:"Gesicherter Zusammenhang",suspected:"Verdächtiger Zusammenhang",tooLimited:"Belege unzureichend",
+  tooLimitedNote:"Diese Faktoren tauchten in Studien auf, aber die IARC wertete die Gesamtbelege als zu begrenzt, um auf einen echten Zusammenhang schließen zu können.",
+  whatThisShows:"Was dies zeigt",whereEncounter:"Wie Menschen damit in Kontakt kommen",
+  inPeople:"Beim Menschen",inAnimals:"Im Tierversuch",howItWorks:"Wirkmechanismus",
+  strongEvidence:"✅ Starke Belege",someEvidence:"➕ Begrenzte Belege",
+  links:n=>`${n} Zusammenhang${n!=1?'hänge':''}`,
+  exposuresLinked:n=>`${n} Exposition${n!=1?'en':''} verknüpft`,
+  exposuresLinkedDesc:name=>`Expositionen, die die IARC mit <b>${name}</b> in Verbindung gebracht hat. <b>Gesichert</b> = starke Belege beim Menschen; <b>Verdächtig</b> = einige Hinweise, nicht eindeutig. Tippen Sie auf eine Exposition für mehr Infos.`,
+  evidence:"Belege",labEvidence:"Laborbelege",
+  noExposures:"Keine Expositionen für diese Krebsart erfasst.",noCancers:"Keine spezifischen Zusammenhänge erfasst.",noCancerLinks:"Keine Krebs-Zusammenhänge erfasst.",noExposuresShort:"Keine Expositionen erfasst.",
+  mlabelLinks:"Zusammenhänge",mlabelCause:"Ursache",chipEst:"Gesichert",chipSus:"Verdächtig",
+  grpKnown:"Bekannt",grpProbable:"Wahrscheinlich",grpPossible:"Möglich",
+  badgeLabels:{'1':'Bekannte Ursache','2A':'Wahrscheinliche Ursache','2B':'Mögliche Ursache','3':'Nicht klassifizierbar'},
+  btnReset:"Zurücksetzen",btnFs:"⤢ Vollbild",btnFsExit:"⤡ Vollbild beenden",
+  legendCancer:"Krebs",legendKnown:"Bekannte Ursache",legendProbable:"Wahrscheinlich",legendPossible:"Möglich",
+  legendEst:"Gesichert (näher, dicker)",legendSus:"Verdächtig (weiter, dünner)",
+  maphint:"Klicken Sie auf einen Kreis, um Details zu sehen und Verbindungen hervorzuheben · ziehen zum Verschieben · scrollen oder ＋/－ zum Zoomen · größerer Kreis = mehr Verbindungen.",
+  footerHazard:"Zeigt <b>Gefährdungspotenzial</b> (kann es Krebs verursachen?), nicht <b>Risiko</b> (wie stark?). Zur allgemeinen Aufklärung – kein medizinischer Rat.",
+  metaCounts:(ne,nc,nl)=>`${ne} Expositionen · ${nc} Krebsarten · ${nl} Zusammenhänge.`,
+  back:"‹ Zurück zur Liste",
+  langChoose:"Wählen Sie Ihre Sprache",langNote:"Namen von Krebsarten und Expositionen bleiben auf Englisch als internationale wissenschaftliche Fachbegriffe."},
+ja:{name:'Japanese',native:'日本語',flag:'🇯🇵',dir:'ltr',
+  title:"がんと関連しているものは？",
+  lede:"<b>WHOのIARC発がん性モノグラフ</b>に基づき、科学者がさまざまながんと関連付けた曝露要因のインタラクティブマップです。がんから探す、曝露要因から探す、またはネットワーク全体を自由に探索できます。",
+  disclaimerTitle:"はじめにお読みください。",
+  disclaimerText:"これは、あるものが<b>一般的にがんを引き起こす可能性があるか</b>（集団レベルの「ハザード」）を示すものです。特定の個人のがんの原因や、個人のリスクを示すものではありません。個人のリスクは用量、期間、遺伝、偶然にも依存します。これらの曝露を受けた人のほとんどはがんを発症しません。ご自身の健康については、医師にご相談ください。",
+  tabCancer:"がんから探す",tabExposure:"曝露要因から探す",tabMap:"ネットワークを探索",
+  searchCancer:"がんを検索… 例：肺、乳房",searchExposure:"曝露要因を検索… 例：タバコ、ラドン、HPV",searchMap:"曝露要因またはがんを検索…",
+  pickerCancer:"がんの種類",pickerExposure:"曝露要因",
+  noMatches:"一致なし。別の言葉をお試しください。",
+  emptyArrow:"←",emptyText:"左からアイテムを選択してエビデンスを探索してください。",
+  established:"確立された関連",suspected:"疑われる関連",tooLimited:"分類するには証拠不十分",
+  tooLimitedNote:"これらは研究で取り上げられましたが、IARCは全体的な証拠が不十分と判断し、実際の関連があるかどうか結論づけませんでした。",
+  whatThisShows:"このツールについて",whereEncounter:"人々がこれに接触する場面",
+  inPeople:"人での証拠",inAnimals:"動物での証拠",howItWorks:"作用メカニズム",
+  strongEvidence:"✅ 強い証拠",someEvidence:"➕ 限られた証拠",
+  links:n=>`${n}件の関連`,
+  exposuresLinked:n=>`${n}件の曝露要因が関連`,
+  exposuresLinkedDesc:name=>`IARCが<b>${name}</b>と関連付けた曝露要因。<b>確立</b>＝人での強い証拠、<b>疑い</b>＝一部の証拠あり、不確実。曝露要因をタップすると詳細が見られます。`,
+  evidence:"証拠",labEvidence:"実験室証拠",
+  noExposures:"このがんに対して記録された曝露要因はありません。",noCancers:"記録された具体的な関連はありません。",noCancerLinks:"記録されたがん関連はありません。",noExposuresShort:"記録された曝露要因はありません。",
+  mlabelLinks:"関連",mlabelCause:"原因",chipEst:"確立",chipSus:"疑い",
+  grpKnown:"既知",grpProbable:"おそらく",grpPossible:"可能性あり",
+  badgeLabels:{'1':'既知の原因','2A':'おそらくの原因','2B':'可能性のある原因','3':'分類不能'},
+  btnReset:"リセット",btnFs:"⤢ フルスクリーン",btnFsExit:"⤡ フルスクリーン終了",
+  legendCancer:"がん",legendKnown:"既知の原因",legendProbable:"おそらく",legendPossible:"可能性あり",
+  legendEst:"確立（近く・太い）",legendSus:"疑い（遠く・細い）",
+  maphint:"円をタップして詳細と関連を表示 · ドラッグで移動 · スクロールまたは＋/－でズーム · 円が大きいほど関連が多い。",
+  footerHazard:"<b>ハザード</b>（がんを引き起こす可能性）を示します、<b>リスク</b>（どの程度か）ではありません。一般向け情報であり、医療アドバイスではありません。",
+  metaCounts:(ne,nc,nl)=>`${ne}件の曝露要因 · ${nc}種類のがん · ${nl}件の関連。`,
+  back:"‹ リストに戻る",
+  langChoose:"言語を選択してください",langNote:"がんと曝露要因の名称は国際的な科学用語として英語のまま表示されます。"}
+};
+let T=LANGS.en;
+
+function updateMetaCounts(){document.getElementById('meta-counts').textContent=T.metaCounts(exposures.length,cancers.length,links.length);}
+updateMetaCounts();
+
+function setChipText(el,text){for(let i=el.childNodes.length-1;i>=0;i--){if(el.childNodes[i].nodeType===1&&el.childNodes[i].classList.contains('txt')){el.childNodes[i].textContent=text;return;}}}
+
+function applyLang(lang){
+  T=LANGS[lang]||LANGS.en;
+  localStorage.setItem('iarc-lang',lang);
+  document.documentElement.lang=lang;
+  document.documentElement.dir=T.dir;
+  document.getElementById('langSwitchLabel').textContent=lang.toUpperCase();
+  document.querySelector('header.top h1').textContent=T.title;
+  document.querySelector('header.top .lede').innerHTML=T.lede;
+  document.getElementById('disc-body').innerHTML=`<b>${T.disclaimerTitle}</b> ${T.disclaimerText}`;
+  document.getElementById('tabCancer').textContent=T.tabCancer;
+  document.getElementById('tabExposure').textContent=T.tabExposure;
+  document.getElementById('tabMap').textContent=T.tabMap;
+  document.getElementById('mq').placeholder=T.searchMap;
+  document.getElementById('mlabelLinks').textContent=T.mlabelLinks;
+  document.getElementById('mlabelCause').textContent=T.mlabelCause;
+  setChipText(document.getElementById('chipEst'),T.chipEst);
+  setChipText(document.getElementById('chipSus'),T.chipSus);
+  document.querySelectorAll('.chip[data-grp]').forEach(c=>{
+    const g=c.dataset.grp; setChipText(c,g==='1'?T.grpKnown:g==='2A'?T.grpProbable:T.grpPossible);});
+  document.getElementById('btnReset').textContent=T.btnReset;
+  document.getElementById('btnFs').textContent=mapWrap&&mapWrap.classList.contains('fs')?T.btnFsExit:T.btnFs;
+  const lg=document.querySelectorAll('.maplegend>span');
+  setChipText(lg[0],T.legendCancer);setChipText(lg[1],T.legendKnown);setChipText(lg[2],T.legendProbable);
+  setChipText(lg[3],T.legendPossible);setChipText(lg[4],T.legendEst);setChipText(lg[5],T.legendSus);
+  document.getElementById('maphint').textContent=T.maphint;
+  document.getElementById('footer-hazard').innerHTML=T.footerHazard;
+  updateMetaCounts();
+  setMode(mode,true);
+  renderDetail();
+}
+
+function buildLangGrid(){
+  const grid=document.getElementById('loGrid'); let h='';
+  Object.keys(LANGS).forEach(code=>{const l=LANGS[code];
+    h+=`<button class="lo-btn" data-lang="${code}"><span class="lo-flag">${l.flag}</span><span class="lo-names"><span class="lo-native">${l.native}</span><span class="lo-en">${l.name}</span></span></button>`;});
+  grid.innerHTML=h;
+  grid.querySelectorAll('.lo-btn').forEach(b=>b.addEventListener('click',()=>pickLang(b.dataset.lang)));
+}
+function pickLang(lang){
+  applyLang(lang);
+  const overlay=document.getElementById('langOverlay'), card=overlay.querySelector('.lo-card');
+  card.style.transition='opacity .35s ease, transform .35s cubic-bezier(.4,0,1,1)';
+  card.style.opacity='0'; card.style.transform='scale(.94) translateY(-12px)';
+  overlay.style.transition='opacity .45s ease';
+  setTimeout(()=>{overlay.style.opacity='0';},80);
+  setTimeout(()=>{overlay.style.display='none';document.getElementById('appContent').classList.add('visible');},450);
+}
+function reopenLangOverlay(){
+  const overlay=document.getElementById('langOverlay'), card=overlay.querySelector('.lo-card');
+  overlay.style.display='flex'; overlay.style.opacity='1';
+  card.style.transition=''; card.style.opacity=''; card.style.transform='';
+  document.getElementById('appContent').classList.remove('visible');
+}
+document.getElementById('langSwitchBtn').addEventListener('click',reopenLangOverlay);
 
 let mode='cancer', sel=null, query='';
 let showEst=true, showSus=true, grpOn={'1':true,'2A':true,'2B':true,'3':true};
 
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-function badge(g){const e=DATA.meta.group_plain[g]||{label:g};
-  return `<span class="badge" style="background:${GRP_VAR[g]||'#888'}" title="IARC Group ${g}">${esc(e.label)}</span>`;}
+function badge(g){const label=(T.badgeLabels&&T.badgeLabels[g])||(DATA.meta.group_plain[g]||{}).label||g;
+  return `<span class="badge" style="background:${GRP_VAR[g]||'#888'}" title="IARC Group ${g}">${esc(label)}</span>`;}
 const isG3=g=>g==='3';
 
 /* ---------------- picker ---------------- */
@@ -243,16 +631,16 @@ const picker=document.getElementById('picker'), pickerHead=document.getElementBy
 function buildPicker(){
   const q=query.toLowerCase(); let html='';
   if(mode==='cancer'){
-    pickerHead.textContent='Cancer types';
+    pickerHead.textContent=T.pickerCancer;
     const byOrgan={};
     cancers.forEach(c=>{ if(q&&!c.name.toLowerCase().includes(q)&&!c.id.toLowerCase().includes(q))return;
       (byOrgan[c.organ_plain]=byOrgan[c.organ_plain]||[]).push(c);});
     Object.keys(byOrgan).sort().forEach(org=>{ html+=`<div class="group-h">${esc(org)}</div>`;
       byOrgan[org].sort((a,b)=>a.name.localeCompare(b.name)).forEach(c=>{const n=(linksByCan[c.id]||[]).length;
         html+=`<div class="item" data-type="cancer" data-id="${esc(c.id)}" ${sel&&sel.type==='cancer'&&sel.id===c.id?'aria-selected="true"':''}>
-          <span class="sq" style="background:var(--cancer)"></span><span class="nm">${esc(c.name)}</span><span class="ct">${n} link${n!=1?'s':''}</span></div>`;});});
+          <span class="sq" style="background:var(--cancer)"></span><span class="nm">${esc(c.name)}</span><span class="ct">${T.links(n)}</span></div>`;});});
   } else {
-    pickerHead.textContent='Exposures';
+    pickerHead.textContent=T.pickerExposure;
     const byCat={};
     exposures.forEach(e=>{ if(q&&!e.name.toLowerCase().includes(q)&&!e.id.toLowerCase().includes(q))return;
       (byCat[e.category]=byCat[e.category]||[]).push(e);});
@@ -262,7 +650,7 @@ function buildPicker(){
         html+=`<div class="item" data-type="exposure" data-id="${esc(e.id)}" ${sel&&sel.type==='exposure'&&sel.id===e.id?'aria-selected="true"':''}>
           <span class="dot" style="background:${CAT_HEX[e.category]}"></span><span class="nm">${esc(e.name)}</span>${badge(e.group)}</div>`;});});
   }
-  picker.innerHTML=html||'<div class="note" style="padding:20px">No matches. Try another word.</div>';
+  picker.innerHTML=html||`<div class="note" style="padding:20px">${T.noMatches}</div>`;
 }
 picker.addEventListener('click',ev=>{const it=ev.target.closest('.item'); if(it) select(it.dataset.type,it.dataset.id);});
 
@@ -279,28 +667,27 @@ function bucket(ls,getObj){const est=[],sus=[],unclear=[];
   const by=(a,b)=>a.obj.name.localeCompare(b.obj.name); est.sort(by);sus.sort(by);unclear.sort(by);
   return {est,sus,unclear};}
 function sections(b,otherType){let h='';
-  if(b.est.length){h+=`<h3><span class="pip"></span>Established link <span class="cnt">· ${b.est.length}</span></h3>`+b.est.map(x=>linkRow(otherType,x.obj)).join('');}
-  if(b.sus.length){h+=`<h3 class="susp"><span class="pip"></span>Suspected link <span class="cnt">· ${b.sus.length}</span></h3>`+b.sus.map(x=>linkRow(otherType,x.obj)).join('');}
-  if(b.unclear.length){h+=`<h3 class="unc"><span class="pip"></span>Too limited to classify <span class="cnt">· ${b.unclear.length}</span></h3>`+b.unclear.map(x=>linkRow(otherType,x.obj)).join('')
-    +`<div class="note">These came up in studies, but IARC judged the overall evidence too limited to say whether there's really a link.</div>`;}
+  if(b.est.length){h+=`<h3><span class="pip"></span>${T.established} <span class="cnt">· ${b.est.length}</span></h3>`+b.est.map(x=>linkRow(otherType,x.obj)).join('');}
+  if(b.sus.length){h+=`<h3 class="susp"><span class="pip"></span>${T.suspected} <span class="cnt">· ${b.sus.length}</span></h3>`+b.sus.map(x=>linkRow(otherType,x.obj)).join('');}
+  if(b.unclear.length){h+=`<h3 class="unc"><span class="pip"></span>${T.tooLimited} <span class="cnt">· ${b.unclear.length}</span></h3>`+b.unclear.map(x=>linkRow(otherType,x.obj)).join('')
+    +`<div class="note">${T.tooLimitedNote}</div>`;}
   return h;
 }
 function cancerBody(c){const ls=linksByCan[c.id]||[]; const b=bucket(ls,l=>expById[l.exposure]);
   return `<div class="d-head"><h2 class="d-title">${esc(c.name)}</h2>
-    <div class="d-sub"><span class="sq" style="background:var(--cancer)"></span>${esc(c.organ_plain)} · ${ls.length} exposure${ls.length!=1?'s':''} linked</div></div>
-    <div class="scn"><div class="lab">What this shows</div>Exposures IARC has linked to <b>${esc(c.name.toLowerCase())}</b>.
-      <b>Established</b> = strong evidence in people; <b>Suspected</b> = some evidence, not certain. Tap any exposure to learn more.</div>
-    <div class="sec">${sections(b,'exposure')||'<div class="note">No exposures recorded for this cancer.</div>'}</div>`;
+    <div class="d-sub"><span class="sq" style="background:var(--cancer)"></span>${esc(c.organ_plain)} · ${T.exposuresLinked(ls.length)}</div></div>
+    <div class="scn"><div class="lab">${T.whatThisShows}</div>${T.exposuresLinkedDesc(esc(c.name))}</div>
+    <div class="sec">${sections(b,'exposure')||`<div class="note">${T.noExposures}</div>`}</div>`;
 }
 function exposureBody(e){const ls=linksByExp[e.id]||[]; const b=bucket(ls,l=>canById[l.cancer]); const st=e.streams;
   let h=`<div class="d-head"><h2 class="d-title">${esc(e.name)}</h2>
     <div class="d-sub">${badge(e.group)}<span>${esc(e.group_desc)}</span><span class="chip-cat" style="background:${CAT_HEX[e.category]}">${esc(e.category)}</span></div></div>
-    <div class="scn"><div class="lab">Where people encounter this</div>${esc(e.scenario)}</div>
-    <div class="ev-streams"><div class="ev-row"><span class="k">In people</span><span>${st.human&&st.human.startsWith('Sufficient')?'✅ Strong evidence':(st.human?'➕ Some evidence (limited)':'—')}</span></div>`;
-  if(st.animal)h+=`<div class="ev-row"><span class="k">In animals</span><span>${esc(st.animal)} evidence</span></div>`;
-  if(st.mechanistic)h+=`<div class="ev-row"><span class="k">How it works</span><span>${esc(st.mechanistic)} lab evidence</span></div>`;
+    <div class="scn"><div class="lab">${T.whereEncounter}</div>${esc(e.scenario)}</div>
+    <div class="ev-streams"><div class="ev-row"><span class="k">${T.inPeople}</span><span>${st.human&&st.human.startsWith('Sufficient')?T.strongEvidence:(st.human?T.someEvidence:'—')}</span></div>`;
+  if(st.animal)h+=`<div class="ev-row"><span class="k">${T.inAnimals}</span><span>${esc(st.animal)} ${T.evidence}</span></div>`;
+  if(st.mechanistic)h+=`<div class="ev-row"><span class="k">${T.howItWorks}</span><span>${esc(st.mechanistic)} ${T.labEvidence}</span></div>`;
   h+=`</div><div class="basis">${esc(e.group_basis)}${e.group_note?' <i>('+esc(e.group_note)+')</i>':''}</div>
-    <div class="sec">${sections(b,'cancer')||'<div class="note">No specific cancer links recorded.</div>'}</div>`;
+    <div class="sec">${sections(b,'cancer')||`<div class="note">${T.noCancers}</div>`}</div>`;
   return h;
 }
 function wireLinks(container,handler){container.querySelectorAll('.link-item').forEach(el=>
@@ -308,11 +695,10 @@ function wireLinks(container,handler){container.querySelectorAll('.link-item').f
 
 /* ---------------- browse detail ---------------- */
 const detail=document.getElementById('detail');
-const BACK='<button class="d-back" id="dback">‹ Back to list</button>';
 function renderDetail(){
-  if(!sel){detail.innerHTML='<div class="empty"><div class="big">←</div>Pick an item on the left to explore the evidence.</div>';return;}
+  if(!sel){detail.innerHTML=`<div class="empty"><div class="big">${T.emptyArrow}</div>${T.emptyText}</div>`;return;}
   const body=sel.type==='cancer'?cancerBody(canById[sel.id]):exposureBody(expById[sel.id]);
-  detail.innerHTML=BACK+body;
+  detail.innerHTML=`<button class="d-back" id="dback">${T.back}</button>`+body;
   wireLinks(detail,(t,id)=>{setMode(t,true);select(t,id);});
   const bb=detail.querySelector('#dback'); if(bb)bb.onclick=()=>{document.body.classList.remove('detail-open');
     document.getElementById('pickerPanel').scrollIntoView({block:'start'});};
@@ -334,7 +720,7 @@ function setMode(m,keepSel){mode=m;
   layout.style.display=isMap?'none':'grid';
   mapWrap.classList.toggle('on',isMap);
   searchrow.style.display=isMap?'none':'block';
-  document.getElementById('q').placeholder=m==='cancer'?'Search cancers… e.g. lung, breast':'Search exposures… e.g. tobacco, radon, HPV';
+  document.getElementById('q').placeholder=m==='cancer'?T.searchCancer:T.searchExposure;
   if(!isMap)buildPicker();
   if(isMap){ ensureGraph(); requestAnimationFrame(()=>{resizeCanvas(); if(sel)focusNode(sel.type,sel.id);}); }
 }
@@ -431,8 +817,8 @@ function move(e){const[px,py,cx,cy]=pos(e);
   if(panning){cam.x+=px-last[0];cam.y+=py-last[1];last=[px,py];moved=true;return;}
   const i=pick(px,py);hover=i;
   if(i!=null){const n=NODES[i];tip.style.display='block';tip.style.left=(cx+12)+'px';tip.style.top=(cy+12)+'px';
-    tip.innerHTML=n.t==='c'?`<b>${esc(n.obj.name)}</b><br>${esc(n.obj.organ_plain)} · ${n.deg} link(s)`
-      :`<b>${esc(n.obj.name)}</b><br>${esc((DATA.meta.group_plain[n.obj.group]||{}).label||'')} · ${n.deg} cancer(s)`;
+    tip.innerHTML=n.t==='c'?`<b>${esc(n.obj.name)}</b><br>${esc(n.obj.organ_plain)} · ${T.links(n.deg)}`
+      :`<b>${esc(n.obj.name)}</b><br>${esc((T.badgeLabels&&T.badgeLabels[n.obj.group])||'')} · ${T.links(n.deg)}`;
     cv.style.cursor='pointer';}
   else{tip.style.display='none';cv.style.cursor=panning?'grabbing':'grab';}}
 function up(){ if(!moved&&last){const i=pick(last[0],last[1]); if(i!=null){pin=i;sel={type:NODES[i].bt,id:NODES[i].id};showMapCard(i);}
@@ -460,11 +846,11 @@ function showMapCard(i){const n=NODES[i]; const o=n.obj;
     h+=`<div class="d-head" style="padding:16px 16px 2px"><h2 class="d-title" style="font-size:19px">${esc(o.name)}</h2>
       <div class="d-sub">${badge(o.group)}<span class="chip-cat" style="background:${CAT_HEX[o.category]}">${esc(o.category)}</span></div></div>
       <div class="scn" style="margin:11px 16px 4px">${esc(o.scenario)}</div>
-      <div class="sec" style="padding:2px 16px 14px">${sections(b,'cancer')||'<div class="note">No cancer links recorded.</div>'}</div>`;
+      <div class="sec" style="padding:2px 16px 14px">${sections(b,'cancer')||`<div class="note">${T.noCancerLinks}</div>`}</div>`;
   } else {const b=bucket(linksByCan[o.id]||[],l=>expById[l.exposure]);
     h+=`<div class="d-head" style="padding:16px 16px 2px"><h2 class="d-title" style="font-size:19px">${esc(o.name)}</h2>
       <div class="d-sub"><span class="sq" style="background:var(--cancer)"></span>${esc(o.organ_plain)}</div></div>
-      <div class="sec" style="padding:6px 16px 14px">${sections(b,'exposure')||'<div class="note">No exposures recorded.</div>'}</div>`;
+      <div class="sec" style="padding:6px 16px 14px">${sections(b,'exposure')||`<div class="note">${T.noExposuresShort}</div>`}</div>`;
   }
   mapcard.innerHTML=h; mapcard.classList.add('on');
   mapcard.querySelector('.mc-x').onclick=()=>{hideMapCard();pin=null;};
@@ -488,12 +874,12 @@ document.getElementById('btnReset').onclick=()=>{cam={x:0,y:0,z:.8};pin=null;hid
 /* full screen */
 function setFs(on){const w=mapWrap; const want=on===undefined?!w.classList.contains('fs'):on;
   w.classList.toggle('fs',want);
-  document.getElementById('btnFs').textContent=want?'⤡ Exit full screen':'⤢ Full screen';
+  document.getElementById('btnFs').textContent=want?T.btnFsExit:T.btnFs;
   if(want&&w.requestFullscreen){w.requestFullscreen().catch(()=>{});}
   else if(!want&&document.fullscreenElement&&document.exitFullscreen){document.exitFullscreen().catch(()=>{});}
   setTimeout(resizeCanvas,80);}
 document.getElementById('btnFs').onclick=()=>setFs();
-document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement&&mapWrap.classList.contains('fs')){mapWrap.classList.remove('fs');document.getElementById('btnFs').textContent='⤢ Full screen';}setTimeout(resizeCanvas,80);});
+document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement&&mapWrap.classList.contains('fs')){mapWrap.classList.remove('fs');document.getElementById('btnFs').textContent=T.btnFs;}setTimeout(resizeCanvas,80);});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&mapWrap.classList.contains('fs'))setFs(false);});
 
 /* auto-resize broadcast (optional; see EMBED_WORDPRESS.md) */
@@ -503,6 +889,15 @@ try{new ResizeObserver(postHeight).observe(document.body);}catch(e){}
 
 /* init */
 setMode('cancer'); buildPicker();
+buildLangGrid();
+(function initLang(){
+  const saved=localStorage.getItem('iarc-lang');
+  if(saved&&LANGS[saved]){
+    applyLang(saved);
+    document.getElementById('langOverlay').style.display='none';
+    document.getElementById('appContent').classList.add('visible');
+  }
+})();
 </script>
 </body>
 </html>
