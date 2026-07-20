@@ -18,13 +18,16 @@
     --radius:22px;--shadow:0 18px 60px rgba(28,62,57,.09);--wrap:1200px;
   }
   *{box-sizing:border-box}
-  html{scroll-behavior:smooth}
+  html{scroll-behavior:smooth;scroll-padding-top:24px}
+  html.inertia-scroll{scroll-behavior:auto}
   html,body{margin:0}
   body{font-family:var(--sans);background:var(--paper);color:var(--ink);line-height:1.55;font-size:15px;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  html.inertia-scroll #appContent{position:fixed;inset:0 0 auto;width:100%;will-change:transform;backface-visibility:hidden;transition:opacity .45s ease}
   button,input{font:inherit}button{cursor:pointer}a{color:var(--teal);text-underline-offset:3px}
   button:focus-visible,input:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid rgba(225,103,82,.3);outline-offset:3px}
   ::selection{background:var(--lime)}
   .wrap{max-width:var(--wrap);margin:0 auto;padding:0 28px}
+  #welcome,#how,#explorer,#next-steps{scroll-margin-top:24px}
 
   .site-header{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px;border-bottom:1px solid rgba(217,225,217,.85)}
   .brand{display:inline-flex;align-items:center;gap:11px;color:var(--ink);text-decoration:none;min-width:0}
@@ -118,7 +121,7 @@
     <header class="top" id="welcome">
       <div class="hero-copy">
         <div class="eyebrow">Cancer causes, explained clearly</div>
-        <h1>Explore what science knows about causes of cancer.</h1>
+        <h1>Explore what science knows about causes of cancer</h1>
         <p class="lede">Use trusted <b>World Health Organization IARC evidence</b> to see which cancers have been linked to tobacco, infections, jobs, medicines, radiation, diet and the environment.</p>
         <div class="hero-actions">
           <button class="button primary" id="heroStart">Start exploring <span aria-hidden="true">→</span></button>
@@ -153,7 +156,7 @@
     <section class="how" id="how">
       <div class="section-head">
         <div class="section-tag">Read this first</div>
-        <h2>Hazard is not the same as personal risk.</h2>
+        <h2>Hazard is not the same as personal risk</h2>
         <p>This one distinction changes how every result in the explorer should be read.</p>
       </div>
       <div class="compare-grid">
@@ -180,7 +183,7 @@
   <section class="explorer-bg" id="explorer">
     <div class="wrap">
       <div class="explorer-head">
-        <div><div class="section-tag">Explore the evidence</div><h2>Choose where you want to begin.</h2></div>
+        <div><div class="section-tag">Explore the evidence</div><h2>Choose where you want to begin</h2></div>
         <p>There is no wrong starting point. Search by a cancer, look up something you may encounter, or move through the full network.</p>
       </div>
       <div class="controls">
@@ -252,7 +255,7 @@
   <div class="wrap">
     <section class="next-steps" id="next-steps">
       <div class="section-tag">After you explore</div>
-      <h2>Use the evidence as a starting point—not a verdict.</h2>
+      <h2>Use the evidence as a starting point—not a verdict</h2>
       <div class="next-grid">
         <article class="next-card"><div class="step">Step 01</div><h3>Put the result in context</h3><p>A classification describes confidence that an exposure can cause cancer. It does not show how large your risk is at the amount you encountered.</p></article>
         <article class="next-card"><div class="step">Step 02</div><h3>Focus on practical prevention</h3><p>Trusted health guidance can help with tobacco, alcohol, sun protection, vaccination, workplace safety and other avoidable exposures.</p></article>
@@ -727,16 +730,18 @@ function setChipText(el,text){for(let i=el.childNodes.length-1;i>=0;i--){if(el.c
 function applyPageCopy(lang){
   const P=PAGE_COPY[lang]||PAGE_COPY.en;
   const put=(selector,value,root=document)=>{const el=root.querySelector(selector);if(el)el.textContent=value;};
+  const headingText=value=>value.replace(/[.。．۔]+$/u,'');
+  const putHeading=(selector,value,root=document)=>put(selector,headingText(value),root);
   const putMany=(selector,values,root=document)=>root.querySelectorAll(selector).forEach((el,i)=>{if(values[i]!=null)el.textContent=values[i];});
   const [eyebrow,heroTitle,heroLede,start,understand,note1,note2,note3]=P.hero;
-  document.title=heroTitle;
+  document.title=headingText(heroTitle);
   put('.brand-copy span',P.misc[0]);
   put('#navHow',P.misc[3]);put('#navExplore',P.misc[4]);
-  put('.eyebrow',eyebrow);put('header.top h1',heroTitle);put('header.top .lede',heroLede);
+  put('.eyebrow',eyebrow);putHeading('header.top h1',heroTitle);put('header.top .lede',heroLede);
   put('#heroStart',start);put('#heroLearn',understand);putMany('.hero-note span',[note1,note2,note3]);
 
   const concept=document.querySelector('.concept-card'),questions=concept.querySelectorAll('.question');
-  put('.concept-kicker',P.concept[0],concept);put('.concept-title',P.concept[1],concept);
+  put('.concept-kicker',P.concept[0],concept);putHeading('.concept-title',P.concept[1],concept);
   put('strong',P.concept[2],questions[0]);put('small',P.concept[3],questions[0]);put('.answer-pill',P.concept[4],questions[0]);
   put('strong',P.concept[5],questions[1]);put('small',P.concept[6],questions[1]);put('.answer-pill',P.concept[7],questions[1]);put('.concept-foot',P.concept[8],concept);
 
@@ -744,17 +749,17 @@ function applyPageCopy(lang){
   put('.trust-source strong',P.trust[0],trust);put('.trust-source > span:last-child > span',P.trust[1],trust);putMany('.stat span',P.trust.slice(2),trust);
 
   const how=document.querySelector('.how'),howHead=how.querySelector('.section-head'),cards=how.querySelectorAll('.compare-card');
-  put('.section-tag',P.how[0],howHead);put('h2',P.how[1],howHead);put('p',P.how[2],howHead);
+  put('.section-tag',P.how[0],howHead);putHeading('h2',P.how[1],howHead);put('p',P.how[2],howHead);
   put('.mini-label',P.how[3],cards[0]);put('h3',P.how[4],cards[0]);put('p',P.how[5],cards[0]);put('.compare-answer',P.how[6],cards[0]);
   put('.mini-label',P.how[7],cards[1]);put('h3',P.how[8],cards[1]);put('p',P.how[9],cards[1]);put('.compare-answer',P.how[10],cards[1]);
 
   const explorer=document.querySelector('.explorer-bg'),explorerHead=explorer.querySelector('.explorer-head');
-  put('.section-tag',P.explore[0],explorerHead);put('h2',P.explore[1],explorerHead);put('p',P.explore[2],explorerHead);putMany('.tab-desc',P.explore.slice(3,6),explorer);
+  put('.section-tag',P.explore[0],explorerHead);putHeading('h2',P.explore[1],explorerHead);put('p',P.explore[2],explorerHead);putMany('.tab-desc',P.explore.slice(3,6),explorer);
   const keyItems=explorer.querySelectorAll('.key-items > span');
   keyItems[0].innerHTML=`<i class="key-line"></i>${P.explore[6]}`;keyItems[1].innerHTML=`<i class="key-line sus"></i>${P.explore[7]}`;put('.key-reminder',P.explore[8],explorer);
 
   const next=document.querySelector('.next-steps'),nextCards=next.querySelectorAll('.next-card');
-  put('.section-tag',P.next[0],next);put('h2',P.next[1],next);putMany('.step',['01','02','03'],next);
+  put('.section-tag',P.next[0],next);putHeading('h2',P.next[1],next);putMany('.step',['01','02','03'],next);
   put('h3',P.next[2],nextCards[0]);put('p',P.next[3],nextCards[0]);put('h3',P.next[4],nextCards[1]);put('p',P.next[5],nextCards[1]);put('h3',P.next[6],nextCards[2]);put('p',P.next[7],nextCards[2]);
   next.querySelector('.medical-note span:last-child').innerHTML=`<strong>${P.next[8]}</strong> ${P.next[9]}`;
 
@@ -813,7 +818,7 @@ function pickLang(lang){
   card.style.opacity='0'; card.style.transform='scale(.94) translateY(-12px)';
   overlay.style.transition='opacity .45s ease';
   setTimeout(()=>{overlay.style.opacity='0';},80);
-  setTimeout(()=>{overlay.style.display='none';document.getElementById('appContent').classList.add('visible');},450);
+  setTimeout(()=>{overlay.style.display='none';document.getElementById('appContent').classList.add('visible');inertiaScroll.refresh();},450);
 }
 function reopenLangOverlay(){
   const overlay=document.getElementById('langOverlay'), card=overlay.querySelector('.lo-card');
@@ -822,11 +827,64 @@ function reopenLangOverlay(){
   document.getElementById('appContent').classList.remove('visible');
 }
 document.getElementById('langSwitchBtn').addEventListener('click',reopenLangOverlay);
+/* Luxy-style inertial page scroll: the document keeps the real scrollbar while
+   the visible page wrapper eases toward it. Desktop only, as in the reference. */
+const inertiaScroll=(()=>{
+  const root=document.getElementById('appContent');
+  const media=window.matchMedia('(min-width:768px) and (hover:hover) and (pointer:fine) and (prefers-reduced-motion:no-preference)');
+  const speed=.065;
+  let active=false,frameId=0,offset=window.scrollY;
+  function refresh(){
+    if(!active)return;
+    document.body.style.height=root.scrollHeight+'px';
+  }
+  function render(){
+    if(!active)return;
+    const target=window.scrollY;
+    offset+=(target-offset)*speed;
+    if(Math.abs(target-offset)<.05)offset=target;
+    root.style.transform=`translate3d(0,${-offset.toFixed(3)}px,0)`;
+    frameId=requestAnimationFrame(render);
+  }
+  function start(){
+    if(active||!media.matches)return;
+    active=true;offset=window.scrollY;
+    document.documentElement.classList.add('inertia-scroll');
+    refresh();render();
+  }
+  function stop(){
+    if(!active)return;
+    active=false;cancelAnimationFrame(frameId);
+    document.documentElement.classList.remove('inertia-scroll');
+    document.body.style.height='';root.style.transform='';
+  }
+  function sync(){media.matches?start():stop();}
+  media.addEventListener?.('change',sync);
+  window.addEventListener('resize',refresh,{passive:true});
+  window.addEventListener('load',refresh,{once:true});
+  try{new ResizeObserver(refresh).observe(root);}catch(e){}
+  document.fonts?.ready.then(refresh);
+  start();
+  return {refresh,start,stop,isActive:()=>active,getOffset:()=>offset};
+})();
+function scrollToSection(target){
+  if(!target)return;
+  const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(inertiaScroll.isActive()){
+    const top=Math.max(0,target.getBoundingClientRect().top+inertiaScroll.getOffset()-24);
+    window.scrollTo({top,behavior:'auto'});
+  }else target.scrollIntoView({behavior:reducedMotion?'auto':'smooth',block:'start'});
+}
+document.querySelector('.brand').addEventListener('click',event=>{
+  event.preventDefault();
+  scrollToSection(document.getElementById('welcome'));
+  history.replaceState(null,'','#welcome');
+});
 document.querySelectorAll('[data-scroll]').forEach(button=>button.addEventListener('click',()=>{
-  const target=document.querySelector(button.dataset.scroll); if(target)target.scrollIntoView({behavior:'smooth',block:'start'});
+  scrollToSection(document.querySelector(button.dataset.scroll));
 }));
 document.getElementById('heroStart').addEventListener('click',()=>{
-  setMode('cancer'); document.getElementById('explorer').scrollIntoView({behavior:'smooth',block:'start'});
+  setMode('cancer'); scrollToSection(document.getElementById('explorer'));
 });
 
 let mode='cancer', sel=null, query='';
@@ -1106,13 +1164,14 @@ document.getElementById('btnReset').onclick=()=>{cam={x:0,y:0,z:.8};pin=null;hid
 
 /* full screen */
 function setFs(on){const w=mapWrap; const want=on===undefined?!w.classList.contains('fs'):on;
+  want?inertiaScroll.stop():inertiaScroll.start();
   w.classList.toggle('fs',want);
   document.getElementById('btnFs').textContent=want?T.btnFsExit:T.btnFs;
   if(want&&w.requestFullscreen){w.requestFullscreen().catch(()=>{});}
   else if(!want&&document.fullscreenElement&&document.exitFullscreen){document.exitFullscreen().catch(()=>{});}
   setTimeout(resizeCanvas,80);}
 document.getElementById('btnFs').onclick=()=>setFs();
-document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement&&mapWrap.classList.contains('fs')){mapWrap.classList.remove('fs');document.getElementById('btnFs').textContent=T.btnFs;}setTimeout(resizeCanvas,80);});
+document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement&&mapWrap.classList.contains('fs')){mapWrap.classList.remove('fs');document.getElementById('btnFs').textContent=T.btnFs;inertiaScroll.start();}setTimeout(()=>{resizeCanvas();inertiaScroll.refresh();},80);});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&mapWrap.classList.contains('fs'))setFs(false);});
 
 /* auto-resize broadcast (optional; see EMBED_WORDPRESS.md) */
@@ -1129,6 +1188,7 @@ buildLangGrid();
     applyLang(saved);
     document.getElementById('langOverlay').style.display='none';
     document.getElementById('appContent').classList.add('visible');
+    inertiaScroll.refresh();
   }
 })();
 </script>
