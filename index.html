@@ -13,7 +13,7 @@
     --accent:#e16752;--accent-ink:#b94333;--accent-soft:#fae9e3;--teal:#1d5c57;--teal-2:#2f756e;
     --teal-soft:#dcece7;--lime:#dbe79c;--yellow:#f3d37c;--cancer:#315f5a;
     --g1:#ba4c38;--g2a:#d27a35;--g2b:#c69b35;--g3:#899693;
-    --established:#ba4c38;--suspected:#c28b32;
+    --established:#ba4c38;--suspected:#c28b32;--cat1:#BB8A3D;--cat2:#3D8A94;--cat3:#48628C;--cat4:#5E8F52;--cat5:#8C5F94;--cat6:#BF4B3E;
     --serif:'Fraunces',ui-serif,Georgia,serif;--sans:'DM Sans',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
     --radius:22px;--shadow:0 18px 60px rgba(28,62,57,.09);--wrap:1200px;
   }
@@ -71,7 +71,7 @@
   .risk-note{margin:9px 27px 3px;background:var(--accent-soft);color:#72483f;border-radius:11px;padding:10px 13px;font-size:11.5px}
 
   /* network: visually refined, interaction and layout unchanged */
-  #mapWrap{display:none}#mapWrap.on{display:flex;flex-direction:column}#mapWrap.fs{position:fixed;inset:0;z-index:9999;border-radius:0;background:var(--paper)}.mapbar{display:flex;flex-wrap:wrap;gap:8px 9px;align-items:center;padding:13px 14px;border-bottom:1px solid var(--line2);font-size:12px}.mapbar .mlabel{color:var(--faint);font-weight:700;font-size:9.5px;text-transform:uppercase;letter-spacing:.07em}.msearch{position:relative;flex:1;min-width:180px;max-width:300px}.msearch input{width:100%;padding:9px 12px 9px 32px;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink);font-size:12.5px;outline:none}.msearch .si{left:10px;top:8px}.chip{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:6px 10px;font-size:11px;display:inline-flex;align-items:center;gap:6px;color:var(--ink);user-select:none}.chip .sw{width:10px;height:10px;border-radius:50%}.chip.line .sw{width:15px;height:0;border-radius:0}.chip.off{opacity:.35}.btn{border:1px solid var(--line);background:var(--paper);border-radius:9px;padding:7px 11px;font-size:11px;font-weight:700;color:var(--ink)}.btn.primary{background:var(--teal);color:#fff;border-color:var(--teal)}.maparea{position:relative;height:640px;overflow:hidden;background:radial-gradient(circle at 50% 50%,#fffef9 0,#f6f6ef 72%)}#mapWrap.fs .maparea{height:auto;flex:1}#cv{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab}.zoombtns{position:absolute;right:13px;bottom:13px;display:flex;flex-direction:column;gap:6px;z-index:5}.zoombtns button{width:36px;height:36px;border-radius:10px;border:1px solid var(--line);background:var(--card);font-size:18px;color:var(--ink);box-shadow:0 2px 8px rgba(28,62,57,.09)}.maplegend{position:absolute;left:13px;bottom:13px;background:rgba(255,254,249,.93);border:1px solid var(--line);border-radius:11px;padding:8px 11px;font-size:10.5px;color:var(--muted);display:flex;flex-wrap:wrap;gap:5px 12px;max-width:min(92%,560px);backdrop-filter:blur(5px)}.maplegend span{display:inline-flex;align-items:center;gap:5px}.mapcard{position:absolute;top:13px;right:13px;width:330px;max-width:calc(100% - 26px);max-height:calc(100% - 26px);overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:17px;box-shadow:var(--shadow);display:none}.mapcard.on{display:block}.mapcard .mc-x{position:absolute;top:10px;right:11px;border:0;background:transparent;font-size:19px;color:var(--faint);line-height:1}.maphint{font-size:10.5px;color:var(--muted);padding:10px 14px;border-top:1px solid var(--line2)}#tip{position:fixed;pointer-events:none;background:var(--ink);color:#fff;border-radius:9px;padding:7px 10px;font-size:11.5px;max-width:240px;display:none;z-index:10010;box-shadow:0 8px 24px rgba(0,0,0,.22)}
+  #mapWrap{display:none}#mapWrap.on{display:flex;flex-direction:column}#mapWrap.fs{position:fixed;inset:0;z-index:9999;border-radius:0;background:var(--paper)}.mapbar{display:flex;flex-wrap:wrap;gap:8px 9px;align-items:center;padding:13px 14px;border-bottom:1px solid var(--line2);font-size:12px}.mapbar .mlabel{color:var(--faint);font-weight:700;font-size:9.5px;text-transform:uppercase;letter-spacing:.07em}.msearch{position:relative;flex:1;min-width:180px;max-width:300px}.msearch input{width:100%;padding:9px 12px 9px 32px;border:1px solid var(--line);border-radius:10px;background:var(--paper);color:var(--ink);font-size:12.5px;outline:none}.msearch .si{left:10px;top:8px}.chip{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:6px 10px;font-size:11px;display:inline-flex;align-items:center;gap:6px;color:var(--ink);user-select:none;cursor:pointer}.chip .sw{width:10px;height:10px;border-radius:50%}.chip.line .sw{width:15px;height:0;border-radius:0}.chip.off{opacity:.35}.chip.toggle{transition:.15s}.chip.toggle .catsw{width:13px;height:13px;border-radius:50%;background:conic-gradient(var(--cat1) 0 60deg,var(--cat2) 60deg 120deg,var(--cat3) 120deg 180deg,var(--cat4) 180deg 240deg,var(--cat5) 240deg 300deg,var(--cat6) 300deg 360deg);box-shadow:inset 0 0 0 1px rgba(0,0,0,.08)}.chip.toggle[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}.catbar{display:none;flex-wrap:wrap;gap:7px 9px;align-items:center;padding:9px 14px;border-bottom:1px solid var(--line2);background:var(--card)}.catbar.on{display:flex}.catbar .mlabel{color:var(--faint);font-weight:700;font-size:9.5px;text-transform:uppercase;letter-spacing:.07em}.btn{border:1px solid var(--line);background:var(--paper);border-radius:9px;padding:7px 11px;font-size:11px;font-weight:700;color:var(--ink)}.btn.primary{background:var(--teal);color:#fff;border-color:var(--teal)}.maparea{position:relative;height:640px;overflow:hidden;background:radial-gradient(circle at 50% 50%,#fffef9 0,#f6f6ef 72%)}#mapWrap.fs .maparea{height:auto;flex:1}#cv{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab}.zoombtns{position:absolute;right:13px;bottom:13px;display:flex;flex-direction:column;gap:6px;z-index:5}.zoombtns button{width:36px;height:36px;border-radius:10px;border:1px solid var(--line);background:var(--card);font-size:18px;color:var(--ink);box-shadow:0 2px 8px rgba(28,62,57,.09)}.maplegend{position:absolute;left:13px;bottom:13px;background:rgba(255,254,249,.93);border:1px solid var(--line);border-radius:11px;padding:8px 11px;font-size:10.5px;color:var(--muted);display:flex;flex-wrap:wrap;gap:5px 12px;max-width:min(92%,560px);backdrop-filter:blur(5px)}.maplegend span{display:inline-flex;align-items:center;gap:5px}.mapcard{position:absolute;top:13px;right:13px;width:330px;max-width:calc(100% - 26px);max-height:calc(100% - 26px);overflow:auto;background:var(--card);border:1px solid var(--line);border-radius:17px;box-shadow:var(--shadow);display:none}.mapcard.on{display:block}.mapcard .mc-x{position:absolute;top:10px;right:11px;border:0;background:transparent;font-size:19px;color:var(--faint);line-height:1}.maphint{font-size:10.5px;color:var(--muted);padding:10px 14px;border-top:1px solid var(--line2)}#tip{position:fixed;pointer-events:none;background:var(--ink);color:#fff;border-radius:9px;padding:7px 10px;font-size:11.5px;max-width:240px;display:none;z-index:10010;box-shadow:0 8px 24px rgba(0,0,0,.22)}
 
   .next-steps{padding:110px 0 96px}.next-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:37px}.next-card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:24px}.next-card .step{font-size:10px;color:var(--accent-ink);text-transform:uppercase;letter-spacing:.1em;font-weight:700}.next-card h3{font-family:var(--serif);font-size:21px;margin:20px 0 9px}.next-card p{font-size:13px;color:var(--muted);margin:0}.medical-note{margin-top:16px;background:var(--accent-soft);border:1px solid #efd0c7;border-radius:16px;padding:17px 20px;display:flex;gap:12px;font-size:12.5px;color:#70443a}.medical-note strong{color:#5e3229}
   footer.ft{background:var(--ink);color:#a9bfbb;font-size:11.5px;padding:42px 0;line-height:1.7}.footer-inner{display:grid;grid-template-columns:1.2fr .8fr;gap:40px}.footer-brand{font-family:var(--serif);font-size:19px;color:#fff;margin-bottom:7px}.ft a{color:#d8e59a}.ft b{color:#d1dfdc}.footer-right{text-align:right}
@@ -81,7 +81,7 @@
 
   @media(max-width:980px){header.top{grid-template-columns:1fr;gap:38px;padding:58px 0 82px}.concept-card{max-width:600px}.trust-strip{grid-template-columns:1.3fr repeat(3,.5fr)}.tabs{grid-template-columns:1fr}.tab{min-height:78px}.explorer-head{align-items:start;flex-direction:column}.layout{grid-template-columns:minmax(280px,.8fr) 1.2fr}.nav-link{display:none}}
   @media(max-width:760px){.wrap{padding:0 18px}.site-header{height:68px}.brand-copy span{display:none}header.top{min-height:0;padding:53px 0 70px}header.top h1{font-size:clamp(42px,13vw,62px)}header.top p.lede{font-size:16px}.concept-card{padding:23px}.trust-strip{grid-template-columns:1fr 1fr;margin-top:-23px}.trust-source{grid-column:1/-1;border-bottom:1px solid var(--line)}.stat{border-left:0;border-right:1px solid var(--line)}.stat:last-child{grid-column:1/-1;border-top:1px solid var(--line);border-right:0}.how{padding:88px 0}.compare-grid,.next-grid{grid-template-columns:1fr}.scope-note{grid-template-columns:1fr}.explorer-bg{padding:68px 0}.layout{grid-template-columns:1fr}.evidence-key{align-items:flex-start;flex-direction:column}.maparea{height:560px}.next-steps{padding:84px 0}.footer-inner{grid-template-columns:1fr}.footer-right{text-align:left}.site-nav .nav-link{display:none}.lo-card{padding:25px 20px}.lo-grid{grid-template-columns:repeat(2,1fr)}.lo-grid .lo-btn:last-child:nth-child(3n+1){grid-column:auto}body.detail-open #pickerPanel{display:none}.d-back{display:inline-flex;align-items:center;gap:6px;margin:14px 16px 0;background:var(--teal-soft);color:var(--teal);border:1px solid #bed8d0;border-radius:999px;padding:7px 13px;font-size:12px;font-weight:700}}
-  @media(max-width:430px){.brand-copy strong{font-size:12px}.lo-langbtn{padding:8px 10px}.hero-actions .button{width:100%}.question{grid-template-columns:36px 1fr}.answer-pill{grid-column:2}.mapbar .mlabel,.chip[data-grp]{display:none}.maplegend{right:60px}.d-head{padding:23px 20px 8px}.scn,.ev-streams,.basis{margin-left:20px;margin-right:20px}}
+  @media(max-width:430px){.brand-copy strong{font-size:12px}.lo-langbtn{padding:8px 10px}.hero-actions .button{width:100%}.question{grid-template-columns:36px 1fr}.answer-pill{grid-column:2}.mapbar .mlabel,.chip[data-grp],#chipCatMode{display:none}.catbar{display:none!important}.maplegend{right:60px}.d-head{padding:23px 20px 8px}.scn,.ev-streams,.basis{margin-left:20px;margin-right:20px}}
   [dir="rtl"] .tab,[dir="rtl"] .item,[dir="rtl"] .link-item{text-align:right}
   [dir="rtl"] .searchrow .si{left:auto;right:16px}[dir="rtl"] .searchrow input{padding:15px 46px 15px 50px}[dir="rtl"] .searchrow .clear{right:auto;left:10px}
   [dir="rtl"] .msearch .si{left:auto;right:10px}[dir="rtl"] .msearch input{padding:9px 32px 9px 12px}[dir="rtl"] .footer-right{text-align:left}
@@ -230,21 +230,23 @@
           <span class="chip" data-grp="1" role="button" tabindex="0"><span class="sw" style="background:var(--g1)"></span><span class="txt">Known</span></span>
           <span class="chip" data-grp="2A" role="button" tabindex="0"><span class="sw" style="background:var(--g2a)"></span><span class="txt">Probable</span></span>
           <span class="chip" data-grp="2B" role="button" tabindex="0"><span class="sw" style="background:var(--g2b)"></span><span class="txt">Possible</span></span>
+          <button type="button" class="chip toggle" id="chipCatMode" aria-pressed="false" style="margin-left:4px">
+            <span class="catsw"></span><span class="txt" id="txtCatMode">Colour by category</span>
+          </button>
           <span style="margin-left:auto"></span>
           <button class="btn" id="btnReset">Reset</button>
           <button class="btn primary" id="btnFs">⤢ Full screen</button>
         </div>
+        <div class="catbar" id="catbar"></div>
         <div class="maparea" id="maparea">
           <canvas id="cv" aria-label="Interactive network of cancer types and exposures"></canvas>
           <div class="zoombtns"><button id="zin" title="Zoom in" aria-label="Zoom in">＋</button><button id="zout" title="Zoom out" aria-label="Zoom out">－</button></div>
           <div class="mapcard" id="mapcard"></div>
           <div class="maplegend">
-            <span><span class="sq" style="background:var(--cancer)"></span><span class="txt">Cancer</span></span>
-            <span><span class="dot" style="background:var(--g1)"></span><span class="txt">Known cause</span></span>
-            <span><span class="dot" style="background:var(--g2a)"></span><span class="txt">Probable</span></span>
-            <span><span class="dot" style="background:var(--g2b)"></span><span class="txt">Possible</span></span>
-            <span><span class="sw" style="display:inline-block;width:18px;border-top:3px solid var(--established)"></span><span class="txt">Established (closer, bolder)</span></span>
-            <span><span class="sw" style="display:inline-block;width:18px;border-top:3px dashed var(--suspected)"></span><span class="txt">Suspected (farther, lighter)</span></span>
+            <span><span class="sq" style="background:var(--cancer)"></span><span class="txt" id="lgCancer">Cancer</span></span>
+            <span id="legendDynamic" style="display:contents"></span>
+            <span><span class="sw" style="display:inline-block;width:18px;border-top:3px solid var(--established)"></span><span class="txt" id="lgEst">Established (closer, bolder)</span></span>
+            <span><span class="sw" style="display:inline-block;width:18px;border-top:3px dashed var(--suspected)"></span><span class="txt" id="lgSus">Suspected (farther, lighter)</span></span>
           </div>
         </div>
         <div class="maphint" id="maphint">Tap a circle to see details and highlight its links · drag to move · scroll or ＋/－ to zoom · bigger circle = more links.</div>
@@ -283,8 +285,9 @@ const linksByExp={}, linksByCan={};
 links.forEach(l=>{(linksByExp[l.exposure]=linksByExp[l.exposure]||[]).push(l);
                   (linksByCan[l.cancer]=linksByCan[l.cancer]||[]).push(l);});
 
-const CAT_HEX={'Lifestyle & diet':'#C9803B','Infections':'#4F8A7B','Occupational':'#6E7CA8',
-  'Environmental':'#6E9457','Medical & pharmaceutical':'#9A6C9C','Radiation':'#C26B6B'};
+const CAT_HEX={'Lifestyle & diet':'#BB8A3D','Infections':'#3D8A94','Occupational':'#48628C',
+  'Environmental':'#5E8F52','Medical & pharmaceutical':'#8C5F94','Radiation':'#BF4B3E'}
+const CATS=['Lifestyle & diet','Infections','Occupational','Environmental','Medical & pharmaceutical','Radiation'];
 const GRP_HEX={'1':'#A8462E','2A':'#C07A38','2B':'#C7A24E','3':'#A89E8C'};
 const GRP_VAR={'1':'var(--g1)','2A':'var(--g2a)','2B':'var(--g2b)','3':'var(--g3)'};
 const HEX={cancer:'#315f5a',ink:'#173330',accent:'#e16752',est:'#ba4c38',sus:'#c28b32',g3:'#899693',paper:'#f3f5ef'};
@@ -317,6 +320,8 @@ en:{name:'English',native:'English',flag:'🇬🇧',dir:'ltr',
   noExposures:"No exposures recorded for this cancer.",noCancers:"No specific cancer links recorded.",noCancerLinks:"No cancer links recorded.",noExposuresShort:"No exposures recorded.",
   mlabelLinks:"Links",mlabelCause:"Cause",chipEst:"Established",chipSus:"Suspected",
   grpKnown:"Known",grpProbable:"Probable",grpPossible:"Possible",
+  mlabelCategory:"Category",catModeLabel:"Colour by category",
+  catModeHint:"Colour and filter the exposure dots by category — diet, infections, occupational, environmental, medical, radiation.",
   badgeLabels:{'1':'Known cause','2A':'Probable cause','2B':'Possible cause','3':'Not classifiable'},
   btnReset:"Reset",btnFs:"⤢ Full screen",btnFsExit:"⤡ Exit full screen",
   legendCancer:"Cancer",legendKnown:"Known cause",legendProbable:"Probable",legendPossible:"Possible",
@@ -351,6 +356,8 @@ zh:{name:'Chinese',native:'中文',flag:'🇨🇳',dir:'ltr',
   noExposures:"该癌症尚无已记录的暴露因素。",noCancers:"尚无具体癌症关联记录。",noCancerLinks:"尚无癌症关联记录。",noExposuresShort:"尚无暴露因素记录。",
   mlabelLinks:"关联",mlabelCause:"致癌因素",chipEst:"已确立",chipSus:"疑似",
   grpKnown:"已知",grpProbable:"可能",grpPossible:"或许",
+  mlabelCategory:"类别",catModeLabel:"按类别着色",
+  catModeHint:"按类别为暴露因素的点着色并筛选——生活方式与饮食、感染因素、职业因素、环境因素、医疗与药物、辐射。",
   badgeLabels:{'1':'已知致癌','2A':'可能致癌','2B':'或许致癌','3':'无法分类'},
   btnReset:"重置",btnFs:"⤢ 全屏",btnFsExit:"⤡ 退出全屏",
   legendCancer:"癌症",legendKnown:"已知致癌物",legendProbable:"可能致癌",legendPossible:"或许致癌",
@@ -385,6 +392,8 @@ fr:{name:'French',native:'Français',flag:'🇫🇷',dir:'ltr',
   noExposures:"Aucune exposition enregistrée pour ce cancer.",noCancers:"Aucun lien spécifique enregistré.",noCancerLinks:"Aucun lien cancer enregistré.",noExposuresShort:"Aucune exposition enregistrée.",
   mlabelLinks:"Liens",mlabelCause:"Cause",chipEst:"Établi",chipSus:"Suspecté",
   grpKnown:"Connu",grpProbable:"Probable",grpPossible:"Possible",
+  mlabelCategory:"Catégorie",catModeLabel:"Colorer par catégorie",
+  catModeHint:"Colorez et filtrez les points d'exposition par catégorie — mode de vie et alimentation, infections, exposition professionnelle, environnement, médical et pharmaceutique, rayonnements.",
   badgeLabels:{'1':'Cause connue','2A':'Cause probable','2B':'Cause possible','3':'Non classable'},
   btnReset:"Réinitialiser",btnFs:"⤢ Plein écran",btnFsExit:"⤡ Quitter le plein écran",
   legendCancer:"Cancer",legendKnown:"Cause connue",legendProbable:"Probable",legendPossible:"Possible",
@@ -419,6 +428,8 @@ es:{name:'Spanish',native:'Español',flag:'🇪🇸',dir:'ltr',
   noExposures:"No hay exposiciones registradas para este cáncer.",noCancers:"No hay vínculos específicos registrados.",noCancerLinks:"No hay vínculos de cáncer registrados.",noExposuresShort:"No hay exposiciones registradas.",
   mlabelLinks:"Vínculos",mlabelCause:"Causa",chipEst:"Establecido",chipSus:"Sospechado",
   grpKnown:"Conocido",grpProbable:"Probable",grpPossible:"Posible",
+  mlabelCategory:"Categoría",catModeLabel:"Colorear por categoría",
+  catModeHint:"Colorea y filtra los puntos de exposición por categoría — estilo de vida y dieta, infecciones, laboral, ambiental, médico y farmacéutico, radiación.",
   badgeLabels:{'1':'Causa conocida','2A':'Causa probable','2B':'Causa posible','3':'No clasificable'},
   btnReset:"Restablecer",btnFs:"⤢ Pantalla completa",btnFsExit:"⤡ Salir de pantalla completa",
   legendCancer:"Cáncer",legendKnown:"Causa conocida",legendProbable:"Probable",legendPossible:"Posible",
@@ -453,6 +464,8 @@ ru:{name:'Russian',native:'Русский',flag:'🇷🇺',dir:'ltr',
   noExposures:"Для этого вида рака не зафиксировано факторов воздействия.",noCancers:"Конкретных связей с видами рака не зафиксировано.",noCancerLinks:"Связей с раком не зафиксировано.",noExposuresShort:"Факторов воздействия не зафиксировано.",
   mlabelLinks:"Связи",mlabelCause:"Причина",chipEst:"Установлено",chipSus:"Предполагается",
   grpKnown:"Известные",grpProbable:"Вероятные",grpPossible:"Возможные",
+  mlabelCategory:"Категория",catModeLabel:"Раскрасить по категории",
+  catModeHint:"Раскрасьте и отфильтруйте точки воздействий по категории — образ жизни и питание, инфекции, профессиональные факторы, окружающая среда, медицина и фармацевтика, излучение.",
   badgeLabels:{'1':'Известная причина','2A':'Вероятная причина','2B':'Возможная причина','3':'Не классифицируется'},
   btnReset:"Сбросить",btnFs:"⤢ На весь экран",btnFsExit:"⤡ Выйти из полноэкранного режима",
   legendCancer:"Рак",legendKnown:"Известная причина",legendProbable:"Вероятная",legendPossible:"Возможная",
@@ -487,6 +500,8 @@ pt:{name:'Portuguese',native:'Português',flag:'🇧🇷',dir:'ltr',
   noExposures:"Nenhuma exposição registrada para este câncer.",noCancers:"Nenhuma associação específica registrada.",noCancerLinks:"Nenhuma associação de câncer registrada.",noExposuresShort:"Nenhuma exposição registrada.",
   mlabelLinks:"Associações",mlabelCause:"Causa",chipEst:"Estabelecida",chipSus:"Suspeita",
   grpKnown:"Conhecida",grpProbable:"Provável",grpPossible:"Possível",
+  mlabelCategory:"Categoria",catModeLabel:"Colorir por categoria",
+  catModeHint:"Colora e filtre os pontos de exposição por categoria — estilo de vida e alimentação, infecções, ocupacional, ambiental, médico e farmacêutico, radiação.",
   badgeLabels:{'1':'Causa conhecida','2A':'Causa provável','2B':'Causa possível','3':'Não classificável'},
   btnReset:"Redefinir",btnFs:"⤢ Tela cheia",btnFsExit:"⤡ Sair da tela cheia",
   legendCancer:"Câncer",legendKnown:"Causa conhecida",legendProbable:"Provável",legendPossible:"Possível",
@@ -521,6 +536,8 @@ ar:{name:'Arabic',native:'العربية',flag:'🇸🇦',dir:'rtl',
   noExposures:"لا توجد تعرضات مسجلة لهذا السرطان.",noCancers:"لا توجد ارتباطات محددة مسجلة.",noCancerLinks:"لا توجد ارتباطات سرطان مسجلة.",noExposuresShort:"لا توجد تعرضات مسجلة.",
   mlabelLinks:"الارتباطات",mlabelCause:"السبب",chipEst:"ثابت",chipSus:"مشتبه به",
   grpKnown:"معروف",grpProbable:"محتمل",grpPossible:"ممكن",
+  mlabelCategory:"الفئة",catModeLabel:"التلوين حسب الفئة",
+  catModeHint:"لوّن نقاط التعرضات وصفِّها حسب الفئة — نمط الحياة والتغذية، عدوى وإصابات، مهنية، بيئية، طبية ودوائية، إشعاعية.",
   badgeLabels:{'1':'سبب معروف','2A':'سبب محتمل','2B':'سبب ممكن','3':'غير قابل للتصنيف'},
   btnReset:"إعادة ضبط",btnFs:"⤢ ملء الشاشة",btnFsExit:"⤡ الخروج من ملء الشاشة",
   legendCancer:"سرطان",legendKnown:"سبب معروف",legendProbable:"محتمل",legendPossible:"ممكن",
@@ -555,6 +572,8 @@ de:{name:'German',native:'Deutsch',flag:'🇩🇪',dir:'ltr',
   noExposures:"Keine Expositionen für diese Krebsart erfasst.",noCancers:"Keine spezifischen Zusammenhänge erfasst.",noCancerLinks:"Keine Krebs-Zusammenhänge erfasst.",noExposuresShort:"Keine Expositionen erfasst.",
   mlabelLinks:"Zusammenhänge",mlabelCause:"Ursache",chipEst:"Gesichert",chipSus:"Verdächtig",
   grpKnown:"Bekannt",grpProbable:"Wahrscheinlich",grpPossible:"Möglich",
+  mlabelCategory:"Kategorie",catModeLabel:"Nach Kategorie einfärben",
+  catModeHint:"Färben und filtern Sie die Expositionspunkte nach Kategorie — Lebensstil & Ernährung, Infektionen, beruflich, Umwelt, Medizin & Arzneimittel, Strahlung.",
   badgeLabels:{'1':'Bekannte Ursache','2A':'Wahrscheinliche Ursache','2B':'Mögliche Ursache','3':'Nicht klassifizierbar'},
   btnReset:"Zurücksetzen",btnFs:"⤢ Vollbild",btnFsExit:"⤡ Vollbild beenden",
   legendCancer:"Krebs",legendKnown:"Bekannte Ursache",legendProbable:"Wahrscheinlich",legendPossible:"Möglich",
@@ -589,6 +608,8 @@ ja:{name:'Japanese',native:'日本語',flag:'🇯🇵',dir:'ltr',
   noExposures:"このがんに対して記録された曝露要因はありません。",noCancers:"記録された具体的な関連はありません。",noCancerLinks:"記録されたがん関連はありません。",noExposuresShort:"記録された曝露要因はありません。",
   mlabelLinks:"関連",mlabelCause:"原因",chipEst:"確立",chipSus:"疑い",
   grpKnown:"既知",grpProbable:"おそらく",grpPossible:"可能性あり",
+  mlabelCategory:"カテゴリー",catModeLabel:"カテゴリー別に色分け",
+  catModeHint:"曝露因子の点をカテゴリー別に色分けし、絞り込めます——生活習慣・食事、感染症、職業性曝露、環境要因、医療・医薬品、放射線。",
   badgeLabels:{'1':'既知の原因','2A':'おそらくの原因','2B':'可能性のある原因','3':'分類不能'},
   btnReset:"リセット",btnFs:"⤢ フルスクリーン",btnFsExit:"⤡ フルスクリーン終了",
   legendCancer:"がん",legendKnown:"既知の原因",legendProbable:"おそらく",legendPossible:"可能性あり",
@@ -623,6 +644,8 @@ it:{name:'Italian',native:'Italiano',flag:'🇮🇹',dir:'ltr',
   noExposures:"Nessuna esposizione registrata per questo tumore.",noCancers:"Nessun collegamento specifico registrato.",noCancerLinks:"Nessun collegamento con tumori registrato.",noExposuresShort:"Nessuna esposizione registrata.",
   mlabelLinks:"Collegamenti",mlabelCause:"Causa",chipEst:"Stabilito",chipSus:"Sospettato",
   grpKnown:"Nota",grpProbable:"Probabile",grpPossible:"Possibile",
+  mlabelCategory:"Categoria",catModeLabel:"Colora per categoria",
+  catModeHint:"Colora e filtra i punti delle esposizioni per categoria — stile di vita e alimentazione, infezioni, professionale, ambientale, medico e farmaceutico, radiazioni.",
   badgeLabels:{'1':'Causa nota','2A':'Causa probabile','2B':'Causa possibile','3':'Non classificabile'},
   btnReset:"Reimposta",btnFs:"⤢ Schermo intero",btnFsExit:"⤡ Esci da schermo intero",
   legendCancer:"Tumore",legendKnown:"Causa nota",legendProbable:"Probabile",legendPossible:"Possibile",
@@ -794,9 +817,14 @@ function applyLang(lang){
     const g=c.dataset.grp; setChipText(c,g==='1'?T.grpKnown:g==='2A'?T.grpProbable:T.grpPossible);});
   document.getElementById('btnReset').textContent=T.btnReset;
   document.getElementById('btnFs').textContent=mapWrap&&mapWrap.classList.contains('fs')?T.btnFsExit:T.btnFs;
-  const lg=document.querySelectorAll('.maplegend>span');
-  setChipText(lg[0],T.legendCancer);setChipText(lg[1],T.legendKnown);setChipText(lg[2],T.legendProbable);
-  setChipText(lg[3],T.legendPossible);setChipText(lg[4],T.legendEst);setChipText(lg[5],T.legendSus);
+  document.getElementById('lgCancer').textContent=T.legendCancer;
+  document.getElementById('lgEst').textContent=T.legendEst;
+  document.getElementById('lgSus').textContent=T.legendSus;
+  buildLegendDynamic();
+  const ccm=document.getElementById('chipCatMode');
+  setChipText(ccm,T.catModeLabel||'Colour by category');
+  ccm.title=T.catModeHint||'';
+  buildCatBar();
   document.getElementById('maphint').textContent=T.maphint;
   document.getElementById('footer-hazard').innerHTML=T.footerHazard;
   updateMetaCounts();
@@ -889,6 +917,7 @@ document.getElementById('heroStart').addEventListener('click',()=>{
 
 let mode='cancer', sel=null, query='';
 let showEst=true, showSus=true, grpOn={'1':true,'2A':true,'2B':true,'3':true};
+let catMode=false, catOn={}; CATS.forEach(c=>catOn[c]=true);
 
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function badge(g){const label=(T.badgeLabels&&T.badgeLabels[g])||(DATA.meta.group_plain[g]||{}).label||g;
@@ -1044,6 +1073,7 @@ function ensureGraph(){ if(built)return; built=true;
 function applyFilters(){ vis.fill(0); visE=[];
   EDGES.forEach(e=>{ if(e.suff&&!showEst)return; if((!e.suff)&&!showSus)return;
     const g=NODES[e.s].obj.group; if(!grpOn[g==='1'||g==='2A'||g==='2B'?g:'3'])return;
+    if(catMode&&!catOn[NODES[e.s].obj.category])return;
     visE.push(e); vis[e.s]=1; vis[e.t]=1;});
   visIdx=[]; for(let i=0;i<NODES.length;i++) if(vis[i])visIdx.push(i);
   reheat(.9);
@@ -1074,7 +1104,7 @@ function draw(){ if(!W)return;
   ctx.setLineDash([]);ctx.globalAlpha=1;
   visIdx.forEach(i=>{const n=NODES[i]; const dim=fs&&!fs.has(i); ctx.globalAlpha=dim?0.14:1; const r=nodeR(n);
     if(n.t==='c'){ctx.fillStyle=HEX.cancer;roundRect(n.x-r,n.y-r,r*2,r*2,4);ctx.fill();}
-    else{ctx.beginPath();ctx.arc(n.x,n.y,r,0,7);ctx.fillStyle=GRP_HEX[n.obj.group]||'#999';ctx.fill();}
+    else{ctx.beginPath();ctx.arc(n.x,n.y,r,0,7);ctx.fillStyle=(catMode?CAT_HEX[n.obj.category]:GRP_HEX[n.obj.group])||'#999';ctx.fill();}
     if(i===pin){ctx.lineWidth=3/cam.z;ctx.strokeStyle=HEX.accent;ctx.stroke();}
     else if(i===hover){ctx.lineWidth=2/cam.z;ctx.strokeStyle=HEX.ink;ctx.stroke();}
     if(!dim&&(cam.z>1.2||i===fid||(fs&&fs.has(i))||n.deg>=11)){ ctx.globalAlpha=1;ctx.fillStyle=HEX.ink;
@@ -1105,7 +1135,7 @@ function move(e){const[px,py,cx,cy]=pos(e);
   const i=pick(px,py);hover=i;
   if(i!=null){const n=NODES[i];tip.style.display='block';tip.style.left=(cx+12)+'px';tip.style.top=(cy+12)+'px';
     tip.innerHTML=n.t==='c'?`<b>${esc(localName(n.obj))}</b><br>${esc(localOrgan(n.obj.organ_plain))} · ${T.links(n.deg)}`
-      :`<b>${esc(localName(n.obj))}</b><br>${esc((T.badgeLabels&&T.badgeLabels[n.obj.group])||'')} · ${T.links(n.deg)}`;
+      :`<b>${esc(localName(n.obj))}</b><br>${esc(catMode?localCategory(n.obj.category):((T.badgeLabels&&T.badgeLabels[n.obj.group])||''))} · ${T.links(n.deg)}`;
     cv.style.cursor='pointer';}
   else{tip.style.display='none';cv.style.cursor=panning?'grabbing':'grab';}}
 function up(){ if(!moved&&last){const i=pick(last[0],last[1]); if(i!=null){pin=i;sel={type:NODES[i].bt,id:NODES[i].id};showMapCard(i);}
@@ -1161,6 +1191,35 @@ document.querySelectorAll('.chip[role="button"]').forEach(c=>{
   c.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();c.click();}});
 });
 document.getElementById('btnReset').onclick=()=>{cam={x:0,y:0,z:.8};pin=null;hideMapCard();reheat(1);};
+
+/* category classifier — optional colour-by-category view of the exposure dots */
+const catbarEl=document.getElementById('catbar');
+function catChipKeydown(e){if(e.key==='Enter'||e.key===' '){e.preventDefault();e.currentTarget.click();}}
+function buildCatBar(){
+  catbarEl.innerHTML=`<span class="mlabel" id="mlabelCat">${esc(T.mlabelCategory||'Category')}</span>`+
+    CATS.map(cat=>`<span class="chip${catOn[cat]?'':' off'}" data-cat="${esc(cat)}" role="button" tabindex="0" aria-pressed="${catOn[cat]}">
+      <span class="sw" style="background:${CAT_HEX[cat]}"></span><span class="txt">${esc(localCategory(cat))}</span></span>`).join('');
+  catbarEl.querySelectorAll('.chip[data-cat]').forEach(c=>{
+    c.onclick=function(){const cat=this.dataset.cat; catOn[cat]=!catOn[cat]; setChip(this,catOn[cat]); applyFilters();};
+    c.addEventListener('keydown',catChipKeydown);
+  });
+}
+function buildLegendDynamic(){
+  const el=document.getElementById('legendDynamic');
+  el.innerHTML=catMode
+    ? CATS.map(cat=>`<span><span class="dot" style="background:${CAT_HEX[cat]}"></span><span class="txt">${esc(localCategory(cat))}</span></span>`).join('')
+    : `<span><span class="dot" style="background:var(--g1)"></span><span class="txt">${esc(T.legendKnown)}</span></span>
+       <span><span class="dot" style="background:var(--g2a)"></span><span class="txt">${esc(T.legendProbable)}</span></span>
+       <span><span class="dot" style="background:var(--g2b)"></span><span class="txt">${esc(T.legendPossible)}</span></span>`;
+}
+const chipCatMode=document.getElementById('chipCatMode');
+chipCatMode.onclick=function(){
+  catMode=!catMode;
+  this.setAttribute('aria-pressed',String(catMode));
+  catbarEl.classList.toggle('on',catMode);
+  buildLegendDynamic();
+  applyFilters();
+};
 
 /* full screen */
 function setFs(on){const w=mapWrap; const want=on===undefined?!w.classList.contains('fs'):on;
