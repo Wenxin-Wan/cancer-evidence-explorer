@@ -1,0 +1,23 @@
+# Cloudflare Worker for tools.epidetective.com (draft of 28 October 2026).
+# Deploy from this folder with `npx wrangler deploy`, or paste worker.js into
+# the dashboard editor. DEPLOY.md has both paths, the checks and the rollback.
+#
+# The Worker declares no bindings or secrets. Deploying with this file removes
+# the bindings the old gate Worker used (the D1 waiting list and the email
+# sender), so export the waiting list first (DEPLOY.md, step 1). Secrets are
+# kept by `wrangler deploy` until they are deleted on purpose.
+
+name = "epidetective-tools"
+main = "worker.js"
+compatibility_date = "2026-10-01"
+
+# The Worker answers every path on the tools host.
+routes = [
+  { pattern = "tools.epidetective.com/*", zone_name = "epidetective.com" },
+]
+# If the dashboard (Settings > Domains & Routes) lists tools.epidetective.com
+# as a Custom Domain, replace the route line above with this one:
+#   { pattern = "tools.epidetective.com", custom_domain = true },
+
+# The tools are served on tools.epidetective.com only.
+workers_dev = false
