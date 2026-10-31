@@ -1,0 +1,1275 @@
+{
+ "v": 1,
+ "tool": "cancer",
+ "version": "1.0",
+ "built": "2026-10-31",
+ "e": {
+  "1-1-1-trichloroethane": {
+   "id": "1,1,1-Trichloroethane",
+   "t": "1,1,1-Trichloroethane · Cancer Evidence Explorer",
+   "d": "1,1,1-Trichloroethane: classified by IARC as a probable cause of cancer (Group 2A), with a suspected link to multiple myeloma (a blood cancer)."
+  },
+  "1-2-dichloropropane": {
+   "id": "1,2-Dichloropropane",
+   "t": "1,2-Dichloropropane · Cancer Evidence Explorer",
+   "d": "1,2-Dichloropropane: classified by IARC as a known cause of cancer (Group 1), with an established link to bile-duct cancer."
+  },
+  "1-3-butadiene": {
+   "id": "1,3-Butadiene",
+   "t": "1,3-Butadiene · Cancer Evidence Explorer",
+   "d": "1,3-Butadiene: classified by IARC as a known cause of cancer (Group 1), with established links to leukaemia (all types), multiple myeloma (a blood cancer) and lymphoma (all types)."
+  },
+  "dioxin": {
+   "id": "2,3,7,8-TCDD (dioxin)",
+   "t": "Dioxin (TCDD) · Cancer Evidence Explorer",
+   "d": "Dioxin (TCDD): classified by IARC as a known cause of cancer (Group 1), with 1 established link and 3 suspected links to cancers, including all cancers combined, lung cancer and non-Hodgkin lymphoma (all types)."
+  },
+  "2-mercaptobenzothiazole": {
+   "id": "2-Mercaptobenzothiazole",
+   "t": "2-Mercaptobenzothiazole · Cancer Evidence Explorer",
+   "d": "2-Mercaptobenzothiazole: classified by IARC as a probable cause of cancer (Group 2A), with a suspected link to bladder cancer."
+  },
+  "2-naphthylamine": {
+   "id": "2-Naphthylamine",
+   "t": "2-Naphthylamine · Cancer Evidence Explorer",
+   "d": "2-Naphthylamine: classified by IARC as a known cause of cancer (Group 1), with an established link to bladder cancer."
+  },
+  "4-aminobiphenyl": {
+   "id": "4-Aminobiphenyl",
+   "t": "4-Aminobiphenyl · Cancer Evidence Explorer",
+   "d": "4-Aminobiphenyl: classified by IARC as a known cause of cancer (Group 1), with an established link to bladder cancer."
+  },
+  "4-chloro-ortho-toluidine": {
+   "id": "4-Chloro-ortho-toluidine",
+   "t": "4-Chloro-ortho-toluidine · Cancer Evidence Explorer",
+   "d": "4-Chloro-ortho-toluidine: classified by IARC as a probable cause of cancer (Group 2A), with a suspected link to bladder cancer."
+  },
+  "acetaldehyde": {
+   "id": "Acetaldehyde (from alcoholic beverages)",
+   "t": "Acetaldehyde (from alcohol) · Cancer Evidence Explorer",
+   "d": "Acetaldehyde (from alcohol): classified by IARC as a known cause of cancer (Group 1), with 6 established links to cancers, including oesophageal (food-pipe) cancer, larynx (voice-box) cancer and mouth cancer."
+  },
+  "acheson-process": {
+   "id": "Acheson process (occupational)",
+   "t": "Acheson process (occupational) · Cancer Evidence Explorer",
+   "d": "Acheson process (occupational): classified by IARC as a known cause of cancer (Group 1), with an established link to lung cancer."
+  },
+  "strong-acid-mists": {
+   "id": "Acid mists, strong inorganic",
+   "t": "Strong acid mists · Cancer Evidence Explorer",
+   "d": "Strong acid mists: classified by IARC as a known cause of cancer (Group 1), with an established link to larynx (voice-box) cancer, and a suspected link to lung cancer."
+  },
+  "acrylonitrile": {
+   "id": "Acrylonitrile",
+   "t": "Acrylonitrile · Cancer Evidence Explorer",
+   "d": "Acrylonitrile: classified by IARC as a known cause of cancer (Group 1), with an established link to lung cancer, and a suspected link to bladder cancer."
+  },
+  "aflatoxins": {
+   "id": "Aflatoxins",
+   "t": "Aflatoxins (mould toxins) · Cancer Evidence Explorer",
+   "d": "Aflatoxins (mould toxins): classified by IARC as a known cause of cancer (Group 1), with an established link to liver cancer."
+  },
+  "alachlor": {
+   "id": "Alachlor",
+   "t": "Alachlor (herbicide) · Cancer Evidence Explorer",
+   "d": "Alachlor (herbicide): classified by IARC as a probable cause of cancer (Group 2A), with a suspected link to larynx (voice-box) cancer."
+  },
+  "alcoholic-drinks": {
+   "id": "Alcoholic beverages",
+   "t": "Alcoholic drinks · Cancer Evidence Explorer",
+   "d": "Alcoholic drinks: classified by IARC as a known cause of cancer (Group 1), with 9 established links and 1 suspected link to cancers, including liver cancer, oesophageal (food-pipe) cancer and larynx (voice-box) cancer."
+  },
+  "aluminium-production": {
+   "id": "Aluminium production",
+   "t": "Aluminium production · Cancer Evidence Explorer",
+   "d": "Aluminium production: classified by IARC as a known cause of cancer (Group 1), with established links to lung cancer and bladder cancer."
+  },
+  "anabolic-steroids": {
+   "id": "Androgenic (anabolic) steroids",
+   "t": "Anabolic steroids · Cancer Evidence Explorer",
+   "d": "Anabolic steroids: classified by IARC as a probable cause of cancer (Group 2A), with suspected links to liver cancer, bile-duct cancer and prostate cancer."
+  },
+  "aristolochic-acid": {
+   "id": "Aristolochic acid",
+   "t": "Aristolochic acid · Cancer Evidence Explorer",
+   "d": "Aristolochic acid: classified by IARC as a known cause of cancer (Group 1), with a suspected link to renal-pelvis & ureter cancer."
+  },
+  "plants-containing-aristolochic-acid": {
+   "id": "Aristolochic acid (plants containing)",
+   "t": "Plants containing aristolochic acid · Cancer Evidence Explorer",
+   "d": "Plants containing aristolochic acid: classified by IARC as a known cause of cancer (Group 1), with an established link to renal-pelvis & ureter cancer."
+  },
+  "arsenic": {
+   "id": "Arsenic & inorganic arsenic compounds",
+   "t": "Arsenic · Cancer Evidence Explorer",
+   "d": "Arsenic: classified by IARC as a known cause of cancer (Group 1), with 3 established and 4 suspected links to cancers, including lung cancer, bladder cancer and skin cancer (non-melanoma)."
+  },
+  "art-glass-glass-containers-pressed-ware-manufacture": {
+   "id": "Art glass / glass containers / pressed ware manufacture",
+   "t": "Art glass / glass containers / pressed ware manufacture · Cancer Evidence Explorer",
+   "d": "Art glass / glass containers / pressed ware manufacture: classified by IARC as a probable cause of cancer (Group 2A), with suspected links to lung cancer and stomach cancer."
+  },
+  "asbestos": {
+   "id": "Asbestos (all forms)",
+   "t": "Asbestos · Cancer Evidence Explorer",
+   "d": "Asbestos: classified by IARC as a known cause of cancer (Group 1), with 4 established and 4 suspected links to cancers, including lung cancer, larynx (voice-box) cancer and mesothelioma (lining of lungs/abdomen)."
+  },
+  "aspartame": {
+   "id": "Aspartame",
+   "t": "Aspartame (sweetener) · Cancer Evidence Explorer",
+   "d": "Aspartame (sweetener): classified by IARC as a possible cause of cancer (Group 2B), with a suspected link to liver cancer."
+  },
+  "atrazine": {
+   "id": "Atrazine",
+   "t": "Atrazine (herbicide) · Cancer Evidence Explorer",
+   "d": "Atrazine (herbicide): classified by IARC as a probable cause of cancer (Group 2A), with a suspected link to non-Hodgkin lymphoma (t(14;18)-positive)."
+  },
+  "auramine-production": {
+   "id": "Auramine production",
+   "t": "Auramine production · Cancer Evidence Explorer",
+   "d": "Auramine production: classified by IARC as a known cause of cancer (Group 1), with an established link to bladder cancer."
+  },
+  "petrol": {
+   "id": "Automotive gasoline",
+   "t": "Petrol (gasoline) · Cancer Evidence Explorer",
+   "d": "Petrol (gasoline): classified by IARC as a known cause of cancer (Group 1), with 2 established and 7 suspected links to cancers, including bladder cancer, acute myeloid leukaemia (a blood cancer) and non-Hodgkin lymphoma (all types)."
+  },
+  "azathioprine": {
+   "id": "Azathioprine",
+   "t": "Azathioprine (immune-suppressant) · Cancer Evidence Explorer",
+   "d": "Azathioprine (immune-suppressant): classified by IARC as a known cause of cancer (Group 1), with established links to non-Hodgkin lymphoma (all types) and skin cancer (non-melanoma)."
+  },
+  "benzene": {
+   "id": "Benzene",
+   "t": "Benzene · Cancer Evidence Explorer",
+   "d": "Benzene: classified by IARC as a known cause of cancer (Group 1), with 2 established and 6 suspected links to cancers, including acute myeloid leukaemia (a blood cancer), other acute non-lymphocytic leukaemia and lung cancer."
+  },
+  "benzidine": {
+   "id": "Benzidine",
+   "t": "Benzidine · Cancer Evidence Explorer",
+   "d": "Benzidine: classified by IARC as a known cause of cancer (Group 1), with an established link to bladder cancer."
+  },
+  "beryllium": {
+   "id": "Beryllium & beryllium compounds",
+   "t": "Beryllium · Cancer Evidence Explorer",
+   "d": "Beryllium: classified by IARC as a known cause of cancer (Group 1), with an established link to lung cancer."
+  },
+  "betel-quid-with-tobacco": {
+   "id": "Betel quid with tobacco",
+   "t": "Betel quid with tobacco · Cancer Evidence Explorer",
+   "d": "Betel quid with tobacco: classified by IARC as a known cause of cancer (Group 1), with established links to oesophageal (food-pipe) cancer, mouth cancer and throat (pharynx) cancer."
+  },
+  "betel-quid": {
+   "id": "Betel quid without tobacco",
+   "t": "Betel quid (no tobacco) · Cancer Evidence Explorer",
+   "d": "Betel quid (no tobacco): classified by IARC as a known cause of cancer (Group 1), with 2 established and 2 suspected links to cancers, including oesophageal (food-pipe) cancer, mouth cancer and liver cancer."
+  },
+  "indoor-wood-smoke": {
+   "id": "Biomass fuel (wood), indoor combustion emissions",
+   "t": "Indoor wood smoke · Cancer Evidence Explorer",
+   "d": "Indoor wood smoke: classified by IARC as a probable cause of cancer (Group 2A), with a suspected link to lung cancer."
+  },
+  "bis-chloromethyl-ether": {
+   "id": "Bis(chloromethyl)ether; chloromethyl methyl ether",
+   "t": "Bis(chloromethyl)ether (BCME) · Cancer Evidence Explorer",
+   "d": "Bis(chloromethyl)ether (BCME): classified by IARC as a known cause of cancer (Group 1), with an established link to lung cancer."
+  },
+  "bitumens-hard-mastic-asphalt-work": {
+   "id": "Bitumens (hard, mastic asphalt work)",
+   "t": "Bitumens (hard, mastic asphalt work) · Cancer Evidence Explorer",
+   "d": "Bitumens (hard, mastic asphalt work): classified by IARC as a possible cause of cancer (Group 2B), with 6 suspected links to cancers, including lung cancer, oesophageal (food-pipe) cancer and larynx (voice-box) cancer."
+  },
+  "bitumens-oxidized-roofing": {
+   "id": "Bitumens (oxidized, roofing)",
+   "t": "Bitumens (oxidized, roofing) · Cancer Evidence Explorer",
+   "d": "Bitumens (oxidized, roofing): classified by IARC as a probable cause of cancer (Group 2A), with 6 suspected links to cancers, including lung cancer, oesophageal (food-pipe) cancer and larynx (voice-box) cancer."
+  },
+  "busulfan": {
+   "id": "Busulfan",
+   "t": "Busulfan (chemotherapy) · Cancer Evidence Explorer",
+   "d": "Busulfan (chemotherapy): classified by IARC as a known cause of cancer (Group 1), with an established link to acute myeloid leukaemia (a blood cancer)."
+  },
+  "cadmium": {
+   "id": "Cadmium & cadmium compounds",
+   "t": "Cadmium · Cancer Evidence Explorer",
+   "d": "Cadmium: classified by IARC as a known cause of cancer (Group 1), with an established link to lung cancer, and suspected links to prostate cancer and kidney cancer."
+  },
+  "carbon-electrode-manufacture": {
+   "id": "Carbon electrode manufacture",
+   "t": "Carbon electrode manufacture · Cancer Evidence Explorer",
+   "d": "Carbon electrode manufacture: classified by IARC as a probable cause of cancer (Group 2A), with a suspected link to lung cancer."
+  },
+  "carmustine": {
+   "id": "Carmustine (BCNU)",
+   "t": "Carmustine (chemotherapy) · Cancer Evidence Explorer",
+   "d": "Carmustine (chemotherapy): classified by IARC as a probable cause of cancer (Group 2A), with suspected links to acute myeloid leukaemia (a blood cancer) and other acute non-lymphocytic leukaemia."
+  },
+  "carpentry-and-joinery": {
+   "id": "Carpentry and joinery",
+   "t": "Carpentry and joinery · Cancer Evidence Explorer",
+   "d": "Carpentry and joinery: classified by IARC as a possible cause of cancer (Group 2B), with a suspected link to nasal & sinus cancer."
+  },
+  "chlorambucil": {
+   "id": "Chlorambucil",
+   "t": "Chlorambucil (chemotherapy) · Cancer Evidence Explorer",
+   "d": "Chlorambucil (chemotherapy): classified by IARC as a known cause of cancer (Group 1), with an established link to acute myeloid leukaemia (a blood cancer)."
+  },
+  "chloramphenicol": {
+   "id": "Chloramphenicol",
+   "t": "Chloramphenicol (antibiotic) · Cancer Evidence Explorer",
+   "d": "Chloramphenicol (antibiotic): classified by IARC as a probable cause of cancer (Group 2A), with suspected links to leukaemia (all types) and childhood leukaemia (all types)."
+  },
+  "chlornaphazine": {
+   "id": "Chlornaphazine",
+   "t": "Chlornaphazine (old drug) · Cancer Evidence Explorer",
+   "d": "Chlornaphazine (old drug): classified by IARC as a known cause of cancer (Group 1), with an established link to bladder cancer."
+  },
+  "chlorophenoxy-weedkillers": {
+   "id": "Chlorophenoxy herbicides",
+   "t": "Chlorophenoxy weedkillers · Cancer Evidence Explorer",
+   "d": "Chlorophenoxy weedkillers: classified by IARC as a possible cause of cancer (Group 2B), with suspected links to non-Hodgkin lymphoma (all types) and multiple sites (unspecified)."
+  },
+  "chromium-6": {
+   "id": "Chromium(VI) compounds",
+   "t": "Chromium-6 · Cancer Evidence Explorer",
+   "d": "Chromium-6: classified by IARC as a known cause of cancer (Group 1), with an established link to lung cancer, and a suspected link to nasal & sinus cancer."
+  },
+  "ciclosporin": {
+   "id": "Ciclosporin",
+   "t": "Ciclosporin (immune-suppressant) · Cancer Evidence Explorer",
+   "d": "Ciclosporin (immune-suppressant): classified by IARC as a known cause of cancer (Group 1), with established links to non-Hodgkin lymphoma (all types), skin cancer (non-melanoma) and multiple sites (unspecified)."
+  },
+  "clonorchis-sinensis": {
+   "id": "Clonorchis sinensis",
+   "t": "Liver fluke (Clonorchis) · Cancer Evidence Explorer",
+   "d": "Liver fluke (Clonorchis): classified by IARC as a known cause of cancer (Group 1), with an established link to bile-duct cancer."
+  },
+  "coal-gasification": {
+   "id": "Coal gasification",
+   "t": "Coal gasification · Cancer Evidence Explorer",
+   "d": "Coal gasification: classified by IARC as a known cause of cancer (Group 1), with an established link to lung cancer."
+  },
+  "indoor-coal-smoke": {
+   "id": "Coal, indoor emissions from household combustion",
+   "t": "Indoor coal smoke · Cancer Evidence Explorer",
+   "d": "Indoor coal smoke: classified by IARC as a known cause of cancer (Group 1), with an established link to lung cancer."
+  },
+  "coal-tar-distillation": {
+   "id": "Coal-tar distillation",
+   "t": "Coal-tar distillation · Cancer Evidence Explorer",
+   "d": "Coal-tar distillation: classified by IARC as a known cause of cancer (Group 1), with an established link to skin cancer (non-melanoma)."
+  },
+  "coal-tar-pitch": {
+   "id": "Coal-tar pitch",
+   "t": "Coal-tar pitch · Cancer Evidence Explorer",
+   "d": "Coal-tar pitch: classified by IARC as a known cause of cancer (Group 1), with an established link to lung cancer, and a suspected link to bladder cancer."
+  },
+  "hard-metal": {
+   "id": "Cobalt metal with tungsten carbide",
+   "t": "Hard metal (cobalt with tungsten carbide) · Cancer Evidence Explorer",
+   "d": "Hard metal (cobalt with tungsten carbide): classified by IARC as a probable cause of cancer (Group 2A), with a suspected link to lung cancer."
+  },
+  "coke-production": {
+   "id": "Coke production",
+   "t": "Coke production · Cancer Evidence Explorer",
+   "d": "Coke production: classified by IARC as a known cause of cancer (Group 1), with an established link to lung cancer."
+  },
+  "creosotes": {
+   "id": "Creosotes",
+   "t": "Creosotes · Cancer Evidence Explorer",
+   "d": "Creosotes: classified by IARC as a probable cause of cancer (Group 2A), with suspected links to lung cancer and skin cancer (non-melanoma)."
+  },
+  "cyclophosphamide": {
+   "id": "Cyclophosphamide",
+   "t": "Cyclophosphamide (chemotherapy) · Cancer Evidence Explorer",
+   "d": "Cyclophosphamide (chemotherapy): classified by IARC as a known cause of cancer (Group 1), with established links to bladder cancer and acute myeloid leukaemia (a blood cancer)."
+  },
+  "ddt": {
+   "id": "DDT",
+   "t": "DDT (pesticide) · Cancer Evidence Explorer",
+   "d": "DDT (pesticide): classified by IARC as a probable cause of cancer (Group 2A), with 4 suspected links to cancers, including non-Hodgkin lymphoma (all types), liver cancer and bile-duct cancer."
+  },
+  "diazinon": {
+   "id": "Diazinon",
+   "t": "Diazinon (pesticide) · Cancer Evidence Explorer",
+   "d": "Diazinon (pesticide): classified by IARC as a probable cause of cancer (Group 2A), with suspected links to lung cancer, non-Hodgkin lymphoma (all types) and leukaemia (all types)."
+  },
+  "dichloromethane": {
+   "id": "Dichloromethane",
+   "t": "Dichloromethane (paint stripper) · Cancer Evidence Explorer",
+   "d": "Dichloromethane (paint stripper): classified by IARC as a probable cause of cancer (Group 2A), with suspected links to non-Hodgkin lymphoma (all types) and bile-duct cancer."
+  },
+  "dieldrin-aldrin": {
+   "id": "Dieldrin / aldrin",
+   "t": "Dieldrin / aldrin (pesticides) · Cancer Evidence Explorer",
+   "d": "Dieldrin / aldrin (pesticides): classified by IARC as a probable cause of cancer (Group 2A), with a suspected link to breast cancer."
+  },
+  "diethylstilbestrol": {
+   "id": "Diethylstilbestrol",
+   "t": "Diethylstilbestrol (DES) · Cancer Evidence Explorer",
+   "d": "Diethylstilbestrol (DES): classified by IARC as a known cause of cancer (Group 1), with an established link to breast cancer, and a suspected link to womb (endometrial) cancer."
+  },
+  "des-exposure-before-birth": {
+   "id": "Diethylstilbestrol (in utero)",
+   "t": "DES exposure before birth · Cancer Evidence Explorer",
+   "d": "DES exposure before birth: not classified on its own; IARC described this evidence in its Group 1 evaluation of diethylstilbestrol (DES), with established links to cervical cancer and vaginal cancer, and a suspected link to testicular cancer."
+  },
+  "digoxin": {
+   "id": "Digoxin",
+   "t": "Digoxin (heart medicine) · Cancer Evidence Explorer",
+   "d": "Digoxin (heart medicine): classified by IARC as a possible cause of cancer (Group 2B), with a suspected link to breast cancer."
+  },
+  "dry-cleaning-work": {
+   "id": "Dry cleaning",
+   "t": "Dry-cleaning work · Cancer Evidence Explorer",
+   "d": "Dry-cleaning work: classified by IARC as a possible cause of cancer (Group 2B), with suspected links to bladder cancer and oesophageal (food-pipe) cancer."
+  },
+  "diesel-engine-exhaust": {
+   "id": "Engine exhaust, diesel",
+   "t": "Diesel engine exhaust · Cancer Evidence Explorer",
+   "d": "Diesel engine exhaust: classified by IARC as a known cause of cancer (Group 1), with an established link to lung cancer, and a suspected link to bladder cancer."
+  },
+  "epstein-barr-virus": {
+   "id": "Epstein-Barr virus",
+   "t": "Epstein–Barr virus · Cancer Evidence Explorer",
+   "d": "Epstein–Barr virus: classified by IARC as a known cause of cancer (Group 1), with 5 established and 2 suspected links to cancers, including nasopharyngeal cancer (upper throat), Burkitt lymphoma and Hodgkin lymphoma."
+  },
+  "erionite": {
+   "id": "Erionite",
+   "t": "Erionite (a natural fibre) · Cancer Evidence Explorer",
+   "d": "Erionite (a natural fibre): classified by IARC as a known cause of cancer (Group 1), with an established link to mesothelioma (lining of lungs/abdomen)."
+  },
+  "oestrogen-only-hrt": {
+   "id": "Estrogen therapy, postmenopausal",
+   "t": "Oestrogen-only HRT · Cancer Evidence Explorer",
+   "d": "Oestrogen-only HRT: classified by IARC as a known cause of cancer (Group 1), with established links to ovarian cancer and womb (endometrial) cancer, and a suspected link to breast cancer."
+  },
+  "combined-hrt": {
+   "id": "Estrogen-progestogen menopausal therapy",
+   "t": "Combined HRT (menopause) · Cancer Evidence Explorer",
+   "d": "Combined HRT (menopause): classified by IARC as a known cause of cancer (Group 1), with established links to breast cancer and womb (endometrial) cancer."
+  },
+  "the-combined-pill": {
+   "id": "Estrogen-progestogen oral contraceptives",
+   "t": "The combined pill · Cancer Evidence Explorer",
+   "d": "The combined pill: classified by IARC as a known cause of cancer (Group 1), with established links to liver cancer, breast cancer and cervical cancer."
+  },
+  "ethylene-oxide": {
+   "id": "Ethylene oxide",
+   "t": "Ethylene oxide · Cancer Evidence Explorer",
+   "d": "Ethylene oxide: classified by IARC as a known cause of cancer (Group 1), with 4 suspected links to cancers, including non-Hodgkin lymphoma (all types), breast cancer and multiple myeloma (a blood cancer)."
+  },
+  "etoposide": {
+   "id": "Etoposide",
+   "t": "Etoposide (chemotherapy) · Cancer Evidence Explorer",
+   "d": "Etoposide (chemotherapy): classified by IARC as a known cause of cancer (Group 1), with a suspected link to acute myeloid leukaemia (a blood cancer)."
+  },
+  "etoposide-cisplatin-bleomycin": {
+   "id": "Etoposide + cisplatin + bleomycin",
+   "t": "Etoposide + cisplatin + bleomycin · Cancer Evidence Explorer",
+   "d": "Etoposide + cisplatin + bleomycin: classified by IARC as a known cause of cancer (Group 1), with an established link to acute myeloid leukaemia (a blood cancer)."
+  },
+  "firefighter": {
+   "id": "Firefighter (occupational)",
+   "t": "Firefighter (occupational) · Cancer Evidence Explorer",
+   "d": "Firefighter (occupational): classified by IARC as a known cause of cancer (Group 1), with 2 established and 5 suspected links to cancers, including bladder cancer, mesothelioma (lining of lungs/abdomen) and non-Hodgkin lymphoma (all types)."
+  },
+  "nuclear-fission-products": {
+   "id": "Fission products, incl. strontium-90",
+   "t": "Nuclear fission products (e.g. strontium-90) · Cancer Evidence Explorer",
+   "d": "Nuclear fission products (e.g. strontium-90): classified by IARC as a known cause of cancer (Group 1), with established links to leukaemia (all types), childhood leukaemia (all types) and multiple sites (unspecified)."
+  },
+  "fluoro-edenite": {
+   "id": "Fluoro-edenite fibrous amphibole",
+   "t": "Fluoro-edenite (a natural fibre) · Cancer Evidence Explorer",
+   "d": "Fluoro-edenite (a natural fibre): classified by IARC as a known cause of cancer (Group 1), with an established link to mesothelioma (lining of lungs/abdomen)."
+  },
+  "formaldehyde": {
+   "id": "Formaldehyde",
+   "t": "Formaldehyde · Cancer Evidence Explorer",
+   "d": "Formaldehyde: classified by IARC as a known cause of cancer (Group 1), with 4 established links and 1 suspected link to cancers, including acute myeloid leukaemia (a blood cancer), other acute non-lymphocytic leukaemia and chronic myeloid leukaemia."
+  },
+  "high-temperature-frying-fumes": {
+   "id": "Frying, high-temperature emissions",
+   "t": "High-temperature frying fumes · Cancer Evidence Explorer",
+   "d": "High-temperature frying fumes: classified by IARC as a probable cause of cancer (Group 2A), with a suspected link to lung cancer."
+  },
+  "glyphosate": {
+   "id": "Glyphosate",
+   "t": "Glyphosate (weedkiller) · Cancer Evidence Explorer",
+   "d": "Glyphosate (weedkiller): classified by IARC as a probable cause of cancer (Group 2A), with a suspected link to non-Hodgkin lymphoma (all types)."
+  },
+  "underground-iron-ore-mining": {
+   "id": "Haematite mining (underground)",
+   "t": "Underground iron-ore (haematite) mining · Cancer Evidence Explorer",
+   "d": "Underground iron-ore (haematite) mining: classified by IARC as a known cause of cancer (Group 1), with an established link to lung cancer."
+  },
+  "hairdressing-barbering": {
+   "id": "Hairdresser or barber (occupational)",
+   "t": "Hairdressing / barbering · Cancer Evidence Explorer",
+   "d": "Hairdressing / barbering: classified by IARC as a probable cause of cancer (Group 2A), with a suspected link to bladder cancer."
+  },
+  "helicobacter-pylori": {
+   "id": "Helicobacter pylori",
+   "t": "Helicobacter pylori (stomach bacterium) · Cancer Evidence Explorer",
+   "d": "Helicobacter pylori (stomach bacterium): classified by IARC as a known cause of cancer (Group 1), with established links to stomach cancer and stomach MALT lymphoma."
+  },
+  "hepatitis-b-virus": {
+   "id": "Hepatitis B virus (chronic)",
+   "t": "Hepatitis B virus (long-term) · Cancer Evidence Explorer",
+   "d": "Hepatitis B virus (long-term): classified by IARC as a known cause of cancer (Group 1), with an established link to liver cancer, and suspected links to non-Hodgkin lymphoma (all types) and bile-duct cancer."
+  },
+  "hepatitis-c-virus": {
+   "id": "Hepatitis C virus (chronic)",
+   "t": "Hepatitis C virus (long-term) · Cancer Evidence Explorer",
+   "d": "Hepatitis C virus (long-term): classified by IARC as a known cause of cancer (Group 1), with established links to non-Hodgkin lymphoma (all types) and liver cancer, and a suspected link to bile-duct cancer."
+  },
+  "hepatitis-d-virus": {
+   "id": "Hepatitis D virus",
+   "t": "Hepatitis D virus · Cancer Evidence Explorer",
+   "d": "Hepatitis D virus: classified by IARC as a known cause of cancer (Group 1), with an established link to liver cancer."
+  },
+  "htlv-1-virus": {
+   "id": "Human T-cell lymphotropic virus type 1",
+   "t": "HTLV-1 virus · Cancer Evidence Explorer",
+   "d": "HTLV-1 virus: classified by IARC as a known cause of cancer (Group 1), with an established link to adult T-cell leukaemia/lymphoma."
+  },
+  "cytomegalovirus": {
+   "id": "Human cytomegalovirus",
+   "t": "Cytomegalovirus (CMV) · Cancer Evidence Explorer",
+   "d": "Cytomegalovirus (CMV): classified by IARC as a possible cause of cancer (Group 2B), with a suspected link to childhood acute lymphoblastic leukaemia."
+  },
+  "hiv-1": {
+   "id": "Human immunodeficiency virus type 1",
+   "t": "HIV-1 · Cancer Evidence Explorer",
+   "d": "HIV-1: classified by IARC as a known cause of cancer (Group 1), with 6 established and 5 suspected links to cancers, including non-Hodgkin lymphoma (all types), cervical cancer and eye cancer."
+  },
+  "high-risk-hpv": {
+   "id": "Human papillomavirus (types 16,18,31,33,35,39,45,51,52,56,58,59)",
+   "t": "High-risk HPV · Cancer Evidence Explorer",
+   "d": "High-risk HPV: classified by IARC as a known cause of cancer (Group 1), with an established link to cervical cancer."
+  },
+  "other-hpv-types": {
+   "id": "Human papillomavirus (types 26,53,66,67,70,73,82)",
+   "t": "Other HPV types (26, 53, 66, 67, 70, 73, 82) · Cancer Evidence Explorer",
+   "d": "Other HPV types (26, 53, 66, 67, 70, 73, 82): classified by IARC as a possible cause of cancer (Group 2B), with a suspected link to cervical cancer."
+  },
+  "hpv-type-68": {
+   "id": "Human papillomavirus type 68",
+   "t": "HPV type 68 · Cancer Evidence Explorer",
+   "d": "HPV type 68: classified by IARC as a probable cause of cancer (Group 2A), with a suspected link to cervical cancer."
+  },
+  "hpv-type-16": {
+   "id": "Human papillomavirus type 16",
+   "t": "HPV type 16 · Cancer Evidence Explorer",
+   "d": "HPV type 16: classified by IARC as a known cause of cancer (Group 1), with 8 established links to cancers, including mouth cancer, cervical cancer and anal cancer."
+  },
+  "hpv-type-18": {
+   "id": "Human papillomavirus type 18",
+   "t": "HPV type 18 · Cancer Evidence Explorer",
+   "d": "HPV type 18: classified by IARC as a known cause of cancer (Group 1), with an established link to cervical cancer, and suspected links to mouth cancer and penile cancer."
+  },
+  "hpv-types-16-and-18": {
+   "id": "Human papillomavirus types 16 and 18",
+   "t": "HPV types 16 & 18 · Cancer Evidence Explorer",
+   "d": "HPV types 16 & 18: classified by IARC as a known cause of cancer (Group 1), with a suspected link to larynx (voice-box) cancer."
+  },
+  "hpv-types-18-and-33": {
+   "id": "Human papillomavirus types 18 and 33",
+   "t": "HPV types 18 & 33 · Cancer Evidence Explorer",
+   "d": "HPV types 18 & 33: classified by IARC as a known cause of cancer (Group 1), with suspected links to anal cancer and vulval cancer."
+  },
+  "hpv-types-5-and-8": {
+   "id": "Human papillomavirus types 5 and 8 (in EV patients)",
+   "t": "HPV types 5 & 8 (rare skin condition) · Cancer Evidence Explorer",
+   "d": "HPV types 5 & 8 (rare skin condition): classified by IARC as a possible cause of cancer (Group 2B), with a suspected link to skin cancer (non-melanoma)."
+  },
+  "hydrazine": {
+   "id": "Hydrazine",
+   "t": "Hydrazine · Cancer Evidence Explorer",
+   "d": "Hydrazine: classified by IARC as a probable cause of cancer (Group 2A), with a suspected link to lung cancer."
+  },
+  "hydrochlorothiazide": {
+   "id": "Hydrochlorothiazide",
+   "t": "Hydrochlorothiazide (blood-pressure pill) · Cancer Evidence Explorer",
+   "d": "Hydrochlorothiazide (blood-pressure pill): classified by IARC as a known cause of cancer (Group 1), with established links to skin cancer (non-melanoma) and lip cancer, and a suspected link to skin cancer (melanoma)."
+  },
+  "iron-and-steel-founding": {
+   "id": "Iron and steel founding",
+   "t": "Iron & steel founding · Cancer Evidence Explorer",
+   "d": "Iron & steel founding: classified by IARC as a known cause of cancer (Group 1), with an established link to lung cancer."
+  },
+  "isopropyl-alcohol-manufacture": {
+   "id": "Isopropyl alcohol manufacture (strong acids)",
+   "t": "Isopropyl alcohol manufacture (strong acids) · Cancer Evidence Explorer",
+   "d": "Isopropyl alcohol manufacture (strong acids): classified by IARC as a known cause of cancer (Group 1), with an established link to nasal & sinus cancer."
+  },
+  "kaposi-sarcoma-herpesvirus": {
+   "id": "Kaposi sarcoma herpesvirus",
+   "t": "Kaposi-sarcoma herpesvirus (HHV-8) · Cancer Evidence Explorer",
+   "d": "Kaposi-sarcoma herpesvirus (HHV-8): classified by IARC as a known cause of cancer (Group 1), with established links to Kaposi sarcoma and primary effusion lymphoma, and a suspected link to multicentric Castleman disease."
+  },
+  "inorganic-lead": {
+   "id": "Lead compounds, inorganic",
+   "t": "Inorganic lead · Cancer Evidence Explorer",
+   "d": "Inorganic lead: classified by IARC as a probable cause of cancer (Group 2A), with a suspected link to stomach cancer."
+  },
+  "leather-dust": {
+   "id": "Leather dust",
+   "t": "Leather dust · Cancer Evidence Explorer",
+   "d": "Leather dust: classified by IARC as a known cause of cancer (Group 1), with an established link to nasal & sinus cancer."
+  },
+  "lindane": {
+   "id": "Lindane",
+   "t": "Lindane (pesticide) · Cancer Evidence Explorer",
+   "d": "Lindane (pesticide): classified by IARC as a known cause of cancer (Group 1), with an established link to non-Hodgkin lymphoma (all types)."
+  },
+  "mopp-and-other-combined-chemotherapy-with-alkylating-agents": {
+   "id": "MOPP / combined chemo with alkylating agents",
+   "t": "MOPP and other combined chemotherapy with alkylating agents · Cancer Evidence Explorer",
+   "d": "MOPP and other combined chemotherapy with alkylating agents: classified by IARC as a known cause of cancer (Group 1), with established links to lung cancer and acute myeloid leukaemia (a blood cancer)."
+  },
+  "magenta-production": {
+   "id": "Magenta production",
+   "t": "Magenta production · Cancer Evidence Explorer",
+   "d": "Magenta production: classified by IARC as a known cause of cancer (Group 1), with an established link to bladder cancer."
+  },
+  "low-frequency-magnetic-fields": {
+   "id": "Magnetic fields, extremely low-frequency",
+   "t": "Low-frequency magnetic fields · Cancer Evidence Explorer",
+   "d": "Low-frequency magnetic fields: classified by IARC as a possible cause of cancer (Group 2B), with a suspected link to childhood leukaemia (all types)."
+  },
+  "malaria": {
+   "id": "Malaria (P. falciparum, holoendemic)",
+   "t": "Malaria (P. falciparum, in holoendemic areas) · Cancer Evidence Explorer",
+   "d": "Malaria (P. falciparum, in holoendemic areas): classified by IARC as a probable cause of cancer (Group 2A), with a suspected link to Burkitt lymphoma."
+  },
+  "malathion": {
+   "id": "Malathion",
+   "t": "Malathion (pesticide) · Cancer Evidence Explorer",
+   "d": "Malathion (pesticide): classified by IARC as a probable cause of cancer (Group 2A), with suspected links to non-Hodgkin lymphoma (all types) and prostate cancer."
+  },
+  "melphalan": {
+   "id": "Melphalan",
+   "t": "Melphalan (chemotherapy) · Cancer Evidence Explorer",
+   "d": "Melphalan (chemotherapy): classified by IARC as a known cause of cancer (Group 1), with an established link to acute myeloid leukaemia (a blood cancer)."
+  },
+  "merkel-cell-polyomavirus": {
+   "id": "Merkel cell polyomavirus",
+   "t": "Merkel cell polyomavirus · Cancer Evidence Explorer",
+   "d": "Merkel cell polyomavirus: classified by IARC as a known cause of cancer (Group 1), with an established link to skin cancer (non-melanoma)."
+  },
+  "methoxsalen-uva": {
+   "id": "Methoxsalen (8-MOP) + UVA",
+   "t": "Methoxsalen + UVA (PUVA) · Cancer Evidence Explorer",
+   "d": "Methoxsalen + UVA (PUVA): classified by IARC as a known cause of cancer (Group 1), with an established link to skin cancer (non-melanoma)."
+  },
+  "mineral-oils": {
+   "id": "Mineral oils, untreated/mildly treated",
+   "t": "Mineral oils (untreated or mildly treated) · Cancer Evidence Explorer",
+   "d": "Mineral oils (untreated or mildly treated): classified by IARC as a known cause of cancer (Group 1), with an established link to skin cancer (non-melanoma)."
+  },
+  "mitoxantrone": {
+   "id": "Mitoxantrone",
+   "t": "Mitoxantrone (chemotherapy) · Cancer Evidence Explorer",
+   "d": "Mitoxantrone (chemotherapy): classified by IARC as a possible cause of cancer (Group 2B), with a suspected link to acute myeloid leukaemia (a blood cancer)."
+  },
+  "dimethylformamide": {
+   "id": "N,N-Dimethylformamide",
+   "t": "Dimethylformamide (DMF) · Cancer Evidence Explorer",
+   "d": "Dimethylformamide (DMF): classified by IARC as a probable cause of cancer (Group 2A), with a suspected link to testicular cancer."
+  },
+  "nickel-compounds": {
+   "id": "Nickel compounds",
+   "t": "Nickel compounds · Cancer Evidence Explorer",
+   "d": "Nickel compounds: classified by IARC as a known cause of cancer (Group 1), with established links to lung cancer and nasal & sinus cancer."
+  },
+  "night-shift-work": {
+   "id": "Night shift work",
+   "t": "Night-shift work · Cancer Evidence Explorer",
+   "d": "Night-shift work: classified by IARC as a probable cause of cancer (Group 2A), with 4 suspected links to cancers, including breast cancer, prostate cancer and colon cancer."
+  },
+  "ingested-nitrate-nitrite": {
+   "id": "Nitrate/nitrite (ingested, endogenous nitrosation)",
+   "t": "Ingested nitrate/nitrite (when nitrosated in the body) · Cancer Evidence Explorer",
+   "d": "Ingested nitrate/nitrite (when nitrosated in the body): classified by IARC as a probable cause of cancer (Group 2A), with a suspected link to stomach cancer."
+  },
+  "nitrogen-mustard": {
+   "id": "Nitrogen mustard",
+   "t": "Nitrogen mustard · Cancer Evidence Explorer",
+   "d": "Nitrogen mustard: classified by IARC as a probable cause of cancer (Group 2A), with suspected links to skin cancer (non-melanoma) and leukaemia (all types)."
+  },
+  "insecticide-spraying-and-application": {
+   "id": "Non-arsenical insecticides (application)",
+   "t": "Insecticide spraying and application (occupational) · Cancer Evidence Explorer",
+   "d": "Insecticide spraying and application (occupational): classified by IARC as a probable cause of cancer (Group 2A), with a suspected link to lung cancer."
+  },
+  "opisthorchis-viverrini": {
+   "id": "Opisthorchis viverrini",
+   "t": "Liver fluke (Opisthorchis) · Cancer Evidence Explorer",
+   "d": "Liver fluke (Opisthorchis): classified by IARC as a known cause of cancer (Group 1), with an established link to bile-duct cancer."
+  },
+  "opium-use": {
+   "id": "Opium consumption",
+   "t": "Opium use · Cancer Evidence Explorer",
+   "d": "Opium use: classified by IARC as a known cause of cancer (Group 1), with 3 established and 4 suspected links to cancers, including lung cancer, bladder cancer and larynx (voice-box) cancer."
+  },
+  "outdoor-air-pollution": {
+   "id": "Outdoor air pollution",
+   "t": "Outdoor air pollution · Cancer Evidence Explorer",
+   "d": "Outdoor air pollution: classified by IARC as a known cause of cancer (Group 1), with an established link to lung cancer, and a suspected link to bladder cancer."
+  },
+  "outdoor-air-pollution-particulate-matter": {
+   "id": "Outdoor air pollution, particulate matter",
+   "t": "Outdoor air pollution – particulate matter · Cancer Evidence Explorer",
+   "d": "Outdoor air pollution – particulate matter: classified by IARC as a known cause of cancer (Group 1), with an established link to lung cancer."
+  },
+  "mother-working-as-a-painter": {
+   "id": "Painter (maternal occupational)",
+   "t": "Mother working as a painter · Cancer Evidence Explorer",
+   "d": "Mother working as a painter: not classified on its own; IARC described this evidence in its Group 1 evaluation of painting (occupational), with a suspected link to childhood leukaemia (all types)."
+  },
+  "painting": {
+   "id": "Painter (occupational)",
+   "t": "Painting (occupational) · Cancer Evidence Explorer",
+   "d": "Painting (occupational): classified by IARC as a known cause of cancer (Group 1), with established links to lung cancer, bladder cancer and mesothelioma (lining of lungs/abdomen)."
+  },
+  "pentachlorophenol": {
+   "id": "Pentachlorophenol",
+   "t": "Pentachlorophenol (wood preservative) · Cancer Evidence Explorer",
+   "d": "Pentachlorophenol (wood preservative): classified by IARC as a known cause of cancer (Group 1), with established links to non-Hodgkin lymphoma (all types) and multiple myeloma (a blood cancer)."
+  },
+  "pfoa": {
+   "id": "Perfluorooctanoic acid (PFOA)",
+   "t": "PFOA (\"forever chemical\") · Cancer Evidence Explorer",
+   "d": "PFOA (\"forever chemical\"): classified by IARC as a known cause of cancer (Group 1), with suspected links to kidney cancer and testicular cancer."
+  },
+  "petroleum-refining": {
+   "id": "Petroleum refining (occupational)",
+   "t": "Petroleum refining (occupational) · Cancer Evidence Explorer",
+   "d": "Petroleum refining (occupational): classified by IARC as a probable cause of cancer (Group 2A), with suspected links to skin cancer (non-melanoma), leukaemia (all types) and skin cancer (melanoma)."
+  },
+  "phenacetin": {
+   "id": "Phenacetin",
+   "t": "Phenacetin (old painkiller) · Cancer Evidence Explorer",
+   "d": "Phenacetin (old painkiller): classified by IARC as a known cause of cancer (Group 1), with an established link to renal-pelvis & ureter cancer."
+  },
+  "phenacetin-containing-painkillers": {
+   "id": "Phenacetin, analgesic mixtures containing",
+   "t": "Phenacetin-containing painkillers · Cancer Evidence Explorer",
+   "d": "Phenacetin-containing painkillers: classified by IARC as a known cause of cancer (Group 1), with an established link to renal-pelvis & ureter cancer."
+  },
+  "phosphorus-32": {
+   "id": "Phosphorus-32",
+   "t": "Phosphorus-32 · Cancer Evidence Explorer",
+   "d": "Phosphorus-32: classified by IARC as a known cause of cancer (Group 1), with established links to acute myeloid leukaemia (a blood cancer), other acute non-lymphocytic leukaemia and acute lymphocytic leukaemia (a blood cancer)."
+  },
+  "pickled-vegetables": {
+   "id": "Pickled vegetables (traditional Asian)",
+   "t": "Pickled vegetables (traditional Asian) · Cancer Evidence Explorer",
+   "d": "Pickled vegetables (traditional Asian): classified by IARC as a possible cause of cancer (Group 2B), with suspected links to oesophageal (food-pipe) cancer, stomach cancer and nasopharyngeal cancer (upper throat)."
+  },
+  "pioglitazone": {
+   "id": "Pioglitazone",
+   "t": "Pioglitazone (diabetes drug) · Cancer Evidence Explorer",
+   "d": "Pioglitazone (diabetes drug): classified by IARC as a probable cause of cancer (Group 2A), with a suspected link to bladder cancer."
+  },
+  "plutonium": {
+   "id": "Plutonium",
+   "t": "Plutonium · Cancer Evidence Explorer",
+   "d": "Plutonium: classified by IARC as a known cause of cancer (Group 1), with 4 established links to cancers, including lung cancer, liver cancer and bile-duct cancer."
+  },
+  "pcbs": {
+   "id": "Polychlorinated biphenyls",
+   "t": "PCBs · Cancer Evidence Explorer",
+   "d": "PCBs: classified by IARC as a known cause of cancer (Group 1), with an established link to skin cancer (melanoma), and suspected links to non-Hodgkin lymphoma (all types) and breast cancer."
+  },
+  "polychlorophenols-and-their-sodium-salts": {
+   "id": "Polychlorophenols & sodium salts (mixed)",
+   "t": "Polychlorophenols & their sodium salts (mixed exposures) · Cancer Evidence Explorer",
+   "d": "Polychlorophenols & their sodium salts (mixed exposures): classified by IARC as a possible cause of cancer (Group 2B), with suspected links to non-Hodgkin lymphoma (all types) and soft-tissue sarcoma."
+  },
+  "printing-processes": {
+   "id": "Printing processes",
+   "t": "Printing processes · Cancer Evidence Explorer",
+   "d": "Printing processes: classified by IARC as a possible cause of cancer (Group 2B), with suspected links to lung cancer and bladder cancer."
+  },
+  "processed-meat": {
+   "id": "Processed meat",
+   "t": "Processed meat · Cancer Evidence Explorer",
+   "d": "Processed meat: classified by IARC as a known cause of cancer (Group 1), with established links to colon cancer and rectal cancer, and a suspected link to stomach cancer."
+  },
+  "radiofrequency-fields": {
+   "id": "Radiofrequency electromagnetic fields (glioma, acoustic neuroma)",
+   "t": "Radiofrequency fields (e.g. mobile phones) · Cancer Evidence Explorer",
+   "d": "Radiofrequency fields (e.g. mobile phones): classified by IARC as a possible cause of cancer (Group 2B), with a suspected link to brain & nervous-system cancer."
+  },
+  "radioactive-iodine": {
+   "id": "Radioiodines, incl. iodine-131",
+   "t": "Radioactive iodine (I-131) · Cancer Evidence Explorer",
+   "d": "Radioactive iodine (I-131): classified by IARC as a known cause of cancer (Group 1), with 1 established link and 6 suspected links to cancers, including thyroid cancer, leukaemia (all types) and childhood leukaemia (all types)."
+  },
+  "radium-224": {
+   "id": "Radium-224 & decay products",
+   "t": "Radium-224 · Cancer Evidence Explorer",
+   "d": "Radium-224: classified by IARC as a known cause of cancer (Group 1), with an established link to bone cancer."
+  },
+  "radium-226": {
+   "id": "Radium-226 & decay products",
+   "t": "Radium-226 · Cancer Evidence Explorer",
+   "d": "Radium-226: classified by IARC as a known cause of cancer (Group 1), with established links to nasal & sinus cancer and bone cancer."
+  },
+  "radium-228": {
+   "id": "Radium-228 & decay products",
+   "t": "Radium-228 · Cancer Evidence Explorer",
+   "d": "Radium-228: classified by IARC as a known cause of cancer (Group 1), with established links to nasal & sinus cancer and bone cancer."
+  },
+  "radon-gas": {
+   "id": "Radon-222 & decay products",
+   "t": "Radon gas · Cancer Evidence Explorer",
+   "d": "Radon gas: classified by IARC as a known cause of cancer (Group 1), with an established link to lung cancer, and a suspected link to leukaemia (all types)."
+  },
+  "red-meat": {
+   "id": "Red meat",
+   "t": "Red meat · Cancer Evidence Explorer",
+   "d": "Red meat: classified by IARC as a probable cause of cancer (Group 2A), with 4 suspected links to cancers, including prostate cancer, colon cancer and rectal cancer."
+  },
+  "rubber-manufacturing-work": {
+   "id": "Rubber manufacturing industry",
+   "t": "Rubber-manufacturing work · Cancer Evidence Explorer",
+   "d": "Rubber-manufacturing work: classified by IARC as a known cause of cancer (Group 1), with 5 established and 3 suspected links to cancers, including lung cancer, bladder cancer and stomach cancer."
+  },
+  "chinese-style-salted-fish": {
+   "id": "Salted fish, Chinese-style",
+   "t": "Chinese-style salted fish · Cancer Evidence Explorer",
+   "d": "Chinese-style salted fish: classified by IARC as a known cause of cancer (Group 1), with an established link to nasopharyngeal cancer (upper throat), and a suspected link to stomach cancer."
+  },
+  "schistosoma-haematobium": {
+   "id": "Schistosoma haematobium",
+   "t": "Blood fluke (Schistosoma haematobium) · Cancer Evidence Explorer",
+   "d": "Blood fluke (Schistosoma haematobium): classified by IARC as a known cause of cancer (Group 1), with an established link to bladder cancer."
+  },
+  "schistosoma-japonicum": {
+   "id": "Schistosoma japonicum",
+   "t": "Blood fluke (Schistosoma japonicum) · Cancer Evidence Explorer",
+   "d": "Blood fluke (Schistosoma japonicum): classified by IARC as a possible cause of cancer (Group 2B), with 4 suspected links to cancers, including liver cancer, bile-duct cancer and colon cancer."
+  },
+  "semustine": {
+   "id": "Semustine (methyl-CCNU)",
+   "t": "Semustine (chemotherapy) · Cancer Evidence Explorer",
+   "d": "Semustine (chemotherapy): classified by IARC as a known cause of cancer (Group 1), with an established link to acute myeloid leukaemia (a blood cancer)."
+  },
+  "shale-oils": {
+   "id": "Shale oils",
+   "t": "Shale oils · Cancer Evidence Explorer",
+   "d": "Shale oils: classified by IARC as a known cause of cancer (Group 1), with an established link to skin cancer (non-melanoma)."
+  },
+  "silica-dust": {
+   "id": "Silica dust, crystalline (quartz/cristobalite)",
+   "t": "Silica dust (quartz or cristobalite) · Cancer Evidence Explorer",
+   "d": "Silica dust (quartz or cristobalite): classified by IARC as a known cause of cancer (Group 1), with an established link to lung cancer."
+  },
+  "silicon-carbide-fibres": {
+   "id": "Silicon carbide, fibrous",
+   "t": "Silicon carbide fibres · Cancer Evidence Explorer",
+   "d": "Silicon carbide fibres: classified by IARC as a possible cause of cancer (Group 2B), with a suspected link to lung cancer."
+  },
+  "sunlight": {
+   "id": "Solar radiation",
+   "t": "Sunlight (UV radiation) · Cancer Evidence Explorer",
+   "d": "Sunlight (UV radiation): classified by IARC as a known cause of cancer (Group 1), with 2 established and 2 suspected links to cancers, including skin cancer (non-melanoma), skin cancer (melanoma) and eye cancer."
+  },
+  "soot": {
+   "id": "Soot (chimney sweeps)",
+   "t": "Soot (chimney sweeping) · Cancer Evidence Explorer",
+   "d": "Soot (chimney sweeping): classified by IARC as a known cause of cancer (Group 1), with established links to lung cancer and skin cancer (non-melanoma), and a suspected link to bladder cancer."
+  },
+  "styrene": {
+   "id": "Styrene",
+   "t": "Styrene · Cancer Evidence Explorer",
+   "d": "Styrene: classified by IARC as a probable cause of cancer (Group 2A), with suspected links to leukaemia (all types), multiple myeloma (a blood cancer) and lymphoma (all types)."
+  },
+  "sulfur-mustard": {
+   "id": "Sulfur mustard",
+   "t": "Sulfur mustard (mustard gas) · Cancer Evidence Explorer",
+   "d": "Sulfur mustard (mustard gas): classified by IARC as a known cause of cancer (Group 1), with an established link to lung cancer, and a suspected link to larynx (voice-box) cancer."
+  },
+  "tacrolimus": {
+   "id": "Tacrolimus",
+   "t": "Tacrolimus (immune-suppressant) · Cancer Evidence Explorer",
+   "d": "Tacrolimus (immune-suppressant): classified by IARC as a known cause of cancer (Group 1), with 2 established and 2 suspected links to cancers, including non-Hodgkin lymphoma (all types), immunosuppression-related lymphoma and skin cancer (non-melanoma)."
+  },
+  "talc": {
+   "id": "Talc (perineal use)",
+   "t": "Talc · Cancer Evidence Explorer",
+   "d": "Talc: classified by IARC as a probable cause of cancer (Group 2A), with a suspected link to ovarian cancer."
+  },
+  "tamoxifen": {
+   "id": "Tamoxifen",
+   "t": "Tamoxifen · Cancer Evidence Explorer",
+   "d": "Tamoxifen: classified by IARC as a known cause of cancer (Group 1), with an established link to womb (endometrial) cancer."
+  },
+  "teniposide": {
+   "id": "Teniposide",
+   "t": "Teniposide (chemotherapy) · Cancer Evidence Explorer",
+   "d": "Teniposide (chemotherapy): classified by IARC as a probable cause of cancer (Group 2A), with suspected links to acute myeloid leukaemia (a blood cancer) and childhood acute myeloid leukaemia."
+  },
+  "tetrachloroethylene": {
+   "id": "Tetrachloroethylene",
+   "t": "Tetrachloroethylene (PERC) · Cancer Evidence Explorer",
+   "d": "Tetrachloroethylene (PERC): classified by IARC as a probable cause of cancer (Group 2A), with a suspected link to bladder cancer."
+  },
+  "textile-manufacturing-industry": {
+   "id": "Textile manufacturing industry",
+   "t": "Textile manufacturing industry · Cancer Evidence Explorer",
+   "d": "Textile manufacturing industry: classified by IARC as a possible cause of cancer (Group 2B), with suspected links to bladder cancer and nasal & sinus cancer."
+  },
+  "thiotepa": {
+   "id": "Thiotepa",
+   "t": "Thiotepa (chemotherapy) · Cancer Evidence Explorer",
+   "d": "Thiotepa (chemotherapy): classified by IARC as a known cause of cancer (Group 1), with an established link to leukaemia (all types)."
+  },
+  "thorium-232": {
+   "id": "Thorium-232 & decay products",
+   "t": "Thorium-232 · Cancer Evidence Explorer",
+   "d": "Thorium-232: classified by IARC as a known cause of cancer (Group 1), with 9 established and 2 suspected links to cancers, including acute myeloid leukaemia (a blood cancer), liver cancer and bile-duct cancer."
+  },
+  "secondhand-smoke": {
+   "id": "Tobacco smoke, secondhand",
+   "t": "Secondhand smoke · Cancer Evidence Explorer",
+   "d": "Secondhand smoke: classified by IARC as a known cause of cancer (Group 1), with an established link to lung cancer, and suspected links to larynx (voice-box) cancer and throat (pharynx) cancer."
+  },
+  "tobacco-smoking": {
+   "id": "Tobacco smoking",
+   "t": "Tobacco smoking · Cancer Evidence Explorer",
+   "d": "Tobacco smoking: classified by IARC as a known cause of cancer (Group 1), with 20 established links and 1 suspected link to cancers, including lung cancer, bladder cancer and acute myeloid leukaemia (a blood cancer)."
+  },
+  "parental-smoking": {
+   "id": "Tobacco smoking (parental)",
+   "t": "Parental smoking · Cancer Evidence Explorer",
+   "d": "Parental smoking: not classified on its own; IARC described this evidence in its Group 1 evaluation of tobacco smoking, with 1 established link and 3 suspected links to cancers, including childhood liver cancer (hepatoblastoma), childhood leukaemia (all types) and childhood acute lymphoblastic leukaemia."
+  },
+  "smokeless-tobacco": {
+   "id": "Tobacco, smokeless",
+   "t": "Smokeless tobacco (chewing/snuff) · Cancer Evidence Explorer",
+   "d": "Smokeless tobacco (chewing/snuff): classified by IARC as a known cause of cancer (Group 1), with established links to oesophageal (food-pipe) cancer, mouth cancer and pancreatic cancer."
+  },
+  "treosulfan": {
+   "id": "Treosulfan",
+   "t": "Treosulfan (chemotherapy) · Cancer Evidence Explorer",
+   "d": "Treosulfan (chemotherapy): classified by IARC as a known cause of cancer (Group 1), with an established link to acute myeloid leukaemia (a blood cancer)."
+  },
+  "trichloroethylene": {
+   "id": "Trichloroethylene",
+   "t": "Trichloroethylene (TCE) · Cancer Evidence Explorer",
+   "d": "Trichloroethylene (TCE): classified by IARC as a known cause of cancer (Group 1), with 1 established link and 3 suspected links to cancers, including kidney cancer, non-Hodgkin lymphoma (all types) and liver cancer."
+  },
+  "antimony": {
+   "id": "Trivalent antimony",
+   "t": "Antimony (trivalent) · Cancer Evidence Explorer",
+   "d": "Antimony (trivalent): classified by IARC as a probable cause of cancer (Group 2A), with a suspected link to lung cancer."
+  },
+  "welding-uv-light": {
+   "id": "UV emissions from welding",
+   "t": "Welding UV light · Cancer Evidence Explorer",
+   "d": "Welding UV light: classified by IARC as a known cause of cancer (Group 1), with an established link to eye cancer."
+  },
+  "tanning-beds": {
+   "id": "UV-emitting tanning devices",
+   "t": "Tanning beds (UV) · Cancer Evidence Explorer",
+   "d": "Tanning beds (UV): classified by IARC as a known cause of cancer (Group 1), with established links to skin cancer (melanoma) and eye cancer, and a suspected link to skin cancer (non-melanoma)."
+  },
+  "uranium": {
+   "id": "Uranium, mixture of isotopes",
+   "t": "Uranium · Cancer Evidence Explorer",
+   "d": "Uranium: classified by IARC as a known cause of cancer (Group 1), with a suspected link to lung cancer."
+  },
+  "very-hot-drinks": {
+   "id": "Very hot beverages (>65C)",
+   "t": "Very hot drinks (above ~65°C) · Cancer Evidence Explorer",
+   "d": "Very hot drinks (above ~65°C): classified by IARC as a probable cause of cancer (Group 2A), with a suspected link to oesophageal (food-pipe) cancer."
+  },
+  "vinyl-chloride": {
+   "id": "Vinyl chloride",
+   "t": "Vinyl chloride · Cancer Evidence Explorer",
+   "d": "Vinyl chloride: classified by IARC as a known cause of cancer (Group 1), with an established link to liver cancer."
+  },
+  "voriconazole": {
+   "id": "Voriconazole",
+   "t": "Voriconazole (antifungal) · Cancer Evidence Explorer",
+   "d": "Voriconazole (antifungal): classified by IARC as a known cause of cancer (Group 1), with an established link to skin cancer (non-melanoma)."
+  },
+  "welding-fumes": {
+   "id": "Welding fumes",
+   "t": "Welding fumes · Cancer Evidence Explorer",
+   "d": "Welding fumes: classified by IARC as a known cause of cancer (Group 1), with an established link to lung cancer, and a suspected link to kidney cancer."
+  },
+  "wood-dust": {
+   "id": "Wood dust",
+   "t": "Wood dust · Cancer Evidence Explorer",
+   "d": "Wood dust: classified by IARC as a known cause of cancer (Group 1), with established links to nasal & sinus cancer and nasopharyngeal cancer (upper throat)."
+  },
+  "x-rays-and-gamma-rays": {
+   "id": "X- and gamma-radiation",
+   "t": "X-rays & gamma rays · Cancer Evidence Explorer",
+   "d": "X-rays & gamma rays: classified by IARC as a known cause of cancer (Group 1), with 18 established and 8 suspected links to cancers, including lung cancer, bladder cancer and skin cancer (non-melanoma)."
+  },
+  "x-rays-gamma-rays-before-birth": {
+   "id": "X- and gamma-radiation (in utero)",
+   "t": "X-rays/gamma rays before birth · Cancer Evidence Explorer",
+   "d": "X-rays/gamma rays before birth: not classified on its own; IARC described this evidence in its Group 1 evaluation of X-rays & gamma rays, with an established link to multiple sites (unspecified)."
+  },
+  "chlorinated-toluenes-and-benzoyl-chloride": {
+   "id": "alpha-Chlorinated toluenes & benzoyl chloride",
+   "t": "Chlorinated toluenes and benzoyl chloride · Cancer Evidence Explorer",
+   "d": "Chlorinated toluenes and benzoyl chloride: classified by IARC as a probable cause of cancer (Group 2A), with a suspected link to lung cancer."
+  },
+  "ortho-toluidine": {
+   "id": "ortho-Toluidine",
+   "t": "ortho-Toluidine · Cancer Evidence Explorer",
+   "d": "ortho-Toluidine: classified by IARC as a known cause of cancer (Group 1), with an established link to bladder cancer."
+  }
+ },
+ "c": {
+  "acute-lymphocytic-leukaemia": {
+   "id": "Acute lymphocytic leukaemia",
+   "t": "Acute lymphocytic leukaemia (a blood cancer) · Cancer Evidence Explorer",
+   "d": "Acute lymphocytic leukaemia (a blood cancer): established links to phosphorus-32, thorium-232 and X-rays & gamma rays in the IARC Monographs."
+  },
+  "acute-myeloid-leukaemia": {
+   "id": "Acute myeloid leukaemia",
+   "t": "Acute myeloid leukaemia (a blood cancer) · Cancer Evidence Explorer",
+   "d": "Acute myeloid leukaemia (a blood cancer): 15 established and 4 suspected links to exposures in the IARC Monographs, including benzene, busulfan (chemotherapy) and chlorambucil (chemotherapy)."
+  },
+  "adult-t-cell-leukaemia-lymphoma": {
+   "id": "Adult T-cell leukaemia/lymphoma",
+   "t": "Adult T-cell leukaemia/lymphoma · Cancer Evidence Explorer",
+   "d": "Adult T-cell leukaemia/lymphoma: established links to HTLV-1 virus, thorium-232 and X-rays & gamma rays in the IARC Monographs."
+  },
+  "all-cancers-combined": {
+   "id": "All cancer sites (combined)",
+   "t": "All cancers combined · Cancer Evidence Explorer",
+   "d": "All cancers combined: an established link to dioxin (TCDD) in the IARC Monographs."
+  },
+  "anal-cancer": {
+   "id": "Anus",
+   "t": "Anal cancer · Cancer Evidence Explorer",
+   "d": "Anal cancer: established links to HIV-1 and HPV type 16, and a suspected link to HPV types 18 & 33 in the IARC Monographs."
+  },
+  "bile-duct-cancer": {
+   "id": "Bile duct",
+   "t": "Bile-duct cancer · Cancer Evidence Explorer",
+   "d": "Bile-duct cancer: 6 established and 10 suspected links to exposures in the IARC Monographs, including liver fluke (Clonorchis), liver fluke (Opisthorchis) and plutonium."
+  },
+  "bone-cancer": {
+   "id": "Bone",
+   "t": "Bone cancer · Cancer Evidence Explorer",
+   "d": "Bone cancer: 5 established links and 1 suspected link to exposures in the IARC Monographs, including plutonium, radium-224 and radium-226."
+  },
+  "brain-and-nervous-system-cancer": {
+   "id": "Brain & central nervous system",
+   "t": "Brain & nervous-system cancer · Cancer Evidence Explorer",
+   "d": "Brain & nervous-system cancer: an established link to X-rays & gamma rays, and a suspected link to radiofrequency fields (e.g. mobile phones) in the IARC Monographs."
+  },
+  "breast-cancer": {
+   "id": "Breast",
+   "t": "Breast cancer · Cancer Evidence Explorer",
+   "d": "Breast cancer: 5 established and 7 suspected links to exposures in the IARC Monographs, including alcoholic drinks, combined HRT (menopause) and diethylstilbestrol (DES)."
+  },
+  "childhood-acute-lymphoblastic-leukaemia": {
+   "id": "Childhood acute lymphoblastic leukaemia",
+   "t": "Childhood acute lymphoblastic leukaemia · Cancer Evidence Explorer",
+   "d": "Childhood acute lymphoblastic leukaemia: suspected links to cytomegalovirus (CMV), parental smoking and petrol (gasoline) in the IARC Monographs."
+  },
+  "childhood-acute-myeloid-leukaemia": {
+   "id": "Childhood acute myeloid leukaemia",
+   "t": "Childhood acute myeloid leukaemia · Cancer Evidence Explorer",
+   "d": "Childhood acute myeloid leukaemia: suspected links to benzene, parental smoking and teniposide (chemotherapy) in the IARC Monographs."
+  },
+  "childhood-leukaemia": {
+   "id": "Childhood leukaemia (all combined)",
+   "t": "Childhood leukaemia (all types) · Cancer Evidence Explorer",
+   "d": "Childhood leukaemia (all types): 3 established and 5 suspected links to exposures in the IARC Monographs, including nuclear fission products (e.g. strontium-90), thorium-232 and X-rays & gamma rays."
+  },
+  "chronic-lymphocytic-leukaemia": {
+   "id": "Chronic lymphocytic leukaemia",
+   "t": "Chronic lymphocytic leukaemia · Cancer Evidence Explorer",
+   "d": "Chronic lymphocytic leukaemia: suspected links to benzene, petrol (gasoline) and ethylene oxide in the IARC Monographs."
+  },
+  "chronic-myeloid-leukaemia": {
+   "id": "Chronic myeloid leukaemia",
+   "t": "Chronic myeloid leukaemia · Cancer Evidence Explorer",
+   "d": "Chronic myeloid leukaemia: 4 established links and 1 suspected link to exposures in the IARC Monographs, including thorium-232, tobacco smoking and X-rays & gamma rays."
+  },
+  "colon-cancer": {
+   "id": "Colon",
+   "t": "Colon cancer · Cancer Evidence Explorer",
+   "d": "Colon cancer: 4 established and 5 suspected links to exposures in the IARC Monographs, including alcoholic drinks, processed meat and tobacco smoking."
+  },
+  "digestive-tract-cancer": {
+   "id": "Digestive tract (unspecified)",
+   "t": "Digestive-tract cancer (unspecified) · Cancer Evidence Explorer",
+   "d": "Digestive-tract cancer (unspecified): a suspected link to radioactive iodine (I-131) in the IARC Monographs."
+  },
+  "womb-cancer": {
+   "id": "Endometrium",
+   "t": "Womb (endometrial) cancer · Cancer Evidence Explorer",
+   "d": "Womb (endometrial) cancer: 3 established links and 1 suspected link to exposures in the IARC Monographs, including combined HRT (menopause), oestrogen-only HRT and tamoxifen."
+  },
+  "kaposi-sarcoma": {
+   "id": "Endothelium (Kaposi sarcoma)",
+   "t": "Kaposi sarcoma · Cancer Evidence Explorer",
+   "d": "Kaposi sarcoma: established links to HIV-1 and Kaposi-sarcoma herpesvirus (HHV-8) in the IARC Monographs."
+  },
+  "eye-cancer": {
+   "id": "Eye",
+   "t": "Eye cancer · Cancer Evidence Explorer",
+   "d": "Eye cancer: 3 established links and 1 suspected link to exposures in the IARC Monographs, including HIV-1, tanning beds (UV) and welding UV light."
+  },
+  "gallbladder-cancer": {
+   "id": "Gall bladder",
+   "t": "Gallbladder cancer · Cancer Evidence Explorer",
+   "d": "Gallbladder cancer: an established link to thorium-232 in the IARC Monographs."
+  },
+  "hodgkin-lymphoma": {
+   "id": "Hodgkin lymphoma",
+   "t": "Hodgkin lymphoma · Cancer Evidence Explorer",
+   "d": "Hodgkin lymphoma: established links to Epstein–Barr virus and HIV-1 in the IARC Monographs."
+  },
+  "kidney-cancer": {
+   "id": "Kidney",
+   "t": "Kidney cancer · Cancer Evidence Explorer",
+   "d": "Kidney cancer: 3 established and 5 suspected links to exposures in the IARC Monographs, including tobacco smoking, X-rays & gamma rays and trichloroethylene (TCE)."
+  },
+  "larynx-cancer": {
+   "id": "Larynx",
+   "t": "Larynx (voice-box) cancer · Cancer Evidence Explorer",
+   "d": "Larynx (voice-box) cancer: 6 established and 7 suspected links to exposures in the IARC Monographs, including acetaldehyde (from alcohol), alcoholic drinks and opium use."
+  },
+  "leukaemia": {
+   "id": "Leukaemia (all combined)",
+   "t": "Leukaemia (all types) · Cancer Evidence Explorer",
+   "d": "Leukaemia (all types): 4 established and 8 suspected links to exposures in the IARC Monographs, including nuclear fission products (e.g. strontium-90), thiotepa (chemotherapy) and 1,3-butadiene."
+  },
+  "lip-cancer": {
+   "id": "Lip",
+   "t": "Lip cancer · Cancer Evidence Explorer",
+   "d": "Lip cancer: an established link to hydrochlorothiazide (blood-pressure pill), and a suspected link to sunlight (UV radiation) in the IARC Monographs."
+  },
+  "liver-cancer": {
+   "id": "Liver",
+   "t": "Liver cancer · Cancer Evidence Explorer",
+   "d": "Liver cancer: 10 established and 9 suspected links to exposures in the IARC Monographs, including aflatoxins (mould toxins), alcoholic drinks and hepatitis B virus (long-term)."
+  },
+  "childhood-liver-cancer": {
+   "id": "Liver (childhood, hepatoblastoma)",
+   "t": "Childhood liver cancer (hepatoblastoma) · Cancer Evidence Explorer",
+   "d": "Childhood liver cancer (hepatoblastoma): an established link to parental smoking in the IARC Monographs."
+  },
+  "lung-cancer": {
+   "id": "Lung",
+   "t": "Lung cancer · Cancer Evidence Explorer",
+   "d": "Lung cancer: 32 established and 19 suspected links to exposures in the IARC Monographs, including tobacco smoking, arsenic and diesel engine exhaust."
+  },
+  "lymphoepithelioma-like-carcinoma": {
+   "id": "Lymphoepithelioma-like carcinoma",
+   "t": "Lymphoepithelioma-like carcinoma · Cancer Evidence Explorer",
+   "d": "Lymphoepithelioma-like carcinoma: a suspected link to Epstein–Barr virus in the IARC Monographs."
+  },
+  "lymphoma": {
+   "id": "Lymphoma (all combined)",
+   "t": "Lymphoma (all types) · Cancer Evidence Explorer",
+   "d": "Lymphoma (all types): established links to 1,3-butadiene and rubber-manufacturing work, and a suspected link to styrene in the IARC Monographs."
+  },
+  "mesothelioma": {
+   "id": "Mesothelium (pleura, peritoneum)",
+   "t": "Mesothelioma (lining of lungs/abdomen) · Cancer Evidence Explorer",
+   "d": "Mesothelioma (lining of lungs/abdomen): 5 established links to exposures in the IARC Monographs, including erionite (a natural fibre), fluoro-edenite (a natural fibre) and asbestos."
+  },
+  "multicentric-castleman-disease": {
+   "id": "Multicentric Castleman disease",
+   "t": "Multicentric Castleman disease · Cancer Evidence Explorer",
+   "d": "Multicentric Castleman disease: a suspected link to Kaposi-sarcoma herpesvirus (HHV-8) in the IARC Monographs."
+  },
+  "multiple-myeloma": {
+   "id": "Multiple myeloma",
+   "t": "Multiple myeloma (a blood cancer) · Cancer Evidence Explorer",
+   "d": "Multiple myeloma (a blood cancer): 2 established and 6 suspected links to exposures in the IARC Monographs, including 1,3-butadiene, pentachlorophenol (wood preservative) and benzene."
+  },
+  "multiple-sites": {
+   "id": "Multiple sites (unspecified)",
+   "t": "Multiple sites (unspecified) · Cancer Evidence Explorer",
+   "d": "Multiple sites (unspecified): 3 established links and 1 suspected link to exposures in the IARC Monographs, including ciclosporin (immune-suppressant), nuclear fission products (e.g. strontium-90) and X-rays/gamma rays before birth."
+  },
+  "myelodysplastic-syndrome": {
+   "id": "Myelodysplastic syndrome",
+   "t": "Myelodysplastic syndrome · Cancer Evidence Explorer",
+   "d": "Myelodysplastic syndrome: a suspected link to petrol (gasoline) in the IARC Monographs."
+  },
+  "burkitt-lymphoma": {
+   "id": "NHL - Burkitt lymphoma",
+   "t": "Burkitt lymphoma · Cancer Evidence Explorer",
+   "d": "Burkitt lymphoma: an established link to Epstein–Barr virus, and a suspected link to malaria (P. falciparum, in holoendemic areas) in the IARC Monographs."
+  },
+  "stomach-malt-lymphoma": {
+   "id": "NHL - MALT gastric lymphoma",
+   "t": "Stomach MALT lymphoma · Cancer Evidence Explorer",
+   "d": "Stomach MALT lymphoma: an established link to Helicobacter pylori (stomach bacterium) in the IARC Monographs."
+  },
+  "nasal-nk-t-cell-lymphoma": {
+   "id": "NHL - extranodal NK/T-cell (nasal type)",
+   "t": "Nasal NK/T-cell lymphoma · Cancer Evidence Explorer",
+   "d": "Nasal NK/T-cell lymphoma: an established link to Epstein–Barr virus in the IARC Monographs."
+  },
+  "immunosuppression-related-lymphoma": {
+   "id": "NHL - immunosuppression-related (incl. PTLD)",
+   "t": "Immunosuppression-related lymphoma · Cancer Evidence Explorer",
+   "d": "Immunosuppression-related lymphoma: established links to Epstein–Barr virus and tacrolimus (immune-suppressant) in the IARC Monographs."
+  },
+  "nhl-positive-for-t-14-18": {
+   "id": "NHL - positive for t(14;18)",
+   "t": "Non-Hodgkin lymphoma (t(14;18)-positive) · Cancer Evidence Explorer",
+   "d": "Non-Hodgkin lymphoma (t(14;18)-positive): a suspected link to atrazine (herbicide) in the IARC Monographs."
+  },
+  "nasal-and-sinus-cancer": {
+   "id": "Nasal cavity & paranasal sinus",
+   "t": "Nasal & sinus cancer · Cancer Evidence Explorer",
+   "d": "Nasal & sinus cancer: 7 established and 4 suspected links to exposures in the IARC Monographs, including radium-226, radium-228 and tobacco smoking."
+  },
+  "nasopharyngeal-cancer": {
+   "id": "Nasopharynx",
+   "t": "Nasopharyngeal cancer (upper throat) · Cancer Evidence Explorer",
+   "d": "Nasopharyngeal cancer (upper throat): 4 established links and 1 suspected link to exposures in the IARC Monographs, including Chinese-style salted fish, Epstein–Barr virus and formaldehyde."
+  },
+  "non-hodgkin-lymphoma-all-combined": {
+   "id": "Non-Hodgkin lymphoma (all combined)",
+   "t": "Non-Hodgkin lymphoma (all types) · Cancer Evidence Explorer",
+   "d": "Non-Hodgkin lymphoma (all types): 7 established and 16 suspected links to exposures in the IARC Monographs, including azathioprine (immune-suppressant), ciclosporin (immune-suppressant) and hepatitis C virus (long-term)."
+  },
+  "oesophageal-cancer": {
+   "id": "Oesophagus",
+   "t": "Oesophageal (food-pipe) cancer · Cancer Evidence Explorer",
+   "d": "Oesophageal (food-pipe) cancer: 7 established and 7 suspected links to exposures in the IARC Monographs, including acetaldehyde (from alcohol), alcoholic drinks and betel quid (no tobacco)."
+  },
+  "mouth-cancer": {
+   "id": "Oral cavity",
+   "t": "Mouth cancer · Cancer Evidence Explorer",
+   "d": "Mouth cancer: 7 established and 3 suspected links to exposures in the IARC Monographs, including acetaldehyde (from alcohol), alcoholic drinks and betel quid (no tobacco)."
+  },
+  "oropharyngeal-cancer": {
+   "id": "Oropharynx",
+   "t": "Oropharyngeal cancer (mid-throat) · Cancer Evidence Explorer",
+   "d": "Oropharyngeal cancer (mid-throat): an established link to HPV type 16 in the IARC Monographs."
+  },
+  "other-acute-non-lymphocytic-leukaemia": {
+   "id": "Other acute non-lymphocytic leukaemia",
+   "t": "Other acute non-lymphocytic leukaemia · Cancer Evidence Explorer",
+   "d": "Other acute non-lymphocytic leukaemia: 5 established links and 1 suspected link to exposures in the IARC Monographs, including benzene, phosphorus-32 and thorium-232."
+  },
+  "ovarian-cancer": {
+   "id": "Ovary",
+   "t": "Ovarian cancer · Cancer Evidence Explorer",
+   "d": "Ovarian cancer: 3 established and 2 suspected links to exposures in the IARC Monographs, including oestrogen-only HRT, tobacco smoking and asbestos."
+  },
+  "pancreatic-cancer": {
+   "id": "Pancreas",
+   "t": "Pancreatic cancer · Cancer Evidence Explorer",
+   "d": "Pancreatic cancer: 2 established and 5 suspected links to exposures in the IARC Monographs, including smokeless tobacco (chewing/snuff), tobacco smoking and alcoholic drinks."
+  },
+  "penile-cancer": {
+   "id": "Penis",
+   "t": "Penile cancer · Cancer Evidence Explorer",
+   "d": "Penile cancer: an established link to HPV type 16, and suspected links to HIV-1 and HPV type 18 in the IARC Monographs."
+  },
+  "throat-cancer": {
+   "id": "Pharynx (all combined)",
+   "t": "Throat (pharynx) cancer · Cancer Evidence Explorer",
+   "d": "Throat (pharynx) cancer: 4 established and 5 suspected links to exposures in the IARC Monographs, including acetaldehyde (from alcohol), alcoholic drinks and betel quid with tobacco."
+  },
+  "primary-effusion-lymphoma": {
+   "id": "Primary effusion lymphoma",
+   "t": "Primary effusion lymphoma · Cancer Evidence Explorer",
+   "d": "Primary effusion lymphoma: an established link to Kaposi-sarcoma herpesvirus (HHV-8) in the IARC Monographs."
+  },
+  "prostate-cancer": {
+   "id": "Prostate",
+   "t": "Prostate cancer · Cancer Evidence Explorer",
+   "d": "Prostate cancer: 10 suspected links to exposures in the IARC Monographs, including anabolic steroids, arsenic and malathion (pesticide)."
+  },
+  "rectal-cancer": {
+   "id": "Rectum",
+   "t": "Rectal cancer · Cancer Evidence Explorer",
+   "d": "Rectal cancer: 3 established and 5 suspected links to exposures in the IARC Monographs, including alcoholic drinks, processed meat and tobacco smoking."
+  },
+  "renal-pelvis-and-ureter-cancer": {
+   "id": "Renal pelvis & ureter",
+   "t": "Renal-pelvis & ureter cancer · Cancer Evidence Explorer",
+   "d": "Renal-pelvis & ureter cancer: 4 established links and 1 suspected link to exposures in the IARC Monographs, including phenacetin (old painkiller), phenacetin-containing painkillers and plants containing aristolochic acid."
+  },
+  "salivary-gland-cancer": {
+   "id": "Salivary gland",
+   "t": "Salivary-gland cancer · Cancer Evidence Explorer",
+   "d": "Salivary-gland cancer: established links to acetaldehyde (from alcohol) and X-rays & gamma rays, and a suspected link to radioactive iodine (I-131) in the IARC Monographs."
+  },
+  "skin-melanoma": {
+   "id": "Skin (melanoma)",
+   "t": "Skin cancer (melanoma) · Cancer Evidence Explorer",
+   "d": "Skin cancer (melanoma): 3 established and 3 suspected links to exposures in the IARC Monographs, including PCBs, sunlight (UV radiation) and tanning beds (UV)."
+  },
+  "skin-non-melanoma": {
+   "id": "Skin (non-melanoma)",
+   "t": "Skin cancer (non-melanoma) · Cancer Evidence Explorer",
+   "d": "Skin cancer (non-melanoma): 13 established and 7 suspected links to exposures in the IARC Monographs, including arsenic, azathioprine (immune-suppressant) and ciclosporin (immune-suppressant)."
+  },
+  "soft-tissue-sarcoma": {
+   "id": "Soft tissue (sarcoma)",
+   "t": "Soft-tissue sarcoma · Cancer Evidence Explorer",
+   "d": "Soft-tissue sarcoma: suspected links to dioxin (TCDD), radioactive iodine (I-131) and polychlorophenols & their sodium salts (mixed exposures) in the IARC Monographs."
+  },
+  "stomach-cancer": {
+   "id": "Stomach",
+   "t": "Stomach cancer · Cancer Evidence Explorer",
+   "d": "Stomach cancer: 4 established and 10 suspected links to exposures in the IARC Monographs, including Helicobacter pylori (stomach bacterium), tobacco smoking and X-rays & gamma rays."
+  },
+  "testicular-cancer": {
+   "id": "Testis",
+   "t": "Testicular cancer · Cancer Evidence Explorer",
+   "d": "Testicular cancer: 5 suspected links to exposures in the IARC Monographs, including DDT (pesticide), DES exposure before birth and PFOA (\"forever chemical\")."
+  },
+  "thyroid-cancer": {
+   "id": "Thyroid",
+   "t": "Thyroid cancer · Cancer Evidence Explorer",
+   "d": "Thyroid cancer: established links to radioactive iodine (I-131) and X-rays & gamma rays in the IARC Monographs."
+  },
+  "tonsil-cancer": {
+   "id": "Tonsil",
+   "t": "Tonsil cancer · Cancer Evidence Explorer",
+   "d": "Tonsil cancer: an established link to HPV type 16 in the IARC Monographs."
+  },
+  "upper-aerodigestive-tract": {
+   "id": "Upper aerodigestive tract (combined)",
+   "t": "Upper aerodigestive tract (mouth/throat/voice-box) · Cancer Evidence Explorer",
+   "d": "Upper aerodigestive tract (mouth/throat/voice-box): 3 established and 2 suspected links to exposures in the IARC Monographs, including acetaldehyde (from alcohol), alcoholic drinks and tobacco smoking."
+  },
+  "bladder-cancer": {
+   "id": "Urinary bladder",
+   "t": "Bladder cancer · Cancer Evidence Explorer",
+   "d": "Bladder cancer: 18 established and 13 suspected links to exposures in the IARC Monographs, including arsenic, blood fluke (Schistosoma haematobium) and chlornaphazine (old drug)."
+  },
+  "cervical-cancer": {
+   "id": "Uterine cervix",
+   "t": "Cervical cancer · Cancer Evidence Explorer",
+   "d": "Cervical cancer: 7 established and 2 suspected links to exposures in the IARC Monographs, including DES exposure before birth, high-risk HPV and HIV-1."
+  },
+  "vaginal-cancer": {
+   "id": "Vagina",
+   "t": "Vaginal cancer · Cancer Evidence Explorer",
+   "d": "Vaginal cancer: established links to DES exposure before birth and HPV type 16, and a suspected link to HIV-1 in the IARC Monographs."
+  },
+  "vulval-cancer": {
+   "id": "Vulva",
+   "t": "Vulval cancer · Cancer Evidence Explorer",
+   "d": "Vulval cancer: an established link to HPV type 16, and suspected links to HIV-1 and HPV types 18 & 33 in the IARC Monographs."
+  }
+ }
+}
