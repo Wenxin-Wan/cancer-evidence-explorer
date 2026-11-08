@@ -350,6 +350,56 @@
   .maphint{font-size:12.5px;color:var(--muted);padding:9px 14px;border-top:1px solid var(--line2)}
   #tip{position:fixed;pointer-events:none;background:#1B2430;color:#fff;border-radius:6px;padding:6px 9px;font-size:12.5px;max-width:240px;display:none;z-index:10010;box-shadow:0 6px 20px rgba(0,0,0,.25)}
 
+  /* ---------------- matrix (the idea of design demo 35) ----------------
+     Every exposure of the network (rows) against every cancer type (columns) on one canvas the size of its frame. The
+     frame scrolls; the names of the rows and columns stay frozen at its edges, like the panes of a spreadsheet, and the
+     canvas draws only what the frame shows (mxDraw). The sort buttons are toggle buttons in the style of the network's
+     chips; the readout above the frame names the pair under the pointer or the chosen pair. */
+  #matrixWrap{display:none}
+  #matrixWrap.on{display:block}
+  .mxhead{padding:13px 16px 2px;border-bottom:1px solid var(--line2)}
+  .mxlead{margin:0 0 11px;font-size:14.5px;line-height:1.5;color:var(--ink);max-width:78ch}
+  .mxbar{display:flex;flex-wrap:wrap;gap:8px 24px;align-items:center;padding:0 0 11px}
+  .mxsort{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:0;padding:0;border:0;min-width:0}
+  .mxsort .mlabel{color:var(--faint);font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;margin-inline-end:3px}
+  .mxs{font-family:inherit;transition:background .15s,border-color .15s,color .15s}
+  .mxs:hover{border-color:var(--faint)}
+  .mxs[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:#fff}
+  .mxread{display:flex;flex-wrap:wrap;align-items:center;gap:3px 9px;min-height:46px;padding:9px 16px;border-bottom:1px solid var(--line2);
+    font-size:13px;line-height:1.45;color:var(--muted)}
+  /* on a phone the readout keeps room for three lines, so that the frame below does not move when it changes */
+  @media(max-width:600px){.mxread{min-height:80px;align-content:flex-start}}
+  .mxread .mxr-p{display:inline-flex;align-items:center;gap:6px;min-width:0;max-width:100%}
+  .mxread .mxr-n{border:none;background:none;padding:2px 0;font:inherit;font-size:14px;font-weight:600;color:var(--ink);text-align:start;
+    text-decoration:underline;text-decoration-color:var(--line);text-underline-offset:3px;overflow-wrap:anywhere;min-width:0}
+  .mxread .mxr-n:hover{text-decoration-color:var(--ink)}
+  .mxread .mxr-x{color:var(--faint)}
+  .mxread .mxr-ev{display:inline-flex;align-items:center;color:var(--ink)}
+  .mxread .mxr-none{color:var(--muted)}
+  .mxread .mxr-ev .sqk{display:inline-block;width:11px;height:11px;margin-inline-end:6px;flex:none;box-sizing:border-box}
+  .sqk.est{background:var(--established)}
+  .sqk.sus{border:2px solid var(--suspected);background:var(--card)}
+  .mxread .dot.stmt,.mxlegend .dot.stmt{background:var(--card)!important;border:2px solid var(--bc,var(--muted))}
+  /* the frame: its own scrolling box (both ways on phones, so the page never scrolls sideways); its height leaves the
+     sticky tab row and the readout in view. The canvas inside stays at the top left of the frame (sticky). */
+  .mxframe{position:relative;overflow:auto;direction:ltr;height:clamp(320px,calc(100vh - 205px),1200px);
+    height:clamp(320px,calc(100svh - 205px),1200px);overscroll-behavior-x:contain;-webkit-overflow-scrolling:touch}
+  /* the canvas covers the frame's inside, so the focus ring is drawn just outside it */
+  .mxframe:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
+  .mxinner{position:relative}
+  #mxCv{position:sticky;top:0;left:0;display:block;touch-action:pan-x pan-y}
+  .mxlegend{border-top:1px solid var(--line2)}
+  .mxlegend .sqk{display:inline-block;width:11px;height:11px;box-sizing:border-box}
+  /* the pair opened from the matrix, marked in the exposure's panel */
+  .link-item.mx-pair{background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--ink)}
+  html[dir=rtl] .link-item.mx-pair{box-shadow:inset -3px 0 0 var(--ink)}
+  /* four tabs on a phone: two rows of two, each tab with its own underline */
+  @media(max-width:560px){
+    .tabs{display:grid;grid-template-columns:1fr 1fr;gap:0 16px;border-bottom:0}
+    .tab{justify-content:flex-start;text-align:start;padding:7px 2px 7px;border-bottom:1px solid var(--line2);margin-bottom:0;line-height:1.3}
+    .tab[aria-selected="true"]{border-bottom:2px solid var(--accent);padding-bottom:6px}
+  }
+
   footer.ft{color:var(--faint);font-size:12px;font-variant-numeric:tabular-nums;padding:18px 0 34px;border-top:1px solid var(--line);margin-top:8px;line-height:1.6}
   footer.ft b{color:var(--muted)}
   /* version and citation (plan of 28 Oct 2026, batch 2) */
@@ -576,6 +626,22 @@
       overflow-wrap:anywhere;unicode-bidi:isolate;direction:ltr}
     /* a PubMed or DOI link reads as its identifier (PMID 19891056, doi:10.1016/...), so no address follows it */
     #detail .sci .ref a[href]::after{content:none}
+    /* the matrix tab prints its lead and, in place of the canvas (which draws only what its frame shows), the table of
+       the links of every exposure in the order of the matrix */
+    #matrixWrap.on{border:0;background:transparent}
+    #matrixWrap .mxbar,#matrixWrap .mxread,#matrixWrap .mxframe,#matrixWrap .mxlegend,#mxKeys,#mxLive{display:none!important}
+    #matrixWrap .mxhead{padding:0 0 6px;border:0}
+    #matrixWrap .mxlead{max-width:none;font-size:12.5px;margin:0}
+    #mxTable{position:static;width:auto;height:auto;margin:0;overflow:visible;clip:auto;white-space:normal}
+    .mxtbl{width:100%;border-collapse:collapse;font-size:10.5px;line-height:1.35}
+    .mxtbl caption{text-align:start;font-weight:600;font-size:11.5px;padding:0 0 4px}
+    .mxtbl th,.mxtbl td{text-align:start;vertical-align:top;padding:2px 6px 2px 0;border-bottom:1px solid var(--line2)}
+    .mxtbl thead th{border-bottom:1px solid var(--ink);font-size:10px;text-transform:uppercase;letter-spacing:.03em;color:var(--muted)}
+    .mxtbl tbody th{font-weight:600;width:24%}
+    .mxtbl td.g{width:12%;color:var(--muted)}
+    .mxtbl tr{break-inside:avoid}
+    .mxtbl .gh th{padding-top:8px;font-size:10.5px;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);border-bottom:1px solid var(--line)}
+    html[dir=rtl] .mxtbl thead th,html[dir=rtl] .mxtbl .gh th{text-transform:none;letter-spacing:0}
   }
   /* REVISION GATE: remove this block at public launch */
   .revgate{position:sticky;top:0;z-index:200;background:var(--ink);color:#E8D48B;text-align:center;
@@ -702,12 +768,14 @@
   </header>
 
   <!-- Tabs (finding T26): a tablist whose tabs name the panel they show (aria-controls); the selected tab alone is in
-       the Tab order, and the arrow keys, Home and End move between the tabs. -->
+       the Tab order, and the arrow keys, Home and End move between the tabs. The fourth tab, the matrix, follows the
+       same pattern; on phones the four tabs sit in two rows of two. -->
   <div class="controls" id="explorer" tabindex="-1">
     <div class="tabs" role="tablist">
       <button type="button" class="tab" role="tab" data-mode="cancer" aria-selected="true" aria-controls="layout" tabindex="0" id="tabCancer">Start with a cancer</button>
       <button type="button" class="tab" role="tab" data-mode="exposure" aria-selected="false" aria-controls="layout" tabindex="-1" id="tabExposure">Start with an exposure</button>
       <button type="button" class="tab" role="tab" data-mode="map" aria-selected="false" aria-controls="mapWrap" tabindex="-1" id="tabMap">Explore the network</button>
+      <button type="button" class="tab" role="tab" data-mode="matrix" aria-selected="false" aria-controls="matrixWrap" tabindex="-1" id="tabMatrix">See the matrix</button>
     </div>
   </div>
   <div id="nfLive" role="status"><div class="notfound" id="notFound" hidden><span class="nf-t" id="nfText"></span><button type="button" class="nf-x" id="nfClose" aria-label="Dismiss">×</button></div></div>
@@ -757,6 +825,39 @@
       <span><span class="sw" style="display:inline-block;width:18px;border-top:3px dashed var(--suspected)"></span><span class="txt" id="lgSus">Suspected (dashed line)</span></span>
     </div>
     <div class="maphint" id="maphint">Tap a circle or square to see details and highlight its links · drag to move · scroll or ＋/－ to zoom · bigger shape = more rows in IARC's table. Size shows how much has been studied. It says nothing about how harmful something is.</div>
+  </div>
+
+  <!-- matrix (the idea of design demo 35): the same exposures, cancer types and links as the network, one square per
+       pair. The sort buttons reorder the rows and the columns; the readout names the pair under the pointer (or the pair
+       chosen by a tap or the arrow keys) with buttons that open its two entries. The canvas is hidden from screen
+       readers: the frame is a keyboard widget that announces each square (#mxLive), and #mxTable lists every link as
+       text (visually hidden; printed in place of the canvas). The script writes every text in the reader's language. -->
+  <div class="panel" id="matrixWrap" role="tabpanel" aria-labelledby="tabMatrix">
+    <div class="mxhead">
+      <p class="mxlead" id="mxLead">Each row is an exposure and each column a cancer type. A filled square is an established link, an outlined square a suspected link. An empty square means IARC lists no link for that pair, not that the exposure is safe.</p>
+      <div class="mxbar" id="mxBar">
+        <div class="mxsort" role="group" aria-labelledby="mxRowsLbl"><span class="mlabel" id="mxRowsLbl">Exposures</span>
+          <button type="button" class="chip mxs" data-axis="r" data-sort="az" aria-pressed="false">A to Z</button>
+          <button type="button" class="chip mxs" data-axis="r" data-sort="cat" aria-pressed="false">By category</button>
+          <button type="button" class="chip mxs" data-axis="r" data-sort="group" aria-pressed="true">By IARC group</button>
+          <button type="button" class="chip mxs" data-axis="r" data-sort="links" aria-pressed="false">By number of links</button>
+        </div>
+        <div class="mxsort" role="group" aria-labelledby="mxColsLbl"><span class="mlabel" id="mxColsLbl">Cancer types</span>
+          <button type="button" class="chip mxs" data-axis="c" data-sort="organ" aria-pressed="true">By organ system</button>
+          <button type="button" class="chip mxs" data-axis="c" data-sort="az" aria-pressed="false">A to Z</button>
+          <button type="button" class="chip mxs" data-axis="c" data-sort="links" aria-pressed="false">By number of links</button>
+        </div>
+      </div>
+    </div>
+    <div class="mxread" id="mxRead"></div>
+    <div class="mxframe" id="mxFrame" tabindex="0" role="application" aria-label="Matrix of the exposures and cancer types" aria-describedby="mxSum mxKeys">
+      <div class="mxinner" id="mxInner"><canvas id="mxCv" aria-hidden="true"></canvas></div>
+    </div>
+    <p class="sr-only" id="mxSum"></p>
+    <p class="sr-only" id="mxKeys">Arrow keys move between squares and names, Enter opens the entry and Escape clears the choice. The table after the matrix lists the same links as text.</p>
+    <div class="sr-only" id="mxLive" aria-live="polite"></div>
+    <div class="maplegend mxlegend" id="mxLegend"></div>
+    <div class="sr-only" id="mxTable"></div>
   </div>
 
 </main>
@@ -956,7 +1057,26 @@ en:{name:'English',native:'English',flag:'🇬🇧',dir:'ltr',
   occHead: "Workplace exposures",
   pinGo: "See the entry →",
   pinLungSrc: "IARC estimate: tobacco smoking caused more than 67% of lung cancer deaths worldwide in 2019 (press release of 3 October 2024).",
-  pinLung: "Smoking causes most lung cancers."},
+  pinLung: "Smoking causes most lung cancers.",
+  /* the matrix tab (design demo 35) */
+  tabMatrix: "See the matrix",
+  mxLead: "Each row is an exposure and each column a cancer type. A filled square is an established link, an outlined square a suspected link. An empty square means IARC lists no link for that pair, not that the exposure is safe.",
+  mxSortAZ: "A to Z",
+  mxSortCat: "By category",
+  mxSortGroup: "By IARC group",
+  mxSortLinks: "By number of links",
+  mxSortOrgan: "By organ system",
+  mxNoLink: "No link listed",
+  mxLegendEst: "Established link (filled square)",
+  mxLegendSus: "Suspected link (outlined square)",
+  mxHint: "Point at a square to read the pair and click it to open the exposure, or click a name to open its entry.",
+  mxHintTouch: "Tap a square to read the pair and tap it again to open the exposure, or tap a name to open its entry. The matrix scrolls inside its frame.",
+  mxAria: "Matrix of the exposures and cancer types",
+  mxKeys: "Arrow keys move between squares and names, Enter opens the entry and Escape clears the choice. The table after the matrix lists the same links as text.",
+  mxSummary: "{ne} exposures in rows and {nc} cancer types in columns, with {nl} links: {est} established and {sus} suspected.",
+  mxThExp: "Exposure",
+  mxCaption: "The links of each exposure, in the order of the matrix",
+  mxPairSr: "{e} and {c}: {ev}"},
 zh:{name:'Chinese',native:'中文',flag:'🇨🇳',dir:'ltr',
   title:"什么与癌症有关？",
   lede:"这是一张互动地图，展示科学家已发现与各种癌症有关的暴露因素，由万汶鑫根据《IARC 致癌物专论》的分类整理而成。地图收录了 IARC 在 2026 年 5 月列出的 185 种因素，每一种都至少有人群研究的有限证据，显示它与某种具体的癌症有关。搜索还能找到 IARC 评估过、但没有指出具体癌症部位的另外 874 种因素，例如咖啡（3 类）。",
@@ -1116,7 +1236,26 @@ zh:{name:'Chinese',native:'中文',flag:'🇨🇳',dir:'ltr',
   occHead: "职业暴露",
   pinGo: "查看条目 →",
   pinLungSrc: "IARC 估计：2019 年全球超过 67% 的肺癌死亡由吸烟导致（2024 年 10 月 3 日新闻稿）。",
-  pinLung: "大多数肺癌由吸烟导致。"},
+  pinLung: "大多数肺癌由吸烟导致。",
+  /* the matrix tab (design demo 35) */
+  tabMatrix: "查看矩阵",
+  mxLead: "每一行是一种暴露因素，每一列是一种癌症类型。实心方块表示已确认关联，空心方块表示疑似关联。空白方格表示 IARC 未列出这一组合的关联，并不代表该暴露因素是安全的。",
+  mxSortAZ: "按名称",
+  mxSortCat: "按类别",
+  mxSortGroup: "按 IARC 分类",
+  mxSortLinks: "按关联数量",
+  mxSortOrgan: "按器官系统",
+  mxNoLink: "未列出关联",
+  mxLegendEst: "已确认关联（实心方块）",
+  mxLegendSus: "疑似关联（空心方块）",
+  mxHint: "将鼠标指向方块可查看这一组合，点击方块可打开该暴露因素；点击名称可打开相应条目。",
+  mxHintTouch: "点击方块可查看这一组合，再点一次可打开该暴露因素；点击名称可打开相应条目。矩阵可在框内滚动。",
+  mxAria: "暴露因素与癌症类型矩阵",
+  mxKeys: "用方向键在方块和名称之间移动，按 Enter 键打开条目，按 Esc 键取消选择。矩阵后面的表格以文字形式列出相同的关联。",
+  mxSummary: "行为 {ne} 项暴露因素，列为 {nc} 种癌症类型，共 {nl} 项关联：已确认 {est} 项，疑似 {sus} 项。",
+  mxThExp: "暴露因素",
+  mxCaption: "各暴露因素的关联（按矩阵中的顺序）",
+  mxPairSr: "{e}与{c}：{ev}"},
 fr:{name:'French',native:'Français',flag:'🇫🇷',dir:'ltr',
   title:"Qu’est-ce qui est lié au cancer ?",
   lede:"Une carte interactive des expositions que les scientifiques ont liées à différents cancers, conçue par Wenxin Wan à partir des classifications des Monographies du CIRC. Elle couvre les 185 agents pour lesquels il existe au moins des preuves limitées chez l’être humain pour un cancer précis, tels que le CIRC les a listés en mai 2026. La recherche trouve aussi les 874 autres agents que le CIRC a évalués sans désigner de localisation de cancer, comme le café (groupe 3).",
@@ -1275,7 +1414,26 @@ fr:{name:'French',native:'Français',flag:'🇫🇷',dir:'ltr',
   occHead: "Expositions professionnelles",
   pinGo: "Voir la fiche →",
   pinLungSrc: "Estimation du CIRC : le tabagisme a causé plus de 67 % des décès par cancer du poumon dans le monde en 2019 (communiqué de presse du 3 octobre 2024).",
-  pinLung: "Le tabagisme cause la plupart des cancers du poumon."},
+  pinLung: "Le tabagisme cause la plupart des cancers du poumon.",
+  /* the matrix tab (design demo 35) */
+  tabMatrix: "Voir la matrice",
+  mxLead: "Chaque ligne est une exposition, chaque colonne un type de cancer. Un carré plein indique un lien établi, un carré creux un lien suspecté. Une case vide signifie que le CIRC ne recense aucun lien pour cette paire, et non que l’exposition est sans danger.",
+  mxSortAZ: "De A à Z",
+  mxSortCat: "Par catégorie",
+  mxSortGroup: "Par groupe du CIRC",
+  mxSortLinks: "Par nombre de liens",
+  mxSortOrgan: "Par organe",
+  mxNoLink: "Aucun lien recensé",
+  mxLegendEst: "Lien établi (carré plein)",
+  mxLegendSus: "Lien suspecté (carré creux)",
+  mxHint: "Pointez un carré pour lire la paire et cliquez dessus pour ouvrir l’exposition, ou cliquez sur un nom pour ouvrir sa fiche.",
+  mxHintTouch: "Touchez un carré pour lire la paire et touchez-le de nouveau pour ouvrir l’exposition, ou touchez un nom pour ouvrir sa fiche. La matrice défile dans son cadre.",
+  mxAria: "Matrice des expositions et des types de cancers",
+  mxKeys: "Les flèches passent d’un carré ou d’un nom à l’autre, Entrée ouvre la fiche et Échap annule le choix. Le tableau qui suit la matrice donne les mêmes liens sous forme de texte.",
+  mxSummary: "{ne} expositions en lignes et {nc} types de cancers en colonnes, avec {nl} liens : {est} établis et {sus} suspectés.",
+  mxThExp: "Exposition",
+  mxCaption: "Les liens de chaque exposition, dans l’ordre de la matrice",
+  mxPairSr: "{e} et {c} : {ev}"},
 es:{name:'Spanish',native:'Español',flag:'🇪🇸',dir:'ltr',
   title:"¿Qué está relacionado con el cáncer?",
   lede:"Un mapa interactivo de las exposiciones que los científicos han vinculado a distintos tipos de cáncer, elaborado por Wenxin Wan a partir de las clasificaciones de las Monografías del CIIC. Recoge los 185 agentes con al menos evidencia limitada en humanos para un cáncer concreto, tal como el CIIC los publicó en mayo de 2026. La búsqueda también encuentra los otros 874 agentes que el CIIC ha evaluado sin indicar una localización del cáncer, como el café (Grupo 3).",
@@ -1436,7 +1594,26 @@ es:{name:'Spanish',native:'Español',flag:'🇪🇸',dir:'ltr',
   occHead: "Exposiciones laborales",
   pinGo: "Ver la ficha →",
   pinLungSrc: "Estimación del CIIC: el tabaquismo causó más del 67 % de las muertes por cáncer de pulmón en el mundo en 2019 (comunicado de prensa del 3 de octubre de 2024).",
-  pinLung: "El tabaquismo causa la mayoría de los cánceres de pulmón."},
+  pinLung: "El tabaquismo causa la mayoría de los cánceres de pulmón.",
+  /* the matrix tab (design demo 35) */
+  tabMatrix: "Ver la matriz",
+  mxLead: "Cada fila es una exposición y cada columna, un tipo de cáncer. Un cuadrado relleno indica un vínculo establecido; un cuadrado hueco, un vínculo sospechado. Una casilla vacía significa que el CIIC no recoge ningún vínculo para esa pareja, no que la exposición sea segura.",
+  mxSortAZ: "De la A a la Z",
+  mxSortCat: "Por categoría",
+  mxSortGroup: "Por grupo del CIIC",
+  mxSortLinks: "Por número de vínculos",
+  mxSortOrgan: "Por órgano",
+  mxNoLink: "Ningún vínculo recogido",
+  mxLegendEst: "Vínculo establecido (cuadrado relleno)",
+  mxLegendSus: "Vínculo sospechado (cuadrado hueco)",
+  mxHint: "Señala un cuadrado para leer la pareja y haz clic en él para abrir la exposición, o haz clic en un nombre para abrir su ficha.",
+  mxHintTouch: "Toca un cuadrado para leer la pareja y tócalo otra vez para abrir la exposición, o toca un nombre para abrir su ficha. La matriz se desplaza dentro de su marco.",
+  mxAria: "Matriz de las exposiciones y los tipos de cáncer",
+  mxKeys: "Las flechas te llevan de un cuadrado o un nombre a otro, Intro abre la ficha y Esc anula la selección. La tabla que sigue a la matriz recoge los mismos vínculos en forma de texto.",
+  mxSummary: "{ne} exposiciones en filas y {nc} tipos de cáncer en columnas, con {nl} vínculos: {est} establecidos y {sus} sospechados.",
+  mxThExp: "Exposición",
+  mxCaption: "Los vínculos de cada exposición, en el orden de la matriz",
+  mxPairSr: "{e} y {c}: {ev}"},
 ru:{name:'Russian',native:'Русский',flag:'🇷🇺',dir:'ltr',
   title:"Что связано с раком?",
   lede:"Интерактивная карта факторов воздействия, которые учёные связали с разными видами рака. Её составил Вэньсинь Вань по классификациям Монографий МАИР. В неё вошли 185 факторов, для которых есть хотя бы ограниченные доказательства связи с конкретным видом рака у людей, по списку МАИР на май 2026 года. Поиск находит и ещё 874 фактора, которые МАИР оценило, не назвав локализацию рака, например кофе (группа 3).",
@@ -1597,7 +1774,26 @@ ru:{name:'Russian',native:'Русский',flag:'🇷🇺',dir:'ltr',
   occHead: "Профессиональные факторы",
   pinGo: "Открыть запись →",
   pinLungSrc: "Оценка МАИР: в 2019 году курение табака стало причиной более 67 % смертей от рака лёгкого в мире (пресс-релиз от 3 октября 2024 года).",
-  pinLung: "Большинство случаев рака лёгкого вызвано курением."},
+  pinLung: "Большинство случаев рака лёгкого вызвано курением.",
+  /* the matrix tab (design demo 35) */
+  tabMatrix: "Посмотреть матрицу",
+  mxLead: "Каждая строка — фактор, каждый столбец — вид рака. Закрашенный квадрат означает установленную связь, контурный — предполагаемую. Пустая клетка значит, что МАИР не указывает связи для этой пары, а не что фактор безопасен.",
+  mxSortAZ: "По алфавиту",
+  mxSortCat: "По категории",
+  mxSortGroup: "По группе МАИР",
+  mxSortLinks: "По числу связей",
+  mxSortOrgan: "По системе органов",
+  mxNoLink: "Связь не указана",
+  mxLegendEst: "Установленная связь (закрашенный квадрат)",
+  mxLegendSus: "Предполагаемая связь (контурный квадрат)",
+  mxHint: "Наведите указатель на квадрат, чтобы увидеть пару, и щёлкните по нему, чтобы открыть фактор, или щёлкните по названию, чтобы открыть его запись.",
+  mxHintTouch: "Нажмите на квадрат, чтобы увидеть пару, и нажмите ещё раз, чтобы открыть фактор, или нажмите на название, чтобы открыть его запись. Матрица прокручивается внутри рамки.",
+  mxAria: "Матрица факторов и видов рака",
+  mxKeys: "Клавиши со стрелками перемещают между квадратами и названиями, Enter открывает запись, Esc снимает выбор. В таблице после матрицы те же связи приведены текстом.",
+  mxSummary: "Факторы в строках: {ne}; виды рака в столбцах: {nc}; связи: {nl}, из них установленные: {est}, предполагаемые: {sus}.",
+  mxThExp: "Фактор",
+  mxCaption: "Связи каждого фактора в порядке матрицы",
+  mxPairSr: "{e} и {c}: {ev}"},
 pt:{name:'Portuguese',native:'Português',flag:'🇧🇷',dir:'ltr',
   title:"O que está associado ao câncer?",
   lede:"Um mapa interativo das exposições que cientistas associaram a diferentes tipos de câncer, feito por Wenxin Wan a partir das classificações das Monografias da IARC. Ele reúne os 185 agentes com pelo menos evidência limitada em pessoas para um câncer específico, como a IARC os listou em maio de 2026. A busca também encontra os outros 874 agentes que a IARC avaliou sem indicar uma localização de câncer, como o café (Grupo 3).",
@@ -1756,7 +1952,26 @@ pt:{name:'Portuguese',native:'Português',flag:'🇧🇷',dir:'ltr',
   occHead: "Exposições no trabalho",
   pinGo: "Ver o item →",
   pinLungSrc: "Estimativa da IARC: o tabagismo causou mais de 67% das mortes por câncer de pulmão no mundo em 2019 (comunicado de imprensa de 3 de outubro de 2024).",
-  pinLung: "O tabagismo causa a maioria dos casos de câncer de pulmão."},
+  pinLung: "O tabagismo causa a maioria dos casos de câncer de pulmão.",
+  /* the matrix tab (design demo 35) */
+  tabMatrix: "Ver a matriz",
+  mxLead: "Cada linha é uma exposição e cada coluna, um tipo de câncer. Um quadrado preenchido indica uma associação estabelecida; um quadrado vazado, uma associação suspeita. Uma casa em branco significa que a IARC não lista associação para esse par, e não que a exposição seja segura.",
+  mxSortAZ: "De A a Z",
+  mxSortCat: "Por categoria",
+  mxSortGroup: "Por grupo da IARC",
+  mxSortLinks: "Por número de associações",
+  mxSortOrgan: "Por órgão",
+  mxNoLink: "Nenhuma associação listada",
+  mxLegendEst: "Associação estabelecida (quadrado preenchido)",
+  mxLegendSus: "Associação suspeita (quadrado vazado)",
+  mxHint: "Aponte para um quadrado para ler o par e clique nele para abrir a exposição, ou clique em um nome para abrir o item.",
+  mxHintTouch: "Toque em um quadrado para ler o par e toque de novo para abrir a exposição, ou toque em um nome para abrir o item. A matriz rola dentro do quadro.",
+  mxAria: "Matriz das exposições e dos tipos de câncer",
+  mxKeys: "As setas levam de um quadrado ou nome a outro, Enter abre o item e Esc desfaz a escolha. A tabela depois da matriz traz as mesmas associações em forma de texto.",
+  mxSummary: "{ne} exposições nas linhas e {nc} tipos de câncer nas colunas, com {nl} associações: {est} estabelecidas e {sus} suspeitas.",
+  mxThExp: "Exposição",
+  mxCaption: "As associações de cada exposição, na ordem da matriz",
+  mxPairSr: "{e} e {c}: {ev}"},
 ar:{name:'Arabic',native:'العربية',flag:'🇸🇦',dir:'rtl',
   title:"ما الذي يرتبط بالسرطان؟",
   lede:"خريطة تفاعلية لعوامل التعرض التي ربطها العلماء بأنواع مختلفة من السرطان، أعدّها Wenxin Wan استناداً إلى تصنيفات دراسات الوكالة الدولية لبحوث السرطان (IARC Monographs). تضم الخريطة 185 عاملاً توجد عن كل منها أدلة محدودة على الأقل لدى البشر على ارتباطه بنوع محدد من السرطان، كما أدرجتها الوكالة في مايو 2026. ويجد البحث أيضاً 874 عاملاً آخر قيّمتها الوكالة دون تحديد موضع للسرطان، مثل القهوة (المجموعة 3).",
@@ -1915,7 +2130,26 @@ ar:{name:'Arabic',native:'العربية',flag:'🇸🇦',dir:'rtl',
   occHead: "التعرضات في العمل",
   pinGo: "عرض المدخل ←",
   pinLungSrc: "تقدير الوكالة الدولية لبحوث السرطان: تسبّب تدخين التبغ في أكثر من 67% من وفيات سرطان الرئة في العالم عام 2019 (بيان صحفي بتاريخ 3 أكتوبر 2024، بالإنجليزية).",
-  pinLung: "التدخين هو سبب معظم حالات سرطان الرئة."},
+  pinLung: "التدخين هو سبب معظم حالات سرطان الرئة.",
+  /* the matrix tab (design demo 35) */
+  tabMatrix: "اعرض المصفوفة",
+  mxLead: "كل صف عامل تعرض، وكل عمود نوع من السرطان. المربع المملوء يعني ارتباطاً مؤكَّداً، والمربع المفرَّغ ارتباطاً مشتبهاً به. أما الخانة الفارغة فتعني أن الوكالة لا تذكر ارتباطاً لهذا الزوج، لا أن العامل آمن.",
+  mxSortAZ: "أبجدياً",
+  mxSortCat: "حسب الفئة",
+  mxSortGroup: "حسب مجموعة الوكالة",
+  mxSortLinks: "حسب عدد الارتباطات",
+  mxSortOrgan: "حسب جهاز الجسم",
+  mxNoLink: "لا يُذكر ارتباط",
+  mxLegendEst: "ارتباط مؤكَّد (مربع مملوء)",
+  mxLegendSus: "ارتباط مشتبه به (مربع مفرَّغ)",
+  mxHint: "أشر إلى مربع لقراءة الزوج، وانقر عليه لفتح عامل التعرض، أو انقر على اسم لفتح مدخله.",
+  mxHintTouch: "انقر على مربع لقراءة الزوج ثم انقر عليه مرة أخرى لفتح عامل التعرض، أو انقر على اسم لفتح مدخله. تتحرك المصفوفة داخل إطارها.",
+  mxAria: "مصفوفة عوامل التعرض وأنواع السرطان",
+  mxKeys: "تنقّل بمفاتيح الأسهم بين المربعات والأسماء، واضغط Enter لفتح المدخل وEsc لإلغاء الاختيار. ويعرض الجدول الذي يلي المصفوفة الارتباطات نفسها في صورة نص.",
+  mxSummary: "عوامل التعرض في الصفوف: {ne} · أنواع السرطان في الأعمدة: {nc} · الارتباطات: {nl}، منها المؤكَّدة: {est} والمشتبه بها: {sus}.",
+  mxThExp: "عامل التعرض",
+  mxCaption: "ارتباطات كل عامل تعرض، بترتيب المصفوفة",
+  mxPairSr: "{e} و{c}: {ev}"},
 de:{name:'German',native:'Deutsch',flag:'🇩🇪',dir:'ltr',
   title:"Was hängt mit Krebs zusammen?",
   lede:"Eine interaktive Karte der Expositionen, die Forschende mit verschiedenen Krebsarten in Verbindung gebracht haben, erstellt von Wenxin Wan auf Grundlage der Einstufungen der IARC-Monographien. Die Karte umfasst die 185 Faktoren, für die es nach der Liste der IARC vom Mai 2026 beim Menschen mindestens begrenzte Belege für eine bestimmte Krebsart gibt. Die Suche findet außerdem 874 weitere Faktoren, die die IARC bewertet hat, ohne eine Krebsart zu nennen, etwa Kaffee (Gruppe 3).",
@@ -2074,7 +2308,26 @@ de:{name:'German',native:'Deutsch',flag:'🇩🇪',dir:'ltr',
   occHead: "Expositionen am Arbeitsplatz",
   pinGo: "Zum Eintrag →",
   pinLungSrc: "Schätzung der IARC: Tabakrauchen verursachte 2019 weltweit mehr als 67 % der Todesfälle durch Lungenkrebs (Pressemitteilung vom 3. Oktober 2024).",
-  pinLung: "Rauchen verursacht die meisten Lungenkrebserkrankungen."},
+  pinLung: "Rauchen verursacht die meisten Lungenkrebserkrankungen.",
+  /* the matrix tab (design demo 35) */
+  tabMatrix: "Matrix ansehen",
+  mxLead: "Jede Zeile ist eine Exposition, jede Spalte eine Krebsart. Ein gefülltes Quadrat steht für einen gesicherten Zusammenhang, ein umrandetes für einen vermuteten. Ein leeres Feld bedeutet, dass die IARC für dieses Paar keinen Zusammenhang aufführt – nicht, dass die Exposition unbedenklich ist.",
+  mxSortAZ: "Von A bis Z",
+  mxSortCat: "Nach Kategorie",
+  mxSortGroup: "Nach IARC-Gruppe",
+  mxSortLinks: "Nach Zahl der Zusammenhänge",
+  mxSortOrgan: "Nach Organsystem",
+  mxNoLink: "Kein Zusammenhang aufgeführt",
+  mxLegendEst: "Gesicherter Zusammenhang (gefülltes Quadrat)",
+  mxLegendSus: "Vermuteter Zusammenhang (umrandetes Quadrat)",
+  mxHint: "Zeigen Sie auf ein Quadrat, um das Paar zu lesen, und klicken Sie darauf, um die Exposition zu öffnen, oder klicken Sie auf einen Namen, um seinen Eintrag zu öffnen.",
+  mxHintTouch: "Tippen Sie auf ein Quadrat, um das Paar zu lesen, und ein zweites Mal, um die Exposition zu öffnen, oder tippen Sie auf einen Namen, um seinen Eintrag zu öffnen. Die Matrix scrollt in ihrem Rahmen.",
+  mxAria: "Matrix der Expositionen und Krebsarten",
+  mxKeys: "Mit den Pfeiltasten wechseln Sie zwischen Quadraten und Namen, die Eingabetaste öffnet den Eintrag, Esc hebt die Auswahl auf. Die Tabelle nach der Matrix nennt dieselben Zusammenhänge als Text.",
+  mxSummary: "{ne} Expositionen in Zeilen und {nc} Krebsarten in Spalten, mit {nl} Zusammenhängen: {est} gesichert und {sus} vermutet.",
+  mxThExp: "Exposition",
+  mxCaption: "Die Zusammenhänge jeder Exposition, in der Reihenfolge der Matrix",
+  mxPairSr: "{e} und {c}: {ev}"},
 ja:{name:'Japanese',native:'日本語',flag:'🇯🇵',dir:'ltr',
   title:"がんと関連するもの",
   lede:"科学者がさまざまながんとの関連を示してきた曝露要因をまとめた、インタラクティブなマップです。Wenxin WanがIARCモノグラフの分類をもとに作成しました。IARCが2026年5月に一覧にした、特定のがんについて人での証拠が少なくとも限定的にある185の要因を扱っています。検索では、IARCが評価したものの、がんの部位を示していないほかの874の要因も見つかります。たとえばコーヒー（グループ3）です。",
@@ -2236,7 +2489,26 @@ ja:{name:'Japanese',native:'日本語',flag:'🇯🇵',dir:'ltr',
   occHead: "職業性曝露",
   pinGo: "項目を見る →",
   pinLungSrc: "IARCの推計：2019年、世界の肺がん死亡の67%超は喫煙によるものでした（2024年10月3日のプレスリリース）。",
-  pinLung: "肺がんの大半は喫煙が原因です。"},
+  pinLung: "肺がんの大半は喫煙が原因です。",
+  /* the matrix tab (design demo 35) */
+  tabMatrix: "マトリックスで見る",
+  mxLead: "行は曝露要因、列はがんの種類です。塗りつぶした四角は確立された関連、枠だけの四角は疑われる関連を示します。空いているマスは、IARCがその組み合わせに関連を挙げていないという意味で、その要因が安全だという意味ではありません。",
+  mxSortAZ: "名前順",
+  mxSortCat: "カテゴリー別",
+  mxSortGroup: "IARCのグループ別",
+  mxSortLinks: "関連の多い順",
+  mxSortOrgan: "臓器系別",
+  mxNoLink: "関連の記載なし",
+  mxLegendEst: "確立された関連（塗りつぶした四角）",
+  mxLegendSus: "疑われる関連（枠だけの四角）",
+  mxHint: "四角にポインターを合わせると組み合わせが表示され、クリックするとその曝露要因が開きます。名前をクリックすると、その項目が開きます。",
+  mxHintTouch: "四角をタップすると組み合わせが表示され、もう一度タップするとその曝露要因が開きます。名前をタップすると、その項目が開きます。マトリックスは枠の中でスクロールします。",
+  mxAria: "曝露要因とがんの種類のマトリックス",
+  mxKeys: "矢印キーで四角と名前の間を移動し、Enterキーで項目を開き、Escキーで選択を解除します。マトリックスの後の表に、同じ関連を文字で載せています。",
+  mxSummary: "行に曝露要因{ne}件、列にがん{nc}種類、関連{nl}件（確立{est}件、疑い{sus}件）。",
+  mxThExp: "曝露要因",
+  mxCaption: "各曝露要因の関連（マトリックスと同じ順）",
+  mxPairSr: "{e}と{c}：{ev}"},
 it:{name:'Italian',native:'Italiano',flag:'🇮🇹',dir:'ltr',
   title:"Cosa è collegato al cancro?",
   lede:"Una mappa interattiva delle esposizioni che gli scienziati hanno collegato a diversi tumori, realizzata da Wenxin Wan a partire dalle classificazioni delle Monografie IARC. Comprende i 185 agenti con prove almeno limitate nell'uomo per un tumore specifico, come li ha elencati la IARC a maggio 2026. La ricerca trova anche gli altri 874 agenti che la IARC ha valutato senza indicare una sede del tumore, come il caffè (Gruppo 3).",
@@ -2394,7 +2666,26 @@ it:{name:'Italian',native:'Italiano',flag:'🇮🇹',dir:'ltr',
   occHead: "Esposizioni sul lavoro",
   pinGo: "Vedi la voce →",
   pinLungSrc: "Stima della IARC: nel 2019 il fumo di tabacco ha causato più del 67% dei decessi per tumore del polmone nel mondo (comunicato stampa del 3 ottobre 2024).",
-  pinLung: "Il fumo causa la maggior parte dei tumori del polmone."}
+  pinLung: "Il fumo causa la maggior parte dei tumori del polmone.",
+  /* the matrix tab (design demo 35) */
+  tabMatrix: "Vedi la matrice",
+  mxLead: "Ogni riga è un'esposizione e ogni colonna un tipo di tumore. Un quadrato pieno indica un legame accertato, un quadrato con il solo bordo un legame sospetto. Una casella vuota significa che la IARC non elenca alcun legame per quella coppia, non che l'esposizione sia sicura.",
+  mxSortAZ: "Dalla A alla Z",
+  mxSortCat: "Per categoria",
+  mxSortGroup: "Per gruppo IARC",
+  mxSortLinks: "Per numero di legami",
+  mxSortOrgan: "Per apparato",
+  mxNoLink: "Nessun legame elencato",
+  mxLegendEst: "Legame accertato (quadrato pieno)",
+  mxLegendSus: "Legame sospetto (quadrato con il solo bordo)",
+  mxHint: "Punta un quadrato per leggere la coppia e cliccalo per aprire l'esposizione, oppure clicca un nome per aprire la sua voce.",
+  mxHintTouch: "Tocca un quadrato per leggere la coppia e toccalo di nuovo per aprire l'esposizione, oppure tocca un nome per aprire la sua voce. La matrice scorre dentro la sua cornice.",
+  mxAria: "Matrice delle esposizioni e dei tipi di tumore",
+  mxKeys: "Le frecce spostano tra quadrati e nomi, Invio apre la voce ed Esc annulla la scelta. La tabella dopo la matrice riporta gli stessi legami come testo.",
+  mxSummary: "{ne} esposizioni nelle righe e {nc} tipi di tumore nelle colonne, con {nl} legami: {est} accertati e {sus} sospetti.",
+  mxThExp: "Esposizione",
+  mxCaption: "I legami di ogni esposizione, nell'ordine della matrice",
+  mxPairSr: "{e} e {c}: {ev}"}
 };
 let T=LANGS.en;
 /* L(key): the current language's string, or the English one when the key is not translated yet */
@@ -2638,6 +2929,7 @@ function applyLang(lang){
   renderGate(lang);
   document.getElementById('nfClose').setAttribute('aria-label',L('dismiss'));
   renderNotFound();
+  mxApplyLang();
   setMode(mode,true);
   renderDetail();
   document.documentElement.classList.remove('lang-pending');
@@ -3089,7 +3381,7 @@ function renderQNotes(qf,total,xr){
   else if(qf&&!xr.length)h+=`<p class="qn-narrow qn-none">${_sub(L('noMatchAll'),{q:esc(query),nc:cancers.length,ne:exposures.length,nv:EVAL.length})}</p>`;
   if(el.innerHTML!==h)el.innerHTML=h;
   const j=document.getElementById('qnJump');
-  if(j)j.onclick=()=>{if(mode==='map'){setMode(_listMode);pushView();} document.body.classList.remove('detail-open'); placeResults(true,null,true);};
+  if(j)j.onclick=()=>{if(mode==='map'||mode==='matrix'){setMode(_listMode);pushView();} document.body.classList.remove('detail-open'); placeResults(true,null,true);};
   if(!pointers)return '';
   const d=document.createElement('div'); d.innerHTML=pointers;
   return Array.from(d.children).map(x=>x.textContent).join(' ');}
@@ -3311,7 +3603,7 @@ const _narrow=window.matchMedia('(max-width:840px)');
 /* the hint in the search box: on a phone the short one (searchShort), so that its examples show in the box */
 function setSearchHint(){qIn.placeholder=(_narrow.matches&&L('searchShort'))||L('searchAll');}
 try{_narrow.addEventListener('change',setSearchHint);}catch(err){}
-function panelOpen(){return mode!=='map'&&!!sel&&(document.body.classList.contains('detail-open')||!_narrow.matches);}
+function panelOpen(){return (mode==='cancer'||mode==='exposure')&&!!sel&&(document.body.classList.contains('detail-open')||!_narrow.matches);}
 function syncTitle(){
   let t=L('docTitle');
   if(panelOpen()){const o=sel.type==='cancer'?canById[sel.id]:expById[sel.id]; if(o)t=localName(o)+' · '+t;}
@@ -3326,8 +3618,10 @@ function copyBtn(){const t=esc(L('copyLink'));
 function pageBase(){return (location.origin&&location.origin!=='null')?location.origin+location.pathname:location.href.split('#')[0].split('?')[0];}
 /* The link to the view or to one entry, in the page's language: the path form in PATH_MODE, else the hash form */
 function deepLink(){
-  if(PATH_MODE)return location.origin+viewPath()+'?lang='+curLang+(mode==='map'?'#map':'');
+  if(PATH_MODE)return location.origin+viewPath()+'?lang='+curLang+viewTail();
   return pageBase()+'?lang='+curLang+viewHash();}
+/* the hash of a picture tab: #map for the network, #matrix for the matrix, nothing for the lists */
+function viewTail(){return mode==='map'?'#map':mode==='matrix'?'#matrix':'';}
 function entryUrl(t,o){
   if(PATH_MODE&&o.slug)return location.origin+'/cancer/'+(t==='cancer'?'c':'e')+'/'+o.slug+'?lang='+curLang;
   return pageBase()+'?lang='+curLang+'#'+t+'='+encodeURIComponent(o.id);}
@@ -3380,6 +3674,7 @@ function renderDetail(){
 }
 function select(type,id){sel={type,id}; hideNotFound();
   if(mode==='map'){focusNode(type,id);return;}
+  if(mode==='matrix')setMode(type,true);   /* an entry opened from the matrix opens in its list tab */
   buildPicker(); renderDetail(); document.body.classList.add('detail-open');
   const it=picker.querySelector('.item[aria-selected="true"]'); if(it)it.scrollIntoView({block:'nearest'});
   if(_narrow.matches)placePanel(false); /* below the sticky tab row, so the title and Back button stay visible */
@@ -3390,15 +3685,18 @@ function select(type,id){sel={type,id}; hideNotFound();
 /* ---------------- modes ---------------- */
 const layout=document.getElementById('layout'), mapWrap=document.getElementById('mapWrap');
 let _listMode='cancer';   // the list tab the search returns to when the reader types on the network tab
-function setMode(m,keepSel){mode=m; if(m!=='map')_listMode=m;
+/* the two picture tabs, the network (map) and the matrix, show no list and no panel */
+const isListMode=m=>m==='cancer'||m==='exposure';
+function setMode(m,keepSel){mode=m; if(isListMode(m))_listMode=m;
   if(!keepSel)document.body.classList.remove('detail-open');
   /* roving tabindex: only the selected tab is in the Tab order */
   document.querySelectorAll('.tab').forEach(t=>{const on=t.dataset.mode===m; t.setAttribute('aria-selected',on); t.tabIndex=on?0:-1;});
-  const isMap=m==='map';
-  layout.style.display=isMap?'none':'grid';
-  if(!isMap)layout.setAttribute('aria-labelledby',m==='exposure'?'tabExposure':'tabCancer');
+  const isMap=m==='map', isList=isListMode(m);
+  layout.style.display=isList?'grid':'none';
+  if(isList)layout.setAttribute('aria-labelledby',m==='exposure'?'tabExposure':'tabCancer');
   mapWrap.classList.toggle('on',isMap);
-  if(!isMap){buildPicker(); const tp=document.getElementById('tip'); if(tp)tp.style.display='none';}
+  mxShow(m==='matrix');
+  if(!isMap){ if(isList)buildPicker(); const tp=document.getElementById('tip'); if(tp)tp.style.display='none';}
   if(isMap){ ensureGraph(); requestAnimationFrame(()=>{resizeCanvas(); if(sel)focusNode(sel.type,sel.id);}); }
   syncTitle();
 }
@@ -3433,9 +3731,9 @@ function revealResults(){
   const need=pk.top+220-vh, room=box.top-top;
   if(need>0&&need<=room)window.scrollBy({top:need,behavior:reduceMotion()?'auto':'smooth'});}
 qIn.addEventListener('input',()=>{const had=!!query; setQuery(qIn.value); dropQueryRoute();
-  /* typing on the network tab brings back the list, where the results are; on a phone, typing while a panel is open
-     goes back from the panel to the list */
-  if(mode==='map'&&query){hideNotFound(); setMode(_listMode); pushView();}
+  /* typing on the network or matrix tab brings back the list, where the results are; on a phone, typing while a panel
+     is open goes back from the panel to the list */
+  if((mode==='map'||mode==='matrix')&&query){hideNotFound(); setMode(_listMode); pushView();}
   else{ if(query&&_narrow.matches&&document.body.classList.contains('detail-open')){document.body.classList.remove('detail-open'); pushView();}
     buildPicker();}
   if(!had&&query)requestAnimationFrame(revealResults);});
@@ -3658,21 +3956,436 @@ document.getElementById('btnFs').onclick=()=>setFs();
 document.addEventListener('fullscreenchange',()=>{if(!document.fullscreenElement&&mapWrap.classList.contains('fs')){mapWrap.classList.remove('fs');document.getElementById('btnFs').textContent=T.btnFs;}setTimeout(resizeCanvas,80);});
 document.addEventListener('keydown',e=>{if(e.key==='Escape'&&mapWrap.classList.contains('fs'))setFs(false);});
 
+/* ====================================================================
+   MATRIX (the idea of design demo 35)
+   ====================================================================
+   The same exposures, cancer types and links as the network: one row per exposure, one column per cancer type, a
+   filled square for an established link and an outlined square for a suspected one, in the colours of the key. One
+   canvas the size of the frame (#mxCv, sticky at the frame's top left) draws only what the frame shows; the names of
+   the rows (the gutter) and of the columns (the head) stay at the frame's edges while the squares scroll, so the page
+   itself never scrolls sideways. Like the network (finding T22), it asks for animation frames only while something
+   changes: a frame for a pointer move, a scroll, a resize or the language, and a short run of frames while a new
+   order slides into place (none with reduced motion). Right to left mirrors the drawing (names on the right, columns
+   running leftwards). The canvas is hidden from screen readers: the frame is a keyboard widget whose position is
+   announced in #mxLive, and #mxTable lists every link as text (it prints in place of the canvas).
+   Geometry, in CSS pixels of the canvas: gut = width of the names of the rows, head = height of the names of the
+   columns, PR and PC = the pitch of a row and of a column. Positions are content coordinates: a row's y and a column's
+   x from the start of the squares; MX.sx and MX.sy are the frame's scroll, sx counted from the start side. */
+const matrixWrap=document.getElementById('matrixWrap'), mxFrame=document.getElementById('mxFrame'),
+  mxInner=document.getElementById('mxInner'), mxCv=document.getElementById('mxCv'), mxCtx=mxCv.getContext('2d'),
+  mxRead=document.getElementById('mxRead'), mxLive=document.getElementById('mxLive');
+const MXC={grid:'#F0EFEA',card:'#FFFFFF',ink:HEX.ink,muted:'#55584F',faint:'#6B6E65',dim:'#B3B4AC',line:'#E2E1DA',
+  bracket:'#CBCAC2',est:HEX.est,sus:HEX.sus,g3:HEX.g3,band:'rgba(22,23,19,.07)',selBand:'rgba(22,23,19,.045)'};
+/* organ systems in the order of IARC's table of cancer sites (head to whole body, as in ICD-10) */
+const MX_ORGANS=['Lip, oral cavity & pharynx','Digestive organs','Respiratory & intrathoracic','Bone','Skin',
+  'Mesothelium, endothelium & soft tissue','Breast','Female genital organs','Male genital organs','Urinary tract',
+  'Eye, brain & CNS','Endocrine glands','Lymphoid & haematopoietic','Multiple / unspecified sites'];
+/* punctuation turned upright for the names of the columns in Chinese and Japanese, which stand in a vertical line */
+const MX_VERT={'（':'︵','）':'︶','(':'︵',')':'︶','「':'﹁','」':'﹂','、':'︑','，':'︐','。':'︒','ー':'︱','—':'︱','－':'︱',
+  '-':'︱','…':'︙','：':'︓',':':'︓','［':'﹇','］':'﹈','[':'﹇',']':'﹈','〔':'︹','〕':'︺'};
+const MX={built:false,rows:[],cols:[],rById:{},cById:{},cell:null,lk:null,rowLinks:[],nR:0,nC:0,est:0,sus:0,
+  sortR:'group',sortC:'organ',ro:[],co:[],hdrs:[],hdrsOld:[],cgs:[],cgsOld:[],rowsH:0,colsW:0,
+  g:null,dpr:1,fam:'',anim:null,raf:0,hov:null,pin:null,ptype:'mouse',last:null,sx:0,sy:0,saved:null,selKey:null,fit:new Map()};
+const mxOn=()=>matrixWrap.classList.contains('on');
+const mxRtl=()=>document.documentElement.dir==='rtl';
+const mxMQ=q=>{try{return window.matchMedia(q).matches;}catch(err){return false;}};
+const mxTouch=()=>mxMQ('(hover: none)');
+function mxBuild(){ if(MX.built)return; MX.built=true;
+  MX.rows=exposures.map((e,i)=>(MX.rById[e.id]={i,o:e,n:0,y:0,y0:0,y1:0,dl:0,rank:i}));
+  MX.cols=cancers.map((c,j)=>(MX.cById[c.id]={i:j,o:c,n:0,x:0,x0:0,x1:0,dl:0,rank:j}));
+  MX.nR=MX.rows.length; MX.nC=MX.cols.length;
+  MX.cell=new Uint8Array(MX.nR*MX.nC); MX.lk=new Array(MX.nR*MX.nC); MX.rowLinks=MX.rows.map(()=>[]);
+  links.forEach(l=>{const r=MX.rById[l.exposure], c=MX.cById[l.cancer]; if(!r||!c)return;
+    /* 1 established, 2 suspected, 3 a link whose exposure is in Group 3 (none today; drawn like a suspected one in grey) */
+    const v=isG3(l.group)?3:(l.evidence==='Sufficient'?1:2), k=r.i*MX.nC+c.i;
+    MX.cell[k]=v; MX.lk[k]=l; MX.rowLinks[r.i].push(c.i); r.n++; c.n++; if(v===1)MX.est++; else MX.sus++;});}
+/* ---- orders: groups of rows and of columns for the chosen sort; within a group, the most links first ---- */
+const mxCmpName=(a,b)=>localName(a.o).localeCompare(localName(b.o),curLang);
+const mxCmpN=(a,b)=>b.n-a.n||mxCmpName(a,b);
+const mxGrp=o=>o.group==='1'||o.group==='2A'||o.group==='2B'?o.group:'3';
+const mxBadge=g=>(T.badgeLabels&&T.badgeLabels[g])||LANGS.en.badgeLabels[g]||g;
+function mxGroupsR(){ const R=MX.rows;
+  if(MX.sortR==='az')return [{items:R.slice().sort(mxCmpName)}];
+  if(MX.sortR==='links')return [{items:R.slice().sort(mxCmpN)}];
+  if(MX.sortR==='cat')return [...new Set(R.map(d=>d.o.category))].sort((a,b)=>localCategory(a).localeCompare(localCategory(b),curLang))
+    .map(c=>({label:localCategory(c),items:R.filter(d=>d.o.category===c).sort(mxCmpN)}));
+  const gl=T.groupLabel||LANGS.en.groupLabel;
+  return ['1','2A','2B','3'].map(g=>({label:gl(g)+' · '+mxBadge(g),items:R.filter(d=>mxGrp(d.o)===g).sort(mxCmpN)})).filter(x=>x.items.length);}
+function mxGroupsC(){ const C=MX.cols;
+  if(MX.sortC==='az')return [{items:C.slice().sort(mxCmpName)}];
+  if(MX.sortC==='links')return [{items:C.slice().sort(mxCmpN)}];
+  const at=o=>{const i=MX_ORGANS.indexOf(o); return i<0?99:i;};
+  return [...new Set(C.map(d=>d.o.organ))].sort((a,b)=>at(a)-at(b)||a.localeCompare(b))
+    .map(o=>{const items=C.filter(d=>d.o.organ===o).sort(mxCmpN); return {label:localOrgan(items[0].o.organ_plain),items};});}
+/* target positions for the current geometry */
+function mxArrange(){ const g=MX.g, hdrs=[], ro=[], cgs=[], co=[]; let y=0, x=0;
+  mxGroupsR().forEach(gr=>{ if(gr.label!=null){hdrs.push({label:gr.label,n:gr.items.length,y}); y+=g.GH;}
+    gr.items.forEach(d=>{d.y1=y; d.rank=ro.length; ro.push(d); y+=g.PR;});});
+  mxGroupsC().forEach((gr,i)=>{ if(i)x+=g.GAP; const x0=x;
+    gr.items.forEach(d=>{d.x1=x; d.rank=co.length; co.push(d); x+=g.PC;});
+    if(gr.label!=null)cgs.push({label:gr.label,x0,x1:x});});
+  return {hdrs,ro,co,cgs,rowsH:y,colsW:x};}
+/* ---- geometry ---- */
+function mxGeom(){
+  const VW=mxFrame.clientWidth, VH=mxFrame.clientHeight; if(!VW||!VH)return null;
+  const coarse=mxMQ('(pointer: coarse)'), narrow=VW<600, GAP=5, pad=12;
+  const nGap=Math.max(0,new Set(cancers.map(c=>c.organ)).size-1);
+  const gut=narrow?Math.round(Math.max(112,Math.min(164,VW*.4))):Math.round(Math.max(170,Math.min(240,VW*.2)));
+  /* fingers get 18 px squares; a mouse gets squares that fill the width (11 to 16 px), the rows at least 13 px apart so
+     that their names stay legible */
+  const PC=coarse?18:Math.max(11,Math.min(16,Math.floor((VW-gut-pad-nGap*GAP)/MX.nC)));
+  const PR=coarse?18:Math.max(PC,13);
+  return {VW,VH,gut,counts:!narrow,head:narrow?124:Math.min(180,Math.max(150,Math.round(VH*.24))),PC,PR,GAP,pad,GH:PR+11,fs:PR>=16?12.5:11.5,coarse,narrow};}
+function mxSize(){ const g=MX.g, dpr=MX.dpr;
+  const A=MX.anim, rowsH=A?Math.max(A.oldH,MX.rowsH):MX.rowsH, colsW=A?Math.max(A.oldW,MX.colsW):MX.colsW;
+  mxInner.style.width=Math.max(g.VW,g.gut+colsW+g.pad)+'px';
+  mxInner.style.height=Math.max(g.VH,g.head+rowsH+g.pad)+'px';
+  mxCv.style.width=g.VW+'px'; mxCv.style.height=g.VH+'px';
+  const w=Math.round(g.VW*dpr), h=Math.round(g.VH*dpr);
+  if(mxCv.width!==w)mxCv.width=w; if(mxCv.height!==h)mxCv.height=h;}
+/* the frame's scroll, with sx counted from the start side (the frame itself is always left to right) */
+function mxReadScroll(){ const max=Math.max(0,mxFrame.scrollWidth-mxFrame.clientWidth), sl=mxFrame.scrollLeft;
+  MX.sx=mxRtl()?max-sl:sl; MX.sy=mxFrame.scrollTop;}
+function mxSetScroll(sx,sy){ const max=Math.max(0,mxFrame.scrollWidth-mxFrame.clientWidth);
+  sx=Math.max(0,Math.min(max,sx)); mxFrame.scrollLeft=mxRtl()?max-sx:sx; mxFrame.scrollTop=Math.max(0,sy); mxReadScroll();}
+/* the frame fills the screen below the sticky tab row and the readout (its height in CSS uses the small viewport
+   height, which does not change while a phone's address bar comes and goes) */
+function mxSyncHeight(){ const sub=Math.round(stickyBottom()+Math.max(46,parseFloat(getComputedStyle(mxRead).minHeight)||0)+14);
+  matrixWrap.style.setProperty('--mx-sub',sub+'px');
+  const s=mxFrame.style; s.height=''; s.height='clamp(320px,calc(100vh - '+sub+'px),1200px)'; s.height='clamp(320px,calc(100svh - '+sub+'px),1200px)';}
+function mxLayout(){ if(!mxOn())return; mxBuild();
+  const g=mxGeom(); if(!g)return;
+  MX.g=g; MX.dpr=window.devicePixelRatio||1; MX.fam=getComputedStyle(document.body).fontFamily; MX.fit.clear();
+  mxCv.dir=mxRtl()?'rtl':'ltr';
+  const a=mxArrange(); Object.assign(MX,a); MX.anim=null; MX.hdrsOld=[]; MX.cgsOld=[];
+  MX.rows.forEach(d=>{d.y=d.y0=d.y1;}); MX.cols.forEach(d=>{d.x=d.x0=d.x1;});
+  const sx=MX.sx, sy=MX.sy; mxSize(); mxSetScroll(sx,sy); mxKick();}
+let _mxQ=0;
+function mxQueueLayout(){ if(_mxQ||!mxOn())return; _mxQ=requestAnimationFrame(()=>{_mxQ=0; mxSyncHeight(); mxLayout();});}
+window.addEventListener('resize',mxQueueLayout);
+/* a change of the panel's width (not of its height, which the readout changes) lays the matrix out again */
+let _mxW=0;
+try{new ResizeObserver(es=>{const w=Math.round(es[0].contentRect.width); if(w!==_mxW){_mxW=w; mxQueueLayout();}}).observe(matrixWrap);}catch(err){}
+/* ---- drawing ---- */
+function mxKick(){ if(!MX.raf&&mxOn()&&!document.hidden)MX.raf=requestAnimationFrame(mxDraw);}
+document.addEventListener('visibilitychange',()=>{ if(!document.hidden)mxKick();});
+const mxEase=t=>t<=0?0:t>=1?1:(t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2);
+function mxStep(now){ const A=MX.anim; if(!A)return false;
+  MX.rows.forEach(d=>{d.y=d.y0+(d.y1-d.y0)*mxEase((now-A.t0-d.dl)/A.dur);});
+  MX.cols.forEach(d=>{d.x=d.x0+(d.x1-d.x0)*mxEase((now-A.t0-d.dl)/A.dur);});
+  A.k=mxEase(Math.min(1,(now-A.t0)/(A.end-A.t0)));
+  if(now<A.end)return true;
+  MX.anim=null; MX.hdrsOld=[]; MX.cgsOld=[];
+  MX.rows.forEach(d=>{d.y=d.y0=d.y1;}); MX.cols.forEach(d=>{d.x=d.x0=d.x1;});
+  mxSize(); if(MX.pin)mxEnsureVisible(MX.pin,true); return false;}
+/* a label cut to the width it has, with an ellipsis (cached per language and font) */
+function mxFit(txt,max,font){ const key=font+'|'+max+'|'+txt; let v=MX.fit.get(key); if(v!=null)return v;
+  const c=mxCtx; c.font=font; v=txt;
+  if(c.measureText(v).width>max){ const u=Array.from(txt); let n=u.length;
+    while(n>1&&c.measureText(u.slice(0,n).join('')+'…').width>max)n--;
+    v=u.slice(0,n).join('').replace(/[\s,;/(（·–-]+$/,'')+'…';}
+  MX.fit.set(key,v); return v;}
+function mxDraw(){ MX.raf=0; const g=MX.g; if(!mxOn()||!g)return;
+  const c=mxCtx, rtl=mxRtl(), now=performance.now(), busy=mxStep(now);
+  mxReadScroll();
+  const sx=MX.sx, sy=MX.sy, PR=g.PR, PC=g.PC, VW=g.VW, VH=g.VH, gut=g.gut, head=g.head, fam=MX.fam, nC=MX.nC;
+  const X=(x,w)=>rtl?VW-x-(w||0):x;            // a logical x (from the start side) to the canvas
+  const ry=d=>head+d.y-sy, cx=d=>gut+d.x-sx;  // the top of a row, the start edge of a column, on the canvas
+  c.setTransform(MX.dpr,0,0,MX.dpr,0,0); c.direction=rtl?'rtl':'ltr';
+  c.fillStyle=MXC.card; c.fillRect(0,0,VW,VH);
+  const vr=MX.ro.filter(d=>{const y=ry(d); return y>head-PR&&y<VH;});
+  const vc=MX.co.filter(d=>{const x=cx(d); return x>gut-PC&&x<VW;});
+  const act=MX.hov||MX.pin, aR=act&&act.r, aC=act&&act.c, zone=act&&act.zone;
+  const sR=sel&&sel.type==='exposure'?MX.rById[sel.id]:null, sC=sel&&sel.type==='cancer'?MX.cById[sel.id]:null;
+  const cellsW=VW-gut, cellsH=VH-head;
+  const s=Math.min(PR,PC)-(PC>=16?3:2), ox=(PC-s)/2, oy=(PR-s)/2;   // the square inside its slot
+  /* the squares */
+  c.save(); c.beginPath(); c.rect(X(gut,cellsW),head,cellsW,cellsH); c.clip();
+  if(sR){c.fillStyle=MXC.selBand; c.fillRect(X(gut,cellsW),ry(sR),cellsW,PR);}
+  if(sC){c.fillStyle=MXC.selBand; c.fillRect(X(cx(sC),PC),head,PC,cellsH);}
+  if(aR){c.fillStyle=MXC.band; c.fillRect(X(gut,cellsW),ry(aR),cellsW,PR);}
+  if(aC){c.fillStyle=MXC.band; c.fillRect(X(cx(aC),PC),head,PC,cellsH);}
+  c.fillStyle=MXC.grid; c.beginPath();
+  vr.forEach(r=>{const y=ry(r)+oy; vc.forEach(col=>{c.rect(X(cx(col)+ox,s),y,s,s);});});
+  c.fill();
+  const lw=s>=13?2:1.5;
+  vr.forEach(r=>{const y=ry(r)+oy;
+    MX.rowLinks[r.i].forEach(j=>{const col=MX.cols[j], x=cx(col)+ox; if(x<gut-PC||x>VW)return; const v=MX.cell[r.i*nC+j], px=X(x,s);
+      if(v===1){c.fillStyle=MXC.est; c.fillRect(px,y,s,s);}
+      else{c.fillStyle=MXC.card; c.fillRect(px,y,s,s); c.strokeStyle=v===3?MXC.g3:MXC.sus; c.lineWidth=lw; c.strokeRect(px+lw/2,y+lw/2,s-lw,s-lw);}});});
+  if(zone==='cell'){const x=X(cx(aC)+ox,s), y=ry(aR)+oy; c.strokeStyle=MXC.ink; c.lineWidth=1.5; c.strokeRect(x-1.75,y-1.75,s+3.5,s+3.5);}
+  c.restore();
+  /* the names of the rows, and the headings of the groups of rows */
+  c.save(); c.beginPath(); c.rect(X(0,gut),head,gut,cellsH); c.clip();
+  if(sR){c.fillStyle=MXC.selBand; c.fillRect(X(0,gut),ry(sR),gut,PR);}
+  if(aR){c.fillStyle=MXC.band; c.fillRect(X(0,gut),ry(aR),gut,PR);}
+  c.textBaseline='middle';
+  const fN=`${g.fs}px ${fam}`, fB=`600 ${g.fs}px ${fam}`, fC=`${g.fs-1.5}px ${fam}`, rad=Math.min(3.5,PR*.27);
+  /* while a new order slides into place, a name that travels fades out and back in, so that names crossing do not
+     pile up */
+  const flight=(d,a,b)=>{const A=MX.anim; if(!A||a===b)return 1; const k=Math.max(0,Math.min(1,(now-A.t0-d.dl)/A.dur)); return .12+.88*Math.abs(1-2*k);};
+  vr.forEach(r=>{const y=ry(r)+PR/2, on=r===aR||r===sR;
+    const dim=zone==='col'&&aC&&!MX.cell[r.i*nC+aC.i];
+    c.globalAlpha=flight(r,r.y0,r.y1);
+    const col=GRP_HEX[mxGrp(r.o)]||MXC.muted;
+    c.beginPath(); c.arc(X(10),y,rad,0,7);
+    if(r.o.basis_type==='stmt'){c.fillStyle=MXC.card; c.fill(); c.lineWidth=1.5; c.strokeStyle=col; c.stroke();} else {c.fillStyle=col; c.fill();}
+    /* the number of links of the row, beside the squares (left out on a phone, where the names need the room) */
+    let cw=-8; if(g.counts){c.font=fC; c.fillStyle=MXC.faint; c.textAlign=rtl?'left':'right';
+      const cnt=String(r.n); cw=c.measureText(cnt).width; c.fillText(cnt,X(gut-8),y);}
+    const f=on?fB:fN; c.font=f; c.fillStyle=dim?MXC.dim:MXC.ink; c.textAlign=rtl?'right':'left';
+    c.fillText(mxFit(localName(r.o),gut-20-cw-16,f),X(20),y); c.globalAlpha=1;});
+  c.restore();
+  const hk=MX.anim?MX.anim.k:1;
+  c.save(); c.beginPath(); c.rect(0,head,VW,cellsH); c.clip();
+  const fH=`700 ${g.fs-1}px ${fam}`;
+  const hdr=(h,alpha)=>{const y=head+h.y-sy; if(y<head-g.GH||y>VH||alpha<=0)return;
+    c.globalAlpha=alpha; c.fillStyle=MXC.card; c.fillRect(X(0,gut),y,gut,g.GH);
+    c.fillStyle=MXC.line; c.fillRect(0,y+g.GH-4,VW,1);
+    c.font=fH; c.fillStyle=MXC.faint; c.textAlign=rtl?'right':'left'; c.textBaseline='alphabetic';
+    const t=(rtl?h.label:h.label.toLocaleUpperCase(curLang))+' · '+h.n;
+    try{c.letterSpacing=rtl?'0px':'0.4px';}catch(err){}
+    c.fillText(t,X(10),y+g.GH-9); try{c.letterSpacing='0px';}catch(err){}
+    c.globalAlpha=1;};
+  const fadeR=MX.anim&&MX.anim.axis==='r', fadeC=MX.anim&&MX.anim.axis==='c';
+  MX.hdrsOld.forEach(h=>hdr(h,1-hk)); MX.hdrs.forEach(h=>hdr(h,fadeR?hk:1));
+  c.restore();
+  /* the names of the columns, standing upright above them, and the brackets of the organ systems */
+  c.save(); c.beginPath(); c.rect(X(gut,cellsW),0,cellsW,head); c.clip();
+  if(sC){c.fillStyle=MXC.selBand; c.fillRect(X(cx(sC),PC),0,PC,head);}
+  if(aC){c.fillStyle=MXC.band; c.fillRect(X(cx(aC),PC),0,PC,head);}
+  const br=(cg,alpha,hot)=>{ if(alpha<=0)return; const x0=gut+cg.x0-sx+1, x1=gut+cg.x1-sx-1; if(x1<gut||x0>VW)return;
+    c.globalAlpha=alpha; c.fillStyle=hot?MXC.ink:MXC.bracket; c.fillRect(X(x0,x1-x0),head-6,x1-x0,2); c.globalAlpha=1;};
+  const hotG=aC&&MX.cgs.find(cg=>aC.x1>=cg.x0&&aC.x1<cg.x1);
+  MX.cgsOld.forEach(cg=>br(cg,1-hk,false)); MX.cgs.forEach(cg=>br(cg,fadeC?hk:1,cg===hotG));
+  /* upright Chinese and Japanese names get a size a little below the column pitch, so that columns stay apart */
+  const cjk=isCJK(), cfs=cjk?Math.min(g.fs-.5,PC-2):g.fs-.5, maxL=head-20, fCn=`${cfs}px ${fam}`, fCb=`600 ${cfs}px ${fam}`;
+  vc.forEach(col=>{const on=col===aC||col===sC, dim=zone==='row'&&aR&&!MX.cell[aR.i*nC+col.i];
+    const f=on?fCb:fCn, mid=X(cx(col)+PC/2), base=head-12, txt=localName(col.o);
+    c.font=f; c.fillStyle=dim?MXC.dim:MXC.ink; c.globalAlpha=flight(col,col.x0,col.x1);
+    if(cjk){ const adv=cfs+1.5, n=Math.max(1,Math.floor(maxL/adv)); let ch=Array.from(txt).map(k=>MX_VERT[k]||k);
+      if(ch.length>n){ch=ch.slice(0,n-1); ch.push('︙');}
+      c.textAlign='center'; c.textBaseline='middle';
+      ch.forEach((k,i)=>c.fillText(k,mid,base-adv/2-(ch.length-1-i)*adv));}
+    else{ c.save(); c.translate(mid,base); c.textBaseline='middle';
+      if(rtl){c.rotate(Math.PI/2); c.textAlign='right';} else {c.rotate(-Math.PI/2); c.textAlign='left';}
+      c.fillText(mxFit(txt,maxL,f),0,0); c.restore();}
+    c.globalAlpha=1;});
+  c.restore();
+  /* the corner: what the rows and the columns are */
+  c.fillStyle=MXC.card; c.fillRect(X(0,gut),0,gut,head);
+  c.font=`700 ${g.fs-1.5}px ${fam}`; c.fillStyle=MXC.faint; c.textBaseline='alphabetic';
+  const up=t=>rtl?t:t.toLocaleUpperCase(curLang);
+  c.textAlign=rtl?'left':'right'; c.fillText(mxFit(up(L('pickerCancer'))+(rtl?' ←':' →'),gut-18,c.font),X(gut-10),head-28);
+  c.textAlign=rtl?'right':'left'; c.fillText(mxFit(up(L('pickerExposure'))+' ↓',gut-18,c.font),X(10),head-10);
+  /* the edges of the frozen panes, with a soft shadow once the squares have scrolled under them */
+  c.fillStyle=MXC.line; c.fillRect(0,head-1,VW,1); c.fillRect(X(gut-1,1),0,1,VH);
+  if(sy>0){const gr=c.createLinearGradient(0,head,0,head+7); gr.addColorStop(0,'rgba(22,23,19,.10)'); gr.addColorStop(1,'rgba(22,23,19,0)');
+    c.fillStyle=gr; c.fillRect(0,head,VW,7);}
+  if(sx>0){const x0=X(gut), gr=c.createLinearGradient(x0,0,rtl?x0-7:x0+7,0); gr.addColorStop(0,'rgba(22,23,19,.10)'); gr.addColorStop(1,'rgba(22,23,19,0)');
+    c.fillStyle=gr; c.fillRect(rtl?x0-7:x0,head,7,cellsH);}
+  if(busy)mxKick();}
+/* ---- what is under a point of the canvas ---- */
+function mxHitXY(px,py){ const g=MX.g; if(!g||px<0||py<0||px>g.VW||py>g.VH)return null;
+  const lx=mxRtl()?g.VW-px:px, inHead=py<g.head, inGut=lx<g.gut; if(inHead&&inGut)return null;
+  let r=null, c=null;
+  if(!inHead){const y=py-g.head+MX.sy; r=MX.ro.find(d=>y>=d.y&&y<d.y+g.PR)||null;}
+  if(!inGut){const x=lx-g.gut+MX.sx; c=MX.co.find(d=>x>=d.x&&x<d.x+g.PC)||null;}
+  if(inHead)return c?{zone:'col',r:null,c}:null;
+  if(inGut)return r?{zone:'row',r,c:null}:null;
+  return r&&c?{zone:'cell',r,c}:null;}
+function mxHitClient(x,y){const b=mxCv.getBoundingClientRect(); return mxHitXY(x-b.left,y-b.top);}
+const mxSame=(a,b)=>!!a&&!!b&&a.zone===b.zone&&a.r===b.r&&a.c===b.c;
+/* ---- words: the readout above the frame, the tooltip and the announcement ---- */
+function mxEv(h){ const k=h.r.i*MX.nC+h.c.i, v=MX.cell[k], l=MX.lk[k];
+  if(!v)return {v:0,t:L('mxNoLink')};
+  const q=l&&l.qualifier?spc()+pr(localQual(l.qualifier)):'';
+  return {v,t:(v===1?T.established:v===2?T.suspected:T.tooLimited)+q};}
+const mxRowSub=r=>(r.o.basis_type==='stmt'?(T.badgeStmt||LANGS.en.badgeStmt):mxBadge(mxGrp(r.o)))+' · '+T.links(r.n);
+const mxColSub=c=>localOrgan(c.o.organ_plain)+' · '+T.links(c.n);
+function mxText(h){ if(!h)return '';
+  if(h.zone==='row')return localName(h.r.o)+' · '+mxRowSub(h.r);
+  if(h.zone==='col')return localName(h.c.o)+' · '+mxColSub(h.c);
+  return _sub(L('mxPairSr'),{e:localName(h.r.o),c:localName(h.c.o),ev:mxEv(h).t});}
+function mxDot(r){const col=GRP_HEX[mxGrp(r.o)]||MXC.muted;
+  return r.o.basis_type==='stmt'?`<span class="dot stmt" style="--bc:${col}"></span>`:`<span class="dot" style="background:${col}"></span>`;}
+const mxNameBtn=(t,o)=>`<button type="button" class="mxr-n" data-type="${t}" data-id="${esc(o.id)}">${esc(localName(o))}</button>`;
+let _mxReadHtml=null;
+function mxReadout(){ const h=MX.hov||MX.pin; let html;
+  if(!h)html=`<span>${esc(L(mxTouch()?'mxHintTouch':'mxHint'))}</span>`;
+  else{ const pe=h.r?`<span class="mxr-p">${mxDot(h.r)}${mxNameBtn('exposure',h.r.o)}</span>`:'';
+    const pc=h.c?`<span class="mxr-p"><span class="sq" style="background:var(--cancer)"></span>${mxNameBtn('cancer',h.c.o)}</span>`:'';
+    if(h.zone==='row')html=pe+`<span class="mxr-ev mxr-none">${esc(mxRowSub(h.r))}</span>`;
+    else if(h.zone==='col')html=pc+`<span class="mxr-ev mxr-none">${esc(mxColSub(h.c))}</span>`;
+    else{ const ev=mxEv(h);
+      html=pe+`<span class="mxr-x" aria-hidden="true">×</span>`+pc
+        +(ev.v?`<span class="mxr-ev"><span class="sqk ${ev.v===1?'est':'sus'}"></span>${esc(ev.t)}</span>`:`<span class="mxr-ev mxr-none">${esc(ev.t)}</span>`);}}
+  if(html!==_mxReadHtml){_mxReadHtml=html; mxRead.innerHTML=html;}}
+mxRead.addEventListener('click',ev=>{const b=ev.target.closest('.mxr-n'); if(!b)return;
+  const run=()=>mxOpen(b.dataset.type,b.dataset.id,null);
+  if(ev.detail===0){_kbd=true; try{run();}finally{_kbd=false;}} else run();});
+function mxTip(h,x,y){ if(!h||mxTouch()){tip.style.display='none'; return;}
+  let html;
+  if(h.zone==='row')html=`<b>${esc(localName(h.r.o))}</b><br>${esc(mxRowSub(h.r))}`;
+  else if(h.zone==='col')html=`<b>${esc(localName(h.c.o))}</b><br>${esc(mxColSub(h.c))}`;
+  else html=`<b>${esc(localName(h.r.o))}</b> × <b>${esc(localName(h.c.o))}</b><br>${esc(mxEv(h).t)}`;
+  if(tip.innerHTML!==html)tip.innerHTML=html;
+  tip.style.display='block';
+  const w=tip.offsetWidth, hh=tip.offsetHeight;
+  let lx=x+14, ty=y+16; if(lx+w>window.innerWidth-8)lx=x-14-w; if(ty+hh>window.innerHeight-8)ty=y-16-hh;
+  tip.style.left=Math.max(4,lx)+'px'; tip.style.top=Math.max(4,ty)+'px';}
+let _mxLiveT=0;
+function mxAnnounce(t){clearTimeout(_mxLiveT); _mxLiveT=setTimeout(()=>{mxLive.textContent=t;},120);}
+/* ---- opening an entry: the exposure (with the pair marked in its panel) or the cancer, as the other tabs do ---- */
+function mxOpen(type,id,pair){ if(!known(type,id))return;
+  tip.style.display='none'; MX.hov=null;
+  if(type==='exposure'){const r=MX.rById[id], c=pair&&MX.cById[pair]; MX.pin=c?{zone:'cell',r,c}:{zone:'row',r,c:null};}
+  else MX.pin={zone:'col',r:null,c:MX.cById[id]};
+  /* the matrix's own history entry remembers this entry, so that Back returns to the matrix with it marked */
+  try{const st=history.state; if(st&&st.m==='matrix')history.replaceState(Object.assign({},st,{t:type,i:id}),'');}catch(err){}
+  setMode(type,true); select(type,id);
+  /* the panel opens at its top, as from the lists; the cancer of the pair is marked in its list of links */
+  if(pair)detail.querySelectorAll('.link-item[data-type="cancer"]').forEach(el=>{if(el.dataset.id===pair)el.classList.add('mx-pair');});
+  scrollToPanel();}
+function mxActivate(h,kbd){ if(!h)return;
+  const run=()=>{ if(h.zone==='row')mxOpen('exposure',h.r.o.id,null);
+    else if(h.zone==='col')mxOpen('cancer',h.c.o.id,null);
+    else mxOpen('exposure',h.r.o.id,MX.cell[h.r.i*MX.nC+h.c.i]?h.c.o.id:null);};
+  if(kbd){_kbd=true; try{run();}finally{_kbd=false;}} else run();}
+/* ---- pointer: a mouse points and clicks; a finger taps once to read a square and again to open it ---- */
+function mxHover(h,x,y){ if(!mxSame(h,MX.hov)&&(h||MX.hov)){MX.hov=h; mxReadout(); mxKick();}
+  mxCv.style.cursor=h?'pointer':'default'; mxTip(h,x,y);}
+mxFrame.addEventListener('pointerdown',e=>{MX.ptype=e.pointerType||'mouse';});
+mxFrame.addEventListener('pointermove',e=>{ if(e.pointerType==='touch')return; MX.last=[e.clientX,e.clientY]; mxHover(mxHitClient(e.clientX,e.clientY),e.clientX,e.clientY);});
+mxFrame.addEventListener('pointerleave',()=>{MX.last=null; mxHover(null);});
+mxFrame.addEventListener('click',e=>{ const h=mxHitClient(e.clientX,e.clientY), touch=MX.ptype==='touch';
+  if(!h){ if(touch&&MX.pin){MX.pin=null; mxReadout(); mxKick();} return;}
+  if(h.zone!=='cell'){mxActivate(h,false); return;}
+  if(touch&&!(MX.pin&&mxSame(MX.pin,h))){MX.pin=h; mxReadout(); mxKick(); mxShowReadout(); return;}
+  mxActivate(h,false);});
+mxFrame.addEventListener('scroll',()=>{ if(MX.last){const h=mxHitClient(MX.last[0],MX.last[1]); if(!mxSame(h,MX.hov)){MX.hov=h; mxReadout();} mxTip(h,MX.last[0],MX.last[1]);}
+  mxKick();},{passive:true});
+/* on a phone the readout may have scrolled away above the frame: the page moves just enough to show it */
+function mxShowReadout(){ const r=mxRead.getBoundingClientRect(), sb=stickyBottom();
+  if(r.top<sb)window.scrollBy({top:r.top-sb,behavior:reduceMotion()?'auto':'smooth'});}
+/* ---- keyboard: the arrow keys move a square (or a name) at a time; Enter opens it; Escape clears it ---- */
+function mxEnsureVisible(h,smooth){ const g=MX.g; if(!g||!h)return; let sx=MX.sx, sy=MX.sy;
+  if(h.r){const t=h.r.y1, b=t+g.PR, vh=g.VH-g.head; if(t<sy)sy=Math.max(0,t-g.GH); else if(b>sy+vh)sy=b-vh+4;}
+  if(h.c){const l=h.c.x1, r=l+g.PC, vw=g.VW-g.gut; if(l<sx)sx=Math.max(0,l-g.GAP); else if(r>sx+vw)sx=r-vw+4;}
+  if(sx===MX.sx&&sy===MX.sy)return;
+  if(smooth&&!reduceMotion()&&mxFrame.scrollTo){const max=Math.max(0,mxFrame.scrollWidth-mxFrame.clientWidth);
+    mxFrame.scrollTo({left:mxRtl()?max-sx:sx,top:sy,behavior:'smooth'});}
+  else mxSetScroll(sx,sy);}
+function mxStart(){ const g=MX.g;
+  const sR=sel&&sel.type==='exposure'?MX.rById[sel.id]:null, sC=sel&&sel.type==='cancer'?MX.cById[sel.id]:null;
+  if(sR)return {zone:'row',r:sR,c:null}; if(sC)return {zone:'col',r:null,c:sC};
+  const r=MX.ro.find(d=>d.y1>=MX.sy)||MX.ro[0], c=MX.co.find(d=>d.x1>=MX.sx)||MX.co[0];
+  return {zone:'cell',r,c};}
+mxFrame.addEventListener('focus',()=>{ if(MX.pin||!MX.g)return;
+  let fv=true; try{fv=mxFrame.matches(':focus-visible');}catch(err){}
+  if(!fv)return;
+  MX.pin=mxStart(); mxEnsureVisible(MX.pin); mxReadout(); mxKick(); mxAnnounce(mxText(MX.pin));});
+mxFrame.addEventListener('keydown',e=>{ const k=e.key;
+  if(e.altKey||e.metaKey||!MX.g)return;
+  if(!['ArrowUp','ArrowDown','ArrowLeft','ArrowRight','Home','End','PageUp','PageDown','Enter',' ','Escape'].includes(k))return;
+  if(e.ctrlKey&&k!=='Home'&&k!=='End')return;
+  if(k==='Escape'){ if(MX.pin){e.preventDefault(); MX.pin=null; mxReadout(); mxKick(); mxAnnounce('');} return;}
+  e.preventDefault();
+  const p=MX.pin;
+  if(!p){MX.pin=mxStart(); mxEnsureVisible(MX.pin); mxReadout(); mxKick(); mxAnnounce(mxText(MX.pin)); return;}
+  if(k==='Enter'||k===' '){mxActivate(p,true); return;}
+  let ri=p.r?MX.ro.indexOf(p.r):-1, ci=p.c?MX.co.indexOf(p.c):-1;
+  const rtl=mxRtl(), page=Math.max(1,Math.floor((MX.g.VH-MX.g.head)/MX.g.PR)-2);
+  if(k==='ArrowDown')ri=Math.min(MX.nR-1,ri+1);
+  else if(k==='ArrowUp')ri=Math.max(-1,ri-1);
+  else if(k==='ArrowRight')ci+=rtl?-1:1;
+  else if(k==='ArrowLeft')ci+=rtl?1:-1;
+  else if(k==='PageDown')ri=Math.min(MX.nR-1,ri+page);
+  else if(k==='PageUp')ri=Math.max(0,ri-page);
+  else if(k==='Home'){ci=0; if(e.ctrlKey)ri=0;}
+  else if(k==='End'){ci=MX.nC-1; if(e.ctrlKey)ri=MX.nR-1;}
+  ci=Math.max(-1,Math.min(MX.nC-1,ci));
+  if(ri<0&&ci<0){ if(k==='ArrowUp')ci=0; else ri=0;}   // the corner holds no name
+  MX.pin={zone:ri<0?'col':ci<0?'row':'cell',r:ri<0?null:MX.ro[ri],c:ci<0?null:MX.co[ci]};
+  mxEnsureVisible(MX.pin); mxReadout(); mxKick(); mxAnnounce(mxText(MX.pin));});
+/* ---- sorting ---- */
+function mxSyncButtons(){ document.querySelectorAll('#mxBar .mxs').forEach(b=>{
+  const on=(b.dataset.axis==='r'?MX.sortR:MX.sortC)===b.dataset.sort; b.setAttribute('aria-pressed',String(on));});}
+function mxSort(axis,val){
+  if(axis==='r'){if(MX.sortR===val)return; MX.sortR=val;} else {if(MX.sortC===val)return; MX.sortC=val;}
+  mxSyncButtons(); mxTable();
+  if(!mxOn()||!MX.g)return;
+  const now=performance.now(); mxStep(now);
+  MX.rows.forEach(d=>{d.y0=d.y;}); MX.cols.forEach(d=>{d.x0=d.x;});
+  const oldH=MX.rowsH, oldW=MX.colsW, oldHd=MX.hdrs, oldCg=MX.cgs;
+  Object.assign(MX,mxArrange());
+  if(reduceMotion()){ MX.anim=null; MX.hdrsOld=[]; MX.cgsOld=[];
+    MX.rows.forEach(d=>{d.y=d.y0=d.y1;}); MX.cols.forEach(d=>{d.x=d.x0=d.x1;});
+    mxSize(); if(MX.pin)mxEnsureVisible(MX.pin); mxKick(); return;}
+  /* the new order slides into place, the first places first (about 0.7 s) */
+  MX.hdrsOld=axis==='r'?oldHd:[]; MX.cgsOld=axis==='c'?oldCg:[];
+  MX.rows.forEach(d=>{d.dl=axis==='r'?d.rank/MX.nR*170:0;}); MX.cols.forEach(d=>{d.dl=axis==='c'?d.rank/MX.nC*150:0;});
+  MX.anim={t0:now,dur:540,end:now+540+170,oldH,oldW,k:0,axis};
+  mxSize(); mxKick();}
+document.getElementById('mxBar').addEventListener('click',ev=>{const b=ev.target.closest('.mxs'); if(b)mxSort(b.dataset.axis,b.dataset.sort);});
+/* ---- the table of the links (screen readers; print) ---- */
+function mxTable(){ mxBuild();
+  const co=[].concat(...mxGroupsC().map(x=>x.items)), at=new Map(co.map((d,i)=>[d.i,i])), sep=L('listSep');
+  const head=`<thead><tr><th scope="col">${esc(L('mxThExp'))}</th><th scope="col">${esc(T.sciGroup)}</th><th scope="col">${esc(T.chipEst)}</th><th scope="col">${esc(T.chipSus)}</th></tr></thead>`;
+  const body=mxGroupsR().map(gr=>`<tbody>${gr.label!=null?`<tr class="gh"><th colspan="4" scope="rowgroup">${esc(gr.label)}</th></tr>`:''}`
+    +gr.items.map(r=>{const est=[], sus=[];
+      MX.rowLinks[r.i].slice().sort((a,b)=>at.get(a)-at.get(b)).forEach(j=>{const k=r.i*MX.nC+j, l=MX.lk[k];
+        (MX.cell[k]===1?est:sus).push(localName(MX.cols[j].o)+(l&&l.qualifier?spc()+pr(localQual(l.qualifier)):''));});
+      return `<tr><th scope="row">${esc(localName(r.o))}</th><td class="g">${esc(r.o.basis_type==='stmt'?(T.badgeStmt||LANGS.en.badgeStmt):mxBadge(mxGrp(r.o)))}</td>`
+        +`<td>${est.length?esc(est.join(sep)):'–'}</td><td>${sus.length?esc(sus.join(sep)):'–'}</td></tr>`;}).join('')+`</tbody>`).join('');
+  document.getElementById('mxTable').innerHTML=`<table class="mxtbl"><caption>${esc(L('mxCaption'))}</caption>${head}${body}</table>`;}
+/* ---- the language ---- */
+function mxApplyLang(){ mxBuild();
+  document.getElementById('tabMatrix').textContent=L('tabMatrix');
+  document.getElementById('mxLead').textContent=L('mxLead');
+  document.getElementById('mxRowsLbl').textContent=L('pickerExposure');
+  document.getElementById('mxColsLbl').textContent=L('pickerCancer');
+  const SK={az:'mxSortAZ',cat:'mxSortCat',group:'mxSortGroup',links:'mxSortLinks',organ:'mxSortOrgan'};
+  document.querySelectorAll('#mxBar .mxs').forEach(b=>{b.textContent=L(SK[b.dataset.sort]);});
+  mxFrame.setAttribute('aria-label',L('mxAria'));
+  document.getElementById('mxKeys').textContent=L('mxKeys');
+  document.getElementById('mxSum').textContent=_sub(L('mxSummary'),{ne:MX.nR,nc:MX.nC,nl:MX.est+MX.sus,est:MX.est,sus:MX.sus});
+  document.getElementById('mxLegend').innerHTML=
+    `<span><span class="sqk est"></span><span class="txt">${esc(L('mxLegendEst'))}</span></span>`
+    +`<span><span class="sqk sus" style="border:2px solid var(--suspected)"></span><span class="txt">${esc(L('mxLegendSus'))}</span></span>`
+    +`<span><span class="dot" style="background:var(--g1)"></span><span class="txt">${esc(T.legendKnown)}</span></span>`
+    +`<span><span class="dot" style="background:var(--g2a)"></span><span class="txt">${esc(T.legendProbable)}</span></span>`
+    +`<span><span class="dot" style="background:var(--g2b)"></span><span class="txt">${esc(T.legendPossible)}</span></span>`
+    +`<span><span class="dot" style="background:transparent;border:2px solid var(--muted)"></span><span class="txt">${esc(T.badgeStmt||LANGS.en.badgeStmt)}</span></span>`;
+  MX.fit.clear(); _mxReadHtml=null; mxReadout(); mxTable();}
+/* ---- the tab: shown or hidden by setMode ---- */
+function mxShow(on){ const was=mxOn();
+  if(!on){ if(was){mxReadScroll(); MX.saved={sx:MX.sx,sy:MX.sy}; matrixWrap.classList.remove('on'); MX.hov=null; MX.last=null; tip.style.display='none';
+      if(MX.raf){cancelAnimationFrame(MX.raf); MX.raf=0;}} return;}
+  matrixWrap.classList.add('on'); mxBuild(); mxSyncButtons(); mxSyncHeight();
+  if(!was){ MX.sx=MX.saved?MX.saved.sx:0; MX.sy=MX.saved?MX.saved.sy:0;}
+  mxLayout();
+  /* the entry chosen in another tab is marked; its row or column comes into view */
+  const key=sel?sel.type+':'+sel.id:null;
+  if(key&&key!==MX.selKey){const h=sel.type==='exposure'?{r:MX.rById[sel.id],c:null}:{r:null,c:MX.cById[sel.id]}; if(h.r||h.c)mxEnsureVisible(h);}
+  MX.selKey=key; mxReadout(); mxKick();}
+
 /* auto-resize broadcast (optional; see EMBED_WORDPRESS.md) */
 function postHeight(){try{parent.postMessage({iarcEvidenceGraphHeight:Math.max(document.body.scrollHeight,document.documentElement.scrollHeight)},'*');}catch(e){}}
 window.addEventListener('load',postHeight);
 try{new ResizeObserver(postHeight).observe(document.body);}catch(e){}
 
 /* URL state (review 2c, B8): choosing an exposure sets #exposure=<id>, a cancer #cancer=<id>,
-   and the network tab #map. Each change is a history entry, so the back button restores the
-   previous view. Nothing else goes into the URL. In PATH_MODE (plan of 28 Oct 2026, batch 5) the
-   same views are written /cancer/e/<slug>, /cancer/c/<slug>, /cancer/ and /cancer/#map, with ?lang=. */
+   the network tab #map and the matrix tab #matrix. Each change is a history entry, so the back button
+   restores the previous view. Nothing else goes into the URL (the matrix's sort stays in the page). In
+   PATH_MODE (plan of 28 Oct 2026, batch 5) the same views are written /cancer/e/<slug>, /cancer/c/<slug>,
+   /cancer/, /cancer/#map and /cancer/#matrix, with ?lang=. */
 let _routing=false, _hashOpened=false;
 function viewState(){return {m:mode,t:sel?sel.type:null,i:sel?sel.id:null,o:document.body.classList.contains('detail-open')};}
-function viewHash(){return mode==='map'?'#map':(sel?'#'+sel.type+'='+encodeURIComponent(sel.id):'');}
-/* path mode: the path of the view (the network keeps #map on /cancer/) */
+function viewHash(){return mode==='map'||mode==='matrix'?viewTail():(sel?'#'+sel.type+'='+encodeURIComponent(sel.id):'');}
+/* path mode: the path of the view (the network keeps #map on /cancer/, the matrix #matrix) */
 function viewPath(){
-  if(mode!=='map'&&sel){const o=sel.type==='cancer'?canById[sel.id]:expById[sel.id];
+  if(isListMode(mode)&&sel){const o=sel.type==='cancer'?canById[sel.id]:expById[sel.id];
     if(o&&o.slug)return '/cancer/'+(sel.type==='cancer'?'c':'e')+'/'+o.slug;}
   return '/cancer/';}
 /* path mode: the address of the view, with lang set to the page's language and the rest of the query kept (a ?q= stays
@@ -3681,7 +4394,7 @@ function viewUrl(extra){
   let s='?lang='+curLang;
   try{const u=new URLSearchParams(location.search); u.set('lang',curLang);
     if(extra)Object.keys(extra).forEach(k=>u.set(k,extra[k])); s='?'+u.toString();}catch(err){}
-  return viewPath()+s+(mode==='map'?'#map':'');}
+  return viewPath()+s+viewTail();}
 function pushView(){ if(_routing)return;
   const st=viewState(), cur=history.state;
   const url=PATH_MODE?viewUrl():location.pathname+location.search+viewHash();
@@ -3690,7 +4403,7 @@ function pushView(){ if(_routing)return;
 function known(t,i){const m=t==='exposure'?expById:t==='cancer'?canById:null;
   return !!(m&&typeof i==='string'&&Object.prototype.hasOwnProperty.call(m,i));}
 function parseHash(h){h=(h||'').replace(/^#/,'');
-  if(h==='map')return {m:'map',t:null,i:null,o:false};
+  if(h==='map'||h==='matrix')return {m:h,t:null,i:null,o:false};
   /* #q=<text> (plan of 28 Oct 2026, batch 4): the exposure tab with the search filled in and its results shown */
   const sq=/^q=(.*)$/.exec(h);
   if(sq){let t=sq[1].replace(/\+/g,' '); try{t=decodeURIComponent(t);}catch(err){} return t.trim()?{m:'exposure',t:null,i:null,o:false,q:t}:null;}
@@ -3699,7 +4412,7 @@ function parseHash(h){h=(h||'').replace(/^#/,'');
   return known(m[1],id)?{m:m[1],t:m[1],i:id,o:true}:null;}
 function showView(v){ _routing=true; hideNotFound();
   try{
-    if(v.m==='map'){ if(known(v.t,v.i))sel={type:v.t,id:v.i}; setMode('map'); }
+    if(v.m==='map'||v.m==='matrix'){ if(known(v.t,v.i))sel={type:v.t,id:v.i}; setMode(v.m); }
     else{ if(v.q!=null)setQuery(v.q);
       setMode(v.m==='exposure'?'exposure':'cancer',true); sel=known(v.t,v.i)?{type:v.t,id:v.i}:null;
       buildPicker(); renderDetail(); document.body.classList.toggle('detail-open',!!(sel&&v.o)); }
@@ -3779,7 +4492,7 @@ function addressView(){
     const t=m[1]==='e'?'exposure':'cancer', map=m[1]==='e'?expBySlug:canBySlug, k=s.toLowerCase();
     const o=Object.prototype.hasOwnProperty.call(map,k)?map[k]:null;
     if(o)pv={m:t,t,i:o.id,o:true}; else if(s.trim())bad={t,q:s};}
-  if(h==='#map')return {v:{m:'map',t:pv?pv.t:null,i:pv?pv.i:null,o:false}};
+  if(h==='#map'||h==='#matrix')return {v:{m:h.slice(1),t:pv?pv.t:null,i:pv?pv.i:null,o:false}};
   return pv?{v:pv}:bad?{bad}:{};}
 /* Path mode: open the view of the address, then write the address in the path form (replaceState) when it held a hash
    of the older form, named an entry that does not exist (the notice shows and the address becomes /cancer/), or is not
@@ -3796,8 +4509,9 @@ function routePath(fromPop){
   else if(a.bad){ if(sq)setQuery(sq);
     showView({m:a.bad.t,t:null,i:null,o:false}); showNotFound(a.bad.q);}
   else if(sq)openHash('#q='+encodeURIComponent(sq));
-  else if(fromPop)showView({m:mode==='map'?_listMode:mode,t:null,i:null,o:false});
-  const rewrite=a.legacy||a.bad||location.pathname!==viewPath()||(mode==='map')!==(location.hash==='#map');
+  else if(fromPop)showView({m:isListMode(mode)?mode:_listMode,t:null,i:null,o:false});
+  const tail=location.hash==='#map'||location.hash==='#matrix'?location.hash:'';
+  const rewrite=a.legacy||a.bad||location.pathname!==viewPath()||viewTail()!==tail;
   try{if(rewrite)history.replaceState(viewState(),'',viewUrl(extra)); else history.replaceState(viewState(),'');}catch(err){}}
 function openFromHash(){ if(_hashOpened)return; _hashOpened=true;
   if(PATH_MODE){routePath();return;}
@@ -3814,7 +4528,7 @@ document.getElementById('skipLink').addEventListener('click',ev=>{ev.preventDefa
   const t=document.getElementById('explorer'); t.focus({preventScroll:true}); t.scrollIntoView({block:'start'});});
 
 /* init */
-setMode('cancer'); buildPicker(); renderHowIarc(); renderFooter();
+mxApplyLang(); setMode('cancer'); buildPicker(); renderHowIarc(); renderFooter();
 window.__epiReady=true;
 (function initLang(){
   /* a gate button pressed while the page was loading (window.__epiPick), else the language read by the script in
