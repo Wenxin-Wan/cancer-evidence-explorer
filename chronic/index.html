@@ -685,6 +685,7 @@
   html[dir=rtl] .quote{border-left:0;border-right:3px solid var(--line);padding:4px 14px 4px 0}
   .quote:before{content:'“';font-family:var(--serif);font-size:20px;line-height:0;color:var(--faint);margin-right:2px;vertical-align:-4px}
   .quote .qlab{display:block;font-size:12.5px;font-weight:600;font-style:normal;text-transform:none;letter-spacing:0;color:var(--muted);margin-bottom:4px}
+.quote .qzh{display:block;margin-top:8px}
   .flag.suspect{background:#F6E6E3;color:#A03024;border-color:#E8C8C1}
   .revbox{margin-top:11px;border-radius:0 4px 4px 0;padding:10px 13px;font-size:14px;line-height:1.55;
           border:1px solid var(--line2);background:var(--card)}
@@ -1512,7 +1513,7 @@ zh: {
   reviewRevised:"2026 年我们把这个数字与论文核对过，并作了更正。",
   reviewSuspect:"我们没有找到这个数字的已发表来源，请谨慎对待。",
   flagSuspect:"未找到来源",
-  quoteOriginal:"引自论文英文原文。", rnEnOnly:'核查说明（暂仅有英文）：',
+  quoteOriginal:"引自论文英文原文。", quoteTrans:"中文译文（供参考，以英文原文为准）", rnEnOnly:'核查说明（暂仅有英文）：',
   editorialLabel:"未注明具体文献",
   editorialTip:"2026 年的核查没有找到在所示比较方式下报告这一关联的已发表综述。这个数字来自编者对相关文献的总体判读。在本站所有条目中，它的出处最为薄弱，请谨慎看待。",
   gradeNoteLabel:'等级说明：',
@@ -2760,7 +2761,9 @@ const gradeNoteTxt = l => lang === 'zh'
   ? `因缺少可具名的权威来源或三角验证证据，本条关联已由“${gradeName('Strong')}”下调为“${gradeName('Moderate')}”。`
   : l.grade_note;
 const ctypeName = c => lang === 'zh' ? ((T.zh.ctypes || {})[c] || DATA.i18n.contrast_types[c]) : ((t().ctypes || {})[c] || c);
-const quoteTxt = l => lang === 'zh' ? (l.quote_zh || l.quote || '') : (l.quote || '');
+const quoteTxt = l => (l.quote || '');
+/* a Chinese translation of the quote, shown beneath the English original (Nov 2026) */
+const quoteZh = l => (lang === 'zh' && l.quote_zh) ? l.quote_zh : '';
 
 /* --------------------------------------------------------------- language
    The gate is a dialog whose ten buttons are written into the page (Batch 2, 28 Oct
@@ -3498,7 +3501,7 @@ function refBlock(l){
   }).join('');
   const q = quoteTxt(l);
   return `<div class="refs"><div class="lab">${esc(x.refsLabel)}</div>${items}
-    ${q ? `<div class="quote"><span class="qlab">${esc(x.quoteLabel)}${lang !== 'en' ? ' · ' + esc(x.quoteOriginal) : ''}</span><span${enAttr()}>${esc(q)}</span></div>` : ''}</div>`;
+    ${q ? `<div class="quote"><span class="qlab">${esc(x.quoteLabel)}${lang !== 'en' ? ' · ' + esc(x.quoteOriginal) : ''}</span><span${enAttr()}>${esc(q)}</span>${quoteZh(l) ? `<span class="qzh"><span class="qlab">${esc(x.quoteTrans || '')}</span>${esc(quoteZh(l))}</span>` : ''}</div>` : ''}</div>`;
 }
 
 /* Every estimate was checked against the synthesis it claims to come from. Saying
@@ -3558,7 +3561,7 @@ function reviewsCounted(l){
     const s = DATA.sources[r.source] || {};
     if (!(r.group in ord)) ord[r.group] = ++n;
     const meta = x.rcMeta.replace('{g}', ord[r.group]).replace('{w}', typeof r.weight === 'number' ? fmtNum(r.weight, 2) : '');
-    return `<li><span class="rc-t"${enAttr()}>${esc(s.label || s.title || r.source)}${s.year ? ` <span class="rc-y">(${esc(s.year)})</span>` : ''}</span>` +
+    return `<li><span class="rc-t"${(lang === 'zh' && s.label_zh) ? '' : enAttr()}>${esc((lang === 'zh' && s.label_zh) || s.label || s.title || r.source)}${s.year ? ` <span class="rc-y">(${esc(s.year)})</span>` : ''}</span>` +
       `<span class="rc-m">${esc(meta)}</span></li>`;
   }).join('');
   const after = (typeof l.n_eff === 'number' && l.n_eff !== rc.length) ? ` (${x.dwAfter.replace('{n}', fmtNum(l.n_eff, 2))})` : '';
@@ -3754,10 +3757,13 @@ function absBlock(l){
   const url = safeUrl(src.url) || (src.doi ? 'https://doi.org/' + src.doi : (src.pmid ? 'https://pubmed.ncbi.nlm.nih.gov/' + src.pmid + '/' : ''));
   const val = a.sex === 'men' ? b.men_pct : (a.sex === 'women' ? b.women_pct : (b.value_pct != null ? b.value_pct : null));
   const kind = fillT(A.kind[b.kind] || '', {age: b.to_age || ''});
+  const zt = (o, f) => (lang === 'zh' && o && o[f + '_zh']) ? o[f + '_zh'] : ((o && o[f]) || '');
+  const zhOk = (o, f) => !(o && o[f]) || (lang === 'zh' && !!o[f + '_zh']);
+  const SEP = lang === 'zh' ? '，' : ', ', END = lang === 'zh' ? '。' : '. ';
   const baseTxt = direct
-    ? `<b>${esc(A.directLab)}</b> <span${enMark()}>${esc(a.population)}, ${esc(a.horizon)}. ${esc(src.citation || '')}</span>`
+    ? `<b>${esc(A.directLab)}</b> <span${zhOk(a, 'population') && zhOk(a, 'horizon') ? '' : enMark()}>${esc(zt(a, 'population'))}${SEP}${esc(zt(a, 'horizon'))}${END}</span><span${enMark()}>${esc(src.citation || '')}</span>`
     : `<b>${esc(A.baseLab)}</b> ${esc(kind)}${val != null ? ' ' + fmtNum(val, Number.isInteger(val) ? 0 : 1) + '%' : ''}` +
-      `${b.from_age ? ', ' + esc(fillT(A.fromAge, {age: b.from_age})) : ''}. <span${enMark()}>${esc(b.population || '')}${b.period ? ', ' + esc(b.period) : ''}. ${esc(src.citation || '')}</span>`;
+      `${b.from_age ? ', ' + esc(fillT(A.fromAge, {age: b.from_age})) : ''}. <span${zhOk(b, 'population') && zhOk(b, 'period') ? '' : enMark()}>${esc(zt(b, 'population'))}${b.period ? SEP + esc(zt(b, 'period')) : ''}${END}</span><span${enMark()}>${esc(src.citation || '')}</span>`;
   const extra = [a.sex === 'men' ? A.sexMen : (a.sex === 'women' ? A.sexWomen : ''),
                  a.share_pct != null ? fillT(A.share, {p: fmtNum(a.share_pct, Number.isInteger(a.share_pct) ? 0 : 1)}) : ''].filter(Boolean).join(' ');
   return `<div class="abs${a.diff < 0 ? ' prot' : ''}">
@@ -3900,7 +3906,7 @@ const ctxP = (r, f) => {
   return v ? `<p${lang === 'en' || (lang === 'zh' && r[f + '_zh']) ? '' : enMark()}>${esc(v)}</p>` : '';
 };
 const ctxNum = v => fmtNum(v, Number.isInteger(v) ? 0 : (Math.abs(v * 10 - Math.round(v * 10)) < 1e-9 ? 1 : 2));
-const unitAfter = (v, u) => /^%/.test(u || '') ? v + u : v + ' ' + u;
+const unitAfter = (v, u) => (/^%/.test(u || '') || (lang === 'zh' && /^[\u4e00-\u9fff]/.test(u || ''))) ? v + u : v + ' ' + u;
 const safeUrl = u => /^https?:\/\//i.test(u || '') ? u : '';
 const hostOf = u => { try { return new URL(u).hostname.replace(/^www\./, ''); } catch (e) { return ''; } };
 const extLink = (u, text, attr) => safeUrl(u)
@@ -3913,7 +3919,7 @@ function prevalenceHtml(p){
   if (!p || typeof p.value !== 'number') return '';
   const x = t(), num = ctxNum(p.value);
   if (/^%/.test(p.unit || '') && safeUrl(p.source_url)){
-    const cap = x.ctxPrev.replace('{value}', num).replace('{population}', p.population).replace('{year}', p.year);
+    const cap = x.ctxPrev.replace('{value}', num).replace('{population}', (lang === 'zh' && p.population_zh) || p.population).replace('{year}', p.year);
     return `<div class="ctx-prev"><span class="ctx-bar" aria-hidden="true"><span style="width:${Math.max(0, Math.min(100, p.value))}%"></span></span>` +
       `<span class="ctx-cap">${extLink(p.source_url, cap, ownKey('ctxPrev') ? '' : enMark())}</span></div>`;
   }
@@ -3956,10 +3962,12 @@ function scaleHtml(sc){
     svg += ln(P(b0), 60, P(b0), 66) + ln(P(b0), 66, P(b1), 66) + ln(P(b1), 60, P(b1), 66) +
       `<text x="${P((b0 + b1) / 2)}" y="81" text-anchor="${anchor((b0 + b1) / 2)}" font-size="12" fill="var(--muted)">${esc(x.ctxStep)}</text>`;
   }
-  const en = lang === 'en' ? '' : enMark();
-  const key = marks.map(m => `<li${en}><b>${esc(unitAfter(ctxNum(m.value), sc.unit))}</b>${colonSep()}${esc(m.label)}</li>`).join('') +
-    (step ? `<li${en}><b>${esc(unitAfter(ctxNum(step), sc.unit))}</b>${colonSep()}${esc(x.ctxStep)}</li>` : '');
-  return `<div class="ctx-fig"><div class="ctx-unit"${en}>${esc(sc.unit)}</div>` +
+  const zhSc = lang === 'zh' && !!sc.unit_zh, unit = zhSc ? sc.unit_zh : sc.unit;
+  const en = (lang === 'en' || zhSc) ? '' : enMark();
+  const mlab = m => (zhSc && m.label_zh) || m.label;
+  const key = marks.map(m => `<li${en}><b>${esc(unitAfter(ctxNum(m.value), unit))}</b>${colonSep()}${esc(mlab(m))}</li>`).join('') +
+    (step ? `<li${en}><b>${esc(unitAfter(ctxNum(step), unit))}</b>${colonSep()}${esc(x.ctxStep)}</li>` : '');
+  return `<div class="ctx-fig"><div class="ctx-unit"${en}>${esc(unit)}</div>` +
     `<svg dir="ltr" style="height:${step ? 86 : 56}px" aria-hidden="true" focusable="false">${svg}</svg>` +
     `<ul class="ctx-key">${key}</ul></div>`;
 }
@@ -4310,7 +4318,7 @@ function renderReferences(){
     if (s.doi)  links_.push(`<a href="https://doi.org/${esc(s.doi)}" target="_blank" rel="noopener">DOI</a>`);
     if (s.url && !s.pmid) links_.push(`<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(x.openSource)}</a>`);
     return `<div class="ri-card">
-      <div class="rk"><span class="rlabel">${esc(s.label)}</span><span class="rn">${esc(x.supportsN(used[id]))}</span></div>
+      <div class="rk"><span class="rlabel">${esc((lang === 'zh' && s.label_zh) || s.label)}</span><span class="rn">${esc(x.supportsN(used[id]))}</span></div>
       <div class="rt">${esc(s.title || s.label)}</div>
       ${meta ? `<div class="rm">${esc(meta)}</div>` : ''}
       ${links_.length ? `<div class="rl">${links_.join('')}</div>` : ''}

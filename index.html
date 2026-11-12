@@ -518,6 +518,8 @@
   .iw .iw-h{margin-top:10px;font-weight:700;color:var(--faint);font-size:12.5px;text-transform:uppercase;letter-spacing:.05em}
   html[dir=rtl] .iw .iw-h{text-transform:none;letter-spacing:0}
   .iw blockquote{margin:4px 0 0;padding-inline-start:11px;border-inline-start:2px solid var(--line);font-size:14px;line-height:1.5;overflow-wrap:anywhere}
+.iw .iw-tr{margin:6px 0 0;padding-inline-start:13px;font-size:14px;line-height:1.65}
+.iw .iw-tl{display:block;font-size:12px;font-weight:600;color:var(--muted);margin-bottom:2px}
   /* "Evaluated by IARC" cards in the search results (decision 8) */
   .evc-gh{padding-top:16px}
   .evc-gh .cnt{font-weight:600}
@@ -1090,7 +1092,7 @@ zh:{name:'Chinese',native:'中文',flag:'🇨🇳',dir:'ltr',
   established:"已确认关联",suspected:"疑似关联",tooLimited:"证据不足，无法分类",
   tooLimitedNote:"研究者考察过这些关联，但 IARC 认为证据太有限，无法下结论。这只反映研究的现状，无法证明这些暴露因素是安全的。",
   whatThisShows:"说明",whereEncounter:"人们如何接触到这种因素",
-  inPeople:"人群研究",inAnimals:"动物实验",howItWorks:"作用机制",
+  iwTrans:"中文译文（供参考，以英文原文为准）",inPeople:"人群研究",inAnimals:"动物实验",howItWorks:"作用机制",
   strongEvidence:"证据充分（IARC 的最高等级）",someEvidence:"有限证据",
   links:n=>`${n} 项关联`,
   exposuresLinked:n=>`已关联 ${n} 项暴露因素`,
@@ -3040,7 +3042,7 @@ function evTop(e){const ev=e.evaluation||{}, c=e.classification||{};
 
 function humanLines(e,h){
   const cat=normCat(h.category), suf=h.sites_sufficient||[], lim=h.sites_limited||[], lack=h.sites_lack_of_carcinogenicity||[];
-  const sites=a=>enx(a.join(', '));
+  const sites=a=>(curLang==='zh'&&DATA.site_zh&&a.every(x=>DATA.site_zh[x]))?esc(a.map(x=>DATA.site_zh[x]).join('、')):enx(a.join(', '));
   const noSite=a=>a.length===1&&/^multiple sites \(unspecified\)$/i.test(a[0]);   // IARC's table: evidence stated, no site named
   const line=(c,a)=>noSite(a)?iterm(Lo('evCat',c))+' · '+esc(L('evNoSite')):a.length?fill(L('evFor'),{term:iterm(Lo('evCat',c)),sites:sites(a)}):iterm(Lo('evCat',c));
   const out=[];
@@ -3057,7 +3059,7 @@ function animalLines(e,a){
   else if(cat==='mixed')main=esc(L('evMixedAnimal'));
   else if(cat==='no_data')main=esc(L('evNoAnimal'));
   else main=v.vol?fill(L('evNotStated'),{vol:esc(volText(v.vol))}):esc(L('evNotStatedNoVol'));
-  const note=a.detail?enx(cap1(a.detail)):(a.class_evaluation?esc(L('evClassNote')):'');
+  const note=a.detail?(curLang==='zh'&&a.detail_zh?esc(a.detail_zh):enx(cap1(a.detail))):(a.class_evaluation?esc(L('evClassNote')):'');
   return [main,note];
 }
 /* Key characteristics of carcinogens. IARC's lists are free text, so each phrase is matched to a plain label;
@@ -3101,7 +3103,7 @@ function mechLines(e,m){
   }else if(v.pre==='earlier'&&v.year)main=fill(L('evMechEarly'),{year:esc(v.year)});          // before 1991 IARC's rules had no such rating
   else if(m.quote&&v.vol)main=fill(L('evMechUnrated'),{vol:esc(volText(v.vol))});               // described, not rated
   else main=v.vol?fill(L('evNotStated'),{vol:esc(volText(v.vol))}):esc(L('evNotStatedNoVol'));
-  if(m.detail)out.push(enx(cap1(m.detail)));          // IARC's own detail: grades by type, "in vitro mutagenicity of the mixture"...
+  if(m.detail)out.push(curLang==='zh'&&m.detail_zh?esc(m.detail_zh):enx(cap1(m.detail)));          // IARC's own detail: grades by type, "in vitro mutagenicity of the mixture"...
   const kc=kcList(m); if(kc)out.push(fill(L('evKC'),{list:kc}));
   return [main].concat(out);
 }
@@ -3116,9 +3118,10 @@ function streamsHtml(e){
 }
 function iarcWords(e){
   const st=e.streams, ev=e.evaluation||{}, cl=e.classification||{}, vol=ev.volume||cl.volume, yr=ev.year||cl.year;
-  const q=(label,s,lang)=>s?`${label?`<div class="iw-h">${esc(label)}</div>`:''}<blockquote lang="en" dir="ltr">${esc(s)}</blockquote>`:'';
+  const q=(label,s,z)=>s?`${label?`<div class="iw-h">${esc(label)}</div>`:''}<blockquote lang="en" dir="ltr">${esc(s)}</blockquote>${z?`<p class="iw-tr"><span class="iw-tl">${esc(T.iwTrans||'')}</span>${esc(z)}</p>`:''}`:'';
+  const zq=o=>curLang==='zh'?(o.quote_zh||''):'';
   const h=st.human||{}, a=st.animal||{}, m=st.mechanistic||{};
-  const quotes=q(T.inPeople,h.quote)+q('',h.lack_quote)+q(T.inAnimals,a.quote)+q(T.howItWorks,m.quote);
+  const quotes=q(T.inPeople,h.quote,zq(h))+q('',h.lack_quote)+q(T.inAnimals,a.quote,zq(a))+q(T.howItWorks,m.quote,zq(m));
   const url=/^https:\/\//.test(ev.url||'')?ev.url:'';
   const chap=ev.chapter?(url?`<a href="${esc(url)}" target="_blank" rel="noopener" lang="en" dir="ltr">${esc(ev.chapter)}</a>`:`<span lang="en" dir="ltr">${esc(ev.chapter)}</span>`):'';
   const src=[vol?esc(cap1(volText(vol)))+(yr?spc()+pr(esc(yr)):''):'',chap].filter(Boolean).join(' · ');
