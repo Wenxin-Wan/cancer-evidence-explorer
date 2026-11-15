@@ -426,10 +426,6 @@
     #atlasWrap[data-theme="dark"] .atwhy{background:#ECEBE4;color:#161713;box-shadow:0 6px 20px rgba(0,0,0,.5)}
     #atlasWrap[data-theme="dark"] .atqlist{box-shadow:0 10px 30px rgba(0,0,0,.5)}
   }
-  .atfsb{display:inline-flex;align-items:center;gap:6px}
-  .atfsb svg{flex:none}
-  .atfsb .ic-out,.at-fs .atfsb .ic-in{display:none}
-  .at-fs .atfsb .ic-out{display:block}
   /* Full screen (atSetFs): the panel fills the screen, through the Fullscreen API or, where it is missing or refused,
      position:fixed over the page; the scene takes the room the bars leave, and the lead, the hint and the note on the
      method wait outside */
@@ -450,7 +446,9 @@
   html[dir=rtl] .atbar .msearch .si{left:auto;right:9px}
   .atbar .atend{margin-inline-start:auto}
   .atbar .btn[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--card)}
-  .atrot .rsw{width:12px;height:12px;border-radius:50%;border:1.5px solid currentColor;border-top-color:transparent;flex:none}
+  .atrot svg,.atthm svg{flex:none}
+  .msearch input{font-family:inherit}
+  .atbar .msearch input:focus-visible,.atsel:focus-visible{outline:2px solid var(--accent);outline-offset:1px}
   .atqlist{position:absolute;z-index:40;left:0;right:0;top:calc(100% + 4px);margin:0;padding:4px;list-style:none;background:var(--card);
     border:1px solid var(--line);border-radius:8px;max-height:320px;overflow:auto;box-shadow:0 8px 30px rgba(23,32,42,.13)}
   .atqlist li{display:flex;align-items:center;gap:9px;padding:7px 8px;border-radius:6px;cursor:pointer;font-size:13.5px;line-height:1.3}
@@ -461,7 +459,8 @@
   .atfilters{display:flex;flex-direction:column;gap:9px;padding:10px 14px 11px;border-bottom:1px solid var(--line2);background:var(--card)}
   .atrow{display:flex;flex-wrap:wrap;gap:7px 9px;align-items:center;min-width:0}
   .atrow .mlabel,.atyear .mlabel{color:var(--faint);font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.04em}
-  .atrow .atgap{width:10px}
+  .atgrp{display:inline-flex;flex-wrap:wrap;gap:7px 9px;align-items:center;min-width:0;margin-inline-end:14px}
+  .atgrp:last-child{margin-inline-end:0}
   .atchips{display:contents}
   .ats{font-family:inherit;transition:background .15s,border-color .15s,color .15s}
   .ats:hover,.atrow .chip:hover{border-color:var(--faint)}
@@ -470,10 +469,11 @@
   .ats[aria-pressed="true"] .n{color:var(--at-ondim)}
   .atsel{font:inherit;font-size:13px;line-height:1.3;padding:6px 10px;border:1px solid var(--line);border-radius:9px;background:var(--paper);color:var(--ink);
     max-width:100%;min-width:0}
-  .atrow .atsel{max-width:min(100%,360px)}
+  .atrow .atsel{max-width:min(100%,320px)}
+  @media(min-width:761px){.atrow .atsel{width:230px}}
   .atread{min-height:40px}
   .atread .atpre{color:var(--muted)}
-  .atstage{position:relative;height:clamp(440px,calc(100vh - 260px),760px);height:clamp(440px,calc(100svh - 260px),760px);overflow:hidden;background:var(--at-scene)}
+  .atstage{position:relative;height:clamp(440px,calc(100vh - 200px),800px);height:clamp(440px,calc(100svh - 200px),800px);overflow:hidden;background:var(--at-scene)}
   #atCv{position:absolute;inset:0;width:100%;height:100%;display:block;touch-action:none;cursor:grab;outline:none}
   #atCv.pointer{cursor:pointer}
   .atlabels{position:absolute;inset:0;pointer-events:none;overflow:hidden;contain:strict}
@@ -482,20 +482,23 @@
   .atlb.show{visibility:visible}
   .atlb.can{font-size:11px;color:var(--muted)}
   .atlb.ag{font-size:12.5px;font-weight:600}
-  .atlb.fac{font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+  .atlb.fac{font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:color-mix(in srgb,var(--fc,currentColor) 70%,var(--ink))}
+  .atlb.sys.grp{color:var(--ink);text-decoration:underline;text-underline-offset:3px}
+  .atlb.sys.hov{color:var(--ink)}
   .atlb.sys{font-size:10px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--faint)}
   .atlb.cap{font-size:10.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--faint)}
   .atlb.cap b{color:var(--ink);font-weight:700}
   html[dir=rtl] .atlb.fac,html[dir=rtl] .atlb.sys,html[dir=rtl] .atlb.cap{letter-spacing:0;text-transform:none}
   .atlb.on{font-weight:600;color:var(--ink)}
   .atlb.sel{font-weight:700;color:var(--ink);text-decoration:underline;text-underline-offset:3px}
-  .atlb.dim{opacity:.5}
+  .atlb.dim{opacity:.6}
+  #atlasWrap[data-theme="dark"] .atlb.dim{opacity:.7}
   .atlb .n{font-size:10.5px;font-weight:600;color:var(--faint);margin-inline-start:5px;font-variant-numeric:tabular-nums}
   .atlb .n.S{color:var(--established)}
   .atlb .n.L{color:var(--suspected)}
   /* the year of the timeline, large, in the lower corner of the scene, with its counts and the volumes of that year */
-  .atyear{position:absolute;inset-inline-start:14px;bottom:64px;z-index:4;max-width:min(470px,calc(100% - 28px));pointer-events:none;
-    text-shadow:0 0 3px var(--at-scene),0 0 3px var(--at-scene),0 0 6px var(--at-scene)}
+  .atyear{position:absolute;inset-inline-start:8px;bottom:62px;z-index:4;max-width:min(480px,calc(100% - 16px));pointer-events:none;
+    background:color-mix(in srgb,var(--at-scene) 82%,transparent);padding:4px 8px;border-radius:9px}
   .atyear b{display:block;font-family:var(--mono);font-size:46px;font-weight:600;line-height:1;letter-spacing:-.01em;color:var(--ink);font-variant-numeric:tabular-nums}
   .atyear .atcount{display:block;margin-top:6px;font-family:var(--mono);font-size:12.5px;line-height:1.4;color:var(--ink)}
   html[lang=ar] .atyear .atcount,html[lang=ru] .atyear .atcount,html[lang=zh] .atyear .atcount,html[lang=ja] .atyear .atcount{font-family:var(--sans);font-size:13px}
@@ -526,6 +529,12 @@
   .atkey>span{display:inline-flex;align-items:center;gap:5px}
   .atkey .sqk{display:inline-block;width:10px;height:8px}
   .atrank{list-style:none;margin:0;padding:0}
+  .atord{display:flex;flex-wrap:wrap;gap:5px;margin:0 0 7px}
+  .atord .chip{padding:3px 9px;font-size:12px}
+  .atrank li.g button{font-weight:600}
+  .atrank li.g+li:not(.g) button,.atrank li.in button{padding-inline-start:16px}
+  .atcans .gh{margin:8px 0 2px;font-size:12px;font-weight:700;color:var(--faint)}
+  .atcans .gh:first-child{margin-top:0}
   .atrank button{width:100%;display:grid;grid-template-columns:minmax(0,1fr) 64px 22px 46px;align-items:center;gap:8px;border:0;background:none;
     padding:4px 5px;border-radius:5px;cursor:pointer;text-align:start;font-size:13px;color:var(--ink)}
   .atrank button:hover{background:var(--paper)}
@@ -580,6 +589,7 @@
   @media(max-width:760px){
     #atlasWrap:not(.filters-open) .atfilters{display:none}
     .atbar .msearch{flex:1 1 100%;max-width:none}
+    .atbar .msearch input,.atsel{font-size:16px}
     .atbar{gap:8px 6px}
     .atbar .atend{display:none}
     .atbar .btn,.atbar .chip{padding:5px 9px;font-size:12px}
@@ -595,7 +605,12 @@
   }
   @media(max-width:420px){.attl .atreplay .txt{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}}
   /* five tabs on a phone: two rows of two and the fifth across the width */
-  @media(max-width:560px){.tab:last-child:nth-child(odd){grid-column:1/-1}}
+  @media(max-width:560px){.tab:last-child:nth-child(odd){grid-column:1/-1}
+    #atHint{display:none}
+    #atlasWrap.at-fs .atlegend{display:none}}
+  .athint-m{display:none}
+  @media(max-width:560px){.athint-m{display:block}}
+  #atFsPh{display:block}
 
   footer.ft{color:var(--faint);font-size:12px;font-variant-numeric:tabular-nums;padding:18px 0 34px;border-top:1px solid var(--line);margin-top:8px;line-height:1.6}
   footer.ft b{color:var(--muted)}
@@ -1086,34 +1101,34 @@
     <div class="mxhead">
       <p class="mxlead" id="atLead">Each exposure sits between the settings where people meet it, on the ring above, and the cancer types IARC links it to, on the ring below. Exposures met in the same settings sit close together. Distance shows how alike the settings are, not how harmful an exposure is.</p>
     </div>
-    <div class="mapbar atbar" id="atBar">
+    <div class="mapbar atbar" id="atBar" inert>
       <div class="msearch"><span class="si"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.8-3.8"/></svg></span><input id="atQ" type="text" role="combobox" aria-autocomplete="list" aria-expanded="false" aria-controls="atQList" autocomplete="off" spellcheck="false" placeholder="Find an exposure or cancer…"><ul class="atqlist" id="atQList" role="listbox" hidden></ul></div>
       <button type="button" class="btn filters" id="atFiltersBtn" aria-expanded="false" aria-controls="atFilters">Filters</button>
       <span class="atend"></span>
-      <button type="button" class="chip toggle atrot" id="atRotate" aria-pressed="true"><span class="rsw" aria-hidden="true"></span><span class="txt">Rotate</span></button>
+      <button type="button" class="chip toggle atrot" id="atRotate" aria-pressed="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12a8 8 0 1 1-2.3-5.7"/><path d="M20 4v5h-5"/></svg><span class="txt">Rotate</span></button>
       <button type="button" class="btn" id="atTop" aria-pressed="false">Top view</button>
       <button type="button" class="btn" id="atReset">Reset view</button>
-      <button type="button" class="btn atfsb" id="atFs" aria-pressed="false"><svg class="ic-in" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/></svg><svg class="ic-out" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 4v5H4M15 4v5h5M9 20v-5H4M15 20v-5h5"/></svg><span class="txt">Full screen</span></button>
+      <button type="button" class="btn primary" id="atFs">⤢ Full screen</button>
       <button type="button" class="chip toggle atthm" id="atTheme" aria-pressed="false"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg><span class="txt">Dark</span></button>
     </div>
-    <div class="atfilters" id="atFilters">
-      <div class="atrow"><span class="mlabel" id="atCatLbl">Category</span><span class="atchips" id="atCats" role="group" aria-labelledby="atCatLbl"></span>
-        <span class="atgap"></span><span class="mlabel" id="atCauseLbl">Cause</span><span class="atchips" id="atGrps" role="group" aria-labelledby="atCauseLbl"></span></div>
-      <div class="atrow"><span class="mlabel" id="atSetLbl">Settings</span><span class="atchips" id="atFacets" role="group" aria-labelledby="atSetLbl"></span>
-        <select class="atsel" id="atSetSel" aria-labelledby="atSetLbl"></select></div>
-      <div class="atrow"><span class="mlabel" id="atCanLbl">Cancer types</span><select class="atsel" id="atCanSel" aria-labelledby="atCanLbl"></select></div>
+    <div class="atfilters" id="atFilters" inert>
+      <div class="atrow"><span class="mlabel" id="atCatLbl">Category</span><span class="atchips" id="atCats" role="group" aria-labelledby="atCatLbl"></span></div>
+      <div class="atrow"><span class="atgrp"><span class="mlabel" id="atCauseLbl">Cause</span><span class="atchips" id="atGrps" role="group" aria-labelledby="atCauseLbl"></span></span>
+        <span class="atgrp"><label class="mlabel" id="atSetLbl" for="atSetSel">Settings</label><select class="atsel" id="atSetSel"></select></span>
+        <span class="atgrp"><label class="mlabel" id="atCanLbl" for="atCanSel">Cancer types</label><select class="atsel" id="atCanSel"></select></span></div>
     </div>
-    <div class="mxread atread" id="atRead" role="status" aria-live="polite"></div>
+    <div class="mxread atread" id="atRead" tabindex="-1"></div>
+    <div class="sr-only" id="atLive" aria-live="polite"></div>
     <div class="maparea atstage" id="atStage">
       <canvas id="atCv" tabindex="-1" role="img" aria-label="3D view of the exposure settings, the exposures and the cancer types"></canvas>
       <div class="atlabels" id="atLabels" aria-hidden="true"></div>
       <div class="atyear" id="atYear" hidden><b id="atYearN"></b><span class="atcount" id="atCount"></span><span class="atcap" id="atCap"></span></div>
-      <div class="attl" id="atTl" role="group" aria-labelledby="atTlLbl"><span class="sr-only" id="atTlLbl">Year of IARC evaluation</span>
-        <button type="button" class="btn primary" id="atPlay" aria-pressed="false"><span class="ic" aria-hidden="true">▶</span><span class="txt">Play the timeline</span></button>
+      <div class="attl" id="atTl" role="group" aria-labelledby="atTlLbl" inert><span class="sr-only" id="atTlLbl">Year of IARC evaluation</span>
+        <button type="button" class="btn primary" id="atPlay"><span class="ic" aria-hidden="true">▶</span><span class="txt">Play the timeline</span></button>
         <button type="button" class="btn atreplay" id="atReplay" hidden><span class="ic" aria-hidden="true">↺</span><span class="txt">Replay</span></button>
         <span class="attrack"><span class="yr" id="atRangeMin" aria-hidden="true"></span><input type="range" id="atRange" step="1"><span class="yr" id="atRangeMax" aria-hidden="true"></span></span>
       </div>
-      <div class="mapcard atsum" id="atSum" aria-live="polite"></div>
+      <div class="mapcard atsum" id="atSum"></div>
       <div class="mapcard atcard" id="atCard" role="region" aria-labelledby="atCardT"></div>
       <div class="atmsg" id="atMsg" role="status"><span class="atmsg-t">Loading the 3D view…</span></div>
     </div>
@@ -1352,7 +1367,7 @@ en:{name:'English',native:'English',flag:'🇬🇧',dir:'ltr',
   /* the exposure-settings tab (design demo B, the Settings Atlas): its UI strings. The names of the tab, of the six
      kinds of settings and of the 48 settings in the other languages are in SETTINGS.i18n (settings-i18n.json). */
   tabSettings: "Explore exposure settings",
-  atLead: "Each exposure sits between the settings where people meet it, on the ring above, and the cancer types IARC links it to, on the ring below. Exposures met in the same settings sit close together. Distance shows how alike the settings are, not how harmful an exposure is.",
+  atLead: "Each exposure sits between the settings where people meet it (the ring above) and the cancer types IARC links it to (the ring below). Exposures met in the same settings sit close together.",
   atLoading: "Loading the 3D view…",
   atFail: "The 3D view could not be loaded. Check your connection and try again.",
   atRetry: "Try again",
@@ -1406,9 +1421,7 @@ en:{name:'English',native:'English',flag:'🇬🇧',dir:'ltr',
   atOpen: "Open the full entry →",
   atWhy: "Matched in the description (English)",
   atNoMatch: "No exposure or cancer type matches “{q}”.",
-  atLgSet: "Exposure setting",
   atLgExp: "Exposure (colour: category)",
-  atLgCan: "Cancer type",
   atHint: "Drag to turn the view · scroll to zoom · click a setting, an exposure or a cancer type to follow its links · Shift-click settings to compare them.",
   atHintTouch: "Drag to turn the view · pinch to zoom · tap a setting, an exposure or a cancer type to follow its links.",
   atAria: "3D view: the exposure settings on the upper ring, the exposures in the middle and the cancer types on the lower ring. The readout, the summary and the other tabs give the same data as text.",
@@ -1417,10 +1430,15 @@ en:{name:'English',native:'English',flag:'🇬🇧',dir:'ltr',
   atHow: ["Three layers. The upper ring holds the {nt} exposure settings, grouped into six kinds. The lower ring holds the {nc} cancer types, grouped by organ system. Between them sit the {ne} exposures. Each is joined to its settings above and to its cancer types below: a solid line for an established link (sufficient evidence in people) and a dashed line for a suspected one (limited evidence).", "Where an exposure sits. The settings of each exposure were found by keywords in its description in this explorer (where it is found and who is exposed, written from the exposure sections of the IARC Monographs, Lancet Oncology summaries and WHO, ATSDR and NTP sources). The exposures were placed once, from a 3D map of how alike their descriptions and settings are, then drawn toward their own settings and their closest neighbours. Distance shows how alike the exposure settings are. It does not show how alike the cancers are, and it is not a measure of risk.", "The timeline. Each exposure appears in the year IARC first evaluated it. Its links to cancer types appear in the year of the evaluation behind its current classification. Earlier evaluations may have named different cancer sites or groups.", "Keywords have limits. An exposure can miss a setting where it does occur, or carry one that its description mentions only in passing. The card of an exposure shows, for each setting, the words that matched (in English)."],
   atPrCap: "The exposure settings, with the number of exposures in each and the cancer types most often linked to them",
   atPrTop: "Cancer types most often linked (number of exposures)",
-  atFs: "Full screen",
-  atFsExit: "Exit full screen",
   atDark: "Dark",
-  atDarkTitle: "Dark colours for this view (the rest of the page stays light)"},
+  atDarkTitle: "Dark colours for this view (the rest of the page stays light)",
+  atLeadNote: "Distance shows how alike the settings are, not how harmful an exposure is.",
+  atFacetAll: "All {facet} settings",
+  atFacetSel: "{facet} settings",
+  atGrpAll: "all types",
+  atKGrp: "Group of cancer types",
+  atByNum: "By number",
+  atCanOrder: "Order of the cancer types"},
 zh:{name:'Chinese',native:'中文',flag:'🇨🇳',dir:'ltr',
   title:"什么与癌症有关？",
   lede:"这是一张互动地图，展示科学家已发现与各种癌症有关的暴露因素，由万汶鑫根据《IARC 致癌物专论》的分类整理而成。地图收录了 IARC 在 2026 年 5 月列出的 185 种因素，每一种都至少有人群研究的有限证据，显示它与某种具体的癌症有关。搜索还能找到 IARC 评估过、但没有指出具体癌症部位的另外 874 种因素，例如咖啡（3 类）。",
@@ -1602,7 +1620,7 @@ zh:{name:'Chinese',native:'中文',flag:'🇨🇳',dir:'ltr',
   mxPairSr: "{e}与{c}：{ev}",
   /* the exposure-settings tab (design demo B, the Settings Atlas): its UI strings. The names of the tab, of the six
      kinds of settings and of the 48 settings in the other languages are in SETTINGS.i18n (settings-i18n.json). */
-  atLead: "每种暴露因素位于两个圆环之间：上方圆环是人们接触到它的场景，下方圆环是 IARC 认定与它有关的癌症类型。在相同场景中接触到的暴露因素彼此靠近。距离反映的是暴露场景的相似程度，并不表示暴露因素的危害大小。",
+  atLead: "每种暴露因素位于两个圆环之间：上方圆环是人们接触到它的场景，下方圆环是 IARC 认定与它有关的癌症类型。在相同场景中接触到的暴露因素彼此靠近。",
   atLoading: "正在加载三维视图…",
   atFail: "三维视图未能加载。请检查网络连接后重试。",
   atRetry: "重试",
@@ -1656,9 +1674,7 @@ zh:{name:'Chinese',native:'中文',flag:'🇨🇳',dir:'ltr',
   atOpen: "查看完整条目 →",
   atWhy: "描述中的匹配文字（英文）",
   atNoMatch: "没有与“{q}”匹配的暴露因素或癌症类型。",
-  atLgSet: "暴露场景",
   atLgExp: "暴露因素（颜色表示类别）",
-  atLgCan: "癌症类型",
   atHint: "拖动可旋转视图 · 滚动鼠标滚轮可缩放 · 点击场景、暴露因素或癌症类型可查看其关联 · 按住 Shift 键点击多个场景可进行比较。",
   atHintTouch: "拖动可旋转视图 · 双指开合可缩放 · 点按场景、暴露因素或癌症类型可查看其关联。",
   atAria: "三维视图：上方圆环为暴露场景，中间为暴露因素，下方圆环为癌症类型。状态栏、摘要和其他标签页以文字形式提供相同的数据。",
@@ -1667,10 +1683,15 @@ zh:{name:'Chinese',native:'中文',flag:'🇨🇳',dir:'ltr',
   atHow: ["三个层次。上方圆环是 {nt} 个暴露场景，分为六类。下方圆环是 {nc} 种癌症类型，按器官系统分组。两者之间是 {ne} 种暴露因素，每种都与上方的场景和下方的癌症类型相连：实线表示已确认关联（人群证据充分），虚线表示疑似关联（人群证据有限）。", "暴露因素的位置。每种暴露因素的场景，是通过关键词从本工具对它的描述中识别出来的。这些描述说明它存在于何处、哪些人会接触到它，依据 IARC 专论中有关暴露的章节、《柳叶刀·肿瘤学》的摘要以及 WHO、ATSDR 和 NTP 的资料撰写。各暴露因素的位置只计算一次：先依据描述和场景的相似程度生成三维分布图，再将每种因素拉向它自己的场景和与它最相近的因素。距离反映的是暴露场景的相似程度，既不反映所致癌症的相似程度，也不是对风险的度量。", "时间线。每种暴露因素在 IARC 首次评估它的年份出现；它与癌症类型的关联，在其现行分类所依据的评估年份出现。此前的评估所认定的癌症部位或分类可能与此不同。", "关键词的局限。某种暴露因素可能漏标它实际存在的场景，也可能被标上描述中仅顺带提及的场景。暴露因素的卡片列出了每个场景所匹配的文字（英文）。"],
   atPrCap: "各暴露场景，以及每个场景中暴露因素的数量和与之关联最多的癌症类型",
   atPrTop: "关联最多的癌症类型（暴露因素数量）",
-  atFs: "全屏",
-  atFsExit: "退出全屏",
   atDark: "深色",
-  atDarkTitle: "此视图使用深色（页面其余部分保持浅色）"},
+  atDarkTitle: "此视图使用深色（页面其余部分保持浅色）",
+  atLeadNote: "距离反映的是暴露场景的相似程度，并不表示暴露因素的危害大小。",
+  atFacetAll: "全部{facet}场景",
+  atFacetSel: "{facet}场景",
+  atGrpAll: "全部类型",
+  atKGrp: "癌症类型分组",
+  atByNum: "按数量",
+  atCanOrder: "癌症类型的排列方式"},
 fr:{name:'French',native:'Français',flag:'🇫🇷',dir:'ltr',
   title:"Qu’est-ce qui est lié au cancer ?",
   lede:"Une carte interactive des expositions que les scientifiques ont liées à différents cancers, conçue par Wenxin Wan à partir des classifications des Monographies du CIRC. Elle couvre les 185 agents pour lesquels il existe au moins des preuves limitées chez l’être humain pour un cancer précis, tels que le CIRC les a listés en mai 2026. La recherche trouve aussi les 874 autres agents que le CIRC a évalués sans désigner de localisation de cancer, comme le café (groupe 3).",
@@ -1851,7 +1872,7 @@ fr:{name:'French',native:'Français',flag:'🇫🇷',dir:'ltr',
   mxPairSr: "{e} et {c} : {ev}",
   /* the exposure-settings tab (design demo B, the Settings Atlas): its UI strings. The names of the tab, of the six
      kinds of settings and of the 48 settings in the other languages are in SETTINGS.i18n (settings-i18n.json). */
-  atLead: "Chaque exposition se place entre les contextes où l’on y est exposé, sur l’anneau du haut, et les types de cancers que le CIRC lui associe, sur l’anneau du bas. Les expositions rencontrées dans les mêmes contextes sont proches les unes des autres. La distance indique à quel point les contextes se ressemblent, pas à quel point une exposition est nocive.",
+  atLead: "Chaque exposition se place entre les contextes où l’on y est exposé, sur l’anneau du haut, et les types de cancers que le CIRC lui associe, sur l’anneau du bas. Les expositions rencontrées dans les mêmes contextes sont proches les unes des autres.",
   atLoading: "Chargement de la vue 3D…",
   atFail: "La vue 3D n’a pas pu être chargée. Vérifiez votre connexion et réessayez.",
   atRetry: "Réessayer",
@@ -1905,9 +1926,7 @@ fr:{name:'French',native:'Français',flag:'🇫🇷',dir:'ltr',
   atOpen: "Ouvrir la fiche complète →",
   atWhy: "Passage repéré dans la description (en anglais)",
   atNoMatch: "Aucune exposition ni aucun type de cancer ne correspond à « {q} ».",
-  atLgSet: "Contexte d’exposition",
   atLgExp: "Exposition (couleur : catégorie)",
-  atLgCan: "Type de cancer",
   atHint: "Faites glisser pour tourner la vue · molette pour zoomer · cliquez sur un contexte, une exposition ou un type de cancer pour suivre ses liens · Maj + clic sur plusieurs contextes pour les comparer.",
   atHintTouch: "Faites glisser pour tourner la vue · pincez pour zoomer · touchez un contexte, une exposition ou un type de cancer pour suivre ses liens.",
   atAria: "Vue 3D : les contextes d’exposition sur l’anneau du haut, les expositions au milieu et les types de cancers sur l’anneau du bas. La ligne d’état, le résumé et les autres onglets donnent les mêmes données sous forme de texte.",
@@ -1916,10 +1935,15 @@ fr:{name:'French',native:'Français',flag:'🇫🇷',dir:'ltr',
   atHow: ["Trois niveaux. L’anneau du haut réunit les {nt} contextes d’exposition, en six familles. L’anneau du bas réunit les {nc} types de cancers, par appareil ou organe. Entre les deux se trouvent les {ne} expositions. Chacune est reliée à ses contextes en haut et à ses types de cancers en bas : un trait plein pour un lien établi (preuves suffisantes chez l’être humain), un trait pointillé pour un lien suspecté (preuves limitées).", "Position d’une exposition. Les contextes de chaque exposition ont été repérés par mots-clés dans sa description dans cet explorateur (où on la trouve et qui y est exposé, rédigée à partir des sections sur l’exposition des Monographies du CIRC, des résumés de Lancet Oncology et de sources de l’OMS, de l’ATSDR et du NTP). Les expositions ont été placées une fois pour toutes à partir d’une carte 3D de la ressemblance de leurs descriptions et de leurs contextes, puis rapprochées de leurs propres contextes et de leurs plus proches voisines. La distance indique à quel point les contextes d’exposition se ressemblent. Elle n’indique pas si les cancers se ressemblent, et ce n’est pas une mesure du risque.", "La chronologie. Chaque exposition apparaît l’année où le CIRC l’a évaluée pour la première fois. Ses liens avec des types de cancers apparaissent l’année de l’évaluation qui fonde sa classification actuelle. Des évaluations antérieures ont pu retenir d’autres localisations de cancer ou d’autres groupes.", "Les limites des mots-clés. Une exposition peut manquer un contexte où elle est pourtant présente, ou porter un contexte que sa description ne mentionne qu’en passant. La fiche d’une exposition montre, pour chaque contexte, les mots repérés (en anglais)."],
   atPrCap: "Les contextes d’exposition, avec le nombre d’expositions de chacun et les types de cancers qui leur sont le plus souvent liés",
   atPrTop: "Types de cancers les plus souvent liés (nombre d’expositions)",
-  atFs: "Plein écran",
-  atFsExit: "Quitter le plein écran",
   atDark: "Sombre",
-  atDarkTitle: "Couleurs sombres pour cette vue (le reste de la page reste clair)"},
+  atDarkTitle: "Couleurs sombres pour cette vue (le reste de la page reste clair)",
+  atLeadNote: "La distance indique à quel point les contextes se ressemblent, pas à quel point une exposition est nocive.",
+  atFacetAll: "Tous les contextes : {facet}",
+  atFacetSel: "Contextes : {facet}",
+  atGrpAll: "tous les types",
+  atKGrp: "Groupe de types de cancers",
+  atByNum: "Par nombre",
+  atCanOrder: "Ordre des types de cancers"},
 es:{name:'Spanish',native:'Español',flag:'🇪🇸',dir:'ltr',
   title:"¿Qué está relacionado con el cáncer?",
   lede:"Un mapa interactivo de las exposiciones que los científicos han vinculado a distintos tipos de cáncer, elaborado por Wenxin Wan a partir de las clasificaciones de las Monografías del CIIC. Recoge los 185 agentes con al menos evidencia limitada en humanos para un cáncer concreto, tal como el CIIC los publicó en mayo de 2026. La búsqueda también encuentra los otros 874 agentes que el CIIC ha evaluado sin indicar una localización del cáncer, como el café (Grupo 3).",
@@ -2102,7 +2126,7 @@ es:{name:'Spanish',native:'Español',flag:'🇪🇸',dir:'ltr',
   mxPairSr: "{e} y {c}: {ev}",
   /* the exposure-settings tab (design demo B, the Settings Atlas): its UI strings. The names of the tab, of the six
      kinds of settings and of the 48 settings in the other languages are in SETTINGS.i18n (settings-i18n.json). */
-  atLead: "Cada exposición se sitúa entre los entornos en los que las personas entran en contacto con ella, en el anillo superior, y los tipos de cáncer que el CIIC le vincula, en el anillo inferior. Las exposiciones que se dan en los mismos entornos quedan cerca unas de otras. La distancia indica cuánto se parecen los entornos, no cuán dañina es una exposición.",
+  atLead: "Cada exposición se sitúa entre los entornos en los que las personas entran en contacto con ella, en el anillo superior, y los tipos de cáncer que el CIIC le vincula, en el anillo inferior. Las exposiciones que se dan en los mismos entornos quedan cerca unas de otras.",
   atLoading: "Cargando la vista 3D…",
   atFail: "No se pudo cargar la vista 3D. Comprueba tu conexión e inténtalo de nuevo.",
   atRetry: "Reintentar",
@@ -2156,9 +2180,7 @@ es:{name:'Spanish',native:'Español',flag:'🇪🇸',dir:'ltr',
   atOpen: "Abrir la ficha completa →",
   atWhy: "Texto encontrado en la descripción (en inglés)",
   atNoMatch: "Ninguna exposición ni tipo de cáncer coincide con «{q}».",
-  atLgSet: "Entorno de exposición",
   atLgExp: "Exposición (color: categoría)",
-  atLgCan: "Tipo de cáncer",
   atHint: "Arrastra para girar la vista · usa la rueda para acercar · haz clic en un entorno, una exposición o un tipo de cáncer para seguir sus vínculos · Mayús + clic en varios entornos para compararlos.",
   atHintTouch: "Arrastra para girar la vista · pellizca para acercar · toca un entorno, una exposición o un tipo de cáncer para seguir sus vínculos.",
   atAria: "Vista 3D: los entornos de exposición en el anillo superior, las exposiciones en el centro y los tipos de cáncer en el anillo inferior. La línea de estado, el resumen y las demás pestañas ofrecen los mismos datos en forma de texto.",
@@ -2167,10 +2189,15 @@ es:{name:'Spanish',native:'Español',flag:'🇪🇸',dir:'ltr',
   atHow: ["Tres niveles. El anillo superior reúne los {nt} entornos de exposición, en seis tipos. El anillo inferior reúne los {nc} tipos de cáncer, agrupados por sistema de órganos. Entre ambos están las {ne} exposiciones. Cada una se une a sus entornos arriba y a sus tipos de cáncer abajo: una línea continua para un vínculo establecido (evidencia suficiente en humanos) y una línea discontinua para uno sospechado (evidencia limitada).", "Dónde se sitúa una exposición. Los entornos de cada exposición se detectaron mediante palabras clave en su descripción en este explorador (dónde se encuentra y quién está expuesto, redactada a partir de las secciones sobre exposición de las Monografías del CIIC, los resúmenes de Lancet Oncology y fuentes de la OMS, la ATSDR y el NTP). Las exposiciones se colocaron una sola vez a partir de un mapa 3D de cuánto se parecen sus descripciones y sus entornos, y después se acercaron a sus propios entornos y a sus vecinas más próximas. La distancia indica cuánto se parecen los entornos de exposición. No indica cuánto se parecen los cánceres y no es una medida del riesgo.", "La cronología. Cada exposición aparece el año en que el CIIC la evaluó por primera vez. Sus vínculos con tipos de cáncer aparecen el año de la evaluación en la que se basa su clasificación actual. Las evaluaciones anteriores pueden haber señalado otras localizaciones de cáncer u otros grupos.", "Los límites de las palabras clave. A una exposición le puede faltar un entorno en el que sí se da, o puede tener uno que su descripción solo menciona de pasada. La ficha de una exposición muestra, para cada entorno, las palabras encontradas (en inglés)."],
   atPrCap: "Los entornos de exposición, con el número de exposiciones de cada uno y los tipos de cáncer vinculados con más frecuencia",
   atPrTop: "Tipos de cáncer vinculados con más frecuencia (número de exposiciones)",
-  atFs: "Pantalla completa",
-  atFsExit: "Salir de pantalla completa",
   atDark: "Oscuro",
-  atDarkTitle: "Colores oscuros para esta vista (el resto de la página sigue claro)"},
+  atDarkTitle: "Colores oscuros para esta vista (el resto de la página sigue claro)",
+  atLeadNote: "La distancia indica cuánto se parecen los entornos, no cuán dañina es una exposición.",
+  atFacetAll: "Todos los entornos: {facet}",
+  atFacetSel: "Entornos: {facet}",
+  atGrpAll: "todos los tipos",
+  atKGrp: "Grupo de tipos de cáncer",
+  atByNum: "Por número",
+  atCanOrder: "Orden de los tipos de cáncer"},
 ru:{name:'Russian',native:'Русский',flag:'🇷🇺',dir:'ltr',
   title:"Что связано с раком?",
   lede:"Интерактивная карта факторов воздействия, которые учёные связали с разными видами рака. Её составил Вэньсинь Вань по классификациям Монографий МАИР. В неё вошли 185 факторов, для которых есть хотя бы ограниченные доказательства связи с конкретным видом рака у людей, по списку МАИР на май 2026 года. Поиск находит и ещё 874 фактора, которые МАИР оценило, не назвав локализацию рака, например кофе (группа 3).",
@@ -2353,7 +2380,7 @@ ru:{name:'Russian',native:'Русский',flag:'🇷🇺',dir:'ltr',
   mxPairSr: "{e} и {c}: {ev}",
   /* the exposure-settings tab (design demo B, the Settings Atlas): its UI strings. The names of the tab, of the six
      kinds of settings and of the 48 settings in the other languages are in SETTINGS.i18n (settings-i18n.json). */
-  atLead: "Каждый фактор расположен между условиями, в которых люди с ним сталкиваются (верхнее кольцо), и видами рака, с которыми его связывает МАИР (нижнее кольцо). Факторы, встречающиеся в одних и тех же условиях, находятся рядом. Расстояние показывает, насколько схожи условия воздействия, а не насколько вреден фактор.",
+  atLead: "Каждый фактор расположен между условиями, в которых люди с ним сталкиваются (верхнее кольцо), и видами рака, с которыми его связывает МАИР (нижнее кольцо). Факторы, встречающиеся в одних и тех же условиях, находятся рядом.",
   atLoading: "Загрузка трёхмерного изображения…",
   atFail: "Не удалось загрузить трёхмерное изображение. Проверьте подключение к интернету и попробуйте ещё раз.",
   atRetry: "Повторить",
@@ -2407,9 +2434,7 @@ ru:{name:'Russian',native:'Русский',flag:'🇷🇺',dir:'ltr',
   atOpen: "Открыть полную запись →",
   atWhy: "Совпадение в описании (на английском)",
   atNoMatch: "Нет фактора или вида рака, соответствующего запросу «{q}».",
-  atLgSet: "Условия воздействия",
   atLgExp: "Фактор (цвет — категория)",
-  atLgCan: "Вид рака",
   atHint: "Перетаскивайте, чтобы повернуть изображение · колесо мыши меняет масштаб · щёлкните условия, фактор или вид рака, чтобы проследить связи · Shift + щелчок по нескольким условиям сравнивает их.",
   atHintTouch: "Проведите пальцем, чтобы повернуть изображение · сведите или разведите пальцы, чтобы изменить масштаб · коснитесь условий, фактора или вида рака, чтобы проследить связи.",
   atAria: "Трёхмерное изображение: условия воздействия на верхнем кольце, факторы в середине, виды рака на нижнем кольце. Строка состояния, сводка и другие вкладки дают те же данные в виде текста.",
@@ -2418,10 +2443,15 @@ ru:{name:'Russian',native:'Русский',flag:'🇷🇺',dir:'ltr',
   atHow: ["Три уровня. Верхнее кольцо объединяет условия воздействия ({nt}) в шести группах. Нижнее кольцо объединяет виды рака ({nc}), сгруппированные по системам органов. Между ними находятся факторы ({ne}). Каждый соединён со своими условиями наверху и со своими видами рака внизу: сплошная линия — установленная связь (достаточные доказательства у людей), пунктирная — предполагаемая (ограниченные доказательства).", "Где расположен фактор. Условия каждого фактора найдены по ключевым словам в его описании в этом обозревателе (где он встречается и кто подвергается воздействию; описания составлены по разделам о воздействии монографий МАИР, резюме в Lancet Oncology и материалам ВОЗ, ATSDR и NTP). Положение факторов рассчитано один раз: сначала по трёхмерной карте сходства их описаний и условий, затем каждый фактор притянут к своим условиям и ближайшим соседям. Расстояние показывает, насколько схожи условия воздействия. Оно не показывает сходство видов рака и не является мерой риска.", "Хронология. Каждый фактор появляется в году, когда МАИР впервые его оценило. Его связи с видами рака появляются в году оценки, на которой основана нынешняя классификация. Более ранние оценки могли называть другие локализации рака или другие группы.", "Ограничения ключевых слов. У фактора могут не оказаться условия, в которых он на самом деле встречается, или оказаться условия, лишь мимоходом упомянутые в описании. В карточке фактора для каждого условия приведены совпавшие слова (на английском)."],
   atPrCap: "Условия воздействия: число факторов в каждом и виды рака, чаще всего связанные с ними",
   atPrTop: "Чаще всего связанные виды рака (число факторов)",
-  atFs: "На весь экран",
-  atFsExit: "Обычный режим",
   atDark: "Тёмная тема",
-  atDarkTitle: "Тёмные цвета для этого изображения (остальная страница остаётся светлой)"},
+  atDarkTitle: "Тёмные цвета для этого изображения (остальная страница остаётся светлой)",
+  atLeadNote: "Расстояние показывает, насколько схожи условия воздействия, а не насколько вреден фактор.",
+  atFacetAll: "Все условия: {facet}",
+  atFacetSel: "Условия: {facet}",
+  atGrpAll: "все виды",
+  atKGrp: "Группа видов рака",
+  atByNum: "По числу",
+  atCanOrder: "Порядок видов рака"},
 pt:{name:'Portuguese',native:'Português',flag:'🇧🇷',dir:'ltr',
   title:"O que está associado ao câncer?",
   lede:"Um mapa interativo das exposições que cientistas associaram a diferentes tipos de câncer, feito por Wenxin Wan a partir das classificações das Monografias da IARC. Ele reúne os 185 agentes com pelo menos evidência limitada em pessoas para um câncer específico, como a IARC os listou em maio de 2026. A busca também encontra os outros 874 agentes que a IARC avaliou sem indicar uma localização de câncer, como o café (Grupo 3).",
@@ -2602,7 +2632,7 @@ pt:{name:'Portuguese',native:'Português',flag:'🇧🇷',dir:'ltr',
   mxPairSr: "{e} e {c}: {ev}",
   /* the exposure-settings tab (design demo B, the Settings Atlas): its UI strings. The names of the tab, of the six
      kinds of settings and of the 48 settings in the other languages are in SETTINGS.i18n (settings-i18n.json). */
-  atLead: "Cada exposição fica entre os contextos em que as pessoas entram em contato com ela, no anel de cima, e os tipos de câncer que a IARC associa a ela, no anel de baixo. Exposições presentes nos mesmos contextos ficam próximas umas das outras. A distância mostra o quanto os contextos se parecem, não o quanto uma exposição é nociva.",
+  atLead: "Cada exposição fica entre os contextos em que as pessoas entram em contato com ela, no anel de cima, e os tipos de câncer que a IARC associa a ela, no anel de baixo. Exposições presentes nos mesmos contextos ficam próximas umas das outras.",
   atLoading: "Carregando a visualização 3D…",
   atFail: "Não foi possível carregar a visualização 3D. Verifique sua conexão e tente de novo.",
   atRetry: "Tentar de novo",
@@ -2656,9 +2686,7 @@ pt:{name:'Portuguese',native:'Português',flag:'🇧🇷',dir:'ltr',
   atOpen: "Abrir o item completo →",
   atWhy: "Trecho encontrado na descrição (em inglês)",
   atNoMatch: "Nenhuma exposição ou tipo de câncer corresponde a “{q}”.",
-  atLgSet: "Contexto de exposição",
   atLgExp: "Exposição (cor: categoria)",
-  atLgCan: "Tipo de câncer",
   atHint: "Arraste para girar a visualização · role para aproximar · clique em um contexto, uma exposição ou um tipo de câncer para seguir suas associações · Shift + clique em vários contextos para compará-los.",
   atHintTouch: "Arraste para girar a visualização · faça o gesto de pinça para dar zoom · toque em um contexto, uma exposição ou um tipo de câncer para seguir suas associações.",
   atAria: "Visualização 3D: os contextos de exposição no anel de cima, as exposições no meio e os tipos de câncer no anel de baixo. A linha de estado, o resumo e as outras abas trazem os mesmos dados em texto.",
@@ -2667,10 +2695,15 @@ pt:{name:'Portuguese',native:'Português',flag:'🇧🇷',dir:'ltr',
   atHow: ["Três camadas. O anel de cima reúne os {nt} contextos de exposição, em seis tipos. O anel de baixo reúne os {nc} tipos de câncer, agrupados por sistema do corpo. Entre eles ficam as {ne} exposições. Cada uma se liga a seus contextos em cima e a seus tipos de câncer embaixo: linha contínua para uma associação estabelecida (evidência suficiente em humanos) e linha tracejada para uma suspeita (evidência limitada).", "Onde fica uma exposição. Os contextos de cada exposição foram identificados por palavras-chave na sua descrição neste explorador (onde ela é encontrada e quem fica exposto, escrita a partir das seções sobre exposição das Monografias da IARC, dos resumos da Lancet Oncology e de fontes da OMS, da ATSDR e do NTP). As exposições foram posicionadas uma única vez a partir de um mapa 3D de quanto suas descrições e contextos se parecem e, depois, aproximadas de seus próprios contextos e de suas vizinhas mais próximas. A distância mostra o quanto os contextos de exposição se parecem. Ela não mostra se os cânceres se parecem e não é uma medida de risco.", "A linha do tempo. Cada exposição aparece no ano em que a IARC a avaliou pela primeira vez. Suas associações com tipos de câncer aparecem no ano da avaliação em que se baseia sua classificação atual. Avaliações anteriores podem ter apontado outras localizações de câncer ou outros grupos.", "Os limites das palavras-chave. Uma exposição pode ficar sem um contexto em que de fato ocorre, ou ter um que sua descrição só menciona de passagem. O cartão de uma exposição mostra, para cada contexto, as palavras encontradas (em inglês)."],
   atPrCap: "Os contextos de exposição, com o número de exposições em cada um e os tipos de câncer associados com mais frequência",
   atPrTop: "Tipos de câncer associados com mais frequência (número de exposições)",
-  atFs: "Tela cheia",
-  atFsExit: "Sair da tela cheia",
   atDark: "Escuro",
-  atDarkTitle: "Cores escuras para esta visualização (o resto da página continua claro)"},
+  atDarkTitle: "Cores escuras para esta visualização (o resto da página continua claro)",
+  atLeadNote: "A distância mostra o quanto os contextos se parecem, não o quanto uma exposição é nociva.",
+  atFacetAll: "Todos os contextos: {facet}",
+  atFacetSel: "Contextos: {facet}",
+  atGrpAll: "todos os tipos",
+  atKGrp: "Grupo de tipos de câncer",
+  atByNum: "Por número",
+  atCanOrder: "Ordem dos tipos de câncer"},
 ar:{name:'Arabic',native:'العربية',flag:'🇸🇦',dir:'rtl',
   title:"ما الذي يرتبط بالسرطان؟",
   lede:"خريطة تفاعلية لعوامل التعرض التي ربطها العلماء بأنواع مختلفة من السرطان، أعدّها Wenxin Wan استناداً إلى تصنيفات دراسات الوكالة الدولية لبحوث السرطان (IARC Monographs). تضم الخريطة 185 عاملاً توجد عن كل منها أدلة محدودة على الأقل لدى البشر على ارتباطه بنوع محدد من السرطان، كما أدرجتها الوكالة في مايو 2026. ويجد البحث أيضاً 874 عاملاً آخر قيّمتها الوكالة دون تحديد موضع للسرطان، مثل القهوة (المجموعة 3).",
@@ -2851,7 +2884,7 @@ ar:{name:'Arabic',native:'العربية',flag:'🇸🇦',dir:'rtl',
   mxPairSr: "{e} و{c}: {ev}",
   /* the exposure-settings tab (design demo B, the Settings Atlas): its UI strings. The names of the tab, of the six
      kinds of settings and of the 48 settings in the other languages are in SETTINGS.i18n (settings-i18n.json). */
-  atLead: "يقع كل عامل تعرض بين السياقات التي يتعرض له الناس فيها، على الحلقة العليا، وأنواع السرطان التي تربطه بها الوكالة الدولية لبحوث السرطان، على الحلقة السفلى. وتتقارب العوامل التي يُتعرَّض لها في السياقات نفسها. تبيّن المسافة مدى تشابه السياقات، لا مدى ضرر العامل.",
+  atLead: "يقع كل عامل تعرض بين السياقات التي يتعرض له الناس فيها، على الحلقة العليا، وأنواع السرطان التي تربطه بها الوكالة الدولية لبحوث السرطان، على الحلقة السفلى. وتتقارب العوامل التي يُتعرَّض لها في السياقات نفسها.",
   atLoading: "جارٍ تحميل العرض ثلاثي الأبعاد…",
   atFail: "تعذّر تحميل العرض ثلاثي الأبعاد. تحقّق من الاتصال وحاول مرة أخرى.",
   atRetry: "حاول مرة أخرى",
@@ -2905,9 +2938,7 @@ ar:{name:'Arabic',native:'العربية',flag:'🇸🇦',dir:'rtl',
   atOpen: "افتح المدخل الكامل ←",
   atWhy: "النص المطابق في الوصف (بالإنجليزية)",
   atNoMatch: "لا يوجد عامل أو نوع سرطان يطابق «{q}».",
-  atLgSet: "سياق التعرض",
   atLgExp: "عامل التعرض (اللون: الفئة)",
-  atLgCan: "نوع السرطان",
   atHint: "اسحب لتدوير العرض · استخدم عجلة الفأرة للتكبير · انقر على سياق أو عامل أو نوع سرطان لتتبّع ارتباطاته · اضغط Shift مع النقر على عدة سياقات لمقارنتها.",
   atHintTouch: "اسحب لتدوير العرض · اضغط بإصبعين (قرص) للتكبير · المس سياقاً أو عاملاً أو نوع سرطان لتتبّع ارتباطاته.",
   atAria: "عرض ثلاثي الأبعاد: سياقات التعرض على الحلقة العليا، والعوامل في الوسط، وأنواع السرطان على الحلقة السفلى. يقدّم سطر الحالة والملخص وعلامات التبويب الأخرى البيانات نفسها نصاً.",
@@ -2916,10 +2947,15 @@ ar:{name:'Arabic',native:'العربية',flag:'🇸🇦',dir:'rtl',
   atHow: ["ثلاث طبقات. تضم الحلقة العليا سياقات التعرض ({nt})، مقسّمة إلى ستة أنواع. وتضم الحلقة السفلى أنواع السرطان ({nc})، مجمّعة حسب أجهزة الجسم. وبينهما عوامل التعرض ({ne}). يرتبط كل عامل بسياقاته في الأعلى وبأنواع السرطان في الأسفل: خط متصل للارتباط المؤكَّد (أدلة كافية لدى البشر) وخط متقطع للارتباط المشتبه به (أدلة محدودة).", "موقع العامل. حُدّدت سياقات كل عامل بكلمات مفتاحية في وصفه في هذا المستكشف (أين يوجد ومن يتعرض له، وقد كُتب استناداً إلى أقسام التعرض في دراسات الوكالة الدولية لبحوث السرطان وملخصات Lancet Oncology ومصادر منظمة الصحة العالمية وATSDR وNTP). ووُضعت العوامل مرة واحدة انطلاقاً من خريطة ثلاثية الأبعاد لمدى تشابه أوصافها وسياقاتها، ثم قُرّب كل عامل من سياقاته وأقرب جيرانه. تبيّن المسافة مدى تشابه سياقات التعرض، ولا تبيّن مدى تشابه أنواع السرطان، وليست مقياساً للخطر.", "الخط الزمني. يظهر كل عامل في العام الذي قيّمته فيه الوكالة لأول مرة. وتظهر ارتباطاته بأنواع السرطان في عام التقييم الذي يستند إليه تصنيفه الحالي. وربما ذكرت التقييمات السابقة مواضع سرطان أو مجموعات مختلفة.", "حدود الكلمات المفتاحية. قد يفتقد عامل سياقاً يوجد فيه فعلاً، أو يحمل سياقاً لا يذكره وصفه إلا عرضاً. وتعرض بطاقة العامل، لكل سياق، الكلمات المطابقة (بالإنجليزية)."],
   atPrCap: "سياقات التعرض، مع عدد العوامل في كل منها وأنواع السرطان الأكثر ارتباطاً بها",
   atPrTop: "أنواع السرطان الأكثر ارتباطاً (عدد العوامل)",
-  atFs: "ملء الشاشة",
-  atFsExit: "الخروج من ملء الشاشة",
   atDark: "داكن",
-  atDarkTitle: "ألوان داكنة لهذا العرض (تبقى بقية الصفحة فاتحة)"},
+  atDarkTitle: "ألوان داكنة لهذا العرض (تبقى بقية الصفحة فاتحة)",
+  atLeadNote: "تبيّن المسافة مدى تشابه السياقات، لا مدى ضرر العامل.",
+  atFacetAll: "كل السياقات: {facet}",
+  atFacetSel: "السياقات: {facet}",
+  atGrpAll: "كل الأنواع",
+  atKGrp: "مجموعة أنواع السرطان",
+  atByNum: "حسب العدد",
+  atCanOrder: "ترتيب أنواع السرطان"},
 de:{name:'German',native:'Deutsch',flag:'🇩🇪',dir:'ltr',
   title:"Was hängt mit Krebs zusammen?",
   lede:"Eine interaktive Karte der Expositionen, die Forschende mit verschiedenen Krebsarten in Verbindung gebracht haben, erstellt von Wenxin Wan auf Grundlage der Einstufungen der IARC-Monographien. Die Karte umfasst die 185 Faktoren, für die es nach der Liste der IARC vom Mai 2026 beim Menschen mindestens begrenzte Belege für eine bestimmte Krebsart gibt. Die Suche findet außerdem 874 weitere Faktoren, die die IARC bewertet hat, ohne eine Krebsart zu nennen, etwa Kaffee (Gruppe 3).",
@@ -3100,7 +3136,7 @@ de:{name:'German',native:'Deutsch',flag:'🇩🇪',dir:'ltr',
   mxPairSr: "{e} und {c}: {ev}",
   /* the exposure-settings tab (design demo B, the Settings Atlas): its UI strings. The names of the tab, of the six
      kinds of settings and of the 48 settings in the other languages are in SETTINGS.i18n (settings-i18n.json). */
-  atLead: "Jede Exposition steht zwischen den Szenarien, in denen Menschen ihr begegnen (oberer Ring), und den Krebsarten, mit denen die IARC sie in Zusammenhang bringt (unterer Ring). Expositionen aus denselben Szenarien liegen nah beieinander. Der Abstand zeigt, wie ähnlich die Szenarien sind, nicht wie schädlich eine Exposition ist.",
+  atLead: "Jede Exposition steht zwischen den Szenarien, in denen Menschen ihr begegnen (oberer Ring), und den Krebsarten, mit denen die IARC sie in Zusammenhang bringt (unterer Ring). Expositionen aus denselben Szenarien liegen nah beieinander.",
   atLoading: "3D-Ansicht wird geladen…",
   atFail: "Die 3D-Ansicht konnte nicht geladen werden. Bitte prüfen Sie Ihre Verbindung und versuchen Sie es erneut.",
   atRetry: "Erneut versuchen",
@@ -3154,9 +3190,7 @@ de:{name:'German',native:'Deutsch',flag:'🇩🇪',dir:'ltr',
   atOpen: "Ganzen Eintrag öffnen →",
   atWhy: "Fundstelle in der Beschreibung (auf Englisch)",
   atNoMatch: "Keine Exposition und keine Krebsart passt zu „{q}“.",
-  atLgSet: "Expositionsszenario",
   atLgExp: "Exposition (Farbe: Kategorie)",
-  atLgCan: "Krebsart",
   atHint: "Ziehen Sie, um die Ansicht zu drehen · zoomen Sie mit dem Mausrad · klicken Sie auf ein Szenario, eine Exposition oder eine Krebsart, um die Zusammenhänge zu verfolgen · vergleichen Sie mehrere Szenarien mit Umschalt + Klick.",
   atHintTouch: "Ziehen Sie, um die Ansicht zu drehen · zoomen Sie mit zwei Fingern · tippen Sie auf ein Szenario, eine Exposition oder eine Krebsart, um die Zusammenhänge zu verfolgen.",
   atAria: "3D-Ansicht: die Expositionsszenarien auf dem oberen Ring, die Expositionen in der Mitte und die Krebsarten auf dem unteren Ring. Statuszeile, Zusammenfassung und die anderen Reiter geben dieselben Daten als Text wieder.",
@@ -3165,10 +3199,15 @@ de:{name:'German',native:'Deutsch',flag:'🇩🇪',dir:'ltr',
   atHow: ["Drei Ebenen. Der obere Ring enthält die {nt} Expositionsszenarien in sechs Gruppen. Der untere Ring enthält die {nc} Krebsarten, nach Organsystem gruppiert. Dazwischen stehen die {ne} Expositionen. Jede ist oben mit ihren Szenarien und unten mit ihren Krebsarten verbunden: eine durchgezogene Linie für einen gesicherten Zusammenhang (ausreichende Belege beim Menschen), eine gestrichelte für einen vermuteten (begrenzte Belege).", "Wo eine Exposition steht. Die Szenarien jeder Exposition wurden über Schlüsselwörter in ihrer Beschreibung in diesem Explorer gefunden (wo sie vorkommt und wer ihr ausgesetzt ist, verfasst nach den Expositionsabschnitten der IARC-Monographien, Zusammenfassungen in Lancet Oncology sowie Quellen von WHO, ATSDR und NTP). Die Expositionen wurden einmalig nach einer 3D-Karte der Ähnlichkeit ihrer Beschreibungen und Szenarien platziert und dann zu ihren eigenen Szenarien und nächsten Nachbarn hingezogen. Der Abstand zeigt, wie ähnlich die Expositionsszenarien sind. Er zeigt nicht, wie ähnlich die Krebsarten sind, und ist kein Maß für das Risiko.", "Die Zeitleiste. Jede Exposition erscheint in dem Jahr, in dem die IARC sie zum ersten Mal bewertet hat. Ihre Zusammenhänge mit Krebsarten erscheinen im Jahr der Bewertung, auf der ihre heutige Einstufung beruht. Frühere Bewertungen können andere Krebslokalisationen oder Gruppen genannt haben.", "Grenzen der Schlüsselwörter. Einer Exposition kann ein Szenario fehlen, in dem sie tatsächlich vorkommt, oder sie trägt eines, das ihre Beschreibung nur nebenbei erwähnt. Das Detailfenster einer Exposition zeigt für jedes Szenario die gefundenen Wörter (auf Englisch)."],
   atPrCap: "Die Expositionsszenarien mit der Zahl ihrer Expositionen und den am häufigsten verknüpften Krebsarten",
   atPrTop: "Am häufigsten verknüpfte Krebsarten (Zahl der Expositionen)",
-  atFs: "Vollbild",
-  atFsExit: "Vollbild beenden",
   atDark: "Dunkel",
-  atDarkTitle: "Dunkle Farben für diese Ansicht (der Rest der Seite bleibt hell)"},
+  atDarkTitle: "Dunkle Farben für diese Ansicht (der Rest der Seite bleibt hell)",
+  atLeadNote: "Der Abstand zeigt, wie ähnlich die Szenarien sind, nicht wie schädlich eine Exposition ist.",
+  atFacetAll: "Alle Szenarien: {facet}",
+  atFacetSel: "Szenarien: {facet}",
+  atGrpAll: "alle Arten",
+  atKGrp: "Gruppe von Krebsarten",
+  atByNum: "Nach Anzahl",
+  atCanOrder: "Reihenfolge der Krebsarten"},
 ja:{name:'Japanese',native:'日本語',flag:'🇯🇵',dir:'ltr',
   title:"がんと関連するもの",
   lede:"科学者がさまざまながんとの関連を示してきた曝露要因をまとめた、インタラクティブなマップです。Wenxin WanがIARCモノグラフの分類をもとに作成しました。IARCが2026年5月に一覧にした、特定のがんについて人での証拠が少なくとも限定的にある185の要因を扱っています。検索では、IARCが評価したものの、がんの部位を示していないほかの874の要因も見つかります。たとえばコーヒー（グループ3）です。",
@@ -3352,7 +3391,7 @@ ja:{name:'Japanese',native:'日本語',flag:'🇯🇵',dir:'ltr',
   mxPairSr: "{e}と{c}：{ev}",
   /* the exposure-settings tab (design demo B, the Settings Atlas): its UI strings. The names of the tab, of the six
      kinds of settings and of the 48 settings in the other languages are in SETTINGS.i18n (settings-i18n.json). */
-  atLead: "各曝露要因は、人がその要因に接する場面（上の輪）と、IARCがその要因と関連づけるがんの種類（下の輪）のあいだに置かれています。同じ場面で接する曝露要因どうしは近くに並びます。距離が示すのは場面の類似度であり、曝露要因の有害性ではありません。",
+  atLead: "各曝露要因は、人がその要因に接する場面（上の輪）と、IARCがその要因と関連づけるがんの種類（下の輪）のあいだに置かれています。同じ場面で接する曝露要因どうしは近くに並びます。",
   atLoading: "3D表示を読み込んでいます…",
   atFail: "3D表示を読み込めませんでした。接続を確認してから、もう一度お試しください。",
   atRetry: "再試行",
@@ -3406,9 +3445,7 @@ ja:{name:'Japanese',native:'日本語',flag:'🇯🇵',dir:'ltr',
   atOpen: "詳しい項目を開く →",
   atWhy: "説明文中の該当箇所（英語）",
   atNoMatch: "「{q}」に一致する要因またはがんの種類はありません。",
-  atLgSet: "曝露の場面",
   atLgExp: "曝露要因（色はカテゴリー）",
-  atLgCan: "がんの種類",
   atHint: "ドラッグで回転 · ホイールで拡大縮小 · 場面・要因・がんの種類をクリックすると関連をたどれます · Shiftキーを押しながら複数の場面をクリックすると比較できます。",
   atHintTouch: "ドラッグで回転 · ピンチで拡大縮小 · 場面・要因・がんの種類をタップすると関連をたどれます。",
   atAria: "3D表示：上の輪に曝露の場面、中央に曝露要因、下の輪にがんの種類。状態表示、要約、ほかのタブで同じデータを文字で確認できます。",
@@ -3417,10 +3454,15 @@ ja:{name:'Japanese',native:'日本語',flag:'🇯🇵',dir:'ltr',
   atHow: ["3つの層。上の輪には{nt}の曝露の場面があり、6つの種類に分かれています。下の輪にはがん{nc}種類があり、臓器系ごとにまとめています。そのあいだに{ne}の曝露要因が並びます。各曝露要因は上の場面と下のがんの種類に線で結ばれ、実線は確立された関連（人での十分な証拠）、破線は疑われる関連（限定的な証拠）を示します。", "曝露要因の位置。各曝露要因の場面は、このマップにある要因の説明文（どこに存在し、だれが曝露するか。IARCモノグラフの曝露に関する節、Lancet Oncologyの要約、WHO・ATSDR・NTPの資料をもとに執筆）から、キーワードによって特定したものです。曝露要因の位置は一度だけ計算しました。説明文と場面の類似度にもとづく3Dの配置から出発し、各要因を自身の場面と最も近い要因のほうへ引き寄せています。距離が示すのは曝露の場面の類似度です。がんの類似度を示すものではなく、リスクの尺度でもありません。", "タイムライン。各曝露要因は、IARCが初めて評価した年に現れます。がんの種類との関連は、現在の分類の根拠となった評価の年に現れます。それ以前の評価では、異なるがんの部位や分類が示されていた可能性があります。", "キーワードの限界。実際に存在する場面が曝露要因から漏れていることも、説明文で付随的に触れられているだけの場面が付与されていることもあります。曝露要因のカードには、場面ごとに該当した語句（英語）を示しています。"],
   atPrCap: "曝露の場面と、それぞれの要因の数、および最も多く関連するがんの種類",
   atPrTop: "最も多く関連するがんの種類（曝露要因の数）",
-  atFs: "全画面表示",
-  atFsExit: "全画面表示を終了",
   atDark: "ダーク",
-  atDarkTitle: "この表示を暗い配色にします（ページのほかの部分は明るいままです）"},
+  atDarkTitle: "この表示を暗い配色にします（ページのほかの部分は明るいままです）",
+  atLeadNote: "距離が示すのは場面の類似度であり、曝露要因の有害性ではありません。",
+  atFacetAll: "{facet}のすべての場面",
+  atFacetSel: "{facet}の場面",
+  atGrpAll: "すべての種類",
+  atKGrp: "がんの種類のグループ",
+  atByNum: "数の多い順",
+  atCanOrder: "がんの種類の並べ方"},
 it:{name:'Italian',native:'Italiano',flag:'🇮🇹',dir:'ltr',
   title:"Cosa è collegato al cancro?",
   lede:"Una mappa interattiva delle esposizioni che gli scienziati hanno collegato a diversi tumori, realizzata da Wenxin Wan a partire dalle classificazioni delle Monografie IARC. Comprende i 185 agenti con prove almeno limitate nell'uomo per un tumore specifico, come li ha elencati la IARC a maggio 2026. La ricerca trova anche gli altri 874 agenti che la IARC ha valutato senza indicare una sede del tumore, come il caffè (Gruppo 3).",
@@ -3600,7 +3642,7 @@ it:{name:'Italian',native:'Italiano',flag:'🇮🇹',dir:'ltr',
   mxPairSr: "{e} e {c}: {ev}",
   /* the exposure-settings tab (design demo B, the Settings Atlas): its UI strings. The names of the tab, of the six
      kinds of settings and of the 48 settings in the other languages are in SETTINGS.i18n (settings-i18n.json). */
-  atLead: "Ogni esposizione si trova tra i contesti in cui le persone la incontrano, sull'anello in alto, e i tipi di tumore a cui la IARC la collega, sull'anello in basso. Le esposizioni presenti negli stessi contesti stanno vicine. La distanza indica quanto si somigliano i contesti, non quanto è dannosa un'esposizione.",
+  atLead: "Ogni esposizione si trova tra i contesti in cui le persone la incontrano, sull'anello in alto, e i tipi di tumore a cui la IARC la collega, sull'anello in basso. Le esposizioni presenti negli stessi contesti stanno vicine.",
   atLoading: "Caricamento della vista 3D…",
   atFail: "Non è stato possibile caricare la vista 3D. Controlla la connessione e riprova.",
   atRetry: "Riprova",
@@ -3654,9 +3696,7 @@ it:{name:'Italian',native:'Italiano',flag:'🇮🇹',dir:'ltr',
   atOpen: "Apri la voce completa →",
   atWhy: "Testo trovato nella descrizione (in inglese)",
   atNoMatch: "Nessuna esposizione né tipo di tumore corrisponde a «{q}».",
-  atLgSet: "Contesto di esposizione",
   atLgExp: "Esposizione (colore: categoria)",
-  atLgCan: "Tipo di tumore",
   atHint: "Trascina per ruotare la vista · usa la rotellina per lo zoom · fai clic su un contesto, un'esposizione o un tipo di tumore per seguirne i legami · Maiusc + clic su più contesti per confrontarli.",
   atHintTouch: "Trascina per ruotare la vista · pizzica per lo zoom · tocca un contesto, un'esposizione o un tipo di tumore per seguirne i legami.",
   atAria: "Vista 3D: i contesti di esposizione sull'anello in alto, le esposizioni al centro e i tipi di tumore sull'anello in basso. La riga di stato, il riepilogo e le altre schede riportano gli stessi dati in forma di testo.",
@@ -3665,10 +3705,15 @@ it:{name:'Italian',native:'Italiano',flag:'🇮🇹',dir:'ltr',
   atHow: ["Tre livelli. L'anello in alto riunisce i {nt} contesti di esposizione, in sei tipi. L'anello in basso riunisce i {nc} tipi di tumore, raggruppati per apparato. In mezzo ci sono le {ne} esposizioni. Ciascuna è collegata ai suoi contesti in alto e ai suoi tipi di tumore in basso: una linea continua per un legame accertato (prove sufficienti nell'uomo), una tratteggiata per uno sospetto (prove limitate).", "Dove si trova un'esposizione. I contesti di ogni esposizione sono stati individuati con parole chiave nella sua descrizione in questo strumento (dove si trova e chi vi è esposto, scritta a partire dalle sezioni sull'esposizione delle Monografie IARC, dalle sintesi di Lancet Oncology e da fonti di OMS, ATSDR e NTP). Le esposizioni sono state collocate una sola volta a partire da una mappa 3D di quanto si somigliano le loro descrizioni e i loro contesti, poi avvicinate ai propri contesti e alle esposizioni più simili. La distanza indica quanto si somigliano i contesti di esposizione. Non indica quanto si somigliano i tumori e non è una misura del rischio.", "La linea del tempo. Ogni esposizione compare nell'anno in cui la IARC l'ha valutata per la prima volta. I suoi legami con i tipi di tumore compaiono nell'anno della valutazione su cui si basa la sua classificazione attuale. Valutazioni precedenti possono avere indicato sedi tumorali o gruppi diversi.", "I limiti delle parole chiave. A un'esposizione può mancare un contesto in cui è invece presente, oppure può averne uno che la sua descrizione cita solo di passaggio. La scheda di un'esposizione mostra, per ogni contesto, le parole trovate (in inglese)."],
   atPrCap: "I contesti di esposizione, con il numero di esposizioni di ciascuno e i tipi di tumore più spesso collegati",
   atPrTop: "Tipi di tumore più spesso collegati (numero di esposizioni)",
-  atFs: "Schermo intero",
-  atFsExit: "Esci da schermo intero",
   atDark: "Scuro",
-  atDarkTitle: "Colori scuri per questa vista (il resto della pagina resta chiaro)"}
+  atDarkTitle: "Colori scuri per questa vista (il resto della pagina resta chiaro)",
+  atLeadNote: "La distanza indica quanto si somigliano i contesti, non quanto è dannosa un'esposizione.",
+  atFacetAll: "Tutti i contesti: {facet}",
+  atFacetSel: "Contesti: {facet}",
+  atGrpAll: "tutti i tipi",
+  atKGrp: "Gruppo di tipi di tumore",
+  atByNum: "Per numero",
+  atCanOrder: "Ordine dei tipi di tumore"}
 };
 let T=LANGS.en;
 /* L(key): the current language's string, or the English one when the key is not translated yet */
@@ -5383,7 +5428,7 @@ const AT_LIB=[
 /* the kinds of settings take the colours of the matching categories of exposures */
 const AT_FACET_CAT={'Work':'Occupational','Environment':'Environmental','Lifestyle & diet':'Lifestyle & diet','Medical':'Medical & pharmaceutical','Infection':'Infections','Radiation':'Radiation'};
 /* geometry of the three layers, in world units: radius and height of the upper (S) and lower (C) rings */
-const AT_G={RS:9.2,YS:8.5,RC:12.4,YC:-11.5,GAP_S:1.7,GAP_C:1.25,AR:0.15};
+const AT_G={RS:9.2,YS:8.5,RC:12.4,YC:-11.5,GAP_S:1.7,GAP_C:1.9,AR:0.15};
 const AT_STEP=400;   // milliseconds per year of the timeline (1971 to 2026 in about 22 s)
 const AT_PULSE=900;  // the pulse of an exposure that appears
 /* the colours come from the panel's CSS custom properties, so that the tab's light and dark themes reach the scene */
@@ -5394,7 +5439,7 @@ const AT_CAN_EN={'Liver (childhood, hepatoblastoma)':'Childhood liver','Digestiv
   'Non-Hodgkin lymphoma (all combined)':'Non-Hodgkin lymphoma','NHL - positive for t(14;18)':'NHL, t(14;18)-positive','Multiple sites (unspecified)':'Multiple sites',
   'Brain & central nervous system':'Brain & nervous system','Childhood leukaemia (all combined)':'Childhood leukaemia','Skin (melanoma)':'Melanoma',
   'Skin (non-melanoma)':'Skin, non-melanoma','Upper aerodigestive tract (combined)':'Upper aerodigestive tract'};
-const ATL={insB:0,built:false,ready:false,loading:null,failed:false,raf:0,dirty:true,W:1,H:1,view:'oblique',rotate:true,touched:false,
+const ATL={visible:true,canOrder:'n',insB:0,built:false,ready:false,loading:null,failed:false,raf:0,dirty:true,W:1,H:1,view:'oblique',rotate:true,touched:false,
   year:0,Y0:0,Y1:0,playing:false,t0:0,yStart:0,pulse:new Map(),fresh:null,selKey:null,rankAll:false,sumOpen:false,filtersOpen:false};
 const atReduce=()=>reduceMotion();
 const atPhone=()=>{try{return window.matchMedia('(max-width:760px)').matches;}catch(err){return false;}};
@@ -5420,6 +5465,12 @@ function atPrepare(){
   A.NT=A.tags.length;
   A.ag=[]; exposures.forEach(e=>{const r=S.a[e.id]; if(r)A.ag.push({o:e,tags:r[3],why:r[4],p:[r[0]/100,r[1]/100,r[2]/100]});});
   A.NA=A.ag.length;
+  /* SETTINGS was computed offline from DATA: an exposure added to DATA since then has no place in the scene */
+  if(A.NA!==exposures.length||A.NA!==Object.keys(S.a).length)
+    try{console.warn('Exposure settings: SETTINGS has '+Object.keys(S.a).length+' exposures, DATA '+exposures.length+', shown '+A.NA);}catch(err){}
+  /* the kinds of setting each exposure has (one bit per kind), and how many exposures have each kind */
+  A.agFac=A.ag.map(g=>g.tags.reduce((m,t)=>m|(1<<A.tags[t].fi),0));
+  A.facetN=S.f.map((f,fi)=>A.agFac.filter(m=>m&(1<<fi)).length);
   const sysAt=s=>{const k=S.o.indexOf(s); return k<0?99:k;};
   A.can=cancers.slice().sort((a,b)=>sysAt(a.organ_plain)-sysAt(b.organ_plain)||(a.name<b.name?-1:a.name>b.name?1:0));
   A.NC=A.can.length;
@@ -5430,16 +5481,23 @@ function atPrepare(){
   A.canAg=A.can.map(()=>[]); A.agCans.forEach((l,a)=>l.forEach(x=>A.canAg[x.c].push({a,ev:x.ev})));
   /* the timeline: the first evaluation of each exposure, and the evaluation behind its current classification */
   A.first=new Int16Array(A.NA); A.cls=new Int16Array(A.NA);
-  A.ag.forEach((g,a)=>{const c=g.o.classification||{}, h=c.history||[];
-    A.first[a]=h.length?Math.min(...h.map(x=>x.y)):(c.year||0); A.cls[a]=Math.max(A.first[a],c.year||A.first[a]);});
-  const ref=parseInt(String(DATA.meta.list_ref||'').slice(0,4),10)||0;
-  A.Y0=Math.min(...A.first); A.Y1=Math.max(ref,...A.cls); ATL.year=A.Y1;
+  A.ag.forEach((g,a)=>{const c=g.o.classification||{}, ys=(c.history||[]).map(x=>+x.y).filter(y=>y>0);
+    A.first[a]=ys.length?Math.min(...ys):(+c.year>0?+c.year:0); A.cls[a]=Math.max(A.first[a],+c.year>0?+c.year:A.first[a]);});
+  /* the timeline starts at the earliest known year (1971 if none); an exposure without a year is there from the start */
+  const ref=parseInt(String(DATA.meta.list_ref||'').slice(0,4),10)||0, known=Array.from(A.first).filter(y=>y>0);
+  A.Y0=known.length?Math.min(...known):1971;
+  A.ag.forEach((g,a)=>{if(!A.first[a])A.first[a]=A.Y0; if(!A.cls[a])A.cls[a]=A.first[a];});
+  A.Y1=Math.max(ref,...A.cls); ATL.year=A.Y1;
   /* ring order: the settings by kind (as in SETTINGS), the cancer types by organ system */
   A.tagPos=new Float32Array(A.NT*3); A.facetSec=[];
   atRing(A.tags.map(t=>t.i),i=>A.tags[i].facet,AT_G.GAP_S,AT_G.RS,AT_G.YS,s=>(s[0].s0+s[0].s1)/2,A.tagPos,A.facetSec);
   A.canPos=new Float32Array(A.NC*3); A.sysSec=[];
   atRing(A.can.map((c,i)=>i),i=>A.can[i].organ_plain,AT_G.GAP_C,AT_G.RC,AT_G.YC,s=>{
     const d=s.find(x=>x.key==='Digestive system'); return d?d.s0-1:(s[0].s0+s[s.length-1].s1)/2;},A.canPos,A.sysSec);
+  /* the groups of cancer types (organ systems, in the order of the ring): the group of each type, and how many
+     exposures are linked to any type of each group */
+  A.canSys=new Int16Array(A.NC); A.sysSec.forEach((sec,k)=>sec.items.forEach(c=>{A.canSys[c]=k;}));
+  A.sysN=A.sysSec.map((sec,k)=>A.agCans.filter(l=>l.some(x=>A.canSys[x.c]===k)).length);
   A.agPos=new Float32Array(A.NA*3); A.ag.forEach((g,a)=>{A.agPos[a*3]=g.p[0]; A.agPos[a*3+1]=g.p[1]; A.agPos[a*3+2]=g.p[2];});
   A.tagR0=A.tags.map((t,i)=>0.2+0.042*Math.sqrt(A.tagAg[i].length||1));
   A.canR0=A.canAg.map(l=>0.13+0.03*Math.sqrt(l.length));
@@ -5485,18 +5543,22 @@ function atCanShorts(){
   A.canShort=base.map((s,i)=>n.get(s)>1?localName(A.can[i]):s);}
 
 /* ---- state ---- */
-const AST={cats:new Set(),grpOff:new Set(),facets:new Set(),sets:new Set(),cancer:-1,agent:-1,hover:null};
+/* group: an organ system chosen as a whole (its index in A.sysSec), or -1 */
+const AST={cats:new Set(),grpOff:new Set(),facets:new Set(),sets:new Set(),cancer:-1,group:-1,agent:-1,hover:null};
 let atFocus=false, atLitList=[], atShared=0, atOwnTags=new Set(), atOwnCans=new Map(), atPool=0, atPoolLinks=0;
 const atTimeline=()=>ATL.year<A.Y1||ATL.playing;
 function atDerive(){
   const NA=A.NA, NT=A.NT, Y=ATL.year;
   for(let t=0;t<NT;t++)A.tagVis[t]=(AST.facets.size===0||AST.facets.has(A.tags[t].facet))?1:0;
   for(const t of Array.from(AST.sets))if(!A.tagVis[t])AST.sets.delete(t);
+  let fmask=0; AST.facets.forEach(f=>{const fi=SETTINGS.f.indexOf(f); if(fi>=0)fmask|=1<<fi;});
+  if(AST.cancer>=0)AST.group=-1;
+  const G=AST.group;
   for(let a=0;a<NA;a++){const o=A.ag[a].o;
-    A.pass[a]=((AST.cats.size===0||AST.cats.has(o.category))&&!AST.grpOff.has(o.group))?1:0;
+    A.pass[a]=((AST.cats.size===0||AST.cats.has(o.category))&&!AST.grpOff.has(o.group)&&(!fmask||(A.agFac[a]&fmask)))?1:0;
     A.on[a]=A.first[a]<=Y?1:0; A.lnk[a]=A.cls[a]<=Y?1:0;}
   if(AST.agent>=0&&!A.on[AST.agent])AST.agent=-1;
-  atFocus=AST.sets.size>0||AST.cancer>=0;
+  atFocus=AST.sets.size>0||AST.cancer>=0||G>=0;
   A.lit.fill(0); A.m.fill(0); A.ev.fill(0); A.canS.fill(0); A.canL.fill(0); A.canHas.fill(0); A.tagCount.fill(0); A.tagS.fill(0); A.tagHas.fill(0);
   atLitList=[]; atShared=0; atPool=0; atPoolLinks=0;
   for(let a=0;a<NA;a++){
@@ -5505,14 +5567,18 @@ function atDerive(){
     if(A.lnk[a])for(const x of A.agCans[a])A.canHas[x.c]++;
     let m=0; if(AST.sets.size)for(const t of A.ag[a].tags)if(AST.sets.has(t))m++;
     A.m[a]=m;
-    let ev=0; if(AST.cancer>=0&&A.lnk[a])for(const x of A.agCans[a])if(x.c===AST.cancer)ev=x.ev==='S'?2:1;
+    /* ev: the strongest visible link to the chosen cancer type, or to any type of the chosen group (2 established) */
+    let ev=0, gl=0;
+    if(A.lnk[a]&&(AST.cancer>=0||G>=0))for(const x of A.agCans[a]){
+      if(AST.cancer>=0?x.c===AST.cancer:A.canSys[x.c]===G){gl++; ev=Math.max(ev,x.ev==='S'?2:1);}}
     A.ev[a]=ev;
-    if(atFocus&&(AST.sets.size===0||m>0)&&(AST.cancer<0||ev>0)){
+    const cOk=AST.cancer<0&&G<0||ev>0;
+    if(atFocus&&(AST.sets.size===0||m>0)&&cOk){
       A.lit[a]=AST.sets.size>1?(m===AST.sets.size?2:1):2; atLitList.push(a); if(A.lit[a]===2)atShared++;}
-    if(!atFocus||A.lit[a]){atPool++; if(A.lnk[a])atPoolLinks+=AST.cancer>=0?1:A.agCans[a].length;}
+    if(!atFocus||A.lit[a]){atPool++; if(A.lnk[a])atPoolLinks+=(AST.cancer>=0||G>=0)?gl:A.agCans[a].length;}
   }
   for(const a of atLitList){
-    if(A.lnk[a])for(const x of A.agCans[a]){if(AST.cancer>=0&&x.c!==AST.cancer)continue; if(x.ev==='S')A.canS[x.c]++; else A.canL[x.c]++;}
+    if(A.lnk[a])for(const x of A.agCans[a]){if(AST.cancer>=0&&x.c!==AST.cancer||G>=0&&A.canSys[x.c]!==G)continue; if(x.ev==='S')A.canS[x.c]++; else A.canL[x.c]++;}
     for(const t of A.ag[a].tags)if(A.tagVis[t]){A.tagCount[t]++; if(A.ev[a]===2)A.tagS[t]++;}
   }
   atOwnTags=new Set(); atOwnCans=new Map();
@@ -5591,8 +5657,8 @@ function atInitScene(){
   A.facetSec.forEach(sec=>{const fi=SETTINGS.f.indexOf(sec.key);
     const l=new THREE.Line(circle(AT_G.RS+0.75,AT_G.YS,sec.a0,sec.a1,40),new THREE.LineBasicMaterial({color:AC.fac[fi]||AC.muted,transparent:true,opacity:0.85}));
     l.userData={facet:sec.key}; atScene.add(l); atArcs.push(l);});
-  A.sysSec.forEach(sec=>{const l=new THREE.Line(circle(AT_G.RC+0.6,AT_G.YC,sec.a0,sec.a1,24),new THREE.LineBasicMaterial({color:AC.faint,transparent:true,opacity:0.6}));
-    atScene.add(l); atArcs.push(l);});}
+  A.sysSec.forEach((sec,k)=>{const l=new THREE.Line(circle(AT_G.RC+0.6,AT_G.YC,sec.a0,sec.a1,24),new THREE.LineBasicMaterial({color:AC.faint,transparent:true,opacity:0.6}));
+    l.userData={sys:k}; atScene.add(l); atArcs.push(l);});}
 
 /* ---- what each node looks like ---- */
 function atInst(mesh,hull,i,x,y,z,r,add,fillC,hullC){
@@ -5612,7 +5678,7 @@ function atVisuals(now){
       if(!A.lit[a])fade=0.86;
       else if(multi){if(A.lit[a]===2){r*=1.45; ink=true; add=0.05;} else fade=0.25;}
       else r*=1.18;
-      if(A.lit[a]&&AST.cancer>=0&&A.ev[a]===1)hollow=true;
+      if(A.lit[a]&&(AST.cancer>=0||AST.group>=0)&&A.ev[a]===1)hollow=true;
     } else if(agentOnly&&a!==AST.agent)fade=0.72;
     if(a===AST.agent&&r>0){r=AT_G.AR*1.75; ink=true; add=0.075; fade=0;}
     if(atIsHov('a',a)&&r>0){r*=1.3; ink=true; add=Math.max(add,0.05);}
@@ -5646,7 +5712,9 @@ function atVisuals(now){
     if(ink)_c2.copy(AC.ink); else _c2.copy(hcol).lerp(AC.bg,fade);
     atInst(atCanM,atCanH,c,A.canPos[c*3],A.canPos[c*3+1],A.canPos[c*3+2],r,add,_c1,_c2);}
   [atAgM,atAgH,atTagM,atTagH,atCanM,atCanH].forEach(m=>{m.instanceMatrix.needsUpdate=true; if(m.instanceColor)m.instanceColor.needsUpdate=true;});
-  atArcs.forEach(l=>{if(l.userData.facet)l.material.opacity=(AST.facets.size===0||AST.facets.has(l.userData.facet))?0.85:0.15;});
+  atArcs.forEach(l=>{if(l.userData.facet)l.material.opacity=(AST.facets.size===0||AST.facets.has(l.userData.facet))?0.85:0.15;
+    else if(l.userData.sys!=null){const on=AST.group===l.userData.sys, hv=atIsHov('g',l.userData.sys);
+      l.material.color.copy(on||hv?AC.ink:AC.faint); l.material.opacity=on?1:hv?0.9:AST.group>=0?0.3:0.6;}});
   ATL.dirty=true;}
 /* the lines; an exposure that appears this year draws its lines in over the year (fresh: its share of the year) */
 function atEdges(){
@@ -5664,6 +5732,8 @@ function atEdges(){
       else{for(const t of A.ag[a].tags)if(A.tagVis[t])atEdgeT(atHlSet,a,t,AC.fac[A.tags[t].fi],0.26*k*f);}
       if(!A.lnk[a])continue;
       if(AST.cancer>=0)atEdgeC(A.ev[a]===2?atHlS:atHlL,a,AST.cancer,A.ev[a]===2?AC.est:AC.sus,0.8*k*g);
+      else if(AST.group>=0){for(const x of A.agCans[a])if(A.canSys[x.c]===AST.group){
+        if(x.ev==='S')atEdgeC(atHlS,a,x.c,AC.est,(strong?0.7:0.3)*k*g); else atEdgeC(atHlL,a,x.c,AC.sus,(strong?0.75:0.32)*k*g);}}
       else for(const x of A.agCans[a]){
         if(x.ev==='S')atEdgeC(atHlS,a,x.c,AC.est,(strong?0.55:0.2)*k*g); else atEdgeC(atHlL,a,x.c,AC.sus,(strong?0.6:0.22)*k*g);}}}
   if(AST.agent>=0){const a=AST.agent;
@@ -5684,9 +5754,10 @@ function atInitLabels(){
   atAgLB=A.ag.map((g,i)=>atMkLabel('a',i,'ag'));
   const head=(r,R0,R1,a,Y)=>{r.inX=R0*Math.cos(a); r.inZ=R0*Math.sin(a); r.outX=R1*Math.cos(a); r.outZ=R1*Math.sin(a); r.wy=Y;};
   atFacLB=A.facetSec.map(sec=>{const r=atMkLabel('f',-1,'fac'); head(r,AT_G.RS-3.1,AT_G.RS+1.55,sec.mid,AT_G.YS); r.ring=1; r.key=sec.key;
-    r.el.style.color=atFacetCol(SETTINGS.f.indexOf(sec.key)); return r;});
-  atSysLB=A.sysSec.map(sec=>{const r=atMkLabel('s',-1,'sys'); head(r,AT_G.RC-3.4,AT_G.RC+2.3,sec.mid,AT_G.YC); r.ring=2; r.key=sec.key; return r;});
-  atCapLB=[atMkLabel('cap',0,'cap'),atMkLabel('cap',1,'cap'),atMkLabel('cap',2,'cap')];}
+    r.el.style.setProperty('--fc',atFacetCol(SETTINGS.f.indexOf(sec.key))); return r;});
+  atSysLB=A.sysSec.map((sec,k)=>{const r=atMkLabel('s',k,'sys'); head(r,AT_G.RC-3.4,AT_G.RC+2.3,sec.mid,AT_G.YC); r.ring=2; r.key=sec.key; return r;});
+  atCapLB=[atMkLabel('cap',0,'cap'),atMkLabel('cap',1,'cap'),atMkLabel('cap',2,'cap')];
+  atPlaced=new Float32Array(4*ALB.length);}
 function atSetLabel(r,html,cls){
   if(html!==r.html){r.el.innerHTML=html; r.html=html; r.measure=true;}
   const full='atlb '+r.cls+(cls?' '+cls:'')+(r.shown?' show':'');
@@ -5724,19 +5795,21 @@ function atLabelStates(){
     atSetLabel(r,esc(localName(A.ag[a].o)),sel?'sel':'');});
   atFacLB.forEach(r=>{r.want=AST.facets.size===0||AST.facets.has(r.key); r.prio=800;
     atSetLabel(r,atFacetMk(SETTINGS.f.indexOf(r.key)),any?'dim':'');});
-  atSysLB.forEach(r=>{r.want=true; r.prio=any?300:780; atSetLabel(r,esc(localOrgan(r.key)),any?'dim':'');});
+  atSysLB.forEach(r=>{const on=AST.group===r.i, hv=atIsHov('g',r.i); r.want=true; r.force=on||hv; r.prio=on||hv?1000:any?300:780;
+    atSetLabel(r,esc(localOrgan(r.key)),on?'grp':hv?'hov':any?'dim':'');});
   let shownA=0; for(let a=0;a<A.NA;a++)if(A.pass[a]&&A.on[a])shownA++;
   let nT=0; for(let t=0;t<A.NT;t++)nT+=A.tagVis[t];
   const cap=(k,n,of)=>esc(L(k))+' · <b>'+(n<of?n+'</b> / '+of:of+'</b>');
   atSetLabel(atCapLB[0],cap('atRingS',nT,A.NT),'');
   atSetLabel(atCapLB[1],cap('pickerExposure',shownA,A.NA),'');
   atSetLabel(atCapLB[2],cap('pickerCancer',A.NC,A.NC),'');
-  /* the caption of the lower ring would sit on the labels of a selection or under the year of the timeline: it waits */
-  atCapLB.forEach(r=>{r.want=!(r.i===2&&(any||tl)); r.force=false; r.prio=1200;});
+  /* the captions of the middle layer and of the lower ring would sit on the labels of a selection (or under the year of
+     the timeline): they wait */
+  atCapLB.forEach(r=>{r.want=!(r.i===2&&(any||tl))&&!(r.i===1&&any); r.force=false; r.prio=1200;});
   for(const r of ALB)if(r.measure){r.w=r.el.offsetWidth; r.h=r.el.offsetHeight; r.measure=false;}
   ALBS=ALB.slice().sort((a,b)=>b.prio-a.prio);
   ATL.dirty=true;}
-const atPlaced=new Float32Array(4*420); let atPlacedN=0;
+let atPlaced=new Float32Array(4*420), atPlacedN=0;
 const atRingInfo=[{},{ok:false},{ok:false}], atAgBox={minX:0,maxX:0,minY:0,maxY:0}, AT_PR={x:0,y:0,d:0,ok:false};
 let atFpx=1;
 function atProject(x,y,z,out){
@@ -5792,7 +5865,7 @@ function atPlaceLabels(){
     let hit=false; const x0=left-2, y0=topY-1, x1=left+r.w+2, y1=topY+r.h+1;
     if(!r.force)for(let k=0;k<atPlacedN;k++){const o=k*4; if(x0<atPlaced[o+2]&&x1>atPlaced[o]&&y0<atPlaced[o+3]&&y1>atPlaced[o+1]){hit=true; break;}}
     if(hit||(r.kind!=='cap'&&(x0<0||x1>W||y0<0||y1>H))){atHide(r); continue;}
-    if(atPlacedN<420){const o=atPlacedN*4; atPlaced[o]=x0; atPlaced[o+1]=y0; atPlaced[o+2]=x1; atPlaced[o+3]=y1; atPlacedN++;}
+    if(atPlacedN*4<atPlaced.length){const o=atPlacedN*4; atPlaced[o]=x0; atPlaced[o+1]=y0; atPlaced[o+2]=x1; atPlaced[o+3]=y1; atPlacedN++;}
     r.rx=left; r.ry=topY;
     if(Math.abs(left-r.x)>0.4||Math.abs(topY-r.y)>0.4){r.x=left; r.y=topY; r.el.style.transform='translate('+left.toFixed(1)+'px,'+topY.toFixed(1)+'px)';}
     if(!r.shown){r.shown=true; r.el.classList.add('show');}
@@ -5830,11 +5903,11 @@ function atInsets(){
     i.t=12;}
   return i;}
 const atFitPts=[];
-function atViewDir(name){const portrait=ATL.W/ATL.H<0.8, el=(name==='top'?88.8:(portrait?30:24))*Math.PI/180;
-  return new THREE.Vector3(0,Math.sin(el),Math.cos(el));}
+function atViewDir(name,az){const portrait=ATL.W/ATL.H<0.8, el=(name==='top'?88.8:(portrait?30:24))*Math.PI/180;
+  az=az||0; return new THREE.Vector3(Math.cos(el)*Math.sin(az),Math.sin(el),Math.cos(el)*Math.cos(az));}
 function atFit(dir,fov){
   const ins=atInsets(), W=ATL.W, H=ATL.H, fw=Math.max(120,W-ins.l-ins.r), fh=Math.max(120,H-ins.t-ins.b);
-  const phone=atPhone(), mx=phone?14:60, my=phone?18:26;
+  const phone=atPhone(), mx=phone?14:40, my=phone?18:14;
   if(!atFitPts.length)for(let k=0;k<48;k++){const a=k/48*Math.PI*2;
     atFitPts.push(new THREE.Vector3((AT_G.RS+0.8)*Math.cos(a),AT_G.YS,(AT_G.RS+0.8)*Math.sin(a)));
     atFitPts.push(new THREE.Vector3((AT_G.RC+0.7)*Math.cos(a),AT_G.YC,(AT_G.RC+0.7)*Math.sin(a)));}
@@ -5852,7 +5925,8 @@ function atFit(dir,fov){
   d=Math.min(380,Math.max(10,d));
   return {pos:dir.clone().multiplyScalar(d).add(target),target,d};}
 const atFov=name=>name==='top'?12:24;
-function atSetView(name,animate){ATL.view=name; const fov=atFov(name), f=atFit(atViewDir(name),fov);
+/* keep: fit again from the reader's current azimuth (after the turning or a drag), changing only distance and target */
+function atSetView(name,animate,keep){ATL.view=name; const fov=atFov(name), f=atFit(atViewDir(name,keep&&atCtl?atCtl.getAzimuthalAngle():0),fov);
   atFly(f.pos,f.target,animate?800:0,fov); atViewPressed(name);}
 function atViewPressed(name){if(name===null)ATL.view=null;
   const b=document.getElementById('atTop'); if(b)b.setAttribute('aria-pressed',String(name==='top'));}
@@ -5876,8 +5950,8 @@ function atPick(px,py,coarse){
   atNdc.set(px/ATL.W*2-1,-(py/ATL.H)*2+1); atRay.setFromCamera(atNdc,atCam);
   const hits=atRay.intersectObjects([atAgM,atTagM,atCanM],false);
   for(const h of hits){const k=h.object===atAgM?'a':h.object===atTagM?'t':'c'; if(h.instanceId!=null&&atVisible(k,h.instanceId))return {k,i:h.instanceId};}
-  for(let n=0;n<ALBS.length;n++){const r=ALBS[n]; if(!r.shown||r.i<0||(r.kind!=='t'&&r.kind!=='c'&&r.kind!=='a'))continue;
-    if(px>=r.rx-2&&px<=r.rx+r.w+2&&py>=r.ry-2&&py<=r.ry+r.h+2)return {k:r.kind,i:r.i};}
+  for(let n=0;n<ALBS.length;n++){const r=ALBS[n]; if(!r.shown||r.i<0||(r.kind!=='t'&&r.kind!=='c'&&r.kind!=='a'&&r.kind!=='s'))continue;
+    if(px>=r.rx-2&&px<=r.rx+r.w+2&&py>=r.ry-2&&py<=r.ry+r.h+2)return {k:r.kind==='s'?'g':r.kind,i:r.i};}
   const lim=coarse?22:11; let best=null, bd=lim*lim;
   const scan=(k,pos,n)=>{for(let i=0;i<n;i++){if(!atVisible(k,i))continue; atProject(pos[i*3],pos[i*3+1],pos[i*3+2],AT_PR); if(!AT_PR.ok)continue;
     const d=(AT_PR.x-px)**2+(AT_PR.y-py)**2; if(d<bd){bd=d; best={k,i};}}};
@@ -5887,6 +5961,7 @@ function atTipHtml(h){
   if(h.k==='t'){const t=A.tags[h.i]; return `<b>${atTagMk(h.i)}</b><br>${atFacetMk(t.fi)} · ${esc(atN('atNExp',A.tagAg[h.i].length))}`;}
   if(h.k==='c'){const c=A.can[h.i], l=A.canAg[h.i], s=l.filter(x=>x.ev==='S').length;
     return `<b>${esc(localName(c))}</b><br>${esc(localOrgan(c.organ_plain))} · ${esc(atN('atNExp',l.length))}${spc()}${esc(pr(_sub(L('atEstSus'),{s,l:l.length-s})))}`;}
+  if(h.k==='g'){const sec=A.sysSec[h.i]; return `<b>${esc(localOrgan(sec.key))}</b><br>${esc(atN('atNCan',sec.items.length))} · ${esc(atN('atNExp',A.sysN[h.i]))}`;}
   const o=A.ag[h.i].o; return `<b>${esc(localName(o))}</b><br>${esc(localCategory(o.category))} · ${esc(atGroupWord(o.group))}`;}
 
 /* ---- the summary of a selection (settings, a cancer type, or both), the readout and the card of an exposure ---- */
@@ -5904,28 +5979,84 @@ function atAgBtns(list,mark){
   return '<div class="atags">'+list.map(a=>{const o=A.ag[a].o, hol=mark&&A.ev[a]===1;
     return `<button type="button" class="atag${AST.sets.size>1&&A.lit[a]===2?' strong':''}" data-act="agent" data-i="${a}"><span class="mk${hol?' hollow':''}" style="--c:${atCatCol(o.category)}"></span>${esc(localName(o))}</button>`;}).join('')+'</div>';}
 function atEvKey(){return `<p class="atkey"><span><span class="sqk est"></span>${esc(T.chipEst)}</span><span><span class="sqk sus" style="background:var(--suspected)"></span>${esc(T.chipSus)}</span></p>`;}
-function atSetOptions(cur,skip,first){
+/* the options of the settings select: "All settings", then for each kind an option for the whole kind (value f:<kind>)
+   and its settings (value s:<id>). The compare select of the summary lists the settings only (kinds false). */
+function atSetOptions(cur,skip,first,kinds){
   let h=first?`<option value="-1">${esc(first)}</option>`:'';
-  SETTINGS.f.forEach((f,fi)=>{if(AST.facets.size&&!AST.facets.has(f))return;
+  SETTINGS.f.forEach((f,fi)=>{
     const items=A.tags.filter(t=>t.fi===fi&&!(skip&&skip.has(t.i))); if(!items.length)return;
-    h+=`<optgroup label="${esc(atFacet(fi))}"${atEnFacet(fi)?' lang="en"':''}>`+items.map(t=>`<option value="${t.i}"${t.i===cur?' selected':''}${atEnTag(t.i)?' lang="en"':''}>${esc(atTag(t.i))}${atParenN(A.tagAg[t.i].length)}</option>`).join('')+'</optgroup>';});
+    h+=`<optgroup label="${esc(atFacet(fi))}"${atEnFacet(fi)?' lang="en"':''}>`;
+    if(kinds){const v='f:'+f, nm=curLang==='en'?atFacet(fi).toLowerCase():atFacet(fi);
+      h+=`<option value="${esc(v)}"${v===cur?' selected':''}${atEnFacet(fi)?' lang="en"':''}>${esc(_sub(L('atFacetAll'),{facet:nm}))}${atParenN(A.facetN[fi])}</option>`;}
+    h+=items.map(t=>{const v='s:'+t.id;
+      return `<option value="${esc(v)}"${v===cur?' selected':''}${atEnTag(t.i)?' lang="en"':''}>${esc(atTag(t.i))}${atParenN(A.tagAg[t.i].length)}</option>`;}).join('')+'</optgroup>';});
   return h;}
+/* the values of the two selects for the state, and back */
+function atSetValue(){ if(AST.sets.size)return 's:'+A.tags[Array.from(AST.sets)[0]].id; if(AST.facets.size)return 'f:'+Array.from(AST.facets)[0]; return '-1';}
+function atCanValue(){ return AST.cancer>=0?String(AST.cancer):AST.group>=0?'g:'+A.sysSec[AST.group].key:'-1';}
+const atTagOfVal=v=>A.tags.findIndex(t=>'s:'+t.id===v), atGroupOfVal=v=>A.sysSec.findIndex(sec=>'g:'+sec.key===v);
+/* the established and suspected bars of a row, and its counts */
+function atBars(s,l,max){
+  return `<span class="bar2" aria-hidden="true"><i class="S" style="width:${(s/max*100).toFixed(1)}%"></i><i class="L" style="width:${(l/max*100).toFixed(1)}%"></i></span>`
+    +`<span class="ct"><b>${s+l}</b></span><span class="sl"><span class="sr-only">${esc(_sub(L('atEstSus'),{s,l}))}</span><span aria-hidden="true">${s} · ${l}</span></span>`;}
+function atCanRow(r,max,cls){
+  return `<li${cls?` class="${cls}"`:''}><button type="button" data-act="cancer" data-c="${r.c}" title="${esc(localName(A.can[r.c]))}"><span class="nm">${esc(A.canShort[r.c])}</span>${atBars(r.s,r.l,max)}</button></li>`;}
+/* the exposures of the selection linked to any type of each group (each exposure once, established if one link is) */
+function atGroupTotals(){ const tot=A.sysSec.map(()=>({s:0,l:0}));
+  for(const a of atLitList){ if(!A.lnk[a])continue; const best=new Map();
+    for(const x of A.agCans[a]){const k=A.canSys[x.c];
+      if(AST.group>=0&&k!==AST.group||AST.cancer>=0&&x.c!==AST.cancer)continue; best.set(k,Math.max(best.get(k)||0,x.ev==='S'?2:1));}
+    best.forEach((v,k)=>{if(v===2)tot[k].s++; else tot[k].l++;});}
+  return tot;}
+/* the two-way switch of the cancer-type lists: by number or by organ system (ATL.canOrder, for the visit) */
+function atOrderSwitch(){const org=ATL.canOrder==='o';
+  return `<div class="atord" role="group" aria-label="${esc(L('atCanOrder'))}"><button type="button" class="chip mxs" data-act="order" data-o="n" aria-pressed="${!org}">${esc(L('atByNum'))}</button>`
+    +`<button type="button" class="chip mxs" data-act="order" data-o="o" aria-pressed="${org}">${esc(L('mxSortOrgan'))}</button></div>`;}
+/* the cancer types of a selection: by number (the first 8 unless all are asked for) or each group with its total and
+   its types beneath; switch false for a single group, whose types are all listed by number */
+function atCanList(rows,switchable){ if(!rows.length)return '';
+  const org=switchable&&ATL.canOrder==='o';
+  let h=(switchable?atOrderSwitch():'')+atEvKey();
+  if(!org){const max=rows[0].n, show=ATL.rankAll||!switchable?rows:rows.slice(0,8);
+    h+='<ol class="atrank">'+show.map(r=>atCanRow(r,max)).join('')+'</ol>';
+    if(switchable&&rows.length>8)h+=`<button type="button" class="atmore" data-act="rankall">${esc(ATL.rankAll?L('atShowTop'):_sub(L('atShowAll'),{n:rows.length}))}</button>`;}
+  else{const tot=atGroupTotals(), byG=new Map();
+    rows.forEach(r=>{const k=A.canSys[r.c]; if(!byG.has(k))byG.set(k,[]); byG.get(k).push(r);});
+    const max=Math.max(1,...tot.map(t=>t.s+t.l));
+    h+='<ol class="atrank">'+A.sysSec.map((sec,k)=>{const list=byG.get(k); if(!list)return '';
+      return `<li class="g"><button type="button" data-act="group" data-g="${k}" title="${esc(localOrgan(sec.key))}"><span class="nm">${esc(localOrgan(sec.key))}</span>${atBars(tot[k].s,tot[k].l,max)}</button></li>`
+        +list.map(r=>atCanRow(r,max,'in')).join('');}).join('')+'</ol>';}
+  return h;}
+/* the settings of a selection, by number of its exposures */
+function atSetRank(){ const rows=[];
+  for(let t=0;t<A.NT;t++)if(A.tagCount[t])rows.push({t,n:A.tagCount[t],s:A.tagS[t]});
+  rows.sort((a,b)=>b.n-a.n||b.s-a.s||a.t-b.t);
+  if(!rows.length)return {rows,h:''};
+  const max=rows[0].n, show=ATL.rankAll?rows:rows.slice(0,8);
+  let h=`<h4 class="ath">${esc(L('atRankS'))}</h4>`+atEvKey()+'<ol class="atrank">'+show.map(r=>{const t=A.tags[r.t];
+    return `<li><button type="button" data-act="tag" data-t="${r.t}" title="${esc(atTag(r.t))}"><span class="nm"><span class="dot" style="background:${atFacetCol(t.fi)}"></span>${atTagMk(r.t,true)}</span>${atBars(r.s,r.n-r.s,max)}</button></li>`;}).join('')+'</ol>';
+  if(rows.length>8)h+=`<button type="button" class="atmore" data-act="rankall">${esc(ATL.rankAll?L('atShowTop'):_sub(L('atShowAll'),{n:rows.length}))}</button>`;
+  return {rows,h};}
 function atRenderSummary(){
   if(!atFocus){const had=atSumEl.contains(document.activeElement); atSumEl.classList.remove('on'); atSumEl.innerHTML='';
-    if(had)try{atCv.focus({preventScroll:true});}catch(err){} return;}
+    if(had)atRestoreFocus(); return;}
   const n=atLitList.length, sN=atLitList.filter(a=>A.ev[a]===2).length, lN=n-sN, phone=atPhone();
   const open=!phone||ATL.sumOpen;
   const close=`<button type="button" class="mc-x" data-act="clear" aria-label="${esc(L('atClear'))}" title="${esc(L('atClear'))}">×</button>`;
   const toggle=phone?`<button type="button" class="atmore" data-act="sumtoggle" aria-expanded="${open}">${esc(L(open?'atHideDetails':'atShowDetails'))}</button>`:'';
+  const none=`<p class="atsub">${esc(L('atNone'))}</p>`, G=AST.group;
   let h='';
   if(AST.sets.size){
     const ts=Array.from(AST.sets), title=ts.map(t=>atTagMk(t)).join(' + ');
     const kick=ts.length>1?esc(atN('atKSets',ts.length)):_sub(esc(L('atKSet')),{facet:atFacetMk(A.tags[ts[0]].fi)});
     h+=`<p class="atkick">${kick}</p>`+close;
-    if(AST.cancer>=0){
-      h+=`<h3 class="attitle">${title}${atArrow()}${esc(localName(A.can[AST.cancer]))}${atColon()}<span class="num">${esc(atN('atNExp',n))}</span></h3>`;
+    if(AST.cancer>=0||G>=0){
+      const tgt=AST.cancer>=0?localName(A.can[AST.cancer]):localOrgan(A.sysSec[G].key);
+      h+=`<h3 class="attitle">${title}${atArrow()}${esc(tgt)}${atColon()}<span class="num">${esc(atN('atNExp',n))}</span></h3>`;
       h+=`<p class="atsub">${esc(_sub(L('atEstSus'),{s:sN,l:lN}))} · <button type="button" class="atmore" data-act="uncancer">${esc(L('atBackAll'))}</button></p>`+toggle;
-      if(open)h+=`<div class="atsumb"><h4 class="ath">${esc(L('atExpH'))}</h4>${n?atAgBtns(atSortAg(atLitList),true)+atHollowKey():`<p class="atsub">${esc(L('atNone'))}</p>`}</div>`;
+      if(open){h+='<div class="atsumb">';
+        if(G>=0){const rows=atRankCancers(); if(rows.length)h+=`<h4 class="ath">${esc(L('atRankC'))}</h4>`+atCanList(rows,false);}
+        h+=`<h4 class="ath">${esc(L('atExpH'))}</h4>${n?atAgBtns(atSortAg(atLitList),true)+atHollowKey():none}</div>`;}
     } else {
       const rows=atRankCancers();
       h+=`<h3 class="attitle">${title}${atColon()}<span class="num">${esc(atN('atNExp',n))}</span>${atArrow()}<span class="num">${esc(atN('atNCan',rows.length))}</span></h3>`;
@@ -5933,31 +6064,28 @@ function atRenderSummary(){
       h+=toggle;
       if(open){h+='<div class="atsumb">';
         if(ts.length>1&&atShared)h+=`<h4 class="ath">${esc(L('atSharedH'))}</h4>`+atAgBtns(atSortAg(atLitList.filter(a=>A.lit[a]===2)),false);
-        if(rows.length){const max=rows[0].n, show=ATL.rankAll?rows:rows.slice(0,8);
-          h+=`<h4 class="ath">${esc(L('atRankC'))}</h4>`+atEvKey()+'<ol class="atrank">'+show.map(r=>
-            `<li><button type="button" data-act="cancer" data-c="${r.c}" title="${esc(localName(A.can[r.c]))}"><span class="nm">${esc(A.canShort[r.c])}</span>`
-            +`<span class="bar2" aria-hidden="true"><i class="S" style="width:${(r.s/max*100).toFixed(1)}%"></i><i class="L" style="width:${(r.l/max*100).toFixed(1)}%"></i></span>`
-            +`<span class="ct"><b>${r.n}</b></span><span class="sl"><span class="sr-only">${esc(_sub(L('atEstSus'),{s:r.s,l:r.l}))}</span><span aria-hidden="true">${r.s} · ${r.l}</span></span></button></li>`).join('')+'</ol>';
-          if(rows.length>8)h+=`<button type="button" class="atmore" data-act="rankall">${esc(ATL.rankAll?L('atShowTop'):_sub(L('atShowAll'),{n:rows.length}))}</button>`;}
-        h+=`<h4 class="ath">${esc(L(ts.length>1?'atExpHn':'atExpH1'))}</h4>`+(n?atAgBtns(atSortAg(atLitList),false):`<p class="atsub">${esc(L('atNone'))}</p>`);
-        h+=`<label class="atcmp"><span class="sr-only">${esc(L('atCompare'))}</span><select class="atsel" data-act="compare">${atSetOptions(-1,AST.sets,L('atCompare'))}</select></label>`;
+        if(rows.length)h+=`<h4 class="ath">${esc(L('atRankC'))}</h4>`+atCanList(rows,true);
+        h+=`<h4 class="ath">${esc(L(ts.length>1?'atExpHn':'atExpH1'))}</h4>`+(n?atAgBtns(atSortAg(atLitList),false):none);
+        h+=`<label class="atcmp"><span class="sr-only">${esc(L('atCompare'))}</span><select class="atsel" data-act="compare">${atSetOptions(-1,AST.sets,L('atCompare'),false)}</select></label>`;
         h+='</div>';}
     }
+  } else if(G>=0){
+    const sec=A.sysSec[G], rows=atRankCancers(), sr=atSetRank();
+    h+=`<p class="atkick">${esc(L('atKGrp'))} · ${esc(atN('atNCan',sec.items.length))}</p>`+close;
+    h+=`<h3 class="attitle">${esc(localOrgan(sec.key))}${atColon()}<span class="num">${esc(atN('atNExp',n))}</span>${atArrow()}<span class="num">${esc(atN('atNCan',rows.length))}</span></h3>`;
+    h+=`<p class="atsub">${esc(_sub(L('atEstSus'),{s:sN,l:lN}))} · ${esc(atN('atFoundIn',sr.rows.length))}</p>`+toggle;
+    if(open){h+='<div class="atsumb">';
+      if(rows.length)h+=`<h4 class="ath">${esc(L('atRankC'))}</h4>`+atCanList(rows,false);
+      h+=sr.h;
+      h+=`<h4 class="ath">${esc(L('atExpH'))}</h4>`+(n?atAgBtns(atSortAg(atLitList),true)+atHollowKey():none);
+      h+='</div>';}
   } else {
-    const c=A.can[AST.cancer], rows=[];
-    for(let t=0;t<A.NT;t++)if(A.tagCount[t])rows.push({t,n:A.tagCount[t],s:A.tagS[t]});
-    rows.sort((a,b)=>b.n-a.n||b.s-a.s||a.t-b.t);
+    const c=A.can[AST.cancer], sr=atSetRank();
     h+=`<p class="atkick">${esc(_sub(L('atKCan'),{organ:localOrgan(c.organ_plain)}))}</p>`+close;
     h+=`<h3 class="attitle">${esc(localName(c))}${atColon()}<span class="num">${esc(atN('atNExp',n))}</span></h3>`;
-    h+=`<p class="atsub">${esc(_sub(L('atEstSus'),{s:sN,l:lN}))} · ${esc(atN('atFoundIn',rows.length))}</p>`+toggle;
-    if(open){h+='<div class="atsumb">';
-      if(rows.length){const max=rows[0].n, show=ATL.rankAll?rows:rows.slice(0,8);
-        h+=`<h4 class="ath">${esc(L('atRankS'))}</h4>`+atEvKey()+'<ol class="atrank">'+show.map(r=>{const t=A.tags[r.t];
-          return `<li><button type="button" data-act="tag" data-t="${r.t}" title="${esc(atTag(r.t))}"><span class="nm"><span class="dot" style="background:${atFacetCol(t.fi)}"></span>${atTagMk(r.t,true)}</span>`
-            +`<span class="bar2" aria-hidden="true"><i class="S" style="width:${(r.s/max*100).toFixed(1)}%"></i><i class="L" style="width:${((r.n-r.s)/max*100).toFixed(1)}%"></i></span>`
-            +`<span class="ct"><b>${r.n}</b></span><span class="sl"><span class="sr-only">${esc(_sub(L('atEstSus'),{s:r.s,l:r.n-r.s}))}</span><span aria-hidden="true">${r.s} · ${r.n-r.s}</span></span></button></li>`;}).join('')+'</ol>';
-        if(rows.length>8)h+=`<button type="button" class="atmore" data-act="rankall">${esc(ATL.rankAll?L('atShowTop'):_sub(L('atShowAll'),{n:rows.length}))}</button>`;}
-      h+=`<h4 class="ath">${esc(L('atExpH'))}</h4>`+(n?atAgBtns(atSortAg(atLitList),true)+atHollowKey():`<p class="atsub">${esc(L('atNone'))}</p>`);
+    h+=`<p class="atsub">${esc(_sub(L('atEstSus'),{s:sN,l:lN}))} · ${esc(atN('atFoundIn',sr.rows.length))}</p>`+toggle;
+    if(open){h+='<div class="atsumb">'+sr.h;
+      h+=`<h4 class="ath">${esc(L('atExpH'))}</h4>`+(n?atAgBtns(atSortAg(atLitList),true)+atHollowKey():none);
       h+='</div>';}
   }
   const was=atSumEl.classList.contains('on'), fk=atFocusKey(atSumEl), st=atSumEl.scrollTop;
@@ -5967,20 +6095,23 @@ function atRenderRead(){
   const pre=[];
   if(AST.cats.size)pre.push(CATS.filter(c=>AST.cats.has(c)).map(localCategory).join(' + '));
   if(AST.grpOff.size)pre.push(['1','2A','2B'].filter(g=>!AST.grpOff.has(g)).map(atGroupWord).join(' + ')||'–');
-  if(AST.facets.size)pre.push(SETTINGS.f.map((f,i)=>AST.facets.has(f)?atFacet(i):null).filter(Boolean).join(' + '));
+  if(AST.facets.size)pre.push(SETTINGS.f.map((f,i)=>AST.facets.has(f)?_sub(L('atFacetSel'),{facet:atFacet(i)}):null).filter(Boolean).join(' + '));
   const n=atLitList.length, s=atLitList.filter(a=>A.ev[a]===2).length, names=Array.from(AST.sets).map(t=>atTag(t)).join(' + ');
+  const tgt=AST.cancer>=0?localName(A.can[AST.cancer]):AST.group>=0?localOrgan(A.sysSec[AST.group].key):null;
   let main;
   const colon=atColon(), es=spc()+pr(_sub(L('atEstSus'),{s,l:n-s}));
-  if(AST.sets.size&&AST.cancer>=0)main=names+atArrow()+localName(A.can[AST.cancer])+colon+atN('atNExp',n)+es;
+  if(AST.sets.size&&tgt)main=names+atArrow()+tgt+colon+atN('atNExp',n)+es;
   else if(AST.sets.size)main=names+colon+atN('atNExp',n);
-  else if(AST.cancer>=0)main=localName(A.can[AST.cancer])+colon+atN('atNExp',n)+es;
+  else if(tgt)main=tgt+colon+atN('atNExp',n)+es;
   else{let p=0; for(let a=0;a<A.NA;a++)if(A.pass[a]&&A.on[a])p++;
     main=pre.length||atTimeline()?atN('atShown',p):_sub(L('atAllLine'),{ne:A.NA,nt:A.NT,nc:A.NC});}
   if(AST.agent>=0)main+=' · '+_sub(L('atSelLine'),{name:localName(A.ag[AST.agent].o)});
   const h=(pre.length?`<span class="atpre">${esc(pre.join(' · '))} · </span>`:'')+`<span>${esc(main)}</span>`;
   if(atReadEl.innerHTML!==h)atReadEl.innerHTML=h;
-  const fb=document.getElementById('atFiltersBtn'), na=AST.cats.size+AST.grpOff.size+AST.facets.size+AST.sets.size+(AST.cancer>=0?1:0);
-  if(fb)fb.textContent=(T.btnFilters||LANGS.en.btnFilters)+(na?' · '+na:'');}
+  atSyncFiltersBtn();}
+function atSyncFiltersBtn(){const fb=document.getElementById('atFiltersBtn'); if(!fb)return;
+  const na=ATL.ready?AST.cats.size+AST.grpOff.size+AST.facets.size+AST.sets.size+(AST.cancer>=0||AST.group>=0?1:0):0;
+  fb.textContent=(T.btnFilters||LANGS.en.btnFilters)+(na?' · '+na:'');}
 function atRenderCard(){
   if(AST.agent<0){atCardEl.classList.remove('on'); atCardEl.innerHTML=''; atCardEl.dataset.a=''; return;}
   const a=AST.agent, g=A.ag[a], o=g.o, c=o.classification||{};
@@ -5990,10 +6121,15 @@ function atRenderCard(){
   if(g.tags.length)h+=`<h4 class="ath">${esc(L('atCardSets'))}</h4><div class="atags">`+g.tags.map((t,k)=>{const why=g.why[k]||'';
     return `<button type="button" class="atag tchip${AST.sets.has(t)?' cur':''}" data-act="tag" data-t="${t}" aria-describedby="atWhy${k}"><span class="mk sq" style="--c:${atFacetCol(A.tags[t].fi)}"></span>${atTagMk(t)}`
       +`<span class="atwhy" id="atWhy${k}" role="tooltip"><span class="atwhy-k">${esc(L('atWhy'))}</span><span lang="en" dir="ltr">${esc(why)}</span></span></button>`;}).join('')+'</div>';
-  const ls=A.agCans[a].slice().sort((p,q)=>(p.ev===q.ev?localName(A.can[p.c]).localeCompare(localName(A.can[q.c]),curLang):p.ev==='S'?-1:1));
+  const byName=(p,q)=>(p.ev===q.ev?localName(A.can[p.c]).localeCompare(localName(A.can[q.c]),curLang):p.ev==='S'?-1:1);
+  const ls=A.agCans[a].slice().sort(byName);
+  const item=x=>`<li><button type="button" data-act="cancer" data-c="${x.c}"${A.lnk[a]?'':' class="later"'}><span class="evglyph ${x.ev==='S'?'strong':'some'}" aria-hidden="true"></span><span class="nm">${esc(localName(A.can[x.c]))}</span><span class="sr-only"> · ${esc(x.ev==='S'?T.established:T.suspected)}</span></button></li>`;
   if(ls.length){
-    h+=`<h4 class="ath">${esc(L('pickerCancer'))}</h4><ul class="atcans">`+ls.map(x=>
-      `<li><button type="button" data-act="cancer" data-c="${x.c}"${A.lnk[a]?'':' class="later"'}><span class="evglyph ${x.ev==='S'?'strong':'some'}" aria-hidden="true"></span><span class="nm">${esc(localName(A.can[x.c]))}</span><span class="sr-only"> · ${esc(x.ev==='S'?T.established:T.suspected)}</span></button></li>`).join('')+'</ul>';
+    h+=`<h4 class="ath">${esc(L('pickerCancer'))}</h4>`+(ls.length>1?atOrderSwitch():'')+'<ul class="atcans">';
+    if(ATL.canOrder==='o'&&ls.length>1)h+=A.sysSec.map((sec,k)=>{const sub=ls.filter(x=>A.canSys[x.c]===k); if(!sub.length)return '';
+      return `<li class="gh">${esc(localOrgan(sec.key))}</li>`+sub.map(item).join('');}).join('');
+    else h+=ls.map(item).join('');
+    h+='</ul>';
     if(!A.lnk[a])h+=`<p class="atsub">${esc(_sub(L('atLater'),{year:A.cls[a]}))}</p>`;}
   const hist=(c.history||[]);
   if(hist.length)h+=`<h4 class="ath">${esc(L('atCardHist'))}</h4><p class="athist">`+hist.map(x=>`<span${x.y>ATL.year?' class="later"':''}>${esc(_sub(L('histItem'),{v:volText(x.v,true),y:x.y}))}</span>`).join('<span class="sep" aria-hidden="true"> · </span>')+'</p>';
@@ -6035,9 +6171,9 @@ function atRenderYear(){
 function atSyncPlay(){
   const p=document.getElementById('atPlay'), r=document.getElementById('atReplay');
   const k=ATL.playing?'atPause':(ATL.year<A.Y1&&ATL.year>A.Y0?'atResume':'atPlay');
-  p.querySelector('.txt').textContent=L(k); p.setAttribute('aria-pressed',String(ATL.playing));
+  p.querySelector('.txt').textContent=L(k);
   p.querySelector('.ic').textContent=ATL.playing?'❚❚':'▶';
-  r.hidden=!(ATL.playing||ATL.year<A.Y1);}
+  r.hidden=atReduce()||!(ATL.playing||ATL.year<A.Y1);}
 function atSetYear(y,fromPlay){
   y=Math.max(A.Y0,Math.min(A.Y1,y|0)); const prev=ATL.year; if(y===prev&&fromPlay!=='force')return;
   ATL.year=y;
@@ -6065,24 +6201,34 @@ function atStepPulse(now){
 
 /* ---- updates ---- */
 function atUpdate(o){ o=o||{};
-  atDerive(); atVisuals(); atEdges(); atLabelStates(); atRenderSummary(); atRenderRead(); atRenderYear();
-  if(o.card!==false)atRenderCard();
-  atSyncControls(); requestAnimationFrame(atAfterLayout); atKick();}
+  atDerive(); atVisuals(); atEdges(); atLabelStates();
+  const now=performance.now(), quiet=!ATL.playing||now-(ATL.drawnT||0)>1000;
+  if(quiet){atRenderSummary(); if(o.card!==false)atRenderCard(); ATL.drawnT=now;}
+  atRenderRead(); atRenderYear();
+  atSyncControls(); atAnnounceState(); requestAnimationFrame(atAfterLayout); atKick();}
+/* the live region: the read-out line (or, with the timeline on, its year and counts), said once things settle */
+let _atLiveT=0, _atLiveLast='';
+function atAnnounceState(){ if(ATL.playing)return;
+  const t=atTimeline()?ATL.year+' · '+document.getElementById('atCount').textContent:atReadEl.textContent;
+  if(t===_atLiveLast)return; _atLiveLast=t; clearTimeout(_atLiveT);
+  _atLiveT=setTimeout(()=>{const el=document.getElementById('atLive'); if(el)el.textContent=t;},450);}
 let atInsetSig='';
 function atAfterLayout(){ if(!ATL.ready||!atOn())return;
   atApplyShift(true);
   const i=atInsets(), sig=[i.l,i.r,i.t,i.b].map(v=>Math.round(v/8)).join(',');
-  if(sig!==atInsetSig){atInsetSig=sig; if(ATL.view&&!atTween)atSetView(ATL.view,true);}}
+  if(sig!==atInsetSig){atInsetSig=sig; if(ATL.view&&!atTween)atSetView(ATL.view,true,true);}}
 function atSyncControls(){
   document.querySelectorAll('#atCats .chip').forEach(b=>{const c=b.dataset.c; b.setAttribute('aria-pressed',String(c?AST.cats.has(c):AST.cats.size===0));});
   document.querySelectorAll('#atGrps .chip').forEach(b=>{const off=AST.grpOff.has(b.dataset.g); b.classList.toggle('off',off); b.setAttribute('aria-pressed',String(!off));});
-  document.querySelectorAll('#atFacets .chip').forEach(b=>{const f=b.dataset.f; b.setAttribute('aria-pressed',String(f?AST.facets.has(f):AST.facets.size===0));});
-  const ss=document.getElementById('atSetSel'), first=AST.sets.size?Array.from(AST.sets)[0]:-1;
-  const sh=atSetOptions(first,null,L('atAnySet')); if(ss.dataset.h!==sh+curLang){ss.innerHTML=sh; ss.dataset.h=sh+curLang;} ss.value=String(first);
-  const cs=document.getElementById('atCanSel'); if(cs.value!==String(AST.cancer))cs.value=String(AST.cancer);}
+  const ss=document.getElementById('atSetSel'), sv=atSetValue();
+  const sh=atSetOptions(sv,null,L('atAnySet'),true); if(ss.dataset.h!==sh+curLang){ss.innerHTML=sh; ss.dataset.h=sh+curLang;} if(ss.value!==sv)ss.value=sv;
+  const cs=document.getElementById('atCanSel'), cv=atCanValue(); if(cs.value!==cv)cs.value=cv;}
+/* the options of the cancer-type select: "All cancer types", then for each organ system an option for the whole group
+   (value g:<system>; n = exposures linked to any of its types) and its types */
 function atCanOptions(){
   let h=`<option value="-1">${esc(L('atAnyCan'))}</option>`;
-  A.sysSec.forEach(sec=>{h+=`<optgroup label="${esc(localOrgan(sec.key))}">`+sec.items.map(c=>`<option value="${c}">${esc(localName(A.can[c]))}${atParenN(A.canAg[c].length)}</option>`).join('')+'</optgroup>';});
+  A.sysSec.forEach((sec,k)=>{h+=`<optgroup label="${esc(localOrgan(sec.key))}"><option value="${esc('g:'+sec.key)}">${esc(localOrgan(sec.key)+atColon()+L('atGrpAll'))}${atParenN(A.sysN[k])}</option>`
+    +sec.items.map(c=>`<option value="${c}">${esc(localName(A.can[c]))}${atParenN(A.canAg[c].length)}</option>`).join('')+'</optgroup>';});
   return h;}
 
 /* ---- actions ---- */
@@ -6093,18 +6239,27 @@ function atSelectTag(t,additive){
   else{AST.sets=new Set([t]); AST.cancer=-1;}
   ATL.rankAll=false;}
 function atSelectCancer(c,additive){
+  AST.group=-1;
   if(additive&&AST.sets.size)AST.cancer=AST.cancer===c?-1:c;
   else if(AST.cancer===c&&AST.sets.size===0)AST.cancer=-1;
   else{AST.sets.clear(); AST.cancer=c;}
   ATL.rankAll=false;}
+/* a group of cancer types (an organ system), from its label on the ring or from the select */
+function atSelectGroup(k,additive){
+  AST.cancer=-1;
+  if(additive&&AST.sets.size)AST.group=AST.group===k?-1:k;
+  else if(AST.group===k&&AST.sets.size===0)AST.group=-1;
+  else{AST.sets.clear(); AST.group=k;}
+  ATL.rankAll=false;}
 function atSelectAgent(a,fly){
   AST.agent=a; atUpdate();
   if(a>=0&&fly)atFlyToAgent(a);}
-function atClearSet(){AST.sets.clear(); AST.cancer=-1; ATL.rankAll=false; atUpdate();}
+function atClearSet(){AST.sets.clear(); AST.cancer=-1; AST.group=-1; AST.facets.clear(); ATL.rankAll=false; atUpdate();}
 function atSceneClick(hit,additive){
   if(!hit){if(AST.agent>=0)atSelectAgent(-1); else if(atFocus)atClearSet(); return;}
   if(hit.k==='t'){atSelectTag(hit.i,additive); AST.agent=-1; atUpdate();}
   else if(hit.k==='c'){atSelectCancer(hit.i,additive); AST.agent=-1; atUpdate();}
+  else if(hit.k==='g'){atSelectGroup(hit.i,additive); AST.agent=-1; atUpdate();}
   else atSelectAgent(AST.agent===hit.i?-1:hit.i,false);}
 function atStopRotate(){ if(!ATL.rotate)return; ATL.rotate=false; if(atCtl)atCtl.autoRotate=false; atSyncRotate();}
 function atSyncRotate(){const b=document.getElementById('atRotate'); if(b){b.setAttribute('aria-pressed',String(ATL.rotate)); b.hidden=atReduce();}}
@@ -6137,7 +6292,10 @@ function atQRender(){
   l.hidden=false; q.setAttribute('aria-expanded','true'); if(atQActive>=0)q.setAttribute('aria-activedescendant','atqo0');}
 function atQChoose(x){ const q=document.getElementById('atQ'); atQClose();
   if(x.k==='a'){q.value=localName(A.ag[x.i].o); if(!A.on[x.i])atSetYear(A.Y1); if(!A.pass[x.i]){AST.cats.clear(); AST.grpOff.clear();} atSelectAgent(x.i,true);}
-  else{q.value=localName(A.can[x.i]); AST.sets.clear(); AST.cancer=x.i; AST.agent=-1; ATL.rankAll=false; atUpdate();}}
+  else{q.value=localName(A.can[x.i]); AST.sets.clear(); AST.cancer=x.i; AST.group=-1; AST.agent=-1; ATL.rankAll=false; atUpdate();}}
+/* the focus goes back to the control that opened a card or a summary, else to the read-out line */
+function atRestoreFocus(){const o=ATL.opener, ok=o&&document.contains(o)&&o.getClientRects().length&&!o.closest('[inert]');
+  try{(ok?o:atReadEl).focus({preventScroll:true});}catch(err){}}
 
 /* ---- wiring (once, when the scene is built) ---- */
 function atWire(){
@@ -6145,11 +6303,12 @@ function atWire(){
   /* the first action of the reader in the tab stops the turning; the Rotate button is the exception */
   const stop=ev=>{ if(ev.target&&ev.target.closest&&ev.target.closest('#atRotate'))return; atStopRotate();};
   atlasWrap.addEventListener('pointerdown',stop,true); atlasWrap.addEventListener('wheel',stop,{capture:true,passive:true}); atlasWrap.addEventListener('keydown',stop,true);
+  atlasWrap.addEventListener('focusin',e=>{stop(e); if(!e.target.closest('#atSum,#atCard'))ATL.opener=e.target;});
   document.getElementById('atRotate').addEventListener('click',()=>{ATL.rotate=!ATL.rotate; if(atCtl)atCtl.autoRotate=ATL.rotate&&!atReduce(); atSyncRotate(); atKick();});
-  document.getElementById('atReset').addEventListener('click',()=>atSetView('oblique',true));
+  document.getElementById('atReset').addEventListener('click',()=>atSetView('oblique',true,false));
   document.getElementById('atFs').addEventListener('click',()=>atSetFs(!ATL.fsOn));
   document.getElementById('atTheme').addEventListener('click',()=>atSetTheme(atlasWrap.dataset.theme==='dark'?'light':'dark'));
-  document.getElementById('atTop').addEventListener('click',()=>atSetView(ATL.view==='top'?'oblique':'top',true));
+  document.getElementById('atTop').addEventListener('click',()=>atSetView(ATL.view==='top'?'oblique':'top',true,true));
   document.getElementById('atFiltersBtn').addEventListener('click',function(){ATL.filtersOpen=!ATL.filtersOpen;
     atlasWrap.classList.toggle('filters-open',ATL.filtersOpen); this.setAttribute('aria-expanded',String(ATL.filtersOpen)); requestAnimationFrame(()=>atResize(true));});
   document.getElementById('atCats').addEventListener('click',e=>{const b=e.target.closest('.chip'); if(!b)return; const c=b.dataset.c;
@@ -6157,10 +6316,16 @@ function atWire(){
     if(AST.agent>=0&&!AST.cats.has(A.ag[AST.agent].o.category)&&AST.cats.size)AST.agent=-1; atUpdate();});
   document.getElementById('atGrps').addEventListener('click',e=>{const b=e.target.closest('.chip'); if(!b)return; const g=b.dataset.g;
     if(AST.grpOff.has(g))AST.grpOff.delete(g); else{AST.grpOff.add(g); if(AST.grpOff.size===3)AST.grpOff.clear();} atUpdate();});
-  document.getElementById('atFacets').addEventListener('click',e=>{const b=e.target.closest('.chip'); if(!b)return; const f=b.dataset.f;
-    if(!f)AST.facets.clear(); else if(AST.facets.has(f))AST.facets.delete(f); else AST.facets.add(f); atUpdate();});
-  document.getElementById('atSetSel').addEventListener('change',e=>{const t=+e.target.value; if(t<0)AST.sets.clear(); else AST.sets=new Set([t]); ATL.rankAll=false; atUpdate();});
-  document.getElementById('atCanSel').addEventListener('change',e=>{AST.cancer=+e.target.value; ATL.rankAll=false; atUpdate();});
+  /* the settings select: all settings, a whole kind (f:, which filters the exposures) or one setting (s:) */
+  document.getElementById('atSetSel').addEventListener('change',e=>{const v=e.target.value;
+    if(v.slice(0,2)==='f:'){AST.facets=new Set([v.slice(2)]); AST.sets.clear();}
+    else if(v.slice(0,2)==='s:'){const t=atTagOfVal(v); AST.facets.clear(); AST.sets=t>=0?new Set([t]):new Set();}
+    else{AST.facets.clear(); AST.sets.clear();}
+    ATL.rankAll=false; atUpdate();});
+  /* the cancer-type select: all, a whole organ system (g:) or one type */
+  document.getElementById('atCanSel').addEventListener('change',e=>{const v=e.target.value;
+    if(v.slice(0,2)==='g:'){AST.group=atGroupOfVal(v); AST.cancer=-1;} else{AST.cancer=+v; AST.group=-1;}
+    ATL.rankAll=false; atUpdate();});
   const rg=document.getElementById('atRange');
   rg.addEventListener('input',()=>{ATL.playing=false; ATL.fresh=null; ATL.pulse.clear(); atSetYear(+rg.value,false);});
   document.getElementById('atPlay').addEventListener('click',atPlay);
@@ -6168,18 +6333,20 @@ function atWire(){
   /* the summary and the card */
   const act=(e,inCard)=>{const b=e.target.closest('[data-act]'); if(!b)return; const k=b.dataset.act;
     if(k==='clear')atClearSet();
-    else if(k==='close'){atSelectAgent(-1); try{atCv.focus({preventScroll:true});}catch(err){}}
+    else if(k==='close'){atSelectAgent(-1); atRestoreFocus();}
     else if(k==='agent')atSelectAgent(+b.dataset.i,true);
-    else if(k==='cancer'){const c=+b.dataset.c; if(inCard){AST.sets.clear(); AST.cancer=c;} else AST.cancer=AST.cancer===c?-1:c; ATL.rankAll=false; atUpdate();}
-    else if(k==='uncancer'){AST.cancer=-1; atUpdate();}
+    else if(k==='cancer'){const c=+b.dataset.c; if(inCard){AST.sets.clear(); AST.cancer=c;} else AST.cancer=AST.cancer===c?-1:c; AST.group=-1; ATL.rankAll=false; atUpdate();}
+    else if(k==='group'){AST.group=+b.dataset.g; AST.cancer=-1; ATL.rankAll=false; atUpdate();}
+    else if(k==='uncancer'){AST.cancer=-1; AST.group=-1; atUpdate();}
+    else if(k==='order'){ATL.canOrder=b.dataset.o; atRenderSummary(); atRenderCard();}
     else if(k==='tag'){const t=+b.dataset.t; if(!A.tagVis[t])AST.facets.clear(); AST.sets=new Set([t]); if(inCard)AST.cancer=-1; ATL.rankAll=false; atUpdate();}
     else if(k==='rankall'){ATL.rankAll=!ATL.rankAll; atRenderSummary();}
     else if(k==='sumtoggle'){ATL.sumOpen=!ATL.sumOpen; atRenderSummary(); requestAnimationFrame(atAfterLayout);}
     else if(k==='open'){ if(e.button||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey)return; e.preventDefault(); atOpenEntry(A.ag[AST.agent].o.id);}};
   atSumEl.addEventListener('click',e=>act(e,false)); atCardEl.addEventListener('click',e=>act(e,true));
-  atSumEl.addEventListener('change',e=>{const s=e.target.closest('select[data-act="compare"]'); if(!s)return; const t=+s.value; if(t>=0){AST.sets.add(t); ATL.rankAll=false; atUpdate();}});
-  const hov=e=>{const b=e.target.closest('[data-c],[data-t],[data-i]'); let h=null;
-    if(b){if(b.dataset.c!=null)h={k:'c',i:+b.dataset.c}; else if(b.dataset.t!=null)h={k:'t',i:+b.dataset.t}; else h={k:'a',i:+b.dataset.i};} atSetHover(h);};
+  atSumEl.addEventListener('change',e=>{const s=e.target.closest('select[data-act="compare"]'); if(!s)return; const t=atTagOfVal(s.value); if(t>=0){AST.sets.add(t); ATL.rankAll=false; atUpdate();}});
+  const hov=e=>{const b=e.target.closest('[data-c],[data-t],[data-i],[data-g]'); let h=null;
+    if(b){if(b.dataset.c!=null)h={k:'c',i:+b.dataset.c}; else if(b.dataset.t!=null)h={k:'t',i:+b.dataset.t}; else if(b.dataset.g!=null)h={k:'g',i:+b.dataset.g}; else h={k:'a',i:+b.dataset.i};} atSetHover(h);};
   [atSumEl,atCardEl].forEach(el=>{el.addEventListener('mouseover',hov); el.addEventListener('mouseleave',()=>atSetHover(null));});
   /* the search */
   const q=document.getElementById('atQ'), ql=document.getElementById('atQList');
@@ -6191,15 +6358,15 @@ function atWire(){
       ql.querySelectorAll('li').forEach((li,k)=>li.setAttribute('aria-selected',String(k===atQActive))); q.setAttribute('aria-activedescendant','atqo'+atQActive);
       const li=document.getElementById('atqo'+atQActive); if(li)li.scrollIntoView({block:'nearest'});}
     else if(e.key==='Enter'){if(e.isComposing||e.keyCode===229)return; if(!ql.hidden&&atQActive>=0&&atQItems[atQActive]){e.preventDefault(); atQChoose(atQItems[atQActive]);}}
-    else if(e.key==='Escape'){if(!ql.hidden){e.stopPropagation(); atQClose();}}});
+    else if(e.key==='Escape'){if(!ql.hidden){e.preventDefault(); e.stopPropagation(); atQClose();}}});
   ql.addEventListener('mousedown',e=>e.preventDefault());
   ql.addEventListener('click',e=>{const li=e.target.closest('li[data-k]'); if(li)atQChoose({k:li.dataset.k,i:+li.dataset.i});});
   q.addEventListener('blur',()=>setTimeout(atQClose,120));
   /* Escape: the card, then the selection */
   atlasWrap.addEventListener('keydown',e=>{ if(e.key!=='Escape'||e.defaultPrevented)return;
-    if(e.target&&e.target.closest&&e.target.closest('#atQ'))return;
     if(ATL.fsOn){e.preventDefault(); atSetFs(false); return;}
-    if(AST.agent>=0)atSelectAgent(-1); else if(atFocus)atClearSet();});
+    const inBox=e.target&&e.target.closest&&e.target.closest('#atSum,#atCard');
+    if(AST.agent>=0){atSelectAgent(-1); if(inBox)atRestoreFocus();} else if(atFocus){atClearSet();}});
   /* the scene: a click (not a drag) picks; the pointer shows the name of what it is over */
   let down=null, last=null, need=false;
   atCv.addEventListener('pointerdown',e=>{down={x:e.clientX,y:e.clientY,id:e.pointerId}; atTween=null; tip.style.display='none';});
@@ -6220,19 +6387,20 @@ function atWire(){
     tip.style.left=tx+'px'; tip.style.top=ty+'px';};
   try{new ResizeObserver(()=>atResize()).observe(atStage);}catch(err){window.addEventListener('resize',()=>atResize());}
   /* a scroll of the page draws the scene once more: some compositors keep a stale part of a canvas that was partly hidden */
-  window.addEventListener('scroll',()=>{if(atOn()){ATL.dirty=true; atKick();}},{passive:true});
+  window.addEventListener('scroll',()=>{if(atOn()&&ATL.visible){ATL.dirty=true; atKick();}},{passive:true});
+  try{new IntersectionObserver(es=>{const v=es.some(x=>x.isIntersecting); if(v!==ATL.visible){ATL.visible=v; if(v){ATL.dirty=true; atKick();}}}).observe(atStage);}catch(err){}
   try{const mq=window.matchMedia('(prefers-reduced-motion: reduce)'), on=()=>{atCtl.enableDamping=!atReduce(); atCtl.autoRotate=ATL.rotate&&!atReduce();
     if(atReduce()&&ATL.playing){ATL.playing=false; ATL.fresh=null;} atSyncRotate(); atRenderYear(); atSyncReduce();};
     if(mq.addEventListener)mq.addEventListener('change',on); else if(mq.addListener)mq.addListener(on);}catch(err){}}
 let atPickLoop=()=>{};
-function atSyncReduce(){const r=atReduce(); document.getElementById('atPlay').hidden=r; if(r)document.getElementById('atReplay').hidden=true;}
+function atSyncReduce(){const r=atReduce(); document.getElementById('atPlay').hidden=r; document.getElementById('atReplay').hidden=r||document.getElementById('atReplay').hidden;}
 let atLastW=0, atLastH=0;
 function atResize(force){ if(!ATL.ready||!atOn())return;
   ATL.W=Math.max(1,atStage.clientWidth); ATL.H=Math.max(1,atStage.clientHeight);
   if(!force&&ATL.W===atLastW&&ATL.H===atLastH)return; const first=atLastW===0; atLastW=ATL.W; atLastH=ATL.H;
   atR.setSize(ATL.W,ATL.H,false); atApplyShift(false);
   if(first){atSetView('oblique',false); const i=atInsets(); atInsetSig=[i.l,i.r,i.t,i.b].map(v=>Math.round(v/8)).join(',');}
-  else if(ATL.view)atSetView(ATL.view,false);
+  else if(ATL.view)atSetView(ATL.view,false,true);
   ATL.dirty=true; atKick();}
 
 /* ---- the tab's theme: light (as the tool) or dark, remembered in this browser ---- */
@@ -6248,6 +6416,9 @@ function atTipInside(inside){ if(!tip)return; const home=inside?atlasWrap:docume
 function atSetFs(on){ on=!!on; if(on===!!ATL.fsOn)return;
   ATL.fsOn=on;
   if(on){
+    ATL.fsScroll=window.scrollY;
+    const ph=document.createElement('div'); ph.id='atFsPh'; ph.setAttribute('aria-hidden','true'); ph.style.height=atlasWrap.offsetHeight+'px';
+    atlasWrap.parentNode.insertBefore(ph,atlasWrap);
     ATL.fsMode='css'; atlasWrap.classList.add('at-fs'); document.documentElement.classList.add('at-fs-lock');
     /* on a phone the filters fold, so that the scene has the screen; the Filters button opens them again */
     if(atPhone()&&ATL.filtersOpen){ATL.filtersOpen=false; atlasWrap.classList.remove('filters-open'); document.getElementById('atFiltersBtn').setAttribute('aria-expanded','false');}
@@ -6258,14 +6429,20 @@ function atSetFs(on){ on=!!on; if(on===!!ATL.fsOn)return;
     },()=>{});}catch(err){} }
   } else {
     atlasWrap.classList.remove('at-fs'); document.documentElement.classList.remove('at-fs-lock');
-    if(atFsEl()===atlasWrap){const ex=document.exitFullscreen||document.webkitExitFullscreen; try{const p=ex&&ex.call(document); if(p&&p.catch)p.catch(()=>{});}catch(err){}}
+    /* the browser leaves its own full screen a moment later: the page's place comes back once it has (fullscreenchange) */
+    if(atFsEl()===atlasWrap){const ex=document.exitFullscreen||document.webkitExitFullscreen; ATL.fsRestore=true;
+      try{const p=ex&&ex.call(document); if(p&&p.catch)p.catch(()=>{});}catch(err){}
+      setTimeout(()=>{if(ATL.fsRestore)atFsRestore();},1500);}
+    else atFsRestore();
     ATL.fsMode=null; atTipInside(false);
   }
   tip.style.display='none'; atSyncFs();
   requestAnimationFrame(()=>atResize(true)); setTimeout(()=>atResize(true),150);}
-function atSyncFs(){const b=document.getElementById('atFs'); if(!b)return; const on=!!ATL.fsOn;
-  b.setAttribute('aria-pressed',String(on)); b.querySelector('.txt').textContent=L(on?'atFsExit':'atFs');}
+function atFsRestore(){ ATL.fsRestore=false; const ph=document.getElementById('atFsPh'); if(ph)ph.remove();
+  const y=ATL.fsScroll||0, back=()=>window.scrollTo(0,y); back(); requestAnimationFrame(back); setTimeout(back,150);}
+function atSyncFs(){const b=document.getElementById('atFs'); if(!b)return; b.textContent=(ATL.fsOn?T.btnFsExit:T.btnFs)||LANGS.en.btnFs;}
 function atOnFsChange(){const el=atFsEl();
+  if(el!==atlasWrap&&ATL.fsRestore)atFsRestore();
   if(el===atlasWrap){ if(ATL.fsOn){ATL.fsMode='native'; atTipInside(true);} }
   else if(ATL.fsOn&&ATL.fsMode==='native')atSetFs(false);   /* the browser's own exit (Esc, gesture) */
   requestAnimationFrame(()=>atResize(true));}
@@ -6281,6 +6458,8 @@ function atFrame(now){ ATL.raf=0; if(!atOn())return;
   try{atFrameStep(now);}finally{ATL.inFrame=false;}
   if(ATL.want&&!ATL.raf&&atOn())ATL.raf=requestAnimationFrame(atFrame);}
 function atFrameStep(now){
+  /* off-screen: the timeline goes on, nothing is drawn, and the loop stops unless it plays */
+  if(!ATL.visible){ if(atStepPlay(now))ATL.want=true; return; }
   let busy=atStepPlay(now);
   if(ATL.pulse.size){atStepPulse(now); busy=true;}
   atStepTween(now); atStepShift(); atPickLoop();
@@ -6309,6 +6488,7 @@ function atEnsure(){
     ATL.building=false;
     try{atColors(); atInitScene();}catch(err){ATL.failed=true; atMsg('gl'); return;}
     atInitLabels(); atWire(); ATL.ready=true; atlasWrap.classList.add('at-ready'); atMsg(null);
+    ['atBar','atFilters','atTl'].forEach(id=>document.getElementById(id).removeAttribute('inert'));
     atSyncRotate(); atSyncReduce();
     if(!atOn())return;
     ATL.W=Math.max(1,atStage.clientWidth); ATL.H=Math.max(1,atStage.clientHeight);
@@ -6319,7 +6499,7 @@ function atEnsure(){
 function atFromSel(){
   const key=sel?sel.type+':'+sel.id:null; if(key===ATL.selKey)return; ATL.selKey=key; if(!sel)return;
   if(sel.type==='exposure'&&A.aById.has(sel.id)){const a=A.aById.get(sel.id); if(!A.on[a]&&A.first[a]>ATL.year)ATL.year=A.Y1; AST.agent=a;}
-  else if(sel.type==='cancer'&&A.cById.has(sel.id)){AST.sets.clear(); AST.cancer=A.cById.get(sel.id); AST.agent=-1;}}
+  else if(sel.type==='cancer'&&A.cById.has(sel.id)){AST.sets.clear(); AST.cancer=A.cById.get(sel.id); AST.group=-1; AST.agent=-1;}}
 /* the controls that do not depend on three.js: chips, selects and the year range */
 function atBuildControls(){
   const cnt={}; A.ag.forEach(g=>{cnt[g.o.category]=(cnt[g.o.category]||0)+1;});
@@ -6327,8 +6507,6 @@ function atBuildControls(){
   document.getElementById('atCats').innerHTML=`<button type="button" class="chip ats" data-c="" aria-pressed="true"><span class="txt"></span></button>`
     +cats.map(c=>`<button type="button" class="chip ats" data-c="${esc(c)}" aria-pressed="false"><span class="sw" style="background:${atCatCol(c)}"></span><span class="txt"></span><span class="n">${cnt[c]||0}</span></button>`).join('');
   document.getElementById('atGrps').innerHTML=['1','2A','2B'].map(g=>`<button type="button" class="chip" data-g="${g}" aria-pressed="true"><span class="sw" style="background:${GRP_VAR[g]}"></span><span class="txt"></span></button>`).join('');
-  document.getElementById('atFacets').innerHTML=`<button type="button" class="chip ats" data-f="" aria-pressed="true"><span class="txt"></span></button>`
-    +SETTINGS.f.map((f,i)=>`<button type="button" class="chip ats" data-f="${esc(f)}" aria-pressed="false"><span class="sw" style="background:${atFacetCol(i)}"></span><span class="txt"></span></button>`).join('');
   const rg=document.getElementById('atRange'); rg.min=A.Y0; rg.max=A.Y1; rg.value=ATL.year;
   document.getElementById('atRangeMin').textContent=A.Y0; document.getElementById('atRangeMax').textContent=A.Y1;
   atApplyLang();}
@@ -6337,6 +6515,7 @@ function atApplyLang(){
   const tabEl=document.getElementById('tabSettings'), tabT=atI18n('tab');
   tabEl.textContent=tabT||LANGS.en.tabSettings; if(curLang!=='en'&&!tabT)tabEl.lang='en'; else tabEl.removeAttribute('lang');
   document.getElementById('atLead').textContent=L('atLead');
+  atSyncFiltersBtn();
   document.getElementById('atQ').placeholder=T.searchMap||LANGS.en.searchMap;
   document.getElementById('atQ').setAttribute('aria-label',T.searchMap||LANGS.en.searchMap);
   document.getElementById('atCatLbl').textContent=T.mlabelCategory||LANGS.en.mlabelCategory;
@@ -6352,22 +6531,24 @@ function atApplyLang(){
   document.getElementById('atRange').setAttribute('aria-label',L('atRangeLbl'));
   document.getElementById('atTlLbl').textContent=L('atRangeLbl');
   atCv.setAttribute('aria-label',L('atAria'));
-  document.getElementById('atHint').textContent=L(atCoarse()?'atHintTouch':'atHint');
+  const hint=L(atCoarse()?'atHintTouch':'atHint');
+  document.getElementById('atHint').textContent=hint;
   document.getElementById('atHowT').textContent=L('atHowT');
-  document.getElementById('atHowB').innerHTML=(L('atHow')||[]).map(p=>`<p class="hi-more">${_sub(esc(p),{nt:SETTINGS.t.length,nc:cancers.length,ne:Object.keys(SETTINGS.a).length})
+  /* the note opens with what distance means; on phones the hint line moves in here */
+  const ne=exposures.filter(e=>SETTINGS.a[e.id]).length;
+  document.getElementById('atHowB').innerHTML=`<p class="hi-lead">${esc(L('atLeadNote'))}</p><p class="hi-more athint-m">${esc(L('atHintTouch'))}</p>`
+    +(L('atHow')||[]).map(p=>`<p class="hi-more">${_sub(esc(p),{nt:SETTINGS.t.length,nc:cancers.length,ne})
     .replace(/^([^.:：。]+[.:：。])/,'<b>$1</b>')}</p>`).join('');
+  /* one row: the two kinds of line, and the dots' colours (the scene's captions name the three layers) */
   document.getElementById('atLegend').innerHTML=
-    `<span><span class="dot" style="width:13px;height:13px;background:${atFacetCol(0)}"></span><span class="txt">${esc(L('atLgSet'))}</span></span>`
-    +`<span><span class="dot" style="width:8px;height:8px;background:var(--cat4)"></span><span class="txt">${esc(L('atLgExp'))}</span></span>`
-    +`<span><span class="dot" style="background:var(--card);border:1.5px solid var(--muted)"></span><span class="txt">${esc(L('atLgCan'))}</span></span>`
-    +`<span><span class="sw" style="display:inline-block;width:18px;border-top:3px solid var(--established)"></span><span class="txt">${esc(T.legendEst)}</span></span>`
-    +`<span><span class="sw" style="display:inline-block;width:18px;border-top:3px dashed var(--suspected)"></span><span class="txt">${esc(T.legendSus)}</span></span>`;
+    `<span><span class="sw" style="display:inline-block;width:18px;border-top:3px solid var(--established)"></span><span class="txt">${esc(T.legendEst)}</span></span>`
+    +`<span><span class="sw" style="display:inline-block;width:18px;border-top:3px dashed var(--suspected)"></span><span class="txt">${esc(T.legendSus)}</span></span>`
+    +`<span><span class="dot" style="width:8px;height:8px;background:var(--cat3)"></span><span class="dot" style="width:8px;height:8px;background:var(--cat1)"></span><span class="dot" style="width:8px;height:8px;background:var(--cat4)"></span><span class="txt">${esc(L('atLgExp'))}</span></span>`;
   if(!ATL.built)return;
   document.querySelectorAll('#atCats .chip').forEach(b=>{b.querySelector('.txt').textContent=b.dataset.c?localCategory(b.dataset.c):L('atAll');});
   document.querySelectorAll('#atGrps .chip').forEach(b=>{const g=b.dataset.g; b.querySelector('.txt').textContent=g==='1'?T.grpKnown:g==='2A'?T.grpProbable:T.grpPossible;});
-  document.querySelectorAll('#atFacets .chip').forEach(b=>{const tx=b.querySelector('.txt'), fi=SETTINGS.f.indexOf(b.dataset.f);
-    tx.textContent=b.dataset.f?atFacet(fi):L('atAll'); if(b.dataset.f&&atEnFacet(fi))tx.lang='en'; else tx.removeAttribute('lang');});
   document.getElementById('atCanSel').innerHTML=atCanOptions();
+  atSyncControls();
   atCanShorts(); atPrintText();
   if(!ATL.ready){atSyncPlay(); if(atMsgEl&&!atMsgEl.hidden)atMsg(ATL.failed?'fail':'load'); return;}
   ALB.forEach(r=>{r.measure=true;});
