@@ -497,12 +497,12 @@
   .atlb .n.S{color:var(--established)}
   .atlb .n.L{color:var(--suspected)}
   /* the year of the timeline, large, in the lower corner of the scene, with its counts and the volumes of that year */
-  .atyear{position:absolute;inset-inline-start:8px;bottom:62px;z-index:4;max-width:min(480px,calc(100% - 16px));pointer-events:none;
+  .atyear{position:absolute;inset-inline-start:8px;bottom:62px;z-index:4;max-width:min(380px,calc(100% - 16px));pointer-events:none;
     background:color-mix(in srgb,var(--at-scene) 82%,transparent);padding:4px 8px;border-radius:9px}
   .atyear b{display:block;font-family:var(--mono);font-size:46px;font-weight:600;line-height:1;letter-spacing:-.01em;color:var(--ink);font-variant-numeric:tabular-nums}
   .atyear .atcount{display:block;margin-top:6px;font-family:var(--mono);font-size:12.5px;line-height:1.4;color:var(--ink)}
   html[lang=ar] .atyear .atcount,html[lang=ru] .atyear .atcount,html[lang=zh] .atyear .atcount,html[lang=ja] .atyear .atcount{font-family:var(--sans);font-size:13px}
-  .atyear .atcap{display:block;margin-top:4px;font-size:13px;line-height:1.45;color:var(--muted)}
+  .atyear .atcap{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;margin-top:4px;font-size:13px;line-height:1.45;color:var(--muted)}
   /* the timeline's controls: a bar across the foot of the scene */
   .attl{position:absolute;left:12px;right:12px;bottom:12px;z-index:5;display:flex;align-items:center;gap:8px 10px;padding:6px 10px;
     background:color-mix(in srgb,var(--card) 94%,transparent);border:1px solid var(--line);border-radius:9px;box-shadow:0 1px 3px rgba(23,32,42,.06)}
@@ -2126,7 +2126,7 @@ es:{name:'Spanish',native:'Español',flag:'🇪🇸',dir:'ltr',
   mxPairSr: "{e} y {c}: {ev}",
   /* the exposure-settings tab (design demo B, the Settings Atlas): its UI strings. The names of the tab, of the six
      kinds of settings and of the 48 settings in the other languages are in SETTINGS.i18n (settings-i18n.json). */
-  atLead: "Cada exposición se sitúa entre los entornos en los que las personas entran en contacto con ella, en el anillo superior, y los tipos de cáncer que el CIIC le vincula, en el anillo inferior. Las exposiciones que se dan en los mismos entornos quedan cerca unas de otras.",
+  atLead: "Cada exposición se sitúa entre los entornos en los que las personas entran en contacto con ella, en el anillo superior, y los tipos de cáncer con los que el CIIC la relaciona, en el anillo inferior. Las exposiciones que se dan en los mismos entornos quedan cerca unas de otras.",
   atLoading: "Cargando la vista 3D…",
   atFail: "No se pudo cargar la vista 3D. Comprueba tu conexión e inténtalo de nuevo.",
   atRetry: "Reintentar",
@@ -2884,7 +2884,7 @@ ar:{name:'Arabic',native:'العربية',flag:'🇸🇦',dir:'rtl',
   mxPairSr: "{e} و{c}: {ev}",
   /* the exposure-settings tab (design demo B, the Settings Atlas): its UI strings. The names of the tab, of the six
      kinds of settings and of the 48 settings in the other languages are in SETTINGS.i18n (settings-i18n.json). */
-  atLead: "يقع كل عامل تعرض بين السياقات التي يتعرض له الناس فيها، على الحلقة العليا، وأنواع السرطان التي تربطه بها الوكالة الدولية لبحوث السرطان، على الحلقة السفلى. وتتقارب العوامل التي يُتعرَّض لها في السياقات نفسها.",
+  atLead: "يقع كل عامل تعرض بين السياقات التي يتعرض الناس له فيها، على الحلقة العليا، وأنواع السرطان التي تربطه بها الوكالة الدولية لبحوث السرطان، على الحلقة السفلى. وتتقارب العوامل التي يُتعرَّض لها في السياقات نفسها.",
   atLoading: "جارٍ تحميل العرض ثلاثي الأبعاد…",
   atFail: "تعذّر تحميل العرض ثلاثي الأبعاد. تحقّق من الاتصال وحاول مرة أخرى.",
   atRetry: "حاول مرة أخرى",
@@ -2949,7 +2949,7 @@ ar:{name:'Arabic',native:'العربية',flag:'🇸🇦',dir:'rtl',
   atPrTop: "أنواع السرطان الأكثر ارتباطاً (عدد العوامل)",
   atDark: "داكن",
   atDarkTitle: "ألوان داكنة لهذا العرض (تبقى بقية الصفحة فاتحة)",
-  atLeadNote: "تبيّن المسافة مدى تشابه السياقات، لا مدى ضرر العامل.",
+  atLeadNote: "تبيّن المسافة مدى تشابه السياقات، لا مدى ضرر عامل التعرض.",
   atFacetAll: "كل السياقات: {facet}",
   atFacetSel: "السياقات: {facet}",
   atGrpAll: "كل الأنواع",
