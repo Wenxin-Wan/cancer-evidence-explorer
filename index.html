@@ -454,7 +454,7 @@
   .atsbox .atmag{position:absolute;inset-inline-start:12px;top:50%;width:16px;height:16px;margin-top:-8px;stroke:var(--muted);fill:none;stroke-width:2;stroke-linecap:round;pointer-events:none}
   .atsbox .atx{position:absolute;inset-inline-end:6px;top:50%;margin-top:-14px;width:28px;height:28px;border:0;border-radius:50%;background:none;text-align:center;line-height:28px;font-size:19px;color:var(--muted);padding:0;cursor:pointer}
   .atsbox .atx:hover{background:var(--line);color:var(--ink)}
-  .atsug{position:absolute;z-index:60;inset-inline:0;top:calc(100% + 4px);background:var(--card);border:1px solid var(--line);border-radius:10px;box-shadow:0 10px 30px rgba(23,32,42,.16);padding:6px;max-height:min(420px,60vh);overflow:auto}
+  .atsug{position:absolute;z-index:20;inset-inline:0;top:calc(100% + 4px);background:var(--card);border:1px solid var(--line);border-radius:10px;box-shadow:0 10px 30px rgba(23,32,42,.16);padding:6px;max-height:min(420px,50vh);overflow:auto;overscroll-behavior:contain}
   #atlasWrap[data-theme="dark"] .atsug{box-shadow:0 12px 36px rgba(0,0,0,.55)}
   .atsugh{font:600 11px/1.3 var(--sans);letter-spacing:.05em;text-transform:uppercase;color:var(--faint);padding:6px 8px 3px}
   html[dir=rtl] .atsugh{letter-spacing:0;text-transform:none}
@@ -500,7 +500,7 @@
   .atband:not(:empty)~.atzc{top:52px}
   .atzc button{min-width:28px;height:28px;padding:0 9px;text-align:center;font:inherit;font-size:12.5px;color:var(--muted);border:1px solid var(--line);border-radius:8px;background:color-mix(in srgb,var(--card) 92%,transparent);cursor:pointer}
   .atzc button:hover{border-color:var(--ink);color:var(--ink)}
-  .atcaption{position:absolute;inset-inline-start:12px;bottom:10px;z-index:2;font-size:12px;color:var(--faint);pointer-events:none;transition:opacity .6s;max-width:70%}
+  .atcaption{position:absolute;inset-inline-start:12px;bottom:10px;z-index:2;font-size:12px;color:var(--faint);pointer-events:none;transition:opacity .3s var(--at-ease);max-width:70%}
   .atcaption.off,.atmap.bodyon .atcaption{opacity:0}
   /* the reading column */
   .atreadcol{min-width:0;display:flex;flex-direction:column;gap:6px;padding:2px 4px 8px 0;outline:none;max-height:var(--at-h,600px);overflow:auto}
@@ -513,7 +513,7 @@
   .atrows{display:grid;gap:3px}
   .atrow{display:grid;grid-template-columns:minmax(0,1fr) 70px 22px;gap:8px;align-items:center;font-size:12.5px}
   .atrow span:first-child{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-  .atrb{height:5px;display:flex;background:color-mix(in srgb,var(--ink) 7%,transparent);direction:ltr}
+  .atrb{height:6px;border-radius:3px;overflow:hidden;display:flex;background:color-mix(in srgb,var(--ink) 7%,transparent);direction:ltr}
   .atrb i{height:100%;background:var(--at-est)} .atrb i+i{background:var(--at-sus)}
   .atrow .v{font:500 11.5px var(--mono);text-align:end;font-variant-numeric:tabular-nums}
   .atlist{display:flex;flex-direction:column;max-height:300px;overflow:auto}
@@ -558,15 +558,16 @@
   #atSvg .atbmore.atshowall{font-style:normal;font-weight:600;fill:var(--ink);cursor:pointer;text-decoration:underline}
   #atSvg .atbcap{fill:var(--muted);paint-order:stroke;stroke:var(--card);stroke-width:3px}
   #atSvg .atbhit{cursor:pointer}
-  #atSvg circle.atd{cursor:pointer;stroke:var(--card);stroke-width:1;vector-effect:non-scaling-stroke;transition:opacity .45s;touch-action:none}
+  #atSvg circle.atd{cursor:pointer;stroke:var(--card);stroke-width:1.25px;vector-effect:non-scaling-stroke;transition:opacity .3s var(--at-ease),transform .15s var(--at-ease);transform-box:fill-box;transform-origin:center;touch-action:none}
+  #atSvg:not(.v3):not(.bodyv) circle.atd:hover{transform:scale(1.15);stroke:var(--ink);stroke-opacity:.5}
   #atSvg circle.atd:focus-visible{outline:none}
   #atSvg.drag circle.atd,#atSvg.drag{cursor:grabbing}
   @media (pointer:coarse){#atSvg circle.atd{stroke:transparent;stroke-width:12px;pointer-events:all}#atSvg circle.atd.hl{stroke:var(--ink)}}
   #atSvg.panning{cursor:grabbing}
   #atSvg circle.atd.hl{stroke:var(--ink);stroke-width:2}
-  .atgg{opacity:0;transition:opacity .25s} .atgg.on{opacity:.24} .atgg circle{pointer-events:all;cursor:pointer}
+  .atgg{opacity:0;transition:opacity .3s var(--at-ease)} .atgg.on{opacity:.24} .atgg circle{pointer-events:all;cursor:pointer}
   .atpill{cursor:pointer;outline:none}
-  .atpill rect{fill:var(--card);stroke:var(--line);stroke-width:1;transition:stroke .15s}
+  .atpill rect{fill:var(--card);stroke:var(--line);stroke-width:1;transition:stroke .15s var(--at-ease)}
   .atpill text{font-weight:650}
   #atSvg .atpill .atpc{fill:var(--faint);font-family:var(--mono);font-weight:500}
   .atpill .atlead{stroke:var(--faint);stroke-width:1;opacity:.55}
@@ -578,7 +579,7 @@
   #atSvg .atpill.atq .atpc{fill:color-mix(in srgb,var(--card) 70%,var(--ink))}
   .atpill.atq .atlead{stroke:var(--ink);opacity:.7}
   .atgg.atqg{opacity:.13}.atgg.atqg.on{opacity:.24}
-  #atPills,#atNames{transition:opacity .25s}
+  #atPills,#atNames{transition:opacity .3s var(--at-ease)}
   #atFlat{transform-origin:0 0}
   #atFigure .atsk{fill:var(--skin);stroke:var(--skin-edge);stroke-width:1;vector-effect:non-scaling-stroke;stroke-linejoin:round}
   #atFigure .ato{--c:var(--o-lung);fill:var(--c);stroke:color-mix(in srgb,var(--c) 72%,var(--ink));stroke-width:.8;stroke-linejoin:round;stroke-linecap:round;vector-effect:non-scaling-stroke;transition:fill .25s,stroke .25s}
@@ -636,11 +637,11 @@
   #atSvg.v3{touch-action:pan-y;cursor:grab}
   #atSvg.v3 circle.atd{touch-action:pan-y}
   #atSvg.v3:focus-visible{outline:2px solid var(--accent);outline-offset:-3px}
-  #atSvg .at3f{fill:var(--ink);fill-opacity:.04;stroke:none}
-  #atSvg .at3r{fill:none;stroke:var(--ink);stroke-opacity:.16;stroke-width:1;vector-effect:non-scaling-stroke}
-  #atSvg .at3s{fill:var(--ink);fill-opacity:.13;stroke:none}
+  #atSvg .at3f{fill:var(--ink);fill-opacity:.028;stroke:none}
+  #atSvg .at3r{fill:none;stroke:var(--ink);stroke-opacity:.1;stroke-width:1;vector-effect:non-scaling-stroke}
+  #atSvg .at3s{fill:var(--ink);fill-opacity:.1;stroke:none}
   #atSvg .at3k{fill:none;stroke:var(--ink);stroke-opacity:.6;stroke-width:1.3;vector-effect:non-scaling-stroke}
-  #atSvg .at3h{opacity:.13;transition:opacity .2s}
+  #atSvg .at3h{opacity:.13;transition:opacity .3s var(--at-ease)}
   #atSvg .at3h path{vector-effect:none}
   #atSvg .at3h.on{opacity:.34}
   #atSvg.hovg .at3h:not(.on){opacity:.04}
@@ -648,6 +649,19 @@
   #atSvg .at3h.at3q{opacity:.2}
   @media (max-width:560px){.atdim{height:40px}.atdim button{padding:0 11px}.atmap svg.v3{max-height:62vh}}
   @media (prefers-reduced-motion:reduce){#atSvg .at3h{transition:none}}
+
+  /* graphic polish: one easing curve (150 / 300 / 900 ms), tinted ground, quiet links, pill leader dots, list chips */
+  #atlasWrap{--at-ease:cubic-bezier(.2,.7,.2,1);--at-gA:.15}
+  #atlasWrap[data-theme="dark"]{--at-gA:.2}
+  #atGw{transition:opacity .3s var(--at-ease)}
+  #atB1{opacity:var(--at-gA)}#atB2{opacity:.28}
+  #atLkA,#atLkM,#atLkH{stroke-linecap:round}
+  #atSvg .atpill .atleadd{fill:var(--faint);pointer-events:none}
+  .atgchip{display:inline-block;width:9px;height:9px;border-radius:3px;margin-inline-end:6px;vertical-align:-1px;border:1px solid color-mix(in srgb,var(--ink) 12%,transparent)}
+  #atSvg .atnm{font-size:11px}
+  .atrb i:first-child{border-radius:3px 0 0 3px}
+  #atKey{font-size:12px;gap:4px 14px}
+  #atKey .atkg{width:14px;height:9px;flex-basis:14px;border-radius:4px;background:color-mix(in srgb,var(--c-blue,#4a6a9a) 18%,var(--card));border:1px solid color-mix(in srgb,var(--ink) 18%,transparent)}
   #atFsPh{display:block}
 
   footer.ft{color:var(--faint);font-size:12px;font-variant-numeric:tabular-nums;padding:18px 0 34px;border-top:1px solid var(--line);margin-top:8px;line-height:1.6}
@@ -1417,8 +1431,8 @@ en:{name:'English',native:'English',flag:'🇬🇧',dir:'ltr',
   atKeySite: "Body site: size = exposures linked, red core = established",
   atReadH: "How to read",
   atReadT: "Each dot is one exposure",
-  atReadSet: "Dots that sit together are met in similar settings. A bigger dot is linked to more cancer types. The grey ground shows where dots gather; each group has a label.",
-  atReadCan: "Dots that sit together are linked to similar cancer types. A bigger dot is linked to more cancer types. The grey ground shows where dots gather; each group has a label.",
+  atReadSet: "Dots that sit together are met in similar settings. A bigger dot is linked to more cancer types. The coloured ground shows where dots gather; each group has a label.",
+  atReadCan: "Dots that sit together are linked to similar cancer types. A bigger dot is linked to more cancer types. The coloured ground shows where dots gather; each group has a label.",
   atReadCat: "Dots are grouped by category. A bigger dot is linked to more cancer types. Each group has a label.",
   atReadDo: "Drag a dot and its neighbours follow. Drag the background to pan, scroll to zoom. Click a group label to lay the group flat and see which parts of the body its cancers reach. Click a dot for its cancer types and nearest neighbours.",
   atGroups: "Groups",
@@ -1487,6 +1501,8 @@ en:{name:'English',native:'English',flag:'🇬🇧',dir:'ltr',
   atRotAria: "Turn the 3D map slowly",
   atCap3: "Drag to turn, scroll to zoom, click a dot or a group label. Arrow keys turn, + and − zoom.",
   atAria3: "3D map. Arrow keys turn it, plus and minus zoom.",
+  atReadDo3: "Drag to turn the cloud, scroll or pinch to zoom, use the arrow keys to turn it. Click a group label to lay the group flat and see which parts of the body its cancers reach. Click a dot for its cancer types and nearest neighbours.",
+  atKeyGround: "Soft colour: where a group sits",
   atNExp: {"one": "{n} exposure", "other": "{n} exposures"},
   atNCan: {"one": "{n} cancer type", "other": "{n} cancer types"},
   atOpen: "Open the full entry →",
@@ -1699,8 +1715,8 @@ zh:{name:'Chinese',native:'中文',flag:'🇨🇳',dir:'ltr',
   atKeySite: "身体部位：大小 = 关联的暴露因素数量，红色圆心 = 已确认",
   atReadH: "阅读说明",
   atReadT: "每个圆点代表一种暴露因素",
-  atReadSet: "靠在一起的圆点，接触场景相似。圆点越大，关联的癌症类型越多。灰色底色显示圆点聚集之处，每个分组都有标签。",
-  atReadCan: "靠在一起的圆点，关联的癌症类型相似。圆点越大，关联的癌症类型越多。灰色底色显示圆点聚集之处，每个分组都有标签。",
+  atReadSet: "靠在一起的圆点，接触场景相似。圆点越大，关联的癌症类型越多。彩色底色显示圆点聚集之处，每个分组都有标签。",
+  atReadCan: "靠在一起的圆点，关联的癌症类型相似。圆点越大，关联的癌症类型越多。彩色底色显示圆点聚集之处，每个分组都有标签。",
   atReadCat: "圆点按类别分组。圆点越大，关联的癌症类型越多。每个分组都有标签。",
   atReadDo: "拖动一个圆点，它的近邻会随之移动。拖动背景可平移，滚动可缩放。点击分组标签，可将该组展开，查看其癌症涉及人体的哪些部位。点击圆点，查看它关联的癌症类型和最相近的暴露因素。",
   atGroups: "分组",
@@ -1769,6 +1785,8 @@ zh:{name:'Chinese',native:'中文',flag:'🇨🇳',dir:'ltr',
   atRotAria: "让三维图缓慢转动",
   atCap3: "拖动旋转，滚动缩放，点击圆点或分组标签。方向键旋转，+ 和 − 缩放。",
   atAria3: "三维图。方向键旋转，加减号缩放。",
+  atReadDo3: "拖动可旋转点云，滚动或双指缩放，也可用方向键旋转。点击分组标签可将该组平铺，并查看其癌症涉及身体的哪些部位。点击圆点可查看其癌症类型和最近的邻居。",
+  atKeyGround: "淡色：分组所在的区域",
   atNExp: {"other": "{n} 种暴露因素"},
   atNCan: {"other": "{n} 种癌症类型"},
   atOpen: "查看完整条目 →",
@@ -1980,8 +1998,8 @@ fr:{name:'French',native:'Français',flag:'🇫🇷',dir:'ltr',
   atKeySite: "Partie du corps : taille = expositions liées, cœur rouge = lien établi",
   atReadH: "Comment lire",
   atReadT: "Chaque point est une exposition",
-  atReadSet: "Les points proches sont rencontrés dans des contextes semblables. Un point plus gros est lié à davantage de types de cancers. Le fond gris montre où les points se regroupent ; chaque groupe a une étiquette.",
-  atReadCan: "Les points proches sont liés à des types de cancers semblables. Un point plus gros est lié à davantage de types de cancers. Le fond gris montre où les points se regroupent ; chaque groupe a une étiquette.",
+  atReadSet: "Les points proches sont rencontrés dans des contextes semblables. Un point plus gros est lié à davantage de types de cancers. Le fond coloré montre où les points se regroupent ; chaque groupe a une étiquette.",
+  atReadCan: "Les points proches sont liés à des types de cancers semblables. Un point plus gros est lié à davantage de types de cancers. Le fond coloré montre où les points se regroupent ; chaque groupe a une étiquette.",
   atReadCat: "Les points sont regroupés par catégorie. Un point plus gros est lié à davantage de types de cancers. Chaque groupe a une étiquette.",
   atReadDo: "Faites glisser un point : ses voisins le suivent. Faites glisser le fond pour vous déplacer, utilisez la molette pour zoomer. Cliquez sur l’étiquette d’un groupe pour l’étaler et voir quelles parties du corps ses cancers touchent. Cliquez sur un point pour ses types de cancers et ses plus proches voisins.",
   atGroups: "Groupes",
@@ -2050,6 +2068,8 @@ fr:{name:'French',native:'Français',flag:'🇫🇷',dir:'ltr',
   atRotAria: "Faire tourner lentement la carte 3D",
   atCap3: "Faites glisser pour tourner, molette pour zoomer, cliquez sur un point ou une étiquette. Flèches : tourner ; + et − : zoom.",
   atAria3: "Carte 3D. Les flèches la font tourner, plus et moins zooment.",
+  atReadDo3: "Faites glisser pour tourner le nuage, molette ou pincement pour zoomer, flèches pour le tourner. Cliquez sur une étiquette de groupe pour l’étaler et voir quelles parties du corps ses cancers touchent. Cliquez sur un point pour ses types de cancer et ses voisins les plus proches.",
+  atKeyGround: "Teinte douce : où se trouve un groupe",
   atNExp: {"one": "{n} exposition", "other": "{n} expositions"},
   atNCan: {"one": "{n} type de cancer", "other": "{n} types de cancers"},
   atOpen: "Ouvrir la fiche complète →",
@@ -2263,8 +2283,8 @@ es:{name:'Spanish',native:'Español',flag:'🇪🇸',dir:'ltr',
   atKeySite: "Zona del cuerpo: tamaño = exposiciones asociadas, centro rojo = establecido",
   atReadH: "Cómo leerlo",
   atReadT: "Cada punto es una exposición",
-  atReadSet: "Los puntos que están juntos se encuentran en entornos parecidos. Un punto mayor se asocia a más tipos de cáncer. El fondo gris muestra dónde se agrupan los puntos; cada grupo tiene una etiqueta.",
-  atReadCan: "Los puntos que están juntos se asocian a tipos de cáncer parecidos. Un punto mayor se asocia a más tipos de cáncer. El fondo gris muestra dónde se agrupan los puntos; cada grupo tiene una etiqueta.",
+  atReadSet: "Los puntos que están juntos se encuentran en entornos parecidos. Un punto mayor se asocia a más tipos de cáncer. El fondo de color muestra dónde se agrupan los puntos; cada grupo tiene una etiqueta.",
+  atReadCan: "Los puntos que están juntos se asocian a tipos de cáncer parecidos. Un punto mayor se asocia a más tipos de cáncer. El fondo de color muestra dónde se agrupan los puntos; cada grupo tiene una etiqueta.",
   atReadCat: "Los puntos se agrupan por categoría. Un punto mayor se asocia a más tipos de cáncer. Cada grupo tiene una etiqueta.",
   atReadDo: "Arrastra un punto y sus vecinos lo siguen. Arrastra el fondo para desplazarte y usa la rueda para ampliar. Haz clic en la etiqueta de un grupo para extenderlo y ver qué partes del cuerpo alcanzan sus cánceres. Haz clic en un punto para ver sus tipos de cáncer y sus vecinos más cercanos.",
   atGroups: "Grupos",
@@ -2333,6 +2353,8 @@ es:{name:'Spanish',native:'Español',flag:'🇪🇸',dir:'ltr',
   atRotAria: "Girar despacio el mapa 3D",
   atCap3: "Arrastra para girar, rueda para ampliar, haz clic en un punto o una etiqueta. Flechas: girar; + y −: ampliar.",
   atAria3: "Mapa 3D. Las flechas lo giran, más y menos amplian.",
+  atReadDo3: "Arrastra para girar la nube, usa la rueda o el pellizco para ampliar y las flechas para girarla. Haz clic en la etiqueta de un grupo para extenderlo y ver qué partes del cuerpo alcanzan sus cánceres. Haz clic en un punto para ver sus tipos de cáncer y sus vecinos más cercanos.",
+  atKeyGround: "Color suave: dónde está un grupo",
   atNExp: {"one": "{n} exposición", "other": "{n} exposiciones"},
   atNCan: {"one": "{n} tipo de cáncer", "other": "{n} tipos de cáncer"},
   atOpen: "Abrir la ficha completa →",
@@ -2546,8 +2568,8 @@ ru:{name:'Russian',native:'Русский',flag:'🇷🇺',dir:'ltr',
   atKeySite: "Часть тела: размер — число связанных факторов, красная середина — установленная связь",
   atReadH: "Как читать",
   atReadT: "Каждая точка — один фактор воздействия",
-  atReadSet: "Близкие точки — факторы, с которыми сталкиваются в сходных условиях. Чем больше точка, тем больше видов рака с ней связано. Серый фон показывает, где точки собираются; у каждой группы есть подпись.",
-  atReadCan: "Близкие точки связаны со сходными видами рака. Чем больше точка, тем больше видов рака с ней связано. Серый фон показывает, где точки собираются; у каждой группы есть подпись.",
+  atReadSet: "Близкие точки — факторы, с которыми сталкиваются в сходных условиях. Чем больше точка, тем больше видов рака с ней связано. Цветной фон показывает, где точки собираются; у каждой группы есть подпись.",
+  atReadCan: "Близкие точки связаны со сходными видами рака. Чем больше точка, тем больше видов рака с ней связано. Цветной фон показывает, где точки собираются; у каждой группы есть подпись.",
   atReadCat: "Точки сгруппированы по категориям. Чем больше точка, тем больше видов рака с ней связано. У каждой группы есть подпись.",
   atReadDo: "Перетащите точку — соседние последуют за ней. Перетащите фон, чтобы сдвинуть карту, прокрутите колесо, чтобы изменить масштаб. Нажмите на подпись группы, чтобы развернуть её и увидеть, каких частей тела касаются её виды рака. Нажмите на точку, чтобы увидеть её виды рака и ближайших соседей.",
   atGroups: "Группы",
@@ -2616,6 +2638,8 @@ ru:{name:'Russian',native:'Русский',flag:'🇷🇺',dir:'ltr',
   atRotAria: "Медленно вращать 3D-карту",
   atCap3: "Перетащите, чтобы повернуть, колесо — масштаб, нажмите на точку или подпись. Стрелки — поворот, + и − — масштаб.",
   atAria3: "3D-карта. Стрелки поворачивают, плюс и минус масштабируют.",
+  atReadDo3: "Перетащите, чтобы повернуть облако; колесо или щипок — масштаб; стрелки тоже поворачивают его. Нажмите на подпись группы, чтобы разложить её и увидеть, каких частей тела касаются её виды рака. Нажмите на точку — увидите её виды рака и ближайших соседей.",
+  atKeyGround: "Мягкий цвет: где расположена группа",
   atNExp: {"one": "{n} фактор", "few": "{n} фактора", "many": "{n} факторов", "other": "{n} фактора"},
   atNCan: {"one": "{n} вид рака", "few": "{n} вида рака", "many": "{n} видов рака", "other": "{n} вида рака"},
   atOpen: "Открыть полную запись →",
@@ -2827,8 +2851,8 @@ pt:{name:'Portuguese',native:'Português',flag:'🇧🇷',dir:'ltr',
   atKeySite: "Parte do corpo: tamanho = exposições associadas, centro vermelho = estabelecida",
   atReadH: "Como ler",
   atReadT: "Cada ponto é uma exposição",
-  atReadSet: "Pontos próximos são encontrados em contextos parecidos. Um ponto maior se associa a mais tipos de câncer. O fundo cinza mostra onde os pontos se reúnem; cada grupo tem um rótulo.",
-  atReadCan: "Pontos próximos se associam a tipos de câncer parecidos. Um ponto maior se associa a mais tipos de câncer. O fundo cinza mostra onde os pontos se reúnem; cada grupo tem um rótulo.",
+  atReadSet: "Pontos próximos são encontrados em contextos parecidos. Um ponto maior se associa a mais tipos de câncer. O fundo colorido mostra onde os pontos se reúnem; cada grupo tem um rótulo.",
+  atReadCan: "Pontos próximos se associam a tipos de câncer parecidos. Um ponto maior se associa a mais tipos de câncer. O fundo colorido mostra onde os pontos se reúnem; cada grupo tem um rótulo.",
   atReadCat: "Os pontos são agrupados por categoria. Um ponto maior se associa a mais tipos de câncer. Cada grupo tem um rótulo.",
   atReadDo: "Arraste um ponto e seus vizinhos o seguem. Arraste o fundo para mover o mapa e use a roda para ampliar. Clique no rótulo de um grupo para abri-lo e ver que partes do corpo seus cânceres atingem. Clique em um ponto para ver seus tipos de câncer e seus vizinhos mais próximos.",
   atGroups: "Grupos",
@@ -2897,6 +2921,8 @@ pt:{name:'Portuguese',native:'Português',flag:'🇧🇷',dir:'ltr',
   atRotAria: "Girar devagar o mapa 3D",
   atCap3: "Arraste para girar, use a roda para ampliar, clique num ponto ou rótulo. Setas: girar; + e −: ampliar.",
   atAria3: "Mapa 3D. As setas giram, mais e menos ampliam.",
+  atReadDo3: "Arraste para girar a nuvem, use a roda ou o gesto de pinça para ampliar e as setas para girá-la. Clique no rótulo de um grupo para estendê-lo e ver que partes do corpo seus cânceres atingem. Clique num ponto para ver seus tipos de câncer e os vizinhos mais próximos.",
+  atKeyGround: "Cor suave: onde está um grupo",
   atNExp: {"one": "{n} exposição", "other": "{n} exposições"},
   atNCan: {"one": "{n} tipo de câncer", "other": "{n} tipos de câncer"},
   atOpen: "Abrir o item completo →",
@@ -3108,8 +3134,8 @@ ar:{name:'Arabic',native:'العربية',flag:'🇸🇦',dir:'rtl',
   atKeySite: "موضع في الجسم: الحجم = عدد عوامل التعرض المرتبطة، المركز الأحمر = مؤكَّد",
   atReadH: "كيف تقرأ",
   atReadT: "كل نقطة تمثل عامل تعرّض",
-  atReadSet: "النقاط المتجاورة تُصادَف في سياقات متشابهة. كلما كبرت النقطة ارتبطت بأنواع أكثر من السرطان. تُظهر الخلفية الرمادية أماكن تجمع النقاط، ولكل مجموعة تسمية.",
-  atReadCan: "النقاط المتجاورة ترتبط بأنواع متشابهة من السرطان. كلما كبرت النقطة ارتبطت بأنواع أكثر من السرطان. تُظهر الخلفية الرمادية أماكن تجمع النقاط، ولكل مجموعة تسمية.",
+  atReadSet: "النقاط المتجاورة تُصادَف في سياقات متشابهة. كلما كبرت النقطة ارتبطت بأنواع أكثر من السرطان. تُظهر الخلفية الملوّنة أماكن تجمع النقاط، ولكل مجموعة تسمية.",
+  atReadCan: "النقاط المتجاورة ترتبط بأنواع متشابهة من السرطان. كلما كبرت النقطة ارتبطت بأنواع أكثر من السرطان. تُظهر الخلفية الملوّنة أماكن تجمع النقاط، ولكل مجموعة تسمية.",
   atReadCat: "تُجمَّع النقاط بحسب الفئة. كلما كبرت النقطة ارتبطت بأنواع أكثر من السرطان. ولكل مجموعة تسمية.",
   atReadDo: "اسحب نقطة فيتبعها جيرانها. اسحب الخلفية لتحريك الخريطة، وحرّك العجلة للتكبير. انقر على تسمية مجموعة لتبسطها وترى أي أجزاء الجسم تصل إليها سرطاناتها. انقر على نقطة لترى أنواع السرطان المرتبطة بها وأقرب جيرانها.",
   atGroups: "المجموعات",
@@ -3178,6 +3204,8 @@ ar:{name:'Arabic',native:'العربية',flag:'🇸🇦',dir:'rtl',
   atRotAria: "إدارة الخريطة ببطء",
   atCap3: "اسحب للتدوير، وحرّك العجلة للتكبير، وانقر على نقطة أو تسمية. الأسهم تدير، و+ و− تكبّر.",
   atAria3: "خريطة ثلاثية الأبعاد. الأسهم تديرها، والإشارتان + و− تكبّران.",
+  atReadDo3: "اسحب لتدوير السحابة، وحرّك العجلة أو اضغط بإصبعين للتكبير، أو استخدم مفاتيح الأسهم للتدوير. انقر على تسمية مجموعة لفردها ومعرفة أجزاء الجسم التي تصل إليها سرطاناتها. انقر على نقطة لرؤية أنواع السرطان المرتبطة بها وأقرب جيرانها.",
+  atKeyGround: "لون هادئ: مكان المجموعة",
   atNExp: {"one": "عامل تعرض واحد", "two": "عاملا تعرض", "few": "{n} عوامل تعرض", "many": "{n} عاملَ تعرض", "other": "{n} عامل تعرض"},
   atNCan: {"one": "نوع واحد من السرطان", "two": "نوعان من السرطان", "few": "{n} أنواع من السرطان", "many": "{n} نوعاً من السرطان", "other": "{n} نوع من السرطان"},
   atOpen: "افتح المدخل الكامل ←",
@@ -3389,8 +3417,8 @@ de:{name:'German',native:'Deutsch',flag:'🇩🇪',dir:'ltr',
   atKeySite: "Körperstelle: Größe = verknüpfte Expositionen, roter Kern = gesichert",
   atReadH: "So lesen Sie die Karte",
   atReadT: "Jeder Punkt ist eine Exposition",
-  atReadSet: "Punkte, die nah beieinander liegen, begegnen einem in ähnlichen Szenarien. Ein größerer Punkt ist mit mehr Krebsarten verknüpft. Der graue Grund zeigt, wo sich Punkte sammeln; jede Gruppe hat ein Etikett.",
-  atReadCan: "Punkte, die nah beieinander liegen, sind mit ähnlichen Krebsarten verknüpft. Ein größerer Punkt ist mit mehr Krebsarten verknüpft. Der graue Grund zeigt, wo sich Punkte sammeln; jede Gruppe hat ein Etikett.",
+  atReadSet: "Punkte, die nah beieinander liegen, begegnen einem in ähnlichen Szenarien. Ein größerer Punkt ist mit mehr Krebsarten verknüpft. Der farbige Grund zeigt, wo sich Punkte sammeln; jede Gruppe hat ein Etikett.",
+  atReadCan: "Punkte, die nah beieinander liegen, sind mit ähnlichen Krebsarten verknüpft. Ein größerer Punkt ist mit mehr Krebsarten verknüpft. Der farbige Grund zeigt, wo sich Punkte sammeln; jede Gruppe hat ein Etikett.",
   atReadCat: "Die Punkte sind nach Kategorie gruppiert. Ein größerer Punkt ist mit mehr Krebsarten verknüpft. Jede Gruppe hat ein Etikett.",
   atReadDo: "Ziehen Sie einen Punkt, dann folgen ihm seine Nachbarn. Ziehen Sie den Hintergrund, um die Karte zu verschieben, und scrollen Sie zum Zoomen. Klicken Sie auf das Etikett einer Gruppe, um sie auszubreiten und zu sehen, welche Körperstellen ihre Krebsarten betreffen. Klicken Sie auf einen Punkt für seine Krebsarten und nächsten Nachbarn.",
   atGroups: "Gruppen",
@@ -3459,6 +3487,8 @@ de:{name:'German',native:'Deutsch',flag:'🇩🇪',dir:'ltr',
   atRotAria: "3D-Karte langsam drehen",
   atCap3: "Ziehen zum Drehen, Scrollen zum Zoomen, Punkt oder Gruppenetikett anklicken. Pfeiltasten drehen, + und − zoomen.",
   atAria3: "3D-Karte. Pfeiltasten drehen, Plus und Minus zoomen.",
+  atReadDo3: "Ziehen, um die Wolke zu drehen; Scrollen oder Zusammenziehen zum Zoomen; die Pfeiltasten drehen sie ebenfalls. Ein Gruppenetikett legt die Gruppe flach und zeigt, welche Körperstellen ihre Krebsarten erreichen. Ein Punkt zeigt seine Krebsarten und nächsten Nachbarn.",
+  atKeyGround: "Sanfte Farbe: wo eine Gruppe liegt",
   atNExp: {"one": "{n} Exposition", "other": "{n} Expositionen"},
   atNCan: {"one": "{n} Krebsart", "other": "{n} Krebsarten"},
   atOpen: "Ganzen Eintrag öffnen →",
@@ -3673,8 +3703,8 @@ ja:{name:'Japanese',native:'日本語',flag:'🇯🇵',dir:'ltr',
   atKeySite: "身体部位：大きさ＝関連する曝露要因の数、赤い中心＝確立",
   atReadH: "見方",
   atReadT: "点は曝露要因を1つずつ表します",
-  atReadSet: "近くにある点は、似た場面で接する曝露要因です。点が大きいほど、関連するがんの種類が多くなります。灰色の地は点が集まる場所を示し、各グループにはラベルがあります。",
-  atReadCan: "近くにある点は、似たがんの種類に関連する曝露要因です。点が大きいほど、関連するがんの種類が多くなります。灰色の地は点が集まる場所を示し、各グループにはラベルがあります。",
+  atReadSet: "近くにある点は、似た場面で接する曝露要因です。点が大きいほど、関連するがんの種類が多くなります。色付きの地は点が集まる場所を示し、各グループにはラベルがあります。",
+  atReadCan: "近くにある点は、似たがんの種類に関連する曝露要因です。点が大きいほど、関連するがんの種類が多くなります。色付きの地は点が集まる場所を示し、各グループにはラベルがあります。",
   atReadCat: "点はカテゴリーごとにまとめています。点が大きいほど、関連するがんの種類が多くなります。各グループにはラベルがあります。",
   atReadDo: "点をドラッグすると近くの点がついてきます。背景をドラッグすると地図が動き、スクロールで拡大縮小できます。グループ名をクリックするとグループが広がり、そのがんが体のどこに及ぶかがわかります。点をクリックすると、関連するがんの種類と近い曝露要因が表示されます。",
   atGroups: "グループ",
@@ -3743,6 +3773,8 @@ ja:{name:'Japanese',native:'日本語',flag:'🇯🇵',dir:'ltr',
   atRotAria: "3Dマップをゆっくり回す",
   atCap3: "ドラッグで回転、スクロールで拡大縮小、点やグループ名をクリック。矢印キーで回転、+ と − で拡大縮小。",
   atAria3: "3Dマップ。矢印キーで回転、+ と − で拡大縮小。",
+  atReadDo3: "ドラッグで点群を回転、スクロールやピンチで拡大縮小、矢印キーでも回転できます。グループ名をクリックするとグループを平面に広げ、そのがんが及ぶ体の部位を表示します。点をクリックすると、がんの種類と近くの点を表示します。",
+  atKeyGround: "淡い色：グループの位置",
   atNExp: {"other": "曝露要因{n}件"},
   atNCan: {"other": "がん{n}種類"},
   atOpen: "詳しい項目を開く →",
@@ -3953,8 +3985,8 @@ it:{name:'Italian',native:'Italiano',flag:'🇮🇹',dir:'ltr',
   atKeySite: "Parte del corpo: dimensione = esposizioni collegate, centro rosso = accertato",
   atReadH: "Come leggere",
   atReadT: "Ogni punto è un’esposizione",
-  atReadSet: "I punti vicini si incontrano in contesti simili. Un punto più grande è legato a più tipi di tumore. Lo sfondo grigio mostra dove si raggruppano i punti; ogni gruppo ha un’etichetta.",
-  atReadCan: "I punti vicini sono legati a tipi di tumore simili. Un punto più grande è legato a più tipi di tumore. Lo sfondo grigio mostra dove si raggruppano i punti; ogni gruppo ha un’etichetta.",
+  atReadSet: "I punti vicini si incontrano in contesti simili. Un punto più grande è legato a più tipi di tumore. Lo sfondo colorato mostra dove si raggruppano i punti; ogni gruppo ha un’etichetta.",
+  atReadCan: "I punti vicini sono legati a tipi di tumore simili. Un punto più grande è legato a più tipi di tumore. Lo sfondo colorato mostra dove si raggruppano i punti; ogni gruppo ha un’etichetta.",
   atReadCat: "I punti sono raggruppati per categoria. Un punto più grande è legato a più tipi di tumore. Ogni gruppo ha un’etichetta.",
   atReadDo: "Trascina un punto e i suoi vicini lo seguono. Trascina lo sfondo per spostare la mappa e usa la rotella per ingrandire. Clicca sull’etichetta di un gruppo per distenderlo e vedere quali parti del corpo raggiungono i suoi tumori. Clicca su un punto per i suoi tipi di tumore e i vicini più prossimi.",
   atGroups: "Gruppi",
@@ -4023,6 +4055,8 @@ it:{name:'Italian',native:'Italiano',flag:'🇮🇹',dir:'ltr',
   atRotAria: "Ruota lentamente la mappa 3D",
   atCap3: "Trascina per ruotare, rotella per ingrandire, clicca su un punto o su un’etichetta. Frecce: ruotare; + e −: zoom.",
   atAria3: "Mappa 3D. Le frecce la ruotano, più e meno ingrandiscono.",
+  atReadDo3: "Trascina per ruotare la nuvola, usa la rotella o il pizzico per ingrandire e le frecce per ruotarla. Clicca sull’etichetta di un gruppo per stenderlo e vedere quali parti del corpo raggiungono i suoi tumori. Clicca su un punto per i suoi tipi di tumore e i vicini più prossimi.",
+  atKeyGround: "Colore tenue: dove si trova un gruppo",
   atNExp: {"one": "{n} esposizione", "other": "{n} esposizioni"},
   atNCan: {"one": "{n} tipo di tumore", "other": "{n} tipi di tumore"},
   atOpen: "Apri la voce completa →",
@@ -5786,7 +5820,7 @@ function prep(){
   N=keep.map(id=>{const r=SET.a[id], o=expById[id], c=[], seen=new Set();
     (linksByExp[id]||[]).forEach(l=>{const ci=cIx.get(l.cancer); if(ci===undefined||seen.has(ci))return; seen.add(ci); c.push([ci,l.evidence==='Sufficient'?1:0]);});
     return {id,o,cat:CAT_ORDER.indexOf(o.category),g:o.group,pS:[r[0],r[1]],pC:[r[2],r[3]],k:r[4],kq:r[5],n1:fixNb(r[6]),n2:fixNb(r[7]),tags:r[8],why:r[9],c};});
-  n=N.length; radBase=N.map(x=>3.6+1.75*Math.sqrt(x.c.length)); rad=radBase.slice();
+  n=N.length; radBase=N.map(x=>Math.min(13,3.5*Math.sqrt(Math.max(1,x.c.length)))); rad=radBase.slice();
   SITES=SET.s.map(([id,names,x,y,cs,o])=>({id,names,x,y,cs:cs.map(c=>cIx.get(c)),o}));
   siteOf=[]; SITES.forEach((s,j)=>s.cs.forEach(c=>{siteOf[c]=j;}));
   cancers.forEach((c,i)=>{if(siteOf[i]===undefined)try{console.warn('Map the exposures: no body site for '+c.id);}catch(err){}});
@@ -6048,30 +6082,31 @@ function buildSvg(){
   svg=$('#atSvg'); svg.setAttribute('viewBox',`0 0 ${W} ${FH}`);
   svg.innerHTML=`<defs>
   <filter id="atGoo1" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="15"/><feColorMatrix values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9"/></filter>
-  <filter id="atGoo2" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="9"/><feColorMatrix values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9"/></filter></defs>
+  <filter id="atGoo2" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="9"/><feColorMatrix values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9"/></filter>
+  <filter id="atEdge" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="15"/><feColorMatrix values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 22 -9" result="a"/><feMorphology in="a" operator="erode" radius="1" result="e"/><feComposite in="a" in2="e" operator="out"/></filter></defs>
   <g id="atFigure" opacity="0" pointer-events="none"><g id="atFigT">${figureSVG()}</g></g>
   <g id="atFlat"><g id="atWorld">
-    <g id="atGw"><g opacity=".05"><g id="atB1" filter="url(#atGoo1)" style="fill:var(--ink)"></g></g><g opacity=".055"><g id="atB2" filter="url(#atGoo2)" style="fill:var(--ink)"></g></g>
+    <g id="atGw"><g id="atB1"></g><g id="atB2"></g>
     <g id="atGrounds"></g></g><g id="atQgw" style="fill:var(--ink)"></g>
-    <path id="atLkA" fill="none" style="stroke:var(--ink)" stroke-width=".7" vector-effect="non-scaling-stroke"/><path id="atLkM" fill="none" style="stroke:var(--ink)" stroke-width="1.3" opacity=".75" vector-effect="non-scaling-stroke"/>
+    <path id="atLkA" fill="none" style="stroke:var(--ink)" stroke-width=".7" vector-effect="non-scaling-stroke"/><path id="atLkH" fill="none" style="stroke:var(--ink)" stroke-width="1.2" opacity=".5" vector-effect="non-scaling-stroke"/><path id="atLkM" fill="none" style="stroke:var(--ink)" stroke-width="1.4" opacity=".75" vector-effect="non-scaling-stroke"/>
     <g id="atDots"></g></g>
   <g id="atPillsFade"><g id="atPills"></g></g><g id="atNames"></g></g>
   <g id="atBodyL"></g><g id="atSel"></g><g id="atBcol"></g>`;
-  b1=N.map(()=>mk('circle',$('#atB1'),{r:36})); b2=N.map(()=>mk('circle',$('#atB2'),{r:20}));
   dots=N.map((x,i)=>mk('circle',$('#atDots'),{class:'atd',r:rad[i].toFixed(1),'data-i':i,tabindex:-1}));}
 function resizeDots(){dots.forEach((d,i)=>{if(!inSel.has(i))d.setAttribute('r',rad[i].toFixed(1));});}
 
 /* ---- the live map: springs to home, collisions, neighbour springs, a slow drift ---- */
 let vx=null, vy=null, ph=null, drag=-1, dgx=0, dgy=0, moving=false, still=0, running=false, raf=0, lastT=0, lastGr=0, lastOv=0, fxOn=true, flowHide=false, onscreen=true, camMoved=0;
-let effHome=[], qs=null, qcs=[];
+let effHome=[], qs=null, qcs=[], shortIx=[], hovIx=[], hovDot=-1;
 const frameMs=[]; let frameN=0;
-const setFx=on=>{if(fxOn===on)return; fxOn=on; ['#atB1','#atB2'].forEach(s=>on?$(s).setAttribute('filter','url(#atGoo'+s.slice(5)+')'):$(s).removeAttribute('filter')); $$('.atgg').forEach(g=>on?g.setAttribute('filter','url(#atGoo2)'):g.removeAttribute('filter'));};
+const setFx=on=>{if(fxOn===on)return; fxOn=on; $$('.atgr').forEach(g=>on?g.setAttribute('filter',g.dataset.f):g.removeAttribute('filter')); $$('.atgg').forEach(g=>on?g.setAttribute('filter','url(#atGoo2)'):g.removeAttribute('filter'));};
 function groundNow(){const f=v=>v.toFixed(1); for(let i=0;i<n;i++){const x=f(cur[i][0]), y=f(cur[i][1]); for(const e of [b1[i],b2[i],gcs[i],qcs[i]]){if(!e)continue; e.setAttribute('cx',x); e.setAttribute('cy',y);}} lastGr=performance.now();}
 function place(){if(V3.t>0){paint3(); return;} const f=v=>v.toFixed(1);
   for(let i=0;i<n;i++){if(inSel.has(i))continue; const d=dots[i]; d.setAttribute('cx',f(cur[i][0])); d.setAttribute('cy',f(cur[i][1]));}
-  if(links.length&&!qs){let a='', m=''; for(let k=0;k<links.length;k++){const l=links[k]; a+=`M${f(cur[l.a][0])} ${f(cur[l.a][1])}L${f(cur[l.b][0])} ${f(cur[l.b][1])}`;}
-    for(const k of mineIx){const l=links[k]; m+=`M${f(cur[l.a][0])} ${f(cur[l.a][1])}L${f(cur[l.b][0])} ${f(cur[l.b][1])}`;}
-    $('#atLkA').setAttribute('d',a); $('#atLkM').setAttribute('d',m);}
+  if(links.length&&!qs){let a='', m='', h=''; const cv=k=>{const l=links[k], x1=cur[l.a][0], y1=cur[l.a][1], x2=cur[l.b][0], y2=cur[l.b][1], dx=x2-x1, dy=y2-y1; return `M${f(x1)} ${f(y1)}Q${f((x1+x2)/2-dy*.14)} ${f((y1+y2)/2+dx*.14)} ${f(x2)} ${f(y2)}`;};
+    for(const k of shortIx){const l=links[k]; a+=`M${f(cur[l.a][0])} ${f(cur[l.a][1])}L${f(cur[l.b][0])} ${f(cur[l.b][1])}`;}
+    for(const k of mineIx)m+=cv(k); if(hovIx.length)for(const k of hovIx)h+=cv(k);
+    $('#atLkA').setAttribute('d',a); $('#atLkM').setAttribute('d',m); $('#atLkH').setAttribute('d',h);}
   const now=performance.now(); if(now-lastGr>250)groundNow();}
 const wantRun=()=>shown&&!document.hidden&&onscreen&&!BV&&!V3.on&&!(V3.t>0);
 function wake(flow){if(!built)return; wake3(); if(flow){still=0; moving=true; setFx(false);} if(!running&&wantRun()){running=true; lastT=performance.now(); raf=requestAnimationFrame(tick);}}
@@ -6116,7 +6151,7 @@ function formCluster(res){
 function dissolveCluster(keepView){
   if(!qs)return; qs=null; effHome=home; qcs=[]; $('#atQgw').innerHTML=''; delete gEls.q;
   $('#atPills').innerHTML=''; pillEls={}; flowHide=true; $('#atPills').style.opacity=0; $('#atNames').style.opacity=0;
-  if(!keepView)fitView(false); wake(true); if(V3.on)sync3();}
+  if(!keepView)fitView(false); qScale(); wake(true); if(V3.on)sync3();}
 
 /* ---- group labels: a pill beside its group, set in screen space so text keeps its size while zooming ---- */
 const flatFs=()=>{const u=uu(); return PORT?10.8*u:Math.max(12.5,8*u);};
@@ -6135,7 +6170,7 @@ function layoutPills(){
     for(const [fm,withCount] of variants){
       const f=f0*fm, h=f+11, label=sp0.name, cnt=withCount&&!(PORT&&label.length>14);
       const el=mk('g',g,{class:'atpill'+(sp0.q?' atq':''),'data-k':sp0.k,tabindex:0,role:'button','aria-label':`${sp0.q?sp0.name:ln.full[sp0.k]}, ${pl('atNExp',ix.length)}`});
-      const lead=mk('line',el,{class:'atlead'}), r=mk('rect',el,{rx:8,height:h.toFixed(1)});
+      const lead=mk('line',el,{class:'atlead'}), leadD=mk('circle',el,{class:'atleadd',r:2.2,style:'display:none'}), r=mk('rect',el,{rx:8,height:h.toFixed(1)});
       const tx=mk('text',el,{'font-size':f.toFixed(1)}); tx.textContent=label; let tc=null, cw=0; if(cnt){tc=mk('text',el,{class:'atpc','font-size':(f*.88).toFixed(1)}); tc.textContent=ix.length; cw=tc.getBBox().width+6;}
       const nw=tx.getBBox().width, w=nw+cw+20, cx=cxs, cy=cys;
       let dx=cx-VW/2, dy=(cy-VH/2)*(VW/VH>1?1.3:1); const dl=Math.hypot(dx,dy)||1; dx/=dl; dy/=dl;
@@ -6155,7 +6190,7 @@ function layoutPills(){
       tx.setAttribute('x',(x0+10).toFixed(1)); tx.setAttribute('y',(y0+h/2+f*.34).toFixed(1)); if(tc){tc.setAttribute('x',(x0+16+nw).toFixed(1)); tc.setAttribute('y',(y0+h/2+f*.34).toFixed(1));}
       let nb=-1, nd=1e9; ix.forEach(i=>{const qx=Math.max(x0,Math.min(SP[i][0],x0+w)), qy=Math.max(y0,Math.min(SP[i][1],y0+h)), d=Math.hypot(SP[i][0]-qx,SP[i][1]-qy)-SR[i]; if(d<nd){nd=d; nb=i;}});
       const qx=Math.max(x0,Math.min(SP[nb][0],x0+w)), qy=Math.max(y0,Math.min(SP[nb][1],y0+h)), ll=Math.hypot(SP[nb][0]-qx,SP[nb][1]-qy)||1;
-      if(nd>2.5){lead.setAttribute('x1',qx.toFixed(1)); lead.setAttribute('y1',qy.toFixed(1)); lead.setAttribute('x2',(SP[nb][0]-(SP[nb][0]-qx)/ll*(SR[nb]+1)).toFixed(1)); lead.setAttribute('y2',(SP[nb][1]-(SP[nb][1]-qy)/ll*(SR[nb]+1)).toFixed(1));}
+      if(nd>2.5){lead.setAttribute('x1',qx.toFixed(1)); lead.setAttribute('y1',qy.toFixed(1)); lead.setAttribute('x2',(SP[nb][0]-(SP[nb][0]-qx)/ll*(SR[nb]+1)).toFixed(1)); lead.setAttribute('y2',(SP[nb][1]-(SP[nb][1]-qy)/ll*(SR[nb]+1)).toFixed(1)); leadD.setAttribute('cx',lead.getAttribute('x2')); leadD.setAttribute('cy',lead.getAttribute('y2')); leadD.style.display='';}
       placed.push({x0,y0,x1:x0+w,y1:y0+h,k:sp0.k,bad:!!best.bad}); pillEls[sp0.k]=el; done=true; break;}});
   const real=placed.filter(q=>q.k!=='zc'); pillBoxes=placed.map(q=>[q.x0,q.y0,q.x1,q.y1]);
   let pp=0, pd2=0; real.forEach((a,i)=>{for(let j=i+1;j<real.length;j++){const b=real[j]; if(a.x0<b.x1&&a.x1>b.x0&&a.y0<b.y1&&a.y1>b.y0)pp++;} if(hitDot(a.x0,a.y0,a.x1,a.y1,0))pd2++;});
@@ -6173,9 +6208,10 @@ function nameLayer(){
   if(st.exp>=0)forced=[st.exp,...[...on].filter(i=>i!==st.exp)];
   else if(rel){const srt=[...on].sort((a,b)=>rel.get(b)-rel.get(a)); forced=srt.slice(0,14); const rest=srt.slice(14).sort((a,b)=>Math.hypot(effHome[b][0]-qs.cx,effHome[b][1]-qs.cy)-Math.hypot(effHome[a][0]-qs.cx,effHome[a][1]-qs.cy)); forced=forced.concat(srt.slice(0,14).length<=14?rest:rest);}
   else if(on&&on.size<=14)forced=[...on];
+  let land=false; if(!on&&!rel&&st.exp<0&&!V3.t){land=true; const ln0=LENS[st.lens]; forced=Object.keys(ln0.mem).map(k=>ln0.mem[k].reduce((b,i)=>N[i].c.length>N[b].c.length?i:b,ln0.mem[k][0])).sort((a,b)=>N[b].c.length-N[a].c.length).slice(0,15);}
   const fset=new Set(forced); pool=forced.slice();
   if(!on||!rel)N.map((x,i)=>i).filter(i=>!fset.has(i)&&(!on||on.has(i))&&rad[i]*Mx.a/u>9).sort((a,b)=>rad[b]-rad[a]).slice(0,80).forEach(i=>pool.push(i));
-  const lits=(rel?[...on]:pool).filter(i=>{const [x,y]=sp(i); return x>-30&&x<W+30&&y>-30&&y<FH+30;}), dbox=new Map(lits.map(i=>{const [x,y]=sp(i), r=rad[i]*Mx.a; return [i,[x-r,y-r,x+r,y+r]];}));
+  const lits=(rel?[...on]:land?N.map((x,i)=>i):pool).filter(i=>{const [x,y]=sp(i); return x>-30&&x<W+30&&y>-30&&y<FH+30;}), dbox=new Map(lits.map(i=>{const [x,y]=sp(i), r=rad[i]*Mx.a; return [i,[x-r,y-r,x+r,y+r]];}));
   const hit=(b,o)=>b[0]<o[2]&&b[2]>o[0]&&b[1]<o[3]&&b[3]>o[1];
   let nn=0, np=0, placedN=0;
   pool.forEach(i=>{if(rel&&placedN>=14)return;const [x,y]=sp(i), r=rad[i]*Mx.a; if(x<-20||x>W+20||y<-20||y>FH+20)return;
@@ -6196,8 +6232,10 @@ function setLens(k,instant){
   if(BV)leaveNow(); if(k!=='ctx'&&(V3.on||V3.t>0))set3D(false,true);
   st.lens=k; st.exp=st.can=-1; st.hov=-1; $('#atCanSel').value=-1; const ln=LENS[k]; arr=ln.route;
   $$('#atArr button').forEach(b=>{const on=b.dataset.l===k; b.setAttribute('aria-selected',String(on)); b.tabIndex=on?0:-1;});
-  home=ln.pos; links=ln.lk; mineIx=[]; effHome=home; qs=null; qcs=[]; $('#atQgw').innerHTML=''; delete gEls.q;
+  home=ln.pos; links=ln.lk; mineIx=[]; hovIx=[]; {const rs=links.map(l=>l.rest).sort((p,q)=>p-q), med=rs.length?rs[rs.length>>1]:0; shortIx=[]; links.forEach((l,k)=>{if(l.rest<=1.2*med)shortIx.push(k);});} effHome=home; qs=null; qcs=[]; $('#atQgw').innerHTML=''; delete gEls.q;
   $('#atGrounds').innerHTML=''; gcs=[]; gEls={};
+  $('#atB1').innerHTML=''; $('#atB2').innerHTML=''; b1=[]; b2=[];
+  Object.entries(ln.mem).forEach(([g,ix])=>{const col=ln.dom[g]>=0?`var(${CAT_VAR[CAT_ORDER[ln.dom[g]]]})`:'var(--muted)'; const f1=mk('g',$('#atB1'),{class:'atgr','data-f':'url(#atGoo1)'}), f2=mk('g',$('#atB2'),{class:'atgr','data-f':'url(#atEdge)'}); f1.style.fill=col; f2.style.fill=`color-mix(in srgb,${col} 60%,var(--ink))`; if(fxOn){f1.setAttribute('filter',f1.dataset.f); f2.setAttribute('filter',f2.dataset.f);} ix.forEach(i=>{b1[i]=mk('circle',f1,{r:40}); b2[i]=mk('circle',f2,{r:40});});});
   Object.entries(ln.mem).forEach(([g,ix])=>{const e=mk('g',$('#atGrounds'),{class:'atgg','data-k':g}); if(fxOn)e.setAttribute('filter','url(#atGoo2)'); e.style.fill=ln.dom[g]>=0?`var(${CAT_VAR[CAT_ORDER[ln.dom[g]]]})`:'var(--muted)'; gEls[g]=e; ix.forEach(i=>{gcs[i]=mk('circle',e,{r:20,'data-k':g});});});
   $('#atPills').innerHTML=''; pillEls={};
   if(st.res&&st.res.hits.length){const r=st.res; formCluster(r);} else fitView(!!instant);
@@ -6208,11 +6246,13 @@ function setLens(k,instant){
 /* ---- camera: wheel / buttons zoom around a point, the background pans; fitView frames the dots (or the search group) ---- */
 let camT=0, camRaf=0;
 const clampCam=()=>{cam.k=Math.max(.8,Math.min(5,cam.k)); cam.tx=Math.max(W*(1-cam.k)-120,Math.min(120,cam.tx)); cam.ty=Math.max(FH*(1-cam.k)-120,Math.min(120,cam.ty));};
-function frame(){Mx={a:cam.k,d:cam.k,tx:cam.tx,ty:cam.ty}; if(V3.t>0)return; $('#atWorld').setAttribute('transform',`matrix(${cam.k} 0 0 ${cam.k} ${cam.tx.toFixed(2)} ${cam.ty.toFixed(2)})`);}
+let qScaled=false, touchT=0;
+function qScale(){if(qs&&!BV){qScaled=true; for(let i=0;i<n;i++)dots[i].setAttribute('r',Math.max(.5,qs.set.has(i)?rad[i]/Math.pow(Math.max(1,cam.k),.5):rad[i]*.62/Math.max(.5,cam.k)).toFixed(2));} else if(qScaled&&!BV){qScaled=false; resizeDots();}}
+function frame(){Mx={a:cam.k,d:cam.k,tx:cam.tx,ty:cam.ty}; if(V3.t>0)return; qScale(); $('#atWorld').setAttribute('transform',`matrix(${cam.k} 0 0 ${cam.k} ${cam.tx.toFixed(2)} ${cam.ty.toFixed(2)})`);}
 function applyCam(){clampCam(); frame(); camMoved=8; setFx(false); $('#atPills').style.opacity=0; $('#atNames').style.opacity=0;
   clearTimeout(camT); camT=setTimeout(()=>{if(BV)return; layoutPills(); nameLayer(); $('#atPills').style.opacity=1; $('#atNames').style.opacity=1; if(!moving)setFx(true);},170); wake();}
 function viewTarget(){
-  if(qs){const mx=PORT?60:130, my=PORT?100:70, k=clampv(Math.min((W-2*mx)/(2*qs.R),(FH-2*my)/(2*qs.R)),1,2.2); return {k,tx:W/2-k*qs.cx,ty:FH/2-k*qs.cy};}
+  if(qs){const mx=PORT?60:130, my=PORT?100:70, k=clampv(.5*Math.min(W,FH)/(2*qs.R),1,3.6); return {k,tx:W/2-k*qs.cx,ty:FH/2-k*qs.cy};}
   let x0=1e9,x1=-1e9,y0=1e9,y1=-1e9; for(let i=0;i<n;i++){const p=effHome[i], r=rad[i]; x0=Math.min(x0,p[0]-r); x1=Math.max(x1,p[0]+r); y0=Math.min(y0,p[1]-r); y1=Math.max(y1,p[1]+r);}
   const mx=PORT?34:110, my=PORT?44:46, k=clampv(Math.min((W-2*mx)/(x1-x0),(FH-2*my)/(y1-y0)),.9,2.2);
   return {k,tx:W/2-k*(x0+x1)/2,ty:FH/2-k*(y0+y1)/2};}
@@ -6248,8 +6288,8 @@ let capOff=false; function captionOff(){if(capOff)return; capOff=true; const c=$
    Each exposure has a point in 3D (SETTINGS.p3, an embedding of its settings that keeps 91% of the neighbours of the flat map).
    A frame turns the points by yaw and pitch, divides by depth (a dot gets smaller and fainter the further away it is),
    and writes the result to the same circle elements. The 2D map is kept as it is and blended in and out over 900 ms. */
-const V3={on:false,t:0,yaw:.55,pitch:.27,zoom:1,zt:1,yawT:null,pitchT:null,c:[0,0,0],ct:[0,0,0],auto:true,P:null,Pc:null,Pt:null,sx:[],sy:[],sr:[],sz:[],hull:{},pl:[],tr:null,raf:0,last:0,sortT:0,order:null,sig:null,floorY:-1.1,ms:[],frames:0,first:true,qk:''};
-const D3=3.1, DEF_YAW=.55, DEF_PITCH=.27;
+const V3={on:false,t:0,yaw:.55,pitch:.2,zoom:1,zt:1,yawT:null,pitchT:null,c:[0,0,0],ct:[0,0,0],auto:true,P:null,Pc:null,Pt:null,sx:[],sy:[],sr:[],sz:[],hull:{},pl:[],tr:null,raf:0,last:0,sortT:0,order:null,sig:null,floorY:-1.1,ms:[],frames:0,first:true,qk:''};
+const D3=3.1, DEF_YAW=.55, DEF_PITCH=.2;
 const want3=()=>(V3.on||V3.t>0)&&shown&&!document.hidden&&onscreen&&!BV;
 const e3=()=>ease(Math.max(0,Math.min(1,V3.t)));
 function init3(){
@@ -6258,16 +6298,17 @@ function init3(){
   let mx=0,my=0,mz=0; raw.forEach(p=>{mx+=p[0]; my+=p[1]; mz+=p[2];}); mx/=n; my/=n; mz/=n;
   let m=1; raw.forEach(p=>{m=Math.max(m,Math.hypot(p[0]-mx,p[1]-my,p[2]-mz));});
   V3.P=raw.map(p=>[(p[0]-mx)/m,-(p[1]-my)/m,(p[2]-mz)/m]); V3.Pc=V3.P.map(p=>p.slice()); V3.Pt=V3.P.map(p=>p.slice());
-  V3.floorY=Math.min(...V3.P.map(p=>p[1]))-.14;
+  V3.floorY=Math.min(...V3.P.map(p=>p[1]))-.06;
   const f=$('#atFlat'), g=document.createElementNS(NS,'g'); g.setAttribute('id','at3'); g.setAttribute('pointer-events','none'); f.insertBefore(g,f.firstChild);
   g.innerHTML='<path id="at3F" class="at3f"/><path id="at3R" class="at3r"/><path id="at3S" class="at3s"/><g id="at3H"></g><path id="at3K" class="at3k"/>';
   const pg=mk('g',f,{id:'at3P'});
+  const defs=svg.querySelector('defs'); CAT_ORDER.forEach((c,k)=>{const v=`var(${CAT_VAR[c]})`; const gr=document.createElementNS(NS,'radialGradient'); gr.setAttribute('id','atSph'+k); gr.setAttribute('cx','.36'); gr.setAttribute('cy','.3'); gr.setAttribute('r','.8'); [[0,`color-mix(in srgb,${v} 45%,#fff)`],[.5,v],[1,`color-mix(in srgb,${v} 74%,#000)`]].forEach(([o,col])=>{const s=document.createElementNS(NS,'stop'); s.setAttribute('offset',o); s.style.stopColor=col; gr.appendChild(s);}); defs.appendChild(gr);}); V3.sph=CAT_ORDER.map((c,k)=>`url(#atSph${k})`);
 }
 function proj3(p,o){
   const cy=o.cy, sy=o.sy, cp=o.cp, sp_=o.sp, c=V3.c, x=p[0]-c[0], y=p[1]-c[1], z=p[2]-c[2];
   const x1=x*cy+z*sy, z1=-x*sy+z*cy, y2=y*cp-z1*sp_, z2=y*sp_+z1*cp, s=D3/(D3-z2);
   return [o.ox+o.S*o.Z*x1*s, o.oy-o.S*o.Z*y2*s, z2, s];}
-function cam3(){const S=(Math.min(W,FH)/2-30)/1.12; return {cy:Math.cos(V3.yaw),sy:Math.sin(V3.yaw),cp:Math.cos(V3.pitch),sp:Math.sin(V3.pitch),S,Z:V3.zoom,ox:W/2,oy:FH/2-(PORT?0:22)};}
+function cam3(){const S=(Math.min(W,FH)/2-34)/1.24; return {cy:Math.cos(V3.yaw),sy:Math.sin(V3.yaw),cp:Math.cos(V3.pitch),sp:Math.sin(V3.pitch),S,Z:V3.zoom,ox:W/2,oy:FH/2-(PORT?0:10)};}
 const hullOf=pts=>{pts=pts.slice().sort((a,b)=>a[0]-b[0]||a[1]-b[1]); if(pts.length<3)return pts; const cr=(o,a,b)=>(a[0]-o[0])*(b[1]-o[1])-(a[1]-o[1])*(b[0]-o[0]); const lo=[]; for(const p of pts){while(lo.length>=2&&cr(lo[lo.length-2],lo[lo.length-1],p)<=0)lo.pop(); lo.push(p);} const up=[]; for(let k=pts.length-1;k>=0;k--){const p=pts[k]; while(up.length>=2&&cr(up[up.length-2],up[up.length-1],p)<=0)up.pop(); up.push(p);} lo.pop(); up.pop(); return lo.concat(up);};
 function paint3(){
   if(!V3.P)return; const e=e3(), o=cam3(), f1=v=>v.toFixed(1), rk=PORT?1.18:1.02, zr=Math.pow(V3.zoom,.8), vis=$('#at3');
@@ -6277,16 +6318,16 @@ function paint3(){
     let x=q[0], y=q[1], r=r3, a=a3;
     if(e<1){const fx=Mx.a*cur[i][0]+Mx.tx, fy=Mx.d*cur[i][1]+Mx.ty; x=fx+(x-fx)*e; y=fy+(y-fy)*e; r=rad[i]*Mx.a+(r3-rad[i]*Mx.a)*e; a=1+(a3-1)*e;}
     V3.sx[i]=x; V3.sy[i]=y; V3.sr[i]=r; V3.sz[i]=q[2];
-    if(inSel.has(i))continue; const d=dots[i]; d.setAttribute('cx',f1(x)); d.setAttribute('cy',f1(y)); d.setAttribute('r',f1(r)); d.setAttribute('fill-opacity',a.toFixed(2));}
+    if(inSel.has(i))continue; const d=dots[i]; if(d._f!==V3.sph[N[i].cat]&&e>.5){d._f=V3.sph[N[i].cat]; d.style.fill=d._f;} d.setAttribute('cx',f1(x)); d.setAttribute('cy',f1(y)); d.setAttribute('r',f1(r)); d.setAttribute('fill-opacity',a.toFixed(2));}
   /* the floor: a disc and two rings under the cloud, and a soft shadow under each dot */
   const fy=V3.floorY, ring=R=>{let d=''; for(let k=0;k<48;k++){const a=k/48*6.2832, q=proj3([Math.cos(a)*R,fy,Math.sin(a)*R],o); d+=(k?'L':'M')+f1(q[0])+' '+f1(q[1]);} return d+'Z';};
-  $('#at3F').setAttribute('d',ring(1.12)); $('#at3R').setAttribute('d',ring(.56)+ring(.84));
+  $('#at3F').setAttribute('d',ring(.95)); $('#at3R').setAttribute('d',ring(.48)+ring(.72));
   let sh=''; const ky=Math.max(.1,Math.sin(Math.abs(V3.pitch)));
   if(V3.pitch>.06)for(let i=0;i<n;i++){const q=proj3([V3.Pc[i][0],fy,V3.Pc[i][2]],o), rx=rad[i]*rk*q[3]*zr*.85, ry=rx*ky; sh+=`M${f1(q[0]-rx)} ${f1(q[1])}a${f1(rx)} ${f1(ry)} 0 1 0 ${f1(2*rx)} 0a${f1(rx)} ${f1(ry)} 0 1 0 ${f1(-2*rx)} 0`;}
   $('#at3S').setAttribute('d',sh); vis.style.opacity=e.toFixed(3); $('#at3P').style.opacity=e.toFixed(3);
   /* soft hulls: the padded outline of each group, seen from where the camera is */
-  for(const k in V3.hull){const h=V3.hull[k]; const pts=h.ix.map(i=>[V3.sx[i],V3.sy[i]]); let rs=0; h.ix.forEach(i=>rs+=V3.sr[i]); const w=2*(rs/h.ix.length*1.1+9);
-    const hl=hullOf(pts); let d=''; if(hl.length===1)d=`M${f1(hl[0][0])} ${f1(hl[0][1])}l.1 0`; else d=hl.map((p,j)=>(j?'L':'M')+f1(p[0])+' '+f1(p[1])).join('')+'Z';
+  for(const k in V3.hull){const h=V3.hull[k]; const pts=h.ix.map(i=>[V3.sx[i],V3.sy[i]]); let rs=0; h.ix.forEach(i=>rs+=V3.sr[i]); const w=2*(rs/h.ix.length*1.3+12);
+    const hl=hullOf(pts); let d=''; if(hl.length===1)d=`M${f1(hl[0][0])} ${f1(hl[0][1])}l.1 0`; else if(hl.length===2)d=`M${f1(hl[0][0])} ${f1(hl[0][1])}L${f1(hl[1][0])} ${f1(hl[1][1])}`; else{const m=(a,b)=>[(a[0]+b[0])/2,(a[1]+b[1])/2], k=hl.length; d='M'+f1(m(hl[k-1],hl[0])[0])+' '+f1(m(hl[k-1],hl[0])[1]); for(let j=0;j<k;j++){const c=hl[j], q=m(c,hl[(j+1)%k]); d+=`Q${f1(c[0])} ${f1(c[1])} ${f1(q[0])} ${f1(q[1])}`;} d+='Z';}
     h.p.setAttribute('d',d); h.p.setAttribute('stroke-width',w.toFixed(1));}
   /* the thin lines from the chosen exposure to its neighbours */
   let kd=''; if(st.exp>=0&&mineIx.length)for(const k of mineIx){const l=links[k]; kd+=`M${f1(V3.sx[l.a])} ${f1(V3.sy[l.a])}L${f1(V3.sx[l.b])} ${f1(V3.sy[l.b])}`;}
@@ -6300,14 +6341,14 @@ function pills3(){
   if(!V3.pl.length)return; const ob=[]; try{const zr=$('#atZc').getBoundingClientRect(); if(zr.width){const [ax,ay]=toStage(zr.left,zr.top), [bx,by]=toStage(zr.right,zr.bottom); ob.push([ax-8,ay-8,bx+8,by+8]);}}catch(err){}
   const L0=V3.pl; L0.forEach(p=>{let sx=0,sy=0,top=1e9,z=0; p.ix.forEach(i=>{sx+=V3.sx[i]; sy+=V3.sy[i]; top=Math.min(top,V3.sy[i]-V3.sr[i]); z+=V3.sz[i];}); const m=p.ix.length; p.cx=sx/m; p.cy=sy/m; p.top=top; p.z=z/m;});
   const ord=L0.slice().sort((a,b)=>(b.z+(b.on?.25:0))-(a.z+(a.on?.25:0))); const placed=ob.slice();
-  for(const p of ord){const w=p.w, h=p.h; let best=null;
+  for(const p of ord){const ds=(PORT?.95:.86)+(PORT?.05:.14)*clamp01((p.z+1)/2), w=p.w*ds, h=p.h*ds; p.ds=ds; let best=null;
     const cand=[]; for(let k=0;k<9;k++){const dy=(k%2?1:-1)*Math.ceil(k/2)*(h+3); cand.push([0,dy]);} cand.push([-w*.6,0],[w*.6,0],[-w*.6,-h-3],[w*.6,-h-3]);
     const own=new Set(p.ix), hitD=b=>{for(let i=0;i<n;i++){if(own.has(i))continue; const cx=Math.max(b[0],Math.min(V3.sx[i],b[2])), cy=Math.max(b[1],Math.min(V3.sy[i],b[3])); if(Math.hypot(V3.sx[i]-cx,V3.sy[i]-cy)<V3.sr[i]+1.5)return true;} return false;};
     for(const nod of [true,false]){if(best)break; for(const [dx,dy] of cand){const x=Math.max(w/2+4,Math.min(W-w/2-4,p.cx+dx)), y=Math.max(h/2+4,Math.min(FH-h/2-4,p.top-h/2-8+dy)), b=[x-w/2,y-h/2,x+w/2,y+h/2];
       if(!placed.some(q=>b[0]-4<q[2]&&b[2]+4>q[0]&&b[1]-3<q[3]&&b[3]+3>q[1])&&!(nod&&hitD(b))){best={x,y,b,nod}; break;}}}
-    if(best){placed.push(best.b); p.x=best.x; p.y=best.y; p.on=true; p.el.setAttribute('transform',`translate(${p.x.toFixed(1)} ${p.y.toFixed(1)})`); p.el.style.display='';}
+    if(best){placed.push(best.b); p.x=best.x; p.y=best.y; p.on=true; p.el.setAttribute('transform',`translate(${p.x.toFixed(1)} ${p.y.toFixed(1)}) scale(${ds.toFixed(3)})`); p.el.style.opacity=(.62+.38*clamp01((p.z+1)/2)).toFixed(2); p.el.style.display='';}
     else{p.on=false; p.el.style.display='none';}}
-  const real=V3.pl.filter(p=>p.on); let pp=0; real.forEach((a,i)=>{for(let j=i+1;j<real.length;j++){const b=real[j]; if(Math.abs(a.x-b.x)<(a.w+b.w)/2&&Math.abs(a.y-b.y)<(a.h+b.h)/2)pp++;}});
+  const real=V3.pl.filter(p=>p.on); let pp=0; real.forEach((a,i)=>{for(let j=i+1;j<real.length;j++){const b=real[j]; if(Math.abs(a.x-b.x)<(a.w*a.ds+b.w*b.ds)/2&&Math.abs(a.y-b.y)<(a.h*a.ds+b.h*b.ds)/2)pp++;}});
   AT_CHECK.pill['3d']={pills:real.length,pillPill:pp,pillDot:0,k:+V3.zoom.toFixed(2),search:!!qs};}
 /* groups, hulls, pills and the search contraction, rebuilt when the arrangement, the search or the language changes */
 function sync3(){
@@ -6316,7 +6357,7 @@ function sync3(){
   const keys=qs?['q'].concat(Object.keys(ln.mem)):Object.keys(ln.mem);
   keys.forEach(k=>{const ix=k==='q'?qs.list:ln.mem[k]; if(!ix.length)return; const hg=mk('g',h,{class:'at3h'+(k==='q'?' at3q':qs?' at3dim':'')}); hg.style.fill=hg.style.stroke=k==='q'?'var(--ink)':ln.dom[k]>=0?`var(${CAT_VAR[CAT_ORDER[ln.dom[k]]]})`:'var(--muted)';
     const p=mk('path',hg,{'stroke-linejoin':'round','stroke-linecap':'round'}); V3.hull[k]={ix,p,g:hg};});
-  const f=flatFs();
+  const f=flatFs()*(PORT?1.08:1);
   specs.forEach(sp0=>{const label=sp0.name, cnt=!(PORT&&label.length>14), el=mk('g',g,{class:'atpill'+(sp0.q?' atq':''),'data-k':sp0.k,tabindex:0,role:'button','aria-label':`${sp0.q?sp0.name:ln.full[sp0.k]}, ${pl('atNExp',sp0.ix.length)}`});
     const r=mk('rect',el,{rx:8}), tx=mk('text',el,{'font-size':f.toFixed(1)}); tx.textContent=label; let tc=null, cw=0; if(cnt){tc=mk('text',el,{class:'atpc','font-size':(f*.88).toFixed(1)}); tc.textContent=sp0.ix.length; cw=tc.getBBox().width+6;}
     const nw=tx.getBBox().width, w=nw+cw+20, hh=f+11; r.setAttribute('x',(-w/2).toFixed(1)); r.setAttribute('y',(-hh/2).toFixed(1)); r.setAttribute('width',w.toFixed(1)); r.setAttribute('height',hh.toFixed(1));
@@ -6335,7 +6376,7 @@ const clampv3=(v,a,b)=>Math.max(a,Math.min(b,v));
 function setZ3(z){V3.zt=clampv3(z,.6,4.5); if(rm())V3.zoom=V3.zt; wake3();}
 function userTouched3(){if(V3.auto){V3.auto=false; rotUi();}}
 function reset3(){V3.auto=false; rotUi(); const d=Math.PI*2; V3.yaw=((V3.yaw-DEF_YAW+Math.PI)%d+d)%d-Math.PI+DEF_YAW; if(rm()){V3.yaw=DEF_YAW; V3.pitch=DEF_PITCH;} V3.yawT=DEF_YAW; V3.pitchT=DEF_PITCH; V3.qk=''; sync3();}
-function pause3(){if(!(V3.t>0))return; dots.forEach(d=>d.removeAttribute('fill-opacity')); $('#at3').style.visibility='hidden'; $('#at3P').style.visibility='hidden';}
+function pause3(){if(!(V3.t>0))return; dots.forEach(d=>{d.removeAttribute('fill-opacity'); d._f=null;}); $('#at3').style.visibility='hidden'; $('#at3P').style.visibility='hidden';}
 function wake3(){if(!built||V3.raf||!want3())return; V3.last=performance.now(); V3.raf=requestAnimationFrame(tick3);}
 function busy3(){return !!V3.tr||(V3.auto&&V3.on&&!rm())||V3.yawT!==null||V3.pitchT!==null||Math.abs(V3.zoom-V3.zt)>.002||V3.c.some((v,k)=>Math.abs(v-V3.ct[k])>.002)||V3.Pc.some((p,i)=>Math.abs(p[0]-V3.Pt[i][0])+Math.abs(p[1]-V3.Pt[i][1])+Math.abs(p[2]-V3.Pt[i][2])>.002)||(gest&&gest.type==='orb'&&gest.moved);}
 function tick3(now){
@@ -6358,11 +6399,11 @@ function set3D(on,instant){
     V3.tr=instant||rm()?null:{a:V3.t,b:1,t0:performance.now(),dur:900}; if(!V3.tr)V3.t=1; paint3(); wake3();}
   else{V3.on=false; for(let i=0;i<n;i++){cur[i][0]=effHome[i][0]; cur[i][1]=effHome[i][1]; vx[i]=vy[i]=0;} svg.removeAttribute('tabindex'); svgAria(); V3.pitchT=V3.yawT=null;
     if(instant||rm()||!(V3.t>0)){V3.tr=null; V3.t=0; end3Out();} else{V3.tr={a:V3.t,b:0,t0:performance.now(),dur:900}; $('#at3P').style.display='none'; wake3();}}
-  dimUi();}
+  dimUi(); if(!BV)paint();}
 function end3Out(){
   V3.t=0; V3.tr=null; V3.raf&&cancelAnimationFrame(V3.raf); V3.raf=0; svg.classList.remove('v3'); svg.removeAttribute('tabindex'); dots.forEach(d=>d.removeAttribute('fill-opacity'));
   const g=$('#at3P'); if(g){g.innerHTML=''; g.style.display='';} const h=$('#at3H'); if(h)h.innerHTML=''; V3.hull={}; V3.pl=[]; pillEls={}; V3.order=null; hov3(-1);
-  frame(); resizeDots(); place(); groundNow(); setFx(false); layoutPills(); nameLayer(); $('#atPills').style.opacity=1; $('#atNames').style.opacity=1; wake(true); dimUi();}
+  frame(); resizeDots(); paint(); groundNow(); setFx(false); layoutPills(); nameLayer(); $('#atPills').style.opacity=1; $('#atNames').style.opacity=1; wake(true); dimUi();}
 function rotUi(){const b=$('#atRot'); if(!b)return; b.hidden=!V3.on; b.setAttribute('aria-pressed',String(!!(V3.auto&&V3.on))); b.disabled=rm();}
 function dimUi(){
   if(!built)return; const ok=st.lens==='ctx'; $$('#atDim button').forEach(b=>{const is3=b.dataset.d==='3', on=is3?V3.on:!V3.on; b.setAttribute('aria-pressed',String(on)); b.classList.toggle('dis',is3&&!ok); is3&&!ok?b.setAttribute('aria-disabled','true'):b.removeAttribute('aria-disabled'); b.title=is3&&!ok?L('atNo3d'):'';});
@@ -6450,9 +6491,9 @@ function enter(ix,title,kind,exp,gk){
   tip.style.display='none'; svg.classList.add('bodyv'); $('.atmap').classList.add('bodyon'); st.bexp=exp===undefined?-1:exp; st.site=-1; st.exp=st.can=-1; st.bhov=-1; $('#atCanGrp').hidden=true; $('#atZc').hidden=true;
   $('#atPills').innerHTML=''; $('#atNames').innerHTML=''; pillEls={}; hov(-1,true); setFx(false); TL=0;
   const cap=capNow(); BV.cap=cap; BV.shown=pickShown(BV.ix,cap,st.bexp);
-  band(); key(); paintBody(); runTL(TOTAL);}
+  band(); key(); paintBody(); runTL(TOTAL); stageIntoView();}
 function leaveNow(){cancelAnimationFrame(tlRaf); TL=0; done(0);}
-function leave(instant){if(!BV)return; BV.leaving=true; st.bexp=st.site=-1; band(); key(); runTL(0,instant);}
+function leave(instant){if(!BV)return; stageIntoView(); BV.leaving=true; st.bexp=st.site=-1; band(); key(); runTL(0,instant);}
 /* an exposure that is in the set but not in the column (more than 48, or 30 on a phone) is swapped in for the least-linked one shown */
 function swapIn(v){let worst=-1; BV.shown.forEach(i=>{if(i===st.bexp)return; if(worst<0||N[i].c.length<N[worst].c.length)worst=i;});
   BV.slide=new Map(G.items.map(it=>[it.i,[it.x,it.y]])); BV.shown=orderShown(BV.shown.filter(i=>i!==worst).concat(v)); BV.sig='';}
@@ -6506,7 +6547,7 @@ function paintBody(){
     mkOf.set(p.j,{ln,lbase});});
   const act=g.phone?(st.bexp>=0?[st.bexp]:[]):(st.bexp>=0?[st.bexp]:hi?[...hi]:sh), strong=st.bexp>=0;
   const curve=(x0,y0,x1,y1)=>g.phone?`M${x0.toFixed(1)} ${y0.toFixed(1)}C${x0.toFixed(1)} ${(y0-(y0-y1)*.55).toFixed(1)} ${x1.toFixed(1)} ${(y1+(y0-y1)*.45).toFixed(1)} ${x1.toFixed(1)} ${y1.toFixed(1)}`
-    :`M${x0.toFixed(1)} ${y0.toFixed(1)}C${((x0+x1)/2).toFixed(1)} ${y0.toFixed(1)} ${((x0+x1)/2).toFixed(1)} ${y1.toFixed(1)} ${x1.toFixed(1)} ${y1.toFixed(1)}`;
+    :`M${x0.toFixed(1)} ${y0.toFixed(1)}C${(x0+(x1-x0)*.28).toFixed(1)} ${y0.toFixed(1)} ${(x1-(x1-x0)*.55).toFixed(1)} ${y1.toFixed(1)} ${x1.toFixed(1)} ${y1.toFixed(1)}`;
   const xmax=Math.max(...pts.map(p=>p.x),g.fx)+14, ymax=Math.max(...pts.map(p=>p.y),g.fy)+14, ymin=Math.min(...pts.map(p=>p.y),g.fy+g.f*100)-14;
   g.items.forEach(it=>{it.groups=[]; it.clip=null;});
   g.items.forEach(it=>{
@@ -6515,12 +6556,12 @@ function paintBody(){
     it.span=g.phone?(it.y+it.r1+2)-ymin:xmax-(it.x-2);
     const gs=mk('g',gS,{class:'atxl','clip-path':`url(#atCl${it.k})`}), ge=mk('g',gE,{class:'atxl','clip-path':`url(#atCl${it.k})`}); it.groups=[gs,ge];
     LK[it.i].forEach((o,j)=>{if(st.site>=0&&j!==st.site)return; const q=mp.get(j); if(!q)return;
-      if(o.est)mk('path',ge,{d:curve(g.phone?it.x:it.x+it.r1,g.phone?it.y-it.r1:it.y,q.x,q.y),stroke:'var(--at-est)','stroke-width':strong?3:2.4,opacity:.7});
-      else mk('path',gs,{d:curve(g.phone?it.x:it.x+it.r1,g.phone?it.y-it.r1:it.y,q.x,q.y),stroke:'var(--at-sus)','stroke-width':strong?1.6:1.3,'stroke-dasharray':'5 4',opacity:.9});});});
+      if(o.est)mk('path',ge,{d:curve(g.phone?it.x:it.x+it.r1,g.phone?it.y-it.r1:it.y,q.x,q.y),stroke:'var(--at-est)','stroke-width':strong?3:2.4,opacity:strong?.7:.5});
+      else mk('path',gs,{d:curve(g.phone?it.x:it.x+it.r1,g.phone?it.y-it.r1:it.y,q.x,q.y),stroke:'var(--at-sus)','stroke-width':strong?1.6:1.3,'stroke-dasharray':'5 4',opacity:strong?.9:.7});});});
   [...shownS.entries()].sort((a,b)=>b[1].n-a[1].n).forEach(([j,a])=>{const p=mp.get(j), r=R(a), dim=st.site>=0&&j!==st.site, e=mkOf.get(j);
     const tipT=strong?`${siteName(j)}: ${pl('atNCan',LK[st.bexp].get(j).cs.length)}`:`${siteName(j)}: ${pl('atNExp',a.n)}, ${_sub(L('atNEst'),{n:a.est})}`;
     const m=mk('g',gM,{class:'atmk','data-site':j,tabindex:0,role:'button','data-tip':tipT,'aria-label':`${siteName(j)}, ${pl('atNExp',a.n)}`});
-    mk('circle',m,{cx:0,cy:0,r:r.toFixed(1),fill:'var(--at-sus)',stroke:st.site===j?'var(--ink)':'var(--card)','stroke-width':st.site===j?2:1.2});
+    mk('circle',m,{cx:0,cy:0,r:r.toFixed(1),fill:'var(--at-sus)',stroke:st.site===j?'var(--ink)':'var(--card)','stroke-width':st.site===j?2:1.7});
     if(a.est)mk('circle',m,{cx:0,cy:0,r:(r*Math.sqrt(a.est/a.n)).toFixed(1),fill:'var(--at-est)','pointer-events':'none'});
     g.marks.push({el:m,x:p.x,y:p.y,ex:a.ex,base:dim?.35:1,ln:e&&e.ln,lbase:e?e.lbase:0,lab:null,j});});
   const maxCh=Math.floor((g.labW-4)/(fs*.5));
@@ -6552,12 +6593,12 @@ function lit(){const ln=LENS[st.lens];
 function paint(){
   if(!built)return; if(BV)return paintBody(); band(); const ln=LENS[st.lens], on=lit(), cl=!!qs&&st.exp<0&&st.can<0;
   $('#atBodyL').innerHTML='';
-  N.forEach((x,i)=>{const d=dots[i], l=!on||on.has(i); d.style.fill=colour(i); d.style.opacity=l?1:(cl?.15:.13); d.style.pointerEvents='';
+  N.forEach((x,i)=>{const d=dots[i], l=!on||on.has(i); d.style.fill=colour(i); d._f=null; d.style.opacity=l?1:(cl?.15:.13); d.style.pointerEvents='';
     if(st.can>=0&&l){const est=x.c.find(c=>c[0]===st.can)[1]; d.style.fill=est?colour(i):'var(--card)'; d.style.stroke=est?'':colour(i); d.style.strokeWidth=est?'':2;}
     else{d.style.stroke=st.exp===i?'var(--ink)':''; d.style.strokeWidth=st.exp===i?2:'';}});
   mineIx=[]; if(st.exp>=0)links.forEach((l,k)=>{if(l.a===st.exp||l.b===st.exp)mineIx.push(k);});
-  $('#atLkA').setAttribute('opacity',qs?0:st.exp>=0?.04:on?.04:.13); $('#atLkM').setAttribute('opacity',mineIx.length?.75:0);
-  $('#atGw').style.opacity=cl?.3:''; place(); nameLayer();
+  $('#atLkA').setAttribute('opacity',qs?0:st.exp>=0?.05:on?.05:.1); $('#atLkM').setAttribute('opacity',mineIx.length?.75:0);
+  $('#atGw').style.opacity=qs?0:''; place(); nameLayer();
   $$('#atPills .atpill:not(.atq)').forEach(p=>p.style.opacity=on?.45:1);
   read(on);}
 function bars(rows){const max=Math.max(1,...rows.map(r=>r[1][0]+r[1][1]));
@@ -6572,8 +6613,9 @@ const expKick=i=>`${esc(grpName(N[i].g))} · ${esc(t('atIarcG',{g:N[i].g}))}`;
 const openLink=(type,o)=>`<p class="atopen"><a href="${esc(entryUrl(type,o))}" data-act="open" data-type="${type}" data-id="${esc(o.id)}">${esc(L('atOpen'))}</a></p>`;
 const copyRow=()=>`<div class="atcopy">${copyBtn()}</div>`;
 /* a group in the lists: the first name bold, the rest as a quiet second line (the map's pills show the first name only) */
+const grpTint=(k,ln)=>ln.dom[k]>=0?`color-mix(in srgb,var(${CAT_VAR[CAT_ORDER[ln.dom[k]]]}) 45%,var(--card))`:'var(--line)';
 function groupRow(k,ln,count){const full=ln.full[k], first=ln.names[k], rest=full.length>first.length&&full.indexOf(first)===0?full.slice(first.length).replace(/^\s*·\s*/,''):'';
-  return `<button type="button" class="atgrow" data-k="${k}"><span class="atgn"><b>${esc(first)}</b> <span class="atn">${count}</span></span>${rest?`<span class="atgsub">${esc(rest)}</span>`:''}</button>`;}
+  return `<button type="button" class="atgrow" data-k="${k}"><span class="atgn"><i class="atgchip" style="background:${grpTint(k,ln)}"></i><b>${esc(first)}</b> <span class="atn">${count}</span></span>${rest?`<span class="atgsub">${esc(rest)}</span>`:''}</button>`;}
 function whereSit(hs,ln){const m=new Map(); hs.forEach(h=>{const k=ln.grp[h.i]; m.set(k,(m.get(k)||0)+1);}); return [...m.entries()].sort((a,b)=>b[1]-a[1]).slice(0,4);}
 function readSearch(){const r=st.res, hs=r.hits, nh=hs.length, S0=ensureSearch(), ln=LENS[st.lens];
   const exs=(L('atExamples')||[]).slice(0,4).map(x=>`<button type="button" class="atchip" data-q="${esc(x)}">${esc(x)}</button>`).join('');
@@ -6604,7 +6646,7 @@ function read(on){
   }else if(st.res){h=readSearch();
   }else{
     h=`${kick(esc(L('atReadH')))}<h2 id="atRT" tabindex="-1">${esc(L('atReadT'))}</h2><p>${esc(L(st.lens==='ctx'?'atReadSet':st.lens==='can'?'atReadCan':'atReadCat'))}</p>
-      <p>${esc(L('atReadDo'))}</p><p class="atk">${esc(L('atGroups'))}</p><div class="atlist atgroups">${Object.keys(ln.mem).sort((a,b)=>ln.mem[b].length-ln.mem[a].length).map(k=>groupRow(k,ln,ln.mem[k].length)).join('')}</div>`;}
+      <p>${esc(L(V3.on?'atReadDo3':'atReadDo'))}</p><p class="atk">${esc(L('atGroups'))}</p><div class="atlist atgroups">${Object.keys(ln.mem).sort((a,b)=>ln.mem[b].length-ln.mem[a].length).map(k=>groupRow(k,ln,ln.mem[k].length)).join('')}</div>`;}
   $('#atRead').innerHTML=h+((st.exp>=0||st.can>=0)?`<button type="button" class="atclear" data-act="clear">${esc(backLabel())}</button>`:st.res?`<button type="button" class="atclear" data-act="clearq">${esc(L('atClearS'))}</button>`:'')+copyRow();}
 function readBody(M){
   M=M||BV.ix; const nameG=BV.title, prim=BV.primary||nameG, sub=BV.sub||''; let h='';
@@ -6631,7 +6673,7 @@ function band(){const b=$('#atBand');
 const swEst='<svg width="30" height="8" aria-hidden="true"><line x1="1" y1="4" x2="29" y2="4" stroke="var(--at-est)" stroke-width="3" stroke-linecap="round"/></svg>';
 const swSus='<svg width="30" height="8" aria-hidden="true"><line x1="1" y1="4" x2="29" y2="4" stroke="var(--at-sus)" stroke-width="1.5" stroke-dasharray="5 4" stroke-linecap="round"/></svg>';
 function key(){if(!built)return; const sw=CAT_ORDER.map((c,i)=>`<span><i style="background:var(${CAT_VAR[c]})"></i>${esc(localCategory(c))}</span>`);
-  $('#atKey').innerHTML=sw.join('')+(!BV?`<span><i style="width:6px;height:6px;flex-basis:6px;background:var(--faint)"></i><i style="width:13px;height:13px;flex-basis:13px;background:var(--faint)"></i>${esc(L('atKeySize'))}</span><span>${esc(L('atKeyNb'))}</span>`
+  $('#atKey').innerHTML=sw.join('')+(!BV?`<span><i style="width:6px;height:6px;flex-basis:6px;background:var(--faint)"></i><i style="width:13px;height:13px;flex-basis:13px;background:var(--faint)"></i>${esc(L('atKeySize'))}</span><span><i class="atkg"></i>${esc(L('atKeyGround'))}</span>`
     :`<span>${swEst}${esc(L('established'))}</span><span>${swSus}${esc(L('suspected'))}</span><span><i style="width:13px;height:13px;flex-basis:13px;background:var(--at-sus);background:radial-gradient(circle,var(--at-est) 40%,var(--at-sus) 44%)"></i>${esc(L('atKeySite'))}</span>`);}
 let liveT=0;
 function say(txt){const el=$('#atLive'); if(!el)return; clearTimeout(liveT); el.textContent=''; liveT=setTimeout(()=>{el.textContent=txt;},60);}
@@ -6675,6 +6717,7 @@ function sugRender(){const el=$('#atSug'), qIn=$('#atQ'), v=qIn.value.trim(); le
   el.innerHTML=html; sug.active=-1; qIn.removeAttribute('aria-activedescendant');
   const any=sug.items.length>0; el.hidden=!(sug.open&&any); qIn.setAttribute('aria-expanded',String(sug.open&&any));}
 function sugOpen(){sug.open=true; sugRender();}
+let noSugFocus=false;
 function sugClose(){sug.open=false; const el=$('#atSug'); if(el)el.hidden=true; const q=$('#atQ'); if(q){q.setAttribute('aria-expanded','false'); q.removeAttribute('aria-activedescendant');} sug.active=-1;}
 function sugMove(d){if(!sug.items.length)return; const els=$$('#atSug .atopt'); sug.active=(sug.active+d+els.length)%els.length; els.forEach((e,i)=>{e.setAttribute('aria-selected',String(i===sug.active)); e.classList.toggle('on',i===sug.active);});
   const a=els[sug.active]; $('#atQ').setAttribute('aria-activedescendant',a.id); a.scrollIntoView({block:'nearest'});}
@@ -6805,7 +6848,8 @@ function sizeStage(){
   else{PORT=false; const tool=$('.attool'), sb=stickyBottom(), avail=innerHeight-sb-(tool?tool.getBoundingClientRect().height:70)-32, h=clampv(avail,420,760); FH=Math.round(clampv(1000*h/w,520,1000)); atlasWrap.style.setProperty('--at-h',Math.round(h)+'px');}}
 let lastMode='';
 function relayoutIfNeeded(){const m=PORT+'|'+FH; if(m===lastMode)return false; const first=lastMode===''; lastMode=m; if(first||!built)return false;
-  if(BV)leaveNow(); layoutAll(false); resizeDots(); svg.setAttribute('viewBox',`0 0 ${W} ${FH}`); const l=st.lens; st.lens=''; const had=st.res; setLens(l,true); if(had&&had.hits.length){formCluster(had);} return true;}
+  const bv=BV&&{ix:BV.ix.slice(),title:BV.title,kind:BV.kind,gk:BV.gk,e:st.bexp}; if(BV)leaveNow(); layoutAll(false); resizeDots(); svg.setAttribute('viewBox',`0 0 ${W} ${FH}`); const l=st.lens; st.lens=''; const had=st.res; setLens(l,true); if(had&&had.hits.length){formCluster(had);}
+  if(bv)startBody(bv.ix,bv.title,bv.kind,bv.e,bv.gk); return true;}
 /* the stage changed size: pills, names and the body view are laid out again */
 let lastSz='';
 function refit(){if(!built||!shown)return; const r=svg.getBoundingClientRect(), sz=Math.round(r.width)+'x'+Math.round(r.height)+'|'+innerHeight; if(sz===lastSz)return; lastSz=sz;
@@ -6824,19 +6868,26 @@ function wire(){
   $('#atRead').addEventListener('pointerover',e=>{if(BV)return; const g=e.target.closest('.atgrow'); hov(g?g.dataset.k:-1);});
   $('#atRead').addEventListener('pointerleave',()=>{if(!BV)hov(-1);});
   $('#atRead').addEventListener('focusin',e=>{if(BV)return; const g=e.target.closest&&e.target.closest('.atgrow'); if(g)hov(g.dataset.k);});
-  svg.addEventListener('pointerover',e=>{if(BV){const tg=e.target.closest('[data-i]'); bhov(tg?+tg.dataset.i:-1); return;} if(drag>=0)return; const tg=e.target.closest('[data-k],[data-i]'); hov(tg?(tg.dataset.k!==undefined?tg.dataset.k:LENS[st.lens].grp[+tg.dataset.i]):-1);});
+  svg.addEventListener('pointerover',e=>{if(!BV&&!V3.on&&e.pointerType!=='touch'){const dd=e.target.closest&&e.target.closest('circle.atd'), v=dd?+dd.dataset.i:-1; if(v!==hovDot){hovDot=v; hovIx=[]; if(v>=0&&v!==st.exp)links.forEach((l,k)=>{if(l.a===v||l.b===v)hovIx.push(k);}); place();}}
+    if(BV){const tg=e.target.closest('[data-i]'); bhov(tg?+tg.dataset.i:-1); return;} if(drag>=0)return; const tg=e.target.closest('[data-k],[data-i]'); hov(tg?(tg.dataset.k!==undefined?tg.dataset.k:LENS[st.lens].grp[+tg.dataset.i]):-1);});
   svg.addEventListener('pointerleave',()=>{if(!BV)hov(-1); else bhov(-1);});
   svg.addEventListener('focusin',e=>{const tg=e.target.closest&&e.target.closest('.atpill'); if(tg&&!BV)hov(tg.dataset.k); const b=e.target.closest&&e.target.closest('.atbn'); if(b&&BV)bhov(+b.dataset.i);});
   svg.addEventListener('focusout',()=>{if(!BV)hov(-1); else bhov(-1);});
-  svg.addEventListener('pointermove',e=>{const m=e.target.closest&&e.target.closest('[data-tip]'), tg=e.target.closest&&e.target.closest('circle.atd'); if((!m&&!tg)||e.pointerType==='touch'||drag>=0){tip.style.display='none'; return;}
+  svg.addEventListener('pointermove',e=>{const m=e.target.closest&&e.target.closest('[data-tip]'), tg=e.target.closest&&e.target.closest('circle.atd'); if((!m&&!tg)||e.pointerType==='touch'||touchT>performance.now()-900||drag>=0){tip.style.display='none'; return;}
     if(m)tip.textContent=m.dataset.tip; else{const i=+tg.dataset.i, x=N[i]; tip.textContent=`${nm(i)} · ${grpName(x.g)} · ${pl('atNCan',x.c.length)}`;} tip.style.display='block';
     tip.style.left=Math.max(4,Math.min(innerWidth-tip.offsetWidth-8,e.clientX+12))+'px'; tip.style.top=(e.clientY+14)+'px';});
   svg.addEventListener('pointerleave',()=>{tip.style.display='none';});
+  svg.addEventListener('pointerdown',e=>{if(e.pointerType==='touch'){touchT=performance.now(); tip.style.display='none';}},true);
+  svg.addEventListener('pointerup',e=>{if(e.pointerType==='touch'){touchT=performance.now(); tip.style.display='none';}},true);
   /* search box and its suggestions */
   const qIn=$('#atQ'), sg=$('#atSug');
   qIn.addEventListener('input',()=>{$('#atQx').hidden=!qIn.value; clearTimeout(qT); qT=setTimeout(()=>runSearch(false),300); sugOpen();});
-  qIn.addEventListener('focus',()=>{try{ensureSearch();}catch(err){} sugOpen();});
-  qIn.addEventListener('blur',()=>{setTimeout(()=>{if(document.activeElement!==qIn)sugClose();},150);});
+  qIn.addEventListener('focus',()=>{try{ensureSearch();}catch(err){} if(noSugFocus){noSugFocus=false; return;} sugOpen();});
+  document.addEventListener('pointerdown',e=>{if(sug.open&&!(e.target.closest&&e.target.closest('.atsbox')))sugClose();},true);
+  addEventListener('scroll',()=>{if(!sug.open)return; const r=qIn.getBoundingClientRect(); if(r.top<stickyBottom()||r.bottom>innerHeight)sugClose();},{passive:true});
+  qIn.addEventListener('keydown',e=>{if(e.key==='Tab')sugClose();});
+  qIn.addEventListener('blur',()=>{setTimeout(()=>{if(document.activeElement!==qIn)sugClose();},120);});
+  $('#atTool').addEventListener('click',e=>{if(e.target.closest&&e.target.closest('button')&&!e.target.closest('.atsug'))sugClose();});
   qIn.addEventListener('keydown',e=>{
     if(e.key==='ArrowDown'){e.preventDefault(); if(!sug.open)sugOpen(); sugMove(1);}
     else if(e.key==='ArrowUp'){e.preventDefault(); if(!sug.open)sugOpen(); sugMove(-1);}
@@ -6844,7 +6895,7 @@ function wire(){
     else if(e.key==='Escape'){if(sug.open){e.preventDefault(); e.stopPropagation(); sugClose();} else if(qIn.value){e.preventDefault(); clearSearch(); announce();}}});
   sg.addEventListener('mousedown',e=>e.preventDefault());
   sg.addEventListener('click',e=>{const o=e.target.closest('.atopt'); if(o)sugPick(o.dataset.q);});
-  $('#atQx').onclick=()=>{clearSearch(); qIn.focus(); announce();};
+  $('#atQx').onclick=()=>{sugClose(); clearSearch(); noSugFocus=document.activeElement!==qIn; qIn.focus(); sugClose(); announce();};
   /* arrangement tabs (roving tabindex, arrow keys) */
   const arrEl=$('#atArr');
   const pick=b=>{const l=b.dataset.l; if(l===st.lens)return; if(BV)leaveNow(); setLens(l); announce(); pushView();};
@@ -6878,6 +6929,7 @@ function build(){
 function selectFrom(p){if(!built){pendingSel=p; return;} if(p.type==='exposure'){const i=N.findIndex(x=>x.id===p.id); if(i>=0){st.exp=i; st.can=-1; paint();}}
   else if(p.type==='cancer'){const c=cIx.get(p.id); if(c!==undefined&&N.some(x=>x.c.some(y=>y[0]===c))){st.can=c; st.exp=-1; $('#atCanSel').value=c; paint();}}}
 let lastSel=null;
+function stageIntoView(){if(!PORT||fsOn)return; const r=$('.atmap').getBoundingClientRect(), sb=stickyBottom(); if(r.top>=sb-2&&r.bottom<=innerHeight+2)return; scrollTo({top:Math.max(0,r.top+scrollY-sb-8),behavior:rm()?'auto':'smooth'});}
 /* arriving at the tab: the panel comes to just under the sticky tab row when its top is low on the screen */
 function placeAtlas(){const r=atlasWrap.getBoundingClientRect(); if(r.top<=innerHeight*.6&&r.top>=-4)return; const top=r.top+scrollY-stickyBottom();
   window.scrollTo({top:Math.max(0,top),behavior:reduceMotion()?'auto':'smooth'});}
